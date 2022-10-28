@@ -69,21 +69,23 @@ public class InteractionManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        { 
+        {
             //test
-            StartConv(testNPC);
-            if (completeDialog) {
+
+            if (completeDialog)
+            {
 
                 for (int i = 0; i < text.Length; i++)
                 {
                     text[i].SetActive(false);
                 }
-
-
                 progress++;
                 StartConv();
                 completeDialog = false;
-
+            }
+            else
+            {
+                StartConv(testNPC);
             }
         }
     }
@@ -98,6 +100,7 @@ public class InteractionManager : MonoBehaviour
     }
     void StartConv(GameObject _npcName = null)
     {
+        Debug.Log("progress: "+progress);
         if (_npcName != null)
         {
             conversationUI.StartConv(_npcName);
@@ -112,7 +115,7 @@ public class InteractionManager : MonoBehaviour
         }
 
     }
-    public void SetText(int _speaker) 
+    public void SetText1(int _speaker) 
     {
         text[_speaker].SetActive(true);
         Debug.Log(CheckSpeaker() +" "+_speaker);
@@ -126,26 +129,33 @@ public class InteractionManager : MonoBehaviour
         //display text
         loadDialog[_speaker].UpdateText(_text);
 
+    }
+
+
+    public void SetText2(int _speaker)
+    {
+        
         // if first half of dialog
         if (_speaker == CheckSpeaker())
         {
             int newSpeaker = (CheckSpeaker() - 1) * -1;
             //new speaker
 
-            dialogPanel[newSpeaker].SetActive(true);
             if (dialogPanel[newSpeaker].activeSelf)
             {
                 UIAnim[newSpeaker].UIDisplay();
             }
+            else
+            {
+                dialogPanel[newSpeaker].SetActive(true);
+            }
         }
         else //secondhalf of dialog
         {
+            Debug.Log("complete");
             completeDialog = true;
         }
     }
-
- 
-
 }
 
 

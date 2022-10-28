@@ -19,22 +19,23 @@ public class DialogUIAnim : MonoBehaviour
 
     }
     public void UIDisplay() {
-        interactionManager.SetText(speaker);
+        interactionManager.SetText1(speaker);
     }
 
     IEnumerator PopupAnim()
     {
+        WaitForEndOfFrame _wait = new WaitForEndOfFrame();
 
         while (scale.x < 1)
         {
             transform.localScale = scale;
-            yield return new WaitForEndOfFrame();
+            yield return _wait;
             scale.x += 0.1f;
         }
         transform.localScale = Vector3.one;
 
-        yield return new WaitForEndOfFrame();
+        yield return _wait;
 
-        interactionManager.SetText(speaker);
+        interactionManager.SetText1(speaker);
     }
 }
