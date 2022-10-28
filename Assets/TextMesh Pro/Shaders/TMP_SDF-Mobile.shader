@@ -56,9 +56,11 @@ Properties {
 SubShader {
 	Tags
 	{
-		"Queue"="Transparent"
-		"IgnoreProjector"="True"
-		"RenderType"="Transparent"
+		"Queue"="Overlay" 
+             "IgnoreProjector"="True" 
+             "RenderType"="Transparent" 
+             "PreviewType"="Plane"
+             "CanUseSpriteAtlas"="True"
 	}
 
 
@@ -71,11 +73,11 @@ SubShader {
 		WriteMask [_StencilWriteMask]
 	}
 
-	Cull [_CullMode]
+	Cull Off
 	ZWrite Off
 	Lighting Off
 	Fog { Mode Off }
-	ZTest [unity_GUIZTestMode]
+	ZTest Off
 	Blend One OneMinusSrcAlpha
 	ColorMask [_ColorMask]
 
