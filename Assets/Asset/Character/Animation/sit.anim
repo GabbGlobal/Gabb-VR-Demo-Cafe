@@ -5408,6 +5408,7 @@ AnimationClip:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
   m_ClipBindingConstant:
+<<<<<<< HEAD
     genericBindings:
     - serializedVersion: 2
       path: 2257317975
@@ -5780,6 +5781,9 @@ AnimationClip:
       typeID: 4
       customType: 0
       isPPtrCurve: 0
+=======
+    genericBindings: []
+>>>>>>> d09b87c59bf04bd1f85cad2f5d91e3edf26899f9
     pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -5791,7 +5795,11 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
+<<<<<<< HEAD
     m_LoopTime: 1
+=======
+    m_LoopTime: 0
+>>>>>>> d09b87c59bf04bd1f85cad2f5d91e3edf26899f9
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -5801,6 +5809,7 @@ AnimationClip:
     m_KeepOriginalPositionXZ: 0
     m_HeightFromFeet: 0
     m_Mirror: 0
+<<<<<<< HEAD
   m_EditorCurves:
   - curve:
       serializedVersion: 2
@@ -38372,6 +38381,10 @@ AnimationClip:
     path: mixamorig:Hips/mixamorig:RightUpLeg/mixamorig:RightLeg/mixamorig:RightFoot/mixamorig:RightToeBase
     classID: 4
     script: {fileID: 0}
+=======
+  m_EditorCurves: []
+  m_EulerEditorCurves: []
+>>>>>>> d09b87c59bf04bd1f85cad2f5d91e3edf26899f9
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events: []
