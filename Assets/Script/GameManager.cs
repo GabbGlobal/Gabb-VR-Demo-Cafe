@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     {
         
     }
+    public void UpdateLessons()
+    {
+        lesson++;
+    }
     public int getLessons() {
         return lesson;
 

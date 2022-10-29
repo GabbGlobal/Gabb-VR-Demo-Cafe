@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Newtonsoft.Json;
-
+using UnityEditorInternal;
 
 public class InteractionManager : MonoBehaviour
 {
@@ -42,6 +42,7 @@ public class InteractionManager : MonoBehaviour
     private string startSpeaker;
     [SerializeField]
     GameObject testNPC;
+    NpcTalking npcTalking;
     bool completeDialog = false;
 
     void Start()
@@ -61,6 +62,7 @@ public class InteractionManager : MonoBehaviour
         //lessons = 1;
         string _json = jsonFile.ToString();
         var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(_json);
+        Debug.Log("lessons: " + lessons );
 
         startSpeaker = data.english[lessons].start;
         dialogData = data.english[lessons].dialog;
@@ -74,17 +76,29 @@ public class InteractionManager : MonoBehaviour
 
             if (completeDialog)
             {
-
                 for (int i = 0; i < text.Length; i++)
                 {
+                    //reset text
                     text[i].SetActive(false);
                 }
+
+                //continued dialog
                 progress++;
-                StartConv();
+                if (progress > dialogData.Count-1)
+                {
+                    //end lesson
+                    progress = 0;
+                    gameManager.UpdateLessons();
+                    EndConv();
+                }
+                else
+                {
+                    StartConv();
+                }
                 completeDialog = false;
             }
             else
-            {
+            { 
                 StartConv(testNPC);
             }
         }
@@ -98,11 +112,22 @@ public class InteractionManager : MonoBehaviour
         }
         else { return 0; }
     }
+    
     void StartConv(GameObject _npcName = null)
     {
+  
         Debug.Log("progress: "+progress);
+
         if (_npcName != null)
         {
+            Debug.Log(_npcName);
+
+            npcTalking = _npcName.GetComponent<NpcTalking>();
+            if (npcTalking == null)
+            {
+                Debug.LogError("npctalking is null");
+            }
+            npcTalking.Talk(true);
             conversationUI.StartConv(_npcName);
             //position ui canvas
 
@@ -113,7 +138,18 @@ public class InteractionManager : MonoBehaviour
         else {
             UIAnim[CheckSpeaker()].UIDisplay();
         }
+    }
+    void EndConv() 
+    {
+        foreach (var panel in dialogPanel)
+        {
+            panel.SetActive(false);
+            
+        }
+        npcTalking.Talk(false);
+        npcTalking = null;
 
+        GetJsonData();
     }
     public void SetText1(int _speaker) 
     {
