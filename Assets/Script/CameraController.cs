@@ -6,17 +6,23 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    // Speed at which the camera moves
     public float moveSpeed = 10f;
-    // Speed at which the camera rotates
     public float turnSpeed = 3.0f;
+    public float fixedYPosition = 1.75f; // Set this to the desired fixed height of the camera
+
+    private CharacterController characterController;
+
+    void Start()
+    {
+        characterController = GetComponent<CharacterController>();
+    }
 
     void Update()
     {
         // Get horizontal input (left/right)
-        float moveHorizontal = Input.GetAxis("Horizontal"); 
+        float moveHorizontal = Input.GetAxis("Horizontal");
         // Get vertical input (forward/backward)
-        float moveVertical = Input.GetAxis("Vertical"); 
+        float moveVertical = Input.GetAxis("Vertical");
 
         // Calculate the forward movement relative to the camera's facing direction
         Vector3 forwardMovement = transform.forward * moveVertical;
@@ -28,8 +34,13 @@ public class CameraController : MonoBehaviour
         // Ensure the movement is restricted to the horizontal plane by setting y to 0
         movement.y = 0;
 
-        // Move the camera based on the calculated movement vector, scaled by moveSpeed and frame time
-        transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
+        // Move the camera using CharacterController to ensure collision detection
+        characterController.Move(movement * moveSpeed * Time.deltaTime);
+
+        // Ensure the camera's y position remains fixed
+        Vector3 position = transform.position;
+        position.y = fixedYPosition;
+        transform.position = position;
 
         // Get input from the mouse's horizontal movement (left/right mouse movement)
         float turnHorizontal = Input.GetAxis("Mouse X");
