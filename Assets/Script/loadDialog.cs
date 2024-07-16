@@ -36,7 +36,7 @@ public class loadDialog : MonoBehaviour
     IEnumerator SettingTexts(string _text) {
         WaitForEndOfFrame _wait= new WaitForEndOfFrame();
         int i = 0; 
-        while(i < _text.Length)
+        while(i <= _text.Length)
         {
             string _t = _text.Substring(0,i);
             text.text = _t;

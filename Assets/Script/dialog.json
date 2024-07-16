@@ -1,115 +1,133 @@
 {
-  "english": [
-    {
-      "lesson": 1,
-      "start": "npc",
-      "array": [
-        [ 0, 1 ],
-        [ 1, 2 ],
-        [ 2, 3 ]
-      ],
-      "dialog": [
-        [
-          "Hello! My name is Olivia. What is your name?",
-          "Hello! My name is $name."
-        ],
-        [
-          "Do you speak English?",
-          "Yes, I speak English very well."
-        ],
-        [
-          "Do you speak Spanish?",
-          "Yes, Spanish is my native language."
-        ],
-        [
-          "Where are you from?",
-          "I am from Barcelona."
-        ],
-        [
-          "Nice to meet you. See you later.",
-          "Goodbye. Have a nice day!"
+    "english": [
+      {
+        "lesson": 1,
+        "start": "npc",
+        "dialog": [
+          [
+            "¡Hola! ¿Cómo está usted hoy?",
+            "Bien gracias, ¿y usted?"
+          ],
+          [
+            "¡Estoy genial! Mañana viajo a casa de mi hermana.",
+            "¡Eso es genial! ¿Dónde vive?"
+          ],
+          [
+            "Ella vive en Boston.",
+            "¿Cómo te gusta viajar?"
+          ],
+          [
+            "Me gusta viajar en avión. Es rápido y fácil.",
+            "Sí, pero es caro."
+          ],
+          [
+            "Eso es cierto. ¿Cómo te gusta viajar?",
+            "Me gusta tomar el autobús. Es económico."
+          ],
+          [
+            "¡Oh, deberías ir a decirle a Lola dónde está la estación de autobuses!",
+            ""
+          ]
         ]
-      ]
-    },
-    {
-      "lesson": 2,
-      "start": "user",
-      "dialog": [
-        [
-          "Excuse me, I think I am lost. Can you help me, please?",
-          "Certainly, what are you looking for?"
-        ],
-        [
-          "I am looking for Sagrada Familia.",
-          "Okay, it's only about 5 minutes walk."
-        ],
-        [
-          "Could you give me the directions?",
-          "Sure. Go along this street until you get to the Bank. Then turn left."
-        ],
-        [
-          "Okay, I will turn left.",
-          "Then go straight on for two blocks. At the traffic light, turn right. The church will be right in front of you."
-        ],
-        [
-          "Got it, thank you very much for your help.",
-          "No problem, have a nice day."
+      },
+      {
+        "lesson": 2,
+        "start": "npc",
+        "dialog": [
+          [
+            "Buenos días. ¿Cómo está hoy?",
+            "Bien gracias, ¿y tú?"
+          ],
+          [
+            "Lo estoy haciendo bien. ¿Sabes dónde está la estación de autobuses?",
+            "Sí, está cerca. Está al otro lado de la calle."
+          ],
+          [
+            "Oh, eso no está lejos. ¿Son caros los billetes de autobús?",
+            "No, son económicos. Un billete cuesta dos dólares con veinticinco centavos."
+          ],
+          [
+            "No esta mal. ¿Cómo te mueves por la ciudad?",
+            "Conduzco mi bici."
+          ],
+          [
+            "¡Fresco!",
+            "Sí, es divertido y un buen ejercicio."
+          ]
         ]
-      ]
-    }
-  ],
-  "Spanish": [
-    {
-      "lesson": 1,
-      "start": "npc",
-      "dialog": [
-        [
-          "Hola! Me Ilamo Antonio. C�mo te llamas?",
-          "Hola! Me llamo $name."
-        ],
-        [
-          "Hablas ingl�s?",
-          "S�, hablo ingl�s bastante bien."
-        ],
-        [
-          "Habla usted espa�ol?",
-          "Si. El espa�ol es mi idioma nativo."
-        ],
-        [
-          "De d�nde eres?",
-          "Soy de Barcelona."
-        ],
-        [
-          "Encantado de conocerte. Hasta Luego.",
-          "Adios. Que tengas un buen d�a!"
+      },
+      {
+        "lesson": 3,
+        "start": "npc",
+        "dialog": [
+          [
+            "Buen día. ¿Le puedo ayudar en algo?",
+            "Hola, ¿puedo ver el menú por favor?"
+          ],
+          [
+            "Si, aquí tienes.",
+            "Quiero un café con leche por favor."
+          ],
+          [
+            "¿Algo para comer con eso?",
+            "Sí, me gustaría un sándwich de huevo."
+          ],
+          [
+            "¿Algo más?",
+            "¿Qué clase de panecillo es ese?"
+          ],
+          [
+            "Es un muffin de arándanos. ¿Quieres uno?",
+            "No gracias, hoy no."
+          ],
+          [
+            "Ok, serán cinco dólares con cuarenta y siete centavos.",
+            "¿Puedo pagar con tarjeta?"
+          ],
+          [
+            "No, sólo aceptamos efectivo.",
+            "Bien, aquí tienes. Aquí tienes seis dólares."
+          ],
+          [
+            "Aquí tienes el cambio, cincuenta y tres centavos.",
+            "¡Gracias!"
+          ]
         ]
-      ]
-    },
-    {
-      "lesson": 2,
-      "start": "user",
-      "dialog": [
-        [
-          "Disc�lpame, creo que estoy perdi�. Me puedes ayudar?",
-          "Claro! Que estas buscando?"
-        ],
-        [
-          "Estoy buscando Sagrada Familia.",
-          "Okay, es solamente un camino de 5 minutos."
-        ],
-        [
-          "Me puedes dar las direcciones?",
-          "Claro que si! Contin�a por esta calle hasta que llegar el banco. Despu�s gire a la izquierda."
-        ],
-        [
-          "Okay, voy a girar a la izquierda.",
-          "Despues, sigue derecho  por dos cuadras. En el sem�foro, gire a la derecha. La iglesia estar� frente a ti."
-        ],
-        [
-          "Lo tengo, muchas gracias por tu ayuda",
-          "No hay problema, que tengas un buen d�a."
+      },
+      {
+        "lesson": 4,
+        "start": "npc",
+        "dialog": [
+          [
+            "Hola, ¿qué te gustaría tomar hoy?",
+            "¿Qué tipos de té tienes?"
+          ],
+          [
+            "Nosotros tenemos té negro y té verde.",
+            "¿Podría darme un té negro, por favor?"
+          ],
+          [
+            "Claro, ¿algo para comer con eso? ¿Quieres una galleta o un muffin?",
+            "¿Qué tipo de galletas tienes?"
+          ],
+          [
+            "Nosotros tenemos galletas de mantequilla de maní.",
+            "Quiero una galleta de mantequilla de maní, por favor."
+          ],
+          [
+            "¿Eso sería todo?",
+            "Si, eso es. Cuánto cuesta."
+          ],
+          [
+            "Serán cuatro dólares y sesenta centavos.",
+            "Aquí tienes."
+          ],
+          [
+            "Gracias. Aquí tienes: tu té y tu galleta. ¡Que tenga un buen día!",
+            "Tú también. adiós"
+          ]
         ]
-      ]
-    }
-  ]
-}
+      }
+    ]
+  }
+  
