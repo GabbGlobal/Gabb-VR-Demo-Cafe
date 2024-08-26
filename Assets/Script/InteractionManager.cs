@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using System;
+using Newtonsoft.Json;
+using System.IO;
 
 // The InteractionManager class handles interactions between the player and NPCs, 
 // manages dialogues, experience points, video hints, and the game's ending screen.
@@ -82,6 +84,13 @@ public class InteractionManager : MonoBehaviour
     private Texture2D pointsOvalTexture;
     private Texture2D starTexture;
 
+    [SerializeField] private TMP_Text dialogueTextCharacter; // Reference to character's dialogue TMP_Text component
+    [SerializeField] private TMP_Text dialogueTextUser; // Reference to user's dialogue TMP_Text component
+    private Dictionary<string, DictionaryEntry> dictionary; // Dictionary to store word-meaning and POS pairs
+    private GameObject popup; // Reference to the popup GameObject
+    private RectTransform popupRectTransform; // RectTransform for popup positioning
+    private TMP_Text currentlyHoveredText; // Track which text is currently being hovered
+
     // The Start method is called before the first frame update.
     // It initializes the game state by setting up the GameManager reference, loading JSON data,
     // configuring UI elements (like the advisor text and hint button), and preparing the video player.
@@ -137,6 +146,9 @@ public class InteractionManager : MonoBehaviour
         // This method generates the necessary textures for UI elements such as rectangles,
         // circles, experience bars, and stars, which will be used later in the game.
         CreateTextures();
+
+        // Load the dictionary JSON data into a Dictionary object
+        LoadDictionary();
     }
 
     // CreateTextures method
@@ -309,6 +321,138 @@ public class InteractionManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             RestartGame();
+        }
+    
+        // Call function to handle mouse hover over words
+        HandleWordHover();
+    }
+
+    private void HandleWordHover()
+    {
+        // Reset currently hovered text
+        currentlyHoveredText = null;
+
+        // Check hover for both character and user dialogue texts
+        HandleWordHoverForText(dialogueTextCharacter);
+        HandleWordHoverForText(dialogueTextUser);
+
+        // If no text is hovered over, destroy the popup
+        if (currentlyHoveredText == null)
+        {
+            DestroyPopupIfExists();
+        }
+    }
+
+    private void HandleWordHoverForText(TMP_Text dialogueText)
+    {
+        // Ensure that the dialogueText GameObject is active
+        if (!dialogueText.gameObject.activeInHierarchy)
+        {
+            return; // Exit if the text GameObject is not active
+        }
+
+        // Get the current mouse position in world space
+        Vector3 mousePosition = Input.mousePosition;
+        Camera camera = Camera.main; // Assuming the main camera is used for screen space calculations
+
+        int wordIndex = TMP_TextUtilities.FindIntersectingWord(dialogueText, mousePosition, camera);
+        if (wordIndex != -1) // If a word is detected
+        {
+            string word = dialogueText.textInfo.wordInfo[wordIndex].GetWord();
+
+            // Convert to lowercase to match dictionary keys
+            word = word.ToLower();
+
+            // Check if the word exists in the dictionary
+            if (dictionary.ContainsKey(word))
+            {
+                string meaning = dictionary[word].Meaning;
+                string pos = dictionary[word].POS;
+                Debug.Log($"Word: {word}, Meaning: {meaning}, POS: {pos}");
+
+                // Set the currently hovered text
+                currentlyHoveredText = dialogueText;
+
+                // Create or update the popup with meaning and POS
+                CreateOrUpdatePopup(mousePosition, meaning, pos);
+            }
+        }
+    }
+
+    private void CreateOrUpdatePopup(Vector3 mousePosition, string meaning, string pos)
+    {
+        if (popup == null)
+        {
+            // Create a new popup GameObject
+            popup = new GameObject("Popup");
+            Canvas canvas = popup.AddComponent<Canvas>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            popup.AddComponent<CanvasScaler>();
+            popup.AddComponent<GraphicRaycaster>();
+
+            // Create a child GameObject for the background
+            GameObject backgroundObject = new GameObject("Background");
+            backgroundObject.transform.SetParent(popup.transform, false);
+            Image background = backgroundObject.AddComponent<Image>();
+            background.color = new Color(0.5f, 0.5f, 0.5f, 0.9f); // Gray background with some transparency
+
+            // Create a TextMeshProUGUI component as a child of the background
+            GameObject textObject = new GameObject("Text");
+            textObject.transform.SetParent(backgroundObject.transform, false);
+            TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
+            textComponent.text = $"{meaning}\n({pos})"; // Include both meaning and POS
+            textComponent.fontSize = 24;
+            textComponent.color = Color.white; // White text color
+            textComponent.alignment = TextAlignmentOptions.Center;
+
+            // Set RectTransform sizes
+            RectTransform textRect = textComponent.GetComponent<RectTransform>();
+            textRect.sizeDelta = new Vector2(200, 50); // Set the text size
+            textRect.anchoredPosition = Vector2.zero; // Center the text in the background
+
+            popupRectTransform = backgroundObject.GetComponent<RectTransform>();
+            popupRectTransform.sizeDelta = new Vector2(220, 70); // Background size slightly larger than text
+        }
+        else
+        {
+            // Update the text of the existing popup
+            TextMeshProUGUI textComponent = popup.GetComponentInChildren<TextMeshProUGUI>();
+            textComponent.text = $"{meaning}\n({pos})"; // Include both meaning and POS
+        }
+
+        // Position the popup higher above the word
+        popupRectTransform.position = mousePosition + new Vector3(0, 60, 0); // Offset to place popup higher above word
+    }
+
+    private void DestroyPopupIfExists()
+    {
+        if (popup != null)
+        {
+            Destroy(popup);
+            popup = null;
+        }
+    }
+
+    private void LoadDictionary()
+    {
+        // Load the dictionary JSON file from Resources
+        TextAsset jsonFile = Resources.Load<TextAsset>("dictionary");
+        if (jsonFile == null)
+        {
+            Debug.LogError("Dictionary JSON file not found in Resources folder.");
+            return;
+        }
+
+        // Parse the JSON file
+        var data = JsonConvert.DeserializeObject<DictionaryData>(jsonFile.text);
+
+        // Initialize the dictionary
+        dictionary = new Dictionary<string, DictionaryEntry>();
+
+        // Fill the dictionary with word-meaning and POS pairs
+        foreach (var entry in data.dictionary)
+        {
+            dictionary[entry.word.ToLower()] = entry; // Store the entire DictionaryEntry object
         }
     }
 
@@ -1016,4 +1160,19 @@ public class InteractionManager : MonoBehaviour
 
         return normalizedDist <= starFunction;
     }
+}
+
+// Class to deserialize the JSON dictionary data
+[System.Serializable]
+public class DictionaryData
+{
+    public List<DictionaryEntry> dictionary;
+}
+
+[System.Serializable]
+public class DictionaryEntry
+{
+    public string word;
+    public string POS;
+    public string Meaning;
 }
