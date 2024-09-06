@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 public class PronunciationAssessor : MonoBehaviour
 {
-    private const string SubscriptionKey = "6762f076f08140b3afa3c1888cd3f642";
-    private const string Region = "eastus";
+    private const string SubscriptionKey = "subscription_key";
+    private const string Region = "region";
     private SpeechConfig speechConfig;
     private AudioConfig audioConfig;
 
