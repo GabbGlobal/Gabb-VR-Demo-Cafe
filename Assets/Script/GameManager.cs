@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int lesson  {get; private set;}
-
+    public int lesson { get; private set; }
     public string language { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,13 +20,14 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
     public void UpdateLessons()
     {
         lesson++;
     }
-    public int getLessons() {
+
+    public int getLessons()
+    {
         return lesson;
-
     }
-
 }

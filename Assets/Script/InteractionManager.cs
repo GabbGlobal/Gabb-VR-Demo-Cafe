@@ -33,6 +33,7 @@ public class InteractionManager : MonoBehaviour
     private int correctDialogues = 0;
     private int incorrectDialogues = 0;
     private int consecutiveIncorrect = 0;
+    private bool progressDialogueNext = false;
     private bool restartDialogueNext = false;
     private HashSet<GameObject> completedCharacters = new HashSet<GameObject>();
 
@@ -90,6 +91,8 @@ public class InteractionManager : MonoBehaviour
     private GameObject popup; // Reference to the popup GameObject
     private RectTransform popupRectTransform; // RectTransform for popup positioning
     private TMP_Text currentlyHoveredText; // Track which text is currently being hovered
+
+    private PronunciationAssessor pronunciationAssessor;
 
     // The Start method is called before the first frame update.
     // It initializes the game state by setting up the GameManager reference, loading JSON data,
@@ -149,6 +152,8 @@ public class InteractionManager : MonoBehaviour
 
         // Load the dictionary JSON data into a Dictionary object
         LoadDictionary();
+
+        pronunciationAssessor = gameObject.AddComponent<PronunciationAssessor>();
     }
 
     // CreateTextures method
@@ -248,41 +253,27 @@ public class InteractionManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("User pressed space.");
-            if (restartDialogueNext)
+            Debug.Log("Complete Dialogue: " + completeDialog);
+            Debug.Log("Progresss Dialogue Next: " + progressDialogueNext);
+            if (currentCharacter == null)
             {
-                RestartDialogue();
+                GameObject nearestCharacter = FindNearestCharacter();
+                if (nearestCharacter != null && IsInView(nearestCharacter) && Vector3.Distance(Camera.main.transform.position, nearestCharacter.transform.position) <= dialogueDistance)
+                {
+                    currentCharacter = nearestCharacter;
+                    StartConv(currentCharacter);
+                }
             }
             else
             {
-                if (currentCharacter == null)
+                if (restartDialogueNext)
                 {
-                    GameObject nearestCharacter = FindNearestCharacter();
-                    if (nearestCharacter != null && IsInView(nearestCharacter) && Vector3.Distance(Camera.main.transform.position, nearestCharacter.transform.position) <= dialogueDistance)
-                    {
-                        currentCharacter = nearestCharacter;
-                        StartConv(currentCharacter);
-                    }
+                    RestartDialogue();
                 }
-                else if (IsInView(currentCharacter) && completeDialog)
+                else if (progressDialogueNext && IsInView(currentCharacter))
                 {
-                    progress++;
-                    if (progress >= dialogData.Count)
-                    {
-                        gameManager.UpdateLessons();
-                        EndConv();
-                    }
-                    else
-                    {
-                        StartConv(currentCharacter);
-                    }
-                    completeDialog = false;
+                    ProgressDialogue();
                 }
-                else if (IsInView(currentCharacter))
-                {
-                    StartConv(currentCharacter);
-                }
-                ResetDialogueTextColors();
-                advisorText.gameObject.SetActive(false);
             }
         }
 
@@ -293,21 +284,10 @@ public class InteractionManager : MonoBehaviour
         {
             EndConv();
             maxExperiencePoints += 3f;
-        }
-
-        // Handle pronunciation input
-        // This section checks if the player presses the N or M keys to indicate correct or incorrect pronunciation.
-        // It updates the dialogue state, experience points, and UI elements accordingly.
-        if (currentCharacter != null)
-        {
-            if (Input.GetKeyDown(KeyCode.N))
-            {
-                HandleCorrectPronunciation();
-            }
-            else if (Input.GetKeyDown(KeyCode.M))
-            {
-                HandleIncorrectPronunciation();
-            }
+            restartDialogueNext = false;
+            progressDialogueNext = false;
+            ResetDialogueTextColors();
+            advisorText.gameObject.SetActive(false);
         }
 
         // Handle input for showing ending screen and restarting game
@@ -316,11 +296,6 @@ public class InteractionManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             ShowEndingScreen();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            RestartGame();
         }
     
         // Call function to handle mouse hover over words
@@ -527,6 +502,20 @@ public class InteractionManager : MonoBehaviour
         }
         Debug.Log("Dialogue Character Text Played.");
         PlayDialogueAudio();
+
+        StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+    }
+
+    System.Collections.IEnumerator StartAssessmentAfterAudio(string userDialogueText)
+    {
+        // Wait until the audio source finishes playing
+        while (audioSource.isPlaying)
+        {
+            yield return null;  // Wait until the next frame and check again
+        }
+
+        Debug.Log("Starting pronunciation assessment for: " + userDialogueText);
+        pronunciationAssessor.StartAssessment(userDialogueText);  // Start the assessment
     }
 
     // EndConv method
@@ -637,7 +626,7 @@ public class InteractionManager : MonoBehaviour
     // HandleCorrectPronunciation method
     // This method is triggered when the player correctly pronounces a dialogue. It updates the UI to reflect
     // the correct pronunciation (e.g., turning text green), increases experience points, and resets the hint state.
-    void HandleCorrectPronunciation()
+    public void HandleCorrectPronunciation()
     {
         Debug.Log("User pronounced the dialogue user text correctly.");
         Debug.Log("The dialogue user text became green.");
@@ -669,12 +658,13 @@ public class InteractionManager : MonoBehaviour
         Debug.Log("Advisor 0 Audio Played.");
         usedHint = false;
         consecutiveIncorrect = 0;
+        progressDialogueNext = true;
     }
 
     // HandleIncorrectPronunciation method
     // This method is triggered when the player incorrectly pronounces a dialogue. It updates the UI to reflect
     // the incorrect pronunciation (e.g., turning text red), tracks consecutive mistakes, and potentially resets the dialogue.
-    void HandleIncorrectPronunciation()
+    public void HandleIncorrectPronunciation()
     {
         Debug.Log("User pronounced the dialogue user text incorrectly.");
         Debug.Log("The dialogue user text became red.");
@@ -688,11 +678,13 @@ public class InteractionManager : MonoBehaviour
         {
             advisorText.text = "That wasn't quite right. Let's see what went wrong.";
             Debug.Log("Advisor 1 Audio Played.");
+            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
         }
         else if (consecutiveIncorrect == 2)
         {
             advisorText.text = "Let's try that again.";
             Debug.Log("Advisor 2 Audio Played.");
+            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
         }
         else if (consecutiveIncorrect == 3)
         {
@@ -733,6 +725,26 @@ public class InteractionManager : MonoBehaviour
         advisorText.gameObject.SetActive(false);
         progress = 0;
         StartConv(currentCharacter);
+    }
+
+    // ProgressDialogue method
+    // This method progresses the dialogue. It either changes the text or concludes the dialogue.
+    void ProgressDialogue()
+    {
+        progressDialogueNext = false;
+        progress++;
+        if (progress >= dialogData.Count)
+        {
+            gameManager.UpdateLessons();
+            EndConv();
+        }
+        else
+        {
+            StartConv(currentCharacter);
+        }
+        completeDialog = false;
+        ResetDialogueTextColors();
+        advisorText.gameObject.SetActive(false);
     }
 
     // OnHintButtonClick method
