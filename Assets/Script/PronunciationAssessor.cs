@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 public class PronunciationAssessor : MonoBehaviour
 {
     // Replace with your actual subscription key and region
-    private const string SubscriptionKey = "6762f076f08140b3afa3c1888cd3f642";
+    private const string SubscriptionKey = "subscription_key";
     private const string Region = "eastus";
 
     // These are a list of prompts from the food and drinks v1
