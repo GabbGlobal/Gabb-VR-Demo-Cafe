@@ -5,6 +5,7 @@ using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.CognitiveServices.Speech.PronunciationAssessment;
 using System.Threading.Tasks;
+using System.Linq;
 
 public class PronunciationAssessor : MonoBehaviour
 {
@@ -102,31 +103,66 @@ public class PronunciationAssessor : MonoBehaviour
             var pronunciationAssessmentResult = JsonUtility.FromJson<PronunciationAssessmentJsonResult>(pronunciationAssessmentResultJson);
 
             var pronunciationScore = pronunciationAssessmentResult.NBest[0].PronunciationAssessment.PronScore;
+            var fluencyScore = pronunciationAssessmentResult.NBest[0].PronunciationAssessment.FluencyScore;
+            var completenessScore = pronunciationAssessmentResult.NBest[0].PronunciationAssessment.CompletenessScore;
+            var accuracyScore = pronunciationAssessmentResult.NBest[0].PronunciationAssessment.AccuracyScore;
+
+            // Implement custom scoring
+            float customScore = CalculateCustomScore(speechRecognitionResult.Text, referenceText);
 
             return new AssessmentResult
             {
                 recognized_text = speechRecognitionResult.Text,
+                reference_text = referenceText,
                 scores = new Scores
                 {
                     pronunciation_score = pronunciationScore,
-                }
+                    fluency_score = fluencyScore,
+                    completeness_score = completenessScore,
+                    accuracy_score = accuracyScore,
+                    custom_score = customScore
+                },
+                recognition_status = customScore >= 90.0f ? "success" : "failure"
             };
         }
+    }
+
+    private float CalculateCustomScore(string recognizedText, string referenceText)
+    {
+        string[] recognizedWords = NormalizeText(recognizedText).Split(' ');
+        string[] referenceWords = NormalizeText(referenceText).Split(' ');
+
+        int matchedWords = recognizedWords.Count(word => referenceWords.Contains(word));
+        float wordAccuracy = (float)matchedWords / referenceWords.Length;
+        float lengthRatio = Mathf.Min(recognizedWords.Length, referenceWords.Length) / 
+                            (float)Mathf.Max(recognizedWords.Length, referenceWords.Length);
+
+        return Mathf.Min(100f, 100f * (wordAccuracy * 0.7f + lengthRatio * 0.3f));
+    }
+
+    private string NormalizeText(string text)
+    {
+        return System.Text.RegularExpressions.Regex.Replace(text.ToLower(), @"[^\w\s]", "");
     }
 
     private void LogAssessmentResult(AssessmentResult result)
     {
         Debug.Log($"Pronunciation Score: {result.scores.pronunciation_score}");
+        Debug.Log($"Fluency Score: {result.scores.fluency_score}");
+        Debug.Log($"Completeness Score: {result.scores.completeness_score}");
+        Debug.Log($"Accuracy Score: {result.scores.accuracy_score}");
+        Debug.Log($"Custom Score: {result.scores.custom_score}");
         Debug.Log($"Recognized Text: {result.recognized_text}");
+        Debug.Log($"Reference Text: {result.reference_text}");
+        Debug.Log($"Recognition Status: {result.recognition_status}");
 
-        // If the pronunciation score is greater than or equal to 90, handle it as correct
-        if (result.scores.pronunciation_score >= 90)
+        if (result.recognition_status == "success")
         {
-            interactionManager.HandleCorrectPronunciation();  // Call HandleCorrectPronunciation
+            interactionManager.HandleCorrectPronunciation();
         }
         else
         {
-            interactionManager.HandleIncorrectPronunciation();  // Call HandleIncorrectPronunciation
+            interactionManager.HandleIncorrectPronunciation();
         }
     }
 
@@ -147,18 +183,27 @@ public class PronunciationAssessor : MonoBehaviour
     private class PronunciationAssessmentResult
     {
         public float PronScore;
+        public float FluencyScore;
+        public float CompletenessScore;
+        public float AccuracyScore;
     }
 
     [System.Serializable]
     public class AssessmentResult
     {
         public string recognized_text;
+        public string reference_text;
         public Scores scores;
+        public string recognition_status;
     }
 
     [System.Serializable]
     public class Scores
     {
         public float pronunciation_score;
+        public float fluency_score;
+        public float completeness_score;
+        public float accuracy_score;
+        public float custom_score;
     }
 }

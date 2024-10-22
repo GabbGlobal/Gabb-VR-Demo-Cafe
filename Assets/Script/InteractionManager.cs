@@ -28,6 +28,7 @@ public class InteractionManager : MonoBehaviour
     private int progress = 0;
     private int lessons;
     private bool usedHint = false;
+    private bool usedHintJustNow = false;
     private float totalExperiencePoints = 0;
     private float maxExperiencePoints = 0;
     private int correctDialogues = 0;
@@ -36,6 +37,14 @@ public class InteractionManager : MonoBehaviour
     private bool progressDialogueNext = false;
     private bool restartDialogueNext = false;
     private HashSet<GameObject> completedCharacters = new HashSet<GameObject>();
+
+    // Speed controller variables
+    // These variables are used to create the speed controller.
+    private float sliderValue = 1.0f;
+    private float minValue = 0.75f;
+    private float maxValue = 1.25f;
+    private float sliderWidth = 200f;
+    private float sliderHeight = 40f;
 
     // UI elements and components
     // These serialized fields are used to connect various UI components, such as dialogue panels,
@@ -543,6 +552,7 @@ public class InteractionManager : MonoBehaviour
         progress = 0;
         completeDialog = false;
         usedHint = false;
+        usedHintJustNow = false;
         consecutiveIncorrect = 0;
 
         if (completedCharacters.Count >= characters.Length)
@@ -628,6 +638,13 @@ public class InteractionManager : MonoBehaviour
     // the correct pronunciation (e.g., turning text green), increases experience points, and resets the hint state.
     public void HandleCorrectPronunciation()
     {
+        if (usedHintJustNow) {
+            Debug.Log("This round does not count.");
+            usedHintJustNow = false;
+            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            return;
+        }
+
         Debug.Log("User pronounced the dialogue user text correctly.");
         Debug.Log("The dialogue user text became green.");
         correctDialogues++;
@@ -659,6 +676,10 @@ public class InteractionManager : MonoBehaviour
         usedHint = false;
         consecutiveIncorrect = 0;
         progressDialogueNext = true;
+
+        AudioClip clip = Resources.Load<AudioClip>("positive tone");
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     // HandleIncorrectPronunciation method
@@ -666,6 +687,13 @@ public class InteractionManager : MonoBehaviour
     // the incorrect pronunciation (e.g., turning text red), tracks consecutive mistakes, and potentially resets the dialogue.
     public void HandleIncorrectPronunciation()
     {
+        if (usedHintJustNow) {
+            Debug.Log("This round does not count.");
+            usedHintJustNow = false;
+            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            return;
+        }
+
         Debug.Log("User pronounced the dialogue user text incorrectly.");
         Debug.Log("The dialogue user text became red.");
         incorrectDialogues++;
@@ -693,6 +721,10 @@ public class InteractionManager : MonoBehaviour
             Debug.Log("Dialogue Reset.");
             restartDialogueNext = true;
         }
+
+        AudioClip clip = Resources.Load<AudioClip>("negative tone");
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     // ShowEndingScreen method
@@ -719,6 +751,7 @@ public class InteractionManager : MonoBehaviour
     {
         restartDialogueNext = false;
         usedHint = false;
+        usedHintJustNow = false;
         consecutiveIncorrect = 0;
         maxExperiencePoints += 3f;
         ResetDialogueTextColors();
@@ -753,6 +786,7 @@ public class InteractionManager : MonoBehaviour
     void OnHintButtonClick()
     {
         usedHint = true;
+        usedHintJustNow = true;
         PlayHintVideo();
     }
 
@@ -797,7 +831,7 @@ public class InteractionManager : MonoBehaviour
 
     // OnGUI method
     // This method handles the drawing of various UI elements directly onto the screen using the Unity GUI system.
-    // It includes the experience bar, experience points, and the ending screen with star ratings and feedback text.
+    // It includes the experience bar, speed controller, and the ending screen with star ratings and feedback text.
     void OnGUI()
     {
         // Define the rectangle dimensions and position
@@ -875,6 +909,39 @@ public class InteractionManager : MonoBehaviour
         pointsStyle.normal.textColor = Color.white;
         Rect pointsTextRect = new Rect(pointsOvalX, pointsOvalY, pointsOvalWidth, pointsOvalHeight);
         GUI.Label(pointsTextRect, totalExperiencePoints.ToString(), pointsStyle);
+
+        // Adjust the position of the slider to move it slightly more to the left and further up from the bottom
+        float sliderX = Screen.width - sliderWidth - 100f; // Moved more to the left
+        float sliderY = Screen.height - sliderHeight - 50f; // 50 pixels from the bottom edge
+
+        // Define custom GUI styles directly inside OnGUI
+        GUIStyle sliderStyle = new GUIStyle(GUI.skin.horizontalSlider);
+        sliderStyle.fixedHeight = 8f; // Adjust slider height to be thinner
+
+        GUIStyle thumbStyle = new GUIStyle(GUI.skin.horizontalSliderThumb);
+        thumbStyle.fixedWidth = 20f; // Smaller thumb (round handle)
+        thumbStyle.fixedHeight = 20f;
+
+        GUIStyle labelStyle = new GUIStyle(GUI.skin.label);
+        labelStyle.fontSize = 18; // Larger font size
+        labelStyle.fontStyle = FontStyle.Bold;
+        labelStyle.alignment = TextAnchor.MiddleCenter;
+
+        // Draw labels (0.75x, 1x, 1.25x) at appropriate positions, raised slightly higher above the slider
+        GUI.Label(new Rect(sliderX - 50, sliderY - 20, 50, 40), "0.75x", labelStyle); // Raised labels higher
+        GUI.Label(new Rect(sliderX + sliderWidth / 2 - 25, sliderY - 20, 50, 40), "1x", labelStyle); // Center label raised
+        GUI.Label(new Rect(sliderX + sliderWidth + 10, sliderY - 20, 50, 40), "1.25x", labelStyle); // Right label raised
+
+        // Draw the horizontal slider with custom styles
+        float newSliderValue = GUI.HorizontalSlider(new Rect(sliderX, sliderY + 20, sliderWidth, sliderHeight), sliderValue, minValue, maxValue, sliderStyle, thumbStyle);
+
+        // If the value has changed, print it to the console
+        if (Mathf.Abs(newSliderValue - sliderValue) > 0.01f) // Change threshold
+        {
+            sliderValue = newSliderValue;
+            audioSource.pitch = sliderValue;
+            Debug.Log("Slider Value Changed: " + sliderValue.ToString("0.00") + "x");
+        }
 
         // Display the ending screen if the showEndingScreen flag is set
         // If the player has completed all dialogues, the ending screen is displayed with performance feedback and options to restart the game.
