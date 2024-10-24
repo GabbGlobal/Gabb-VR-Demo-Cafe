@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService; Commented out - Any UnityEditor invocation will error if you try to build the project.
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
