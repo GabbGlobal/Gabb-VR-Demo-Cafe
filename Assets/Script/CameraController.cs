@@ -11,10 +11,14 @@ public class CameraController : MonoBehaviour
     public float fixedYPosition = 1.75f; // Set this to the desired fixed height of the camera
 
     private CharacterController characterController;
+    private Camera cam;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        cam = Camera.main;
+        // Disable tracked pose driver so we don't have to fight HMD tracking
+        cam.GetComponent<UnityEngine.InputSystem.XR.TrackedPoseDriver>().enabled = false;
     }
 
     void Update()
@@ -24,10 +28,21 @@ public class CameraController : MonoBehaviour
         // Get vertical input (forward/backward)
         float moveVertical = Input.GetAxis("Vertical");
 
+        // Forward direction relative relative to the camera's facing direction on xz plane
+        Vector3 flatForward = cam.transform.forward;
+        flatForward.y = 0;
+        flatForward.Normalize();
+
+
+        // Right direction relative relative to the camera's facing direction on xz plane
+        Vector3 flatRight = cam.transform.right;
+        flatRight.y = 0;
+        flatRight.Normalize();
+
         // Calculate the forward movement relative to the camera's facing direction
-        Vector3 forwardMovement = transform.forward * moveVertical;
+        Vector3 forwardMovement = flatForward * moveVertical;
         // Calculate the rightward movement relative to the camera's facing direction
-        Vector3 rightMovement = transform.right * moveHorizontal;
+        Vector3 rightMovement = flatRight * moveHorizontal;
 
         // Combine the forward and rightward movements
         Vector3 movement = forwardMovement + rightMovement;
@@ -38,9 +53,9 @@ public class CameraController : MonoBehaviour
         characterController.Move(movement * moveSpeed * Time.deltaTime);
 
         // Ensure the camera's y position remains fixed and restricted to the horizontal plane
-        Vector3 position = transform.position;
-        position.y = fixedYPosition;
-        transform.position = position;
+        Vector3 localPosition = cam.transform.localPosition;
+        localPosition.y = fixedYPosition;
+        cam.transform.localPosition = localPosition;
 
         // Check if the Q key is pressed
         if (!Input.GetKey(KeyCode.Q))
@@ -51,9 +66,9 @@ public class CameraController : MonoBehaviour
             float turnVertical = Input.GetAxis("Mouse Y");
 
             // Rotate the camera around the y-axis (yaw) based on horizontal mouse movement
-            transform.Rotate(Vector3.up, turnHorizontal * turnSpeed, Space.World);
+            cam.transform.Rotate(Vector3.up, turnHorizontal * turnSpeed, Space.World);
             // Rotate the camera around the x-axis (pitch) based on vertical mouse movement
-            transform.Rotate(Vector3.left, turnVertical * turnSpeed);
+            cam.transform.Rotate(Vector3.left, turnVertical * turnSpeed);
         }
     }
 }
