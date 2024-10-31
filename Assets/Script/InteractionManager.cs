@@ -200,10 +200,13 @@ public class InteractionManager : MonoBehaviour
     {
         lessons = gameManager.lesson;
         string _json = jsonFile.ToString();
+        Debug.Log(_json);
         var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(_json);
 
         // Find the character index to retrieve the relevant dialogue data from the JSON file.
         int characterIndex = System.Array.IndexOf(characters, currentCharacter);
+        Debug.Log($"characterIndex: {characterIndex}");
+        Debug.Log($"characterIndex: {data.english.Count}");
         if (characterIndex >= 0 && characterIndex < data.english.Count)
         {
             startSpeaker = data.english[characterIndex].start;
