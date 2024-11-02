@@ -3,11 +3,14 @@ using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows.Speech;
+#if UNITY_STANDALONE_WIN
+    using UnityEngine.Windows.Speech;
+#endif
 using TMPro;
 
 public class VoiceToText: MonoBehaviour
 {
+#if UNITY_STANDALONE_WIN
     [SerializeField]
     private TMP_Text m_Hypotheses;
     
@@ -46,4 +49,5 @@ public class VoiceToText: MonoBehaviour
 
         m_DictationRecognizer.Start();
     }
+#endif
 }
