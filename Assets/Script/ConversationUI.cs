@@ -21,25 +21,23 @@ public class ConversationUI : MonoBehaviour
         //dialogInJson = JsonUtility.FromJson<English>(jsonFile.text);
         //InteractionManager.interact += StartConv;
     }
-    private void Update()
-    {
-        Vector3 _cam = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-        transform.LookAt(_cam);
-        //point normal to player
-    }
-
 
     public void StartConv(GameObject _NPC)
     {
+        transform.SetParent(null);
         NPC = _NPC;
-        Vector3 _pos = NPC.transform.position;
-        _pos.y = yOffset;
-        transform.position = _pos;
+        //Vector3 _pos = NPC.transform.position;
+        //_pos.y = yOffset;
+        var npcTalking = NPC.GetComponent<NpcTalking>();
+        transform.position = npcTalking.placeUIHere.position;
+        transform.rotation = npcTalking.placeUIHere.rotation;
+        transform.SetParent(npcTalking.placeUIHere);
 
     }
 
     private void OnDisable()
     {
+        transform.SetParent(null);
        // InteractionManager.interact -= StartConv;
     }
 }

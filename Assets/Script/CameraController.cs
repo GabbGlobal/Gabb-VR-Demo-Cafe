@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        characterController = GetComponent<CharacterController>();
+        characterController = transform.root.GetComponent<CharacterController>();
         cam = Camera.main;
         // Disable tracked pose driver so we don't have to fight HMD tracking
         cam.GetComponent<UnityEngine.InputSystem.XR.TrackedPoseDriver>().enabled = false;
