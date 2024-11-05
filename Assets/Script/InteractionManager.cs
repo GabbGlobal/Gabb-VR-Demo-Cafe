@@ -7,6 +7,7 @@ using UnityEngine.Video;
 using System;
 using Newtonsoft.Json;
 using System.IO;
+using UnityEngine.InputSystem;
 
 // The InteractionManager class handles interactions between the player and NPCs, 
 // manages dialogues, experience points, video hints, and the game's ending screen.
@@ -93,15 +94,21 @@ public class InteractionManager : MonoBehaviour
     private Texture2D expBarFillTexture;
     private Texture2D pointsOvalTexture;
     private Texture2D starTexture;
+    
 
     [SerializeField] private TMP_Text dialogueTextCharacter; // Reference to character's dialogue TMP_Text component
     [SerializeField] private TMP_Text dialogueTextUser; // Reference to user's dialogue TMP_Text component
     private Dictionary<string, DictionaryEntry> dictionary; // Dictionary to store word-meaning and POS pairs
     private GameObject popup; // Reference to the popup GameObject
-    private RectTransform popupRectTransform; // RectTransform for popup positioning
+    private UIFaceCamera popupFaceCamera; // cache reference to the UIFaceCamera script on the popup
     private TMP_Text currentlyHoveredText; // Track which text is currently being hovered
 
     private PronunciationAssessor pronunciationAssessor;
+
+
+    public InputActionReference progressDialogueInput; // replaces all uses of Input.GetKeyDown("space");
+    public PointAtWords pointAtWords; // script to handle pointing at words
+    public GameObject popupPrefab;
 
     // The Start method is called before the first frame update.
     // It initializes the game state by setting up the GameManager reference, loading JSON data,
@@ -116,6 +123,9 @@ public class InteractionManager : MonoBehaviour
         {
             Debug.LogError("gamemanager is null");
         }
+
+        progressDialogueInput.action.Enable(); // enable input action
+        
 
         // Get the language and load JSON data
         // Language settings are retrieved from the GameManager, and JSON data is loaded to populate dialogues.
@@ -260,9 +270,10 @@ public class InteractionManager : MonoBehaviour
         }
 
         // Handle input for progressing or restarting dialogue
-        // This section checks if the player presses the space bar to progress through the dialogue.
+        // This section checks if the player presses the space bar or equivalent xr input to progress through the dialogue.
         // It also handles restarting the dialogue if necessary and manages dialogue state.
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (progressDialogueInput.action.WasPressedThisFrame())
         {
             Debug.Log("User pressed space.");
             Debug.Log("Complete Dialogue: " + completeDialog);
@@ -341,6 +352,13 @@ public class InteractionManager : MonoBehaviour
         // Get the current mouse position in world space
         Vector3 mousePosition = Input.mousePosition;
         Camera camera = Camera.main; // Assuming the main camera is used for screen space calculations
+        Vector3 cursorWorldPosition = Vector3.zero;
+        if (pointAtWords.pointerWorldPositionOnUI.HasValue) {
+            cursorWorldPosition = pointAtWords.pointerWorldPositionOnUI.Value;
+            mousePosition = Camera.main.WorldToScreenPoint(cursorWorldPosition);
+        } else {
+           // mousePosition = Vector3.zero;
+        }
 
         int wordIndex = TMP_TextUtilities.FindIntersectingWord(dialogueText, mousePosition, camera);
         if (wordIndex != -1) // If a word is detected
@@ -361,54 +379,30 @@ public class InteractionManager : MonoBehaviour
                 currentlyHoveredText = dialogueText;
 
                 // Create or update the popup with meaning and POS
-                CreateOrUpdatePopup(mousePosition, meaning, pos);
+                CreateOrUpdatePopup(cursorWorldPosition, meaning, pos);
             }
         }
     }
 
-    private void CreateOrUpdatePopup(Vector3 mousePosition, string meaning, string pos)
+    private void CreateOrUpdatePopup(Vector3 cursorWorldPosition, string meaning, string pos)
     {
         if (popup == null)
         {
             // Create a new popup GameObject
-            popup = new GameObject("Popup");
-            Canvas canvas = popup.AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            popup.AddComponent<CanvasScaler>();
-            popup.AddComponent<GraphicRaycaster>();
-
-            // Create a child GameObject for the background
-            GameObject backgroundObject = new GameObject("Background");
-            backgroundObject.transform.SetParent(popup.transform, false);
-            Image background = backgroundObject.AddComponent<Image>();
-            background.color = new Color(0.5f, 0.5f, 0.5f, 0.9f); // Gray background with some transparency
-
-            // Create a TextMeshProUGUI component as a child of the background
-            GameObject textObject = new GameObject("Text");
-            textObject.transform.SetParent(backgroundObject.transform, false);
-            TextMeshProUGUI textComponent = textObject.AddComponent<TextMeshProUGUI>();
-            textComponent.text = $"{meaning}\n({pos})"; // Include both meaning and POS
-            textComponent.fontSize = 24;
-            textComponent.color = Color.white; // White text color
-            textComponent.alignment = TextAlignmentOptions.Center;
-
-            // Set RectTransform sizes
-            RectTransform textRect = textComponent.GetComponent<RectTransform>();
-            textRect.sizeDelta = new Vector2(200, 50); // Set the text size
-            textRect.anchoredPosition = Vector2.zero; // Center the text in the background
-
-            popupRectTransform = backgroundObject.GetComponent<RectTransform>();
-            popupRectTransform.sizeDelta = new Vector2(220, 70); // Background size slightly larger than text
+            popup = Instantiate(popupPrefab);
+            Canvas canvas = popup.GetComponent<Canvas>();
+            canvas.worldCamera = Camera.main;
+            popupFaceCamera = popup.GetComponent<UIFaceCamera>();
         }
-        else
-        {
-            // Update the text of the existing popup
-            TextMeshProUGUI textComponent = popup.GetComponentInChildren<TextMeshProUGUI>();
-            textComponent.text = $"{meaning}\n({pos})"; // Include both meaning and POS
-        }
+
+        // Update the text of the popup
+        TextMeshProUGUI textComponent = popup.GetComponentInChildren<TextMeshProUGUI>();
+        textComponent.text = $"{meaning}\n({pos})"; // Include both meaning and POS
 
         // Position the popup higher above the word
-        popupRectTransform.position = mousePosition + new Vector3(0, 60, 0); // Offset to place popup higher above word
+        Debug.Log(cursorWorldPosition);
+        popup.transform.position = cursorWorldPosition + new Vector3(0f, 0.17f, 0f); // Offset to place popup higher above word
+        popupFaceCamera.FaceCamera(); // face camera here to avoid a 1 frame flicker where the popup is not facing the camera
     }
 
     private void DestroyPopupIfExists()
@@ -1097,25 +1091,6 @@ public class InteractionManager : MonoBehaviour
                 {
                     texture.SetPixel(x, y, color);
                 }
-            }
-        }
-
-        texture.Apply();
-        return texture;
-    }
-
-    // CreateRectangleTexture method
-    // This method creates a simple rectangle texture with the specified width, height, and color.
-    // It fills the entire texture with the provided color.
-    Texture2D CreateRectangleTexture(int width, int height, Color color)
-    {
-        Texture2D texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
-
-        for (int y = 0; y < height; y++)
-        {
-            for (int x = 0; x < width; x++)
-            {
-                texture.SetPixel(x, y, color);
             }
         }
 

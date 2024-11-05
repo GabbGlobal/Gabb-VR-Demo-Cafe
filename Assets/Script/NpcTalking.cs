@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class NpcTalking : MonoBehaviour
 {
-    private GameObject player;
+    private Transform player;
     private bool talking = false;
     private Animator animator;
     private Quaternion originalRotation;
     private Coroutine turnBackCoroutine;
     private Coroutine faceUserCoroutine;
+    public Transform placeUIHere;
 
     void Start()
     {
-        player = GameObject.FindGameObjectsWithTag("MainCamera")[0];
-        animator = GetComponent<Animator>();
+        player = Camera.main.transform;
+        animator = GetComponentInChildren<Animator>();
         if (animator == null)
         {
             Debug.LogError("animator is null");
@@ -64,7 +65,7 @@ public class NpcTalking : MonoBehaviour
     {
         while (true)
         {
-            Vector3 targetDirection = player.transform.position - transform.position;
+            Vector3 targetDirection = player.position - transform.position;
             targetDirection.y = 0; // Keep the rotation in the horizontal plane
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 4.0f);
@@ -103,7 +104,7 @@ public class NpcTalking : MonoBehaviour
 
     private void FaceUserInstantly()
     {
-        Vector3 targetDirection = player.transform.position - transform.position;
+        Vector3 targetDirection = player.position - transform.position;
         targetDirection.y = 0; // Keep the rotation in the horizontal plane
         transform.rotation = Quaternion.LookRotation(targetDirection);
     }
