@@ -37,7 +37,7 @@ public class ConversationUI : MonoBehaviour
 
     private void OnDisable()
     {
-        transform.SetParent(null);
+        //transform.SetParent(null);
        // InteractionManager.interact -= StartConv;
     }
 }

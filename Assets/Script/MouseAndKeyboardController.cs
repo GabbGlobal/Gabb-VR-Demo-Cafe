@@ -4,7 +4,7 @@ using UnityEngine;
 // It allows the main camera to navigate using the arrow keys and rotate using the mouse.
 // This is not intended for final deployment.
 
-public class CameraController : MonoBehaviour
+public class MouseAndKeyboardController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float turnSpeed = 3.0f;
@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        if (!Application.isEditor) { return; }
         characterController = transform.root.GetComponent<CharacterController>();
         cam = Camera.main;
         // Disable tracked pose driver so we don't have to fight HMD tracking
@@ -23,6 +24,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        if (!Application.isEditor) { return; }
         // Get horizontal input (left/right)
         float moveHorizontal = Input.GetAxis("Horizontal");
         // Get vertical input (forward/backward)

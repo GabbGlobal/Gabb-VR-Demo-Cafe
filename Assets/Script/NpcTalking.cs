@@ -1,5 +1,7 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NpcTalking : MonoBehaviour
 {
@@ -10,9 +12,15 @@ public class NpcTalking : MonoBehaviour
     private Coroutine turnBackCoroutine;
     private Coroutine faceUserCoroutine;
     public Transform placeUIHere;
-
+    public InputActionReference progressDialogueInput;
+    private Renderer[] renderers;
+    private PlayerTriggerZone playerTriggerZone;
+    private NpcFacing npcFacing;
     void Start()
     {
+        renderers = GetComponentsInChildren<Renderer>();
+        npcFacing = GetComponent<NpcFacing>();
+        playerTriggerZone = GetComponentInChildren<PlayerTriggerZone>();
         player = Camera.main.transform;
         animator = GetComponentInChildren<Animator>();
         if (animator == null)
@@ -20,14 +28,6 @@ public class NpcTalking : MonoBehaviour
             Debug.LogError("animator is null");
         }
         originalRotation = transform.rotation;
-    }
-
-    void Update()
-    {
-        if (talking)
-        {
-            FaceUserInstantly();
-        }
     }
 
     public void Talk(bool _talk)
@@ -49,63 +49,41 @@ public class NpcTalking : MonoBehaviour
         }
     }
 
-    public void FaceUser(bool face)
-    {
-        if (face)
-        {
-            if (faceUserCoroutine != null)
-            {
-                StopCoroutine(faceUserCoroutine);
+    void Update() {
+         // if facing player is in trigger zone and looking at this NPC
+        bool canTalkWithPlayer = playerTriggerZone.PlayerIsInTriggerZone && IsInView(); 
+
+        // if can talk, face player
+        if (canTalkWithPlayer) {
+            npcFacing.facePlayer = true; // look at the player   
+        } else { 
+            npcFacing.facePlayer = false;
+        }
+
+        /*// can talk and progress dialogue input is pressed
+        if (canTalkWithPlayer && && InteractionManager.Instance.CurrentNpc == null && progressDialogueInput.action.WasPressedThisFrame()) {
+            InteractionManager.Instance.StartConv(this); // start conversation with this NPC
+        }*/
+
+        // if can talk and not player is not already talking to somebody
+        if (canTalkWithPlayer && InteractionManager.Instance.CurrentNpc == null) {
+            InteractionManager.Instance.StartConv(this); // start conversation with this NPC
+        }
+
+        // if player leaves the trigger zone, end the convo
+        if (!playerTriggerZone.PlayerIsInTriggerZone && InteractionManager.Instance.CurrentNpc == this) {
+            InteractionManager.Instance.EndConv();
+        }
+    }
+
+    // Check if the NPC is in view of the camera. Does not account for occlusion.
+    public bool IsInView() {
+        var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+        foreach (Renderer r in renderers) {
+            if(GeometryUtility.TestPlanesAABB(planes, r.bounds)) {
+                return true;
             }
-            faceUserCoroutine = StartCoroutine(SmoothFaceUser());
         }
-    }
-
-    private IEnumerator SmoothFaceUser()
-    {
-        while (true)
-        {
-            Vector3 targetDirection = player.position - transform.position;
-            targetDirection.y = 0; // Keep the rotation in the horizontal plane
-            Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 4.0f);
-            yield return null;
-        }
-    }
-
-    public void ReturnToOriginalRotation()
-    {
-        if (faceUserCoroutine != null)
-        {
-            StopCoroutine(faceUserCoroutine);
-        }
-        if (turnBackCoroutine != null)
-        {
-            StopCoroutine(turnBackCoroutine);
-        }
-        turnBackCoroutine = StartCoroutine(SmoothReturnToOriginalRotation());
-    }
-
-    private IEnumerator SmoothReturnToOriginalRotation()
-    {
-        float duration = 0.5f; // Duration of the turn back
-        float elapsed = 0f;
-        Quaternion startRotation = transform.rotation;
-
-        while (elapsed < duration)
-        {
-            transform.rotation = Quaternion.Slerp(startRotation, originalRotation, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.rotation = originalRotation; // Ensure exact original rotation at the end
-    }
-
-    private void FaceUserInstantly()
-    {
-        Vector3 targetDirection = player.position - transform.position;
-        targetDirection.y = 0; // Keep the rotation in the horizontal plane
-        transform.rotation = Quaternion.LookRotation(targetDirection);
+        return false;        
     }
 }
