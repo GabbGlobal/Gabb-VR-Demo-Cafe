@@ -58,6 +58,7 @@ public class InteractionManager : MonoBehaviour
     [SerializeField] private TMP_Text advisorText;
     [SerializeField] private Button hintButton;
     [SerializeField] private VideoPlayer videoPlayer; // Reference to VideoPlayer
+    public Renderer playVideoOnThis;
 
     // Dialogue data
     // These variables are used to manage and process dialogue data, including the dialogue
@@ -71,9 +72,9 @@ public class InteractionManager : MonoBehaviour
     // These variables manage the characters in the game, particularly the NPCs that the player
     // interacts with. They track the current and previous characters involved in dialogues.
     [SerializeField] private GameObject[] characters;
-    private GameObject currentCharacter;
-    private GameObject previousCharacter;
-    NpcTalking npcTalking;
+    public GameObject currentCharacter;
+    public GameObject previousCharacter;
+    public NpcTalking CurrentNpc {get; private set;}
     bool completeDialog = false;
     private float dialogueDistance = 4f;
     private AudioSource audioSource;
@@ -110,6 +111,16 @@ public class InteractionManager : MonoBehaviour
     public PointAtWords pointAtWords; // script to handle pointing at words
     public GameObject popupPrefab;
 
+
+    public static InteractionManager Instance {get; private set;} // singleton
+    void Awake() {
+        // enforce singleton
+        if (Instance != null) {
+            DestroyImmediate(Instance.gameObject);
+        }
+        Instance = this;
+    }
+
     // The Start method is called before the first frame update.
     // It initializes the game state by setting up the GameManager reference, loading JSON data,
     // configuring UI elements (like the advisor text and hint button), and preparing the video player.
@@ -123,6 +134,10 @@ public class InteractionManager : MonoBehaviour
         {
             Debug.LogError("gamemanager is null");
         }
+
+        // cache video player references
+        videoPlayer = FindObjectOfType<VideoPlayer>(includeInactive: true); // TODO: move all video player logic into a deicated component instead
+        playVideoOnThis = videoPlayer.targetMaterialRenderer;
 
         progressDialogueInput.action.Enable(); // enable input action
         
@@ -143,31 +158,13 @@ public class InteractionManager : MonoBehaviour
         hintButton.gameObject.SetActive(false);
         hintButton.onClick.AddListener(OnHintButtonClick);
 
-        // Set up video player
-        // The video player is configured to render videos to a RenderTexture, which is later used by
-        // the RawImage to display the video content on the screen. Looping and autoplay are disabled,
-        // and a callback is added to handle video end events.
-        videoPlayer.renderMode = VideoRenderMode.RenderTexture;
-        videoPlayer.targetTexture = new RenderTexture(Screen.width, Screen.height, 0);
-        videoPlayer.isLooping = false;
-        videoPlayer.playOnAwake = false;
+        // Set up video player, add callback to handle video end events.
         videoPlayer.loopPointReached += OnVideoEnd;
-
-        // Create RawImage for video display
-        // A new GameObject is created to hold the RawImage component, which will display the video content.
-        // The RawImage is initially hidden and sized to match the screen dimensions.
-        GameObject videoRawImageObject = new GameObject("VideoRawImage");
-        Canvas canvas = videoRawImageObject.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        videoRawImage = videoRawImageObject.AddComponent<RawImage>();
-        videoRawImage.texture = videoPlayer.targetTexture;
-        videoRawImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
-        videoRawImage.gameObject.SetActive(false); // Initially hidden
 
         // Pre-create textures
         // This method generates the necessary textures for UI elements such as rectangles,
         // circles, experience bars, and stars, which will be used later in the game.
-        CreateTextures();
+        CreateTextures(); // TODO: eliminate this
 
         // Load the dictionary JSON data into a Dictionary object
         LoadDictionary();
@@ -233,42 +230,6 @@ public class InteractionManager : MonoBehaviour
     // movement and facing, dialogue progression, pronunciation input, and restarting the game.
     void Update()
     {
-        // Handle character facing and movement
-        // This section checks if the player is near an NPC and adjusts the NPC's facing direction
-        // accordingly. It also resets the NPC's rotation when the player moves away.
-        if (currentCharacter == null)
-        {
-            GameObject nearestCharacter = FindNearestCharacter();
-
-            if (nearestCharacter != null && Vector3.Distance(Camera.main.transform.position, nearestCharacter.transform.position) <= dialogueDistance)
-            {
-                if (previousCharacter != nearestCharacter)
-                {
-                    if (previousCharacter != null)
-                    {
-                        previousCharacter.GetComponent<NpcTalking>().ReturnToOriginalRotation();
-                    }
-                    previousCharacter = nearestCharacter;
-                }
-                nearestCharacter.GetComponent<NpcTalking>().FaceUser(true);
-            }
-            else
-            {
-                if (previousCharacter != null)
-                {
-                    previousCharacter.GetComponent<NpcTalking>().ReturnToOriginalRotation();
-                    previousCharacter = null;
-                }
-            }
-        }
-        else
-        {
-            if (IsInView(currentCharacter) && Vector3.Distance(Camera.main.transform.position, currentCharacter.transform.position) <= dialogueDistance)
-            {
-                currentCharacter.GetComponent<NpcTalking>().FaceUser(true);
-            }
-        }
-
         // Handle input for progressing or restarting dialogue
         // This section checks if the player presses the space bar or equivalent xr input to progress through the dialogue.
         // It also handles restarting the dialogue if necessary and manages dialogue state.
@@ -280,12 +241,12 @@ public class InteractionManager : MonoBehaviour
             Debug.Log("Progresss Dialogue Next: " + progressDialogueNext);
             if (currentCharacter == null)
             {
-                GameObject nearestCharacter = FindNearestCharacter();
+                /*GameObject nearestCharacter = FindNearestCharacter();
                 if (nearestCharacter != null && IsInView(nearestCharacter) && Vector3.Distance(Camera.main.transform.position, nearestCharacter.transform.position) <= dialogueDistance)
                 {
                     currentCharacter = nearestCharacter;
                     StartConv(currentCharacter);
-                }
+                }*/
             }
             else
             {
@@ -293,14 +254,14 @@ public class InteractionManager : MonoBehaviour
                 {
                     RestartDialogue();
                 }
-                else if (progressDialogueNext && IsInView(currentCharacter))
+                else if (progressDialogueNext && CurrentNpc.IsInView())
                 {
                     ProgressDialogue();
                 }
             }
         }
 
-        // Handle dialogue end when user moves too far
+        /*// Handle dialogue end when user moves too far
         // This section ends the dialogue if the player moves too far from the NPC during a conversation.
         // It also updates the maximum experience points when this happens.
         if (currentCharacter != null && Vector3.Distance(Camera.main.transform.position, currentCharacter.transform.position) > dialogueDistance)
@@ -311,7 +272,7 @@ public class InteractionManager : MonoBehaviour
             progressDialogueNext = false;
             ResetDialogueTextColors();
             advisorText.gameObject.SetActive(false);
-        }
+        }*/
 
         // Handle input for showing ending screen and restarting game
         // This section checks if the player presses the E or R keys to either show the ending screen
@@ -437,36 +398,6 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
-    // IsInView method
-    // This method checks if a given NPC is within the player's view by calculating the screen position
-    // of the NPC relative to the camera. It ensures that the NPC is within a defined viewport range.
-    bool IsInView(GameObject character)
-    {
-        Vector3 screenPoint = Camera.main.WorldToViewportPoint(character.transform.position);
-        return screenPoint.z > 0 && screenPoint.x > 0.25f && screenPoint.x < 0.75f && screenPoint.y > -0.5f && screenPoint.y < 1.5f;
-    }
-
-    // FindNearestCharacter method
-    // This method finds the nearest NPC to the player by calculating the distance between the camera
-    // and each NPC. It returns the closest NPC that is also within the player's view.
-    GameObject FindNearestCharacter()
-    {
-        GameObject nearestCharacter = null;
-        float shortestDistance = Mathf.Infinity;
-        Vector3 cameraPosition = Camera.main.transform.position;
-
-        foreach (GameObject character in characters)
-        {
-            float distance = Vector3.Distance(cameraPosition, character.transform.position);
-            if (distance < shortestDistance && IsInView(character))
-            {
-                shortestDistance = distance;
-                nearestCharacter = character;
-            }
-        }
-        return nearestCharacter;
-    }
-
     // CheckSpeaker method
     // This method determines which character (player or NPC) should start speaking based on
     // the value of the startSpeaker variable. It returns an integer representing the speaker.
@@ -482,19 +413,19 @@ public class InteractionManager : MonoBehaviour
     // StartConv method
     // This method initiates a conversation with an NPC. It sets up the dialogue, updates the UI,
     // and starts playing the corresponding dialogue audio. If no NPC is provided, it triggers a UI animation.
-    void StartConv(GameObject _npcName = null)
+    public void StartConv(NpcTalking npcTalking = null)
     {
-        if (_npcName != null)
+        if (npcTalking != null)
         {
-            currentCharacter = _npcName;
+            currentCharacter = npcTalking.gameObject;
             GetJsonData();
-            npcTalking = _npcName.GetComponent<NpcTalking>();
+            this.CurrentNpc = npcTalking;
             if (npcTalking == null)
             {
                 Debug.LogError("npctalking is null");
             }
             npcTalking.Talk(true);
-            conversationUI.StartConv(_npcName);
+            conversationUI.StartConv(npcTalking.gameObject);
             dialogPanel[CheckSpeaker()].SetActive(true);
 
             // Only show the hint button if the user dialogue text is not empty
@@ -527,17 +458,20 @@ public class InteractionManager : MonoBehaviour
     // EndConv method
     // This method ends the current conversation by hiding the dialogue panels, resetting the NPC's talking state,
     // and updating the game state. If all characters have been completed, it triggers the ending screen.
-    void EndConv()
+    public void EndConv()
     {
+        videoPlayer.Stop();
+        playVideoOnThis.gameObject.SetActive(false);
         foreach (var panel in dialogPanel)
         {
             panel.SetActive(false);
+
         }
         hintButton.gameObject.SetActive(false);
-        if (npcTalking != null)
+        if (CurrentNpc != null)
         {
-            npcTalking.Talk(false);
-            npcTalking = null;
+            CurrentNpc.Talk(false);
+            CurrentNpc = null;
         }
 
         if (progress >= dialogData.Count && currentCharacter != null)
@@ -551,6 +485,14 @@ public class InteractionManager : MonoBehaviour
         usedHint = false;
         usedHintJustNow = false;
         consecutiveIncorrect = 0;
+
+        // --- this code was previously triggered outside of EndConvo() when the player left a convo by walking too far away
+        maxExperiencePoints += 3f; ///updates the maximum experience points when this happens. TODO: why update experience on walking away from a convo???
+        restartDialogueNext = false;
+        progressDialogueNext = false;
+        ResetDialogueTextColors();
+        advisorText.gameObject.SetActive(false);
+        // ---
 
         if (completedCharacters.Count >= characters.Length)
         {
@@ -754,7 +696,7 @@ public class InteractionManager : MonoBehaviour
         ResetDialogueTextColors();
         advisorText.gameObject.SetActive(false);
         progress = 0;
-        StartConv(currentCharacter);
+        StartConv(CurrentNpc);
     }
 
     // ProgressDialogue method
@@ -770,7 +712,7 @@ public class InteractionManager : MonoBehaviour
         }
         else
         {
-            StartConv(currentCharacter);
+            StartConv(CurrentNpc);
         }
         completeDialog = false;
         ResetDialogueTextColors();
@@ -792,13 +734,15 @@ public class InteractionManager : MonoBehaviour
     // file is selected based on the current character and progress in the conversation.
     void PlayHintVideo()
     {
+        playVideoOnThis.gameObject.SetActive(false);// Hide video surface
+        Debug.Log("[InteractionManager] PlayHintVideo");
         int characterIndex = System.Array.IndexOf(characters, currentCharacter);
         string conversation = characterIndex < 2 ? "7" : "8";
         string version = (characterIndex % 2 == 0) ? "1" : "2";
         string hintVideoName = $"conversation{conversation}_version{version}_hint{progress + 1}.mp4";
         string videoPath = System.IO.Path.Combine(Application.streamingAssetsPath, hintVideoName);
         videoPlayer.url = videoPath;
-        videoRawImage.gameObject.SetActive(true); // Show RawImage
+        videoPlayer.gameObject.SetActive(true); // Show video player surface
         videoPlayer.Prepare();
         videoPlayer.prepareCompleted += OnVideoPrepared;
     }
@@ -807,6 +751,7 @@ public class InteractionManager : MonoBehaviour
     // This method is called when the video is ready to play. It starts the video playback.
     void OnVideoPrepared(VideoPlayer vp)
     {
+        playVideoOnThis.gameObject.SetActive(true); // show video surface
         vp.Play();
     }
 
@@ -815,7 +760,7 @@ public class InteractionManager : MonoBehaviour
     // the video content.
     void OnVideoEnd(VideoPlayer vp)
     {
-        videoRawImage.gameObject.SetActive(false); // Hide RawImage
+        playVideoOnThis.gameObject.SetActive(false);// Hide video surface
     }
 
     // RestartGame method

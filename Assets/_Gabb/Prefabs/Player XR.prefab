@@ -1173,7 +1173,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7261574040684762722}
-  - component: {fileID: 7261574040684762725}
   m_Layer: 7
   m_Name: Camera Offset
   m_TagString: Player
@@ -1200,21 +1199,6 @@ Transform:
   m_Father: {fileID: 7261574041348027581}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7261574040684762725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7261574040684762723}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 094c099d9d8f9425ba8572525cc7b6a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  turnSpeed: 3
-  fixedYPosition: 1.75
 --- !u!1 &7261574041002053724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,9 +1373,11 @@ GameObject:
   - component: {fileID: 7261574041348027583}
   - component: {fileID: 2896837202778754120}
   - component: {fileID: 3631447105279829446}
+  - component: {fileID: 7451093592418531109}
+  - component: {fileID: 3503520629753669964}
   m_Layer: 7
   m_Name: Player XR
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1571,3 +1557,30 @@ MonoBehaviour:
   m_LocomotionProvider: {fileID: 0}
   m_MinHeight: 0
   m_MaxHeight: Infinity
+--- !u!114 &7451093592418531109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261574041348027579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d21d944e95c6c04e8041f720b3681ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3503520629753669964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261574041348027579}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 094c099d9d8f9425ba8572525cc7b6a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  turnSpeed: 3
+  fixedYPosition: 1.75

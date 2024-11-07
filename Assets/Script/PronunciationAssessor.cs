@@ -9,7 +9,7 @@ using System.Linq;
 
 public class PronunciationAssessor : MonoBehaviour
 {
-    private const string SubscriptionKey = "subscription_key";
+    private const string SubscriptionKey = "placeholder_key";
     private const string Region = "region";
     private SpeechConfig speechConfig;
     private AudioConfig audioConfig;
