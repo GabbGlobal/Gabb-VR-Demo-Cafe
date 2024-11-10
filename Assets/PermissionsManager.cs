@@ -13,7 +13,9 @@ public class PermissionsManager : MonoBehaviour
         }
         Instance = this;
     }
-#if PLATFORM_ANDROID
+    
+    private Microphone mic; // not used, but required for Microphone permissions on Android
+
     private void PermissionCallbacks_PermissionDeniedAndDontAskAgain(string permissionName)
     {
         Debug.Log($"{permissionName} PermissionDeniedAndDontAskAgain");
@@ -38,6 +40,7 @@ public class PermissionsManager : MonoBehaviour
     // Start is called before the first frame update
     public void RequestPermissions()
     {
+#if PLATFORM_ANDROID
         var callbacks = new PermissionCallbacks();
         callbacks.PermissionDenied += PermissionCallbacks_PermissionDenied;
         callbacks.PermissionGranted += PermissionCallbacks_PermissionGranted;
