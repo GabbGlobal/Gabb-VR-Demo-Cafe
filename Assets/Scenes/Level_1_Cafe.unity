@@ -25201,6 +25201,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1643361016074922344, guid: 957591a5ae8a00c4db4006b348d30865, type: 3}
+      propertyPath: englishTestingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6804575783230013636, guid: 957591a5ae8a00c4db4006b348d30865, type: 3}
       propertyPath: hintButton
       value: 
@@ -25280,6 +25284,10 @@ PrefabInstance:
     - target: {fileID: 6804575783230013656, guid: 957591a5ae8a00c4db4006b348d30865, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6804575783230013656, guid: 957591a5ae8a00c4db4006b348d30865, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6804575783230013658, guid: 957591a5ae8a00c4db4006b348d30865, type: 3}
       propertyPath: m_RootOrder

@@ -169,7 +169,7 @@ public class InteractionManager : MonoBehaviour
         // Load the dictionary JSON data into a Dictionary object
         LoadDictionary();
 
-        pronunciationAssessor = gameObject.AddComponent<PronunciationAssessor>();
+        pronunciationAssessor = GetComponent<PronunciationAssessor>();
     }
 
     // CreateTextures method
@@ -361,7 +361,7 @@ public class InteractionManager : MonoBehaviour
         textComponent.text = $"{meaning}\n({pos})"; // Include both meaning and POS
 
         // Position the popup higher above the word
-        Debug.Log(cursorWorldPosition);
+        //Debug.Log(cursorWorldPosition);
         popup.transform.position = cursorWorldPosition + new Vector3(0f, 0.17f, 0f); // Offset to place popup higher above word
         popupFaceCamera.FaceCamera(); // face camera here to avoid a 1 frame flicker where the popup is not facing the camera
     }

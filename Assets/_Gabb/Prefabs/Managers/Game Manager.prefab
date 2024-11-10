@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6804575783230013658}
   - component: {fileID: 6804575783230013639}
   - component: {fileID: 6804575783230013636}
+  - component: {fileID: 1643361016074922344}
+  - component: {fileID: 4965466649841866244}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -73,14 +75,43 @@ MonoBehaviour:
   advisorText: {fileID: 0}
   hintButton: {fileID: 0}
   videoPlayer: {fileID: 0}
+  playVideoOnThis: {fileID: 0}
   jsonFile: {fileID: 4900000, guid: c6098232cdd27f645b1b02b5ffdb8246, type: 3}
   characters:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  currentCharacter: {fileID: 0}
+  previousCharacter: {fileID: 0}
   dialogueTextCharacter: {fileID: 0}
   dialogueTextUser: {fileID: 0}
   progressDialogueInput: {fileID: -2349988013680730178, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   pointAtWords: {fileID: 0}
   popupPrefab: {fileID: 3061650488792274220, guid: 433d8621a398d2e468d67bbcc8b04b71, type: 3}
+--- !u!114 &1643361016074922344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804575783230013656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8305c0d46cea94040b3d25451d86d694, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  englishTestingMode: 1
+--- !u!114 &4965466649841866244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6804575783230013656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b75b0ab0370018246819fdb82353b096, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secretsAsset: {fileID: 11400000, guid: ac5d48f71068c394d8b8738dbf187aee, type: 2}
