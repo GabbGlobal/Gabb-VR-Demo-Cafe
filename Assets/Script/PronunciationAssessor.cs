@@ -6,6 +6,9 @@ using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.CognitiveServices.Speech.PronunciationAssessment;
 using System.Threading.Tasks;
 using System.Linq;
+#if PLATFORM_ANDROID
+using UnityEngine.Android;
+#endif
 
 public class PronunciationAssessor : MonoBehaviour
 {
@@ -23,8 +26,11 @@ public class PronunciationAssessor : MonoBehaviour
     private InteractionManager interactionManager;
     public bool englishTestingMode = false; // if true, just say "Test" in US English. For faster testing.
 
-    void Start()
+    IEnumerator Start()
     {
+        // Get the InteractionManager component
+        interactionManager = FindObjectOfType<InteractionManager>();  // Ensure InteractionManager exists in the scene
+
         speechConfig = SpeechConfig.FromSubscription(
             SecretsManager.Instance.secretsAsset.azureSpeechSubscriptionKey,
             Region);
@@ -35,11 +41,17 @@ public class PronunciationAssessor : MonoBehaviour
         {
             speechConfig.SpeechRecognitionLanguage = "en-US"; // use US english for testing only
         }
+        
+        #if PLATFORM_ANDROID
+            PermissionsManager.Instance.RequestPermissions();
+            yield return new WaitUntil(()=>Permission.HasUserAuthorizedPermission(Permission.Microphone)); // wait for microphone persmission before proceeding
+        #endif
         audioConfig = AudioConfig.FromDefaultMicrophoneInput();
 
-        // Get the InteractionManager component
-        interactionManager = FindObjectOfType<InteractionManager>();  // Ensure InteractionManager exists in the scene
+        yield break;
     }
+
+
 
     public void StartAssessment(string referenceText)
     {
