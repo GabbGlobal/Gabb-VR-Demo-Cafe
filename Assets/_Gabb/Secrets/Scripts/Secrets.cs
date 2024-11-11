@@ -7,5 +7,6 @@ using UnityEngine;
 // This does not keep secrets out of builds, only helps keep secrets out of git. (similar to a .env)
 public class Secrets : ScriptableObject
 {
+    public const string assetPath = "Assets/_Gabb/Secrets/SecretData.asset";
     public string azureSpeechSubscriptionKey = "Fill in key here";
 }

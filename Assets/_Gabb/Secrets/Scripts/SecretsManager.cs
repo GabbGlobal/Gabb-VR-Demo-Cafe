@@ -15,7 +15,6 @@ public class SecretsManager : MonoBehaviour
     public static SecretsManager Instance {get; private set;}
     // Path to the secret data asset
     // This path MUST be gitignored to keep the secret keys out of the repo
-    private const string assetPath = "Assets/_Gabb/Secrets/SecretData.asset";
     void Awake() {
         if (Instance != null) {
             DestroyImmediate(Instance);
@@ -37,11 +36,11 @@ public class SecretsManager : MonoBehaviour
 #if UNITY_EDITOR
         if (Application.isEditor)
         {
-            Log($"Loading secret data asset from {assetPath}");
+            Log($"Loading secret data asset from {Secrets.assetPath}");
             // load the secrets asset
-            Secrets secrets = AssetDatabase.LoadAssetAtPath<Secrets>(assetPath);
+            Secrets secrets = AssetDatabase.LoadAssetAtPath<Secrets>(Secrets.assetPath);
             if (secrets == null) {
-                LogWarning($"No secret data asset found at {assetPath}. Restart the Editor so one is created.");
+                LogWarning($"No secret data asset found at {Secrets.assetPath}. Restart the Editor so one is created.");
             }
             this.secretsAsset = secrets;
         }

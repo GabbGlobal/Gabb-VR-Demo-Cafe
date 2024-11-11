@@ -6,9 +6,6 @@ using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.CognitiveServices.Speech.PronunciationAssessment;
 using System.Threading.Tasks;
 using System.Linq;
-#if PLATFORM_ANDROID
-using UnityEngine.Android;
-#endif
 
 public class PronunciationAssessor : MonoBehaviour
 {
@@ -42,10 +39,6 @@ public class PronunciationAssessor : MonoBehaviour
             speechConfig.SpeechRecognitionLanguage = "en-US"; // use US english for testing only
         }
         
-        #if PLATFORM_ANDROID
-            PermissionsManager.Instance.RequestPermissions();
-            yield return new WaitUntil(()=>Permission.HasUserAuthorizedPermission(Permission.Microphone)); // wait for microphone persmission before proceeding
-        #endif
         audioConfig = AudioConfig.FromDefaultMicrophoneInput();
 
         yield break;
