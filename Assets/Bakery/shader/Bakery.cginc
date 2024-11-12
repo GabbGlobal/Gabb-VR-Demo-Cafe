@@ -10,7 +10,9 @@ float bakeryLightmapMode;
 
 //#define BAKERY_SSBUMP
 
-#define BAKERY_LMSPECOCCLUSION_MUL 10
+
+//#define BAKERY_LMSPECOCCLUSION_MUL 10 // default value 10
+#define BAKERY_LMSPECOCCLUSION_MUL 5000 // increased value for SDR
 
 //#define BAKERY_COMPRESSED_VOLUME_RGBM
 
