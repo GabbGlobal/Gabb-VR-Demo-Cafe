@@ -1,0 +1,1035 @@
+2024-11-12
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Running ftraceRTX.exe interactive "C:\Users\Dan\AppData\Local\Temp\frender" a 4 0 0 preview.bin
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Running ftraceRTX.exe interactive "C:\Users\Dan\AppData\Local\Temp\frender" a 4 0 0 preview.bin
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 1924 0 1 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 1924 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 1 comp_1.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 1 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 1 shcomp_1.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LM0.lz4" 2 0 0 0
+Running ftraceRTX fixpos12 "C:\Users\Dan\AppData\Local\Temp\frender" "uvpos_Level_1_Cafe_LMA1.lz4" 2 0 1 0
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_0" 68 0 0 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_0_0_8" 68 0 0 batchpointlight_0_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_lights_Dir.lz4" 64 0 0 dircomp_0.bin
+Running ftraceRTX arealightdir "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_1" 68 0 1 lights0.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_1_0_8" 68 0 1 batchpointlight_1_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX diradd "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_lights_Dir.lz4" 64 0 1 dircomp_1.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM00.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA10.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM01.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA11.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM02.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA12.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_diffuse" 4 16 0 "gi_Level_1_Cafe_LM03.bin" "Level_1_Cafe_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_diffuse" 4 16 1 "gi_Level_1_Cafe_LMA13.bin" "Level_1_Cafe_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LM0_final" 68 16 0 "gi_Level_1_Cafe_LM04.bin" "Level_1_Cafe_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgidir "C:\Users\Dan\AppData\Local\Temp\frender" "Level_1_Cafe_LMA1_final" 68 16 1 "gi_Level_1_Cafe_LMA14.bin" "Level_1_Cafe_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "0" "Level_1_Cafe_LM0_final_HDR.lz4" "Level_1_Cafe_LM0_final_Dir.lz4
+Running denoiserOIDN2 D "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" 2048 0
+Running denoiserOIDN2 c "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" 2048 0
+Running seamfixer "C:\Users\Dan\AppData\Local\Temp\frender" "1" "Level_1_Cafe_LMA1_final_HDR.lz4" "Level_1_Cafe_LMA1_final_Dir.lz4
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LM0_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LM0_dir.tga" 
+Running halffloat2hdr "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_HDR.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_final.hdr" 1024
+Running rgba2tga "C:\Users\Dan\AppData\Local\Temp\frender/Level_1_Cafe_LMA1_final_Dir.lz4" "C:/UnityProjects/Gabb-VR-Demo-Cafe/Assets/BakeryLightmaps/Level_1_Cafe_LMA1_dir.tga" 
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Rendering UV GBuffer for Level_1_Cafe_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Level_1_Cafe_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX arealightprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "light_1_2" 1924 0 2 lights0.bin
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Dan\AppData\Local\Temp\frender" "PointBatch_2_0_8" 1924 0 2 batchpointlight_2_0_8.bin
+Running ftraceRTX addmul "C:\Users\Dan\AppData\Local\Temp\frender" "probes" 4 0 2 comp_2.bin
+Running ftraceRTX texgiprobesh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final" 1924 16 2 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Dan\AppData\Local\Temp\frender" "probes_final_" 4 0 2 shcomp_2.bin

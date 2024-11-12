@@ -35,7 +35,8 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    extraUserProperties: []
+    extraUserProperties:
+    - '#BAKERY{"meshName":["ggCafe_chairSeat01","ggCafe_chairLegs01","ggCafe_chairLeg_Nib05","ggCafe_chairBack_Middle01","ggCafe_chairBack01"],"padding":[31,29,256,52,48],"unwrapper":[1,1,1,1,1]}'
     clipAnimations: []
     isReadable: 0
   meshes:
@@ -68,8 +69,8 @@ ModelImporter:
     secondaryUVAreaDistortion: 15
     secondaryUVHardAngle: 88
     secondaryUVMarginMethod: 1
-    secondaryUVMinLightmapResolution: 30
-    secondaryUVMinObjectScale: 1
+    secondaryUVMinLightmapResolution: 100
+    secondaryUVMinObjectScale: 0.0328084
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
@@ -93,7 +94,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.30479997
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

@@ -45,7 +45,8 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    extraUserProperties: []
+    extraUserProperties:
+    - '#BAKERY{"meshName":["ggCafe_windowFrame01","ggCafe_windowCounter_Support03","ggCafe_windowCounter_Support02","ggCafe_windowCounter_Support01","ggCafe_windowCounter01"],"padding":[30,106,106,106,18],"unwrapper":[1,1,1,1,1]}'
     clipAnimations: []
     isReadable: 0
   meshes:
@@ -79,7 +80,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVMarginMethod: 1
     secondaryUVMinLightmapResolution: 30
-    secondaryUVMinObjectScale: 1
+    secondaryUVMinObjectScale: 0.0328084
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
