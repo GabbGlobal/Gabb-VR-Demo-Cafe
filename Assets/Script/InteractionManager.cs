@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using System;
-using Newtonsoft.Json;
+//using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.InputSystem;
 
@@ -208,7 +208,7 @@ public class InteractionManager : MonoBehaviour
         lessons = gameManager.lesson;
         string _json = jsonFile.ToString();
         Debug.Log(_json);
-        var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(_json);
+        var data = JsonUtility.FromJson<Root>(_json);
 
         // Find the character index to retrieve the relevant dialogue data from the JSON file.
         int characterIndex = System.Array.IndexOf(characters, currentCharacter);
@@ -386,7 +386,7 @@ public class InteractionManager : MonoBehaviour
         }
 
         // Parse the JSON file
-        var data = JsonConvert.DeserializeObject<DictionaryData>(jsonFile.text);
+        var data = JsonUtility.FromJson<DictionaryData>(jsonFile.text);
 
         // Initialize the dictionary
         dictionary = new Dictionary<string, DictionaryEntry>();

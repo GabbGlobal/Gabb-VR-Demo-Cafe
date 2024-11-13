@@ -197,7 +197,7 @@ public class ftLightMeshInspector : UnityEditor.Editor
         }
         else
         {
-            return obj.type == LightType.Area;
+            return obj.type == LightType.Rectangle;
         }
         return false;
     }

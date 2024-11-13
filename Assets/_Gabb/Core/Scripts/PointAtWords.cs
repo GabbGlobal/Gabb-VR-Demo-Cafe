@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class PointAtWords : MonoBehaviour
 {
-    private XRRayInteractor rayInteractor;
+    private UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor rayInteractor;
     public Vector3? pointerWorldPositionOnUI;
     // Start is called before the first frame update
     void Start()
     {
-        rayInteractor = GetComponent<XRRayInteractor>();
+        rayInteractor = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>();
     }
 
     // Update is called once per frame

@@ -14,11 +14,11 @@ namespace Gabb.XR
     {
         [SerializeField]
         [Tooltip("The Locomotion Provider object to listen to.")]
-        LocomotionProvider m_LocomotionProvider;
+        UnityEngine.XR.Interaction.Toolkit.Locomotion.LocomotionProvider m_LocomotionProvider;
         /// <summary>
         /// The <see cref="LocomotionProvider"/> object to listen to.
         /// </summary>
-        public LocomotionProvider locomotionProvider
+        public UnityEngine.XR.Interaction.Toolkit.Locomotion.LocomotionProvider locomotionProvider
         {
             get => m_LocomotionProvider;
             set
@@ -124,7 +124,7 @@ namespace Gabb.XR
             m_CharacterController.center = center;
         }
 
-        void Subscribe(LocomotionProvider provider)
+        void Subscribe(UnityEngine.XR.Interaction.Toolkit.Locomotion.LocomotionProvider provider)
         {
             if (provider != null)
             {
@@ -133,7 +133,7 @@ namespace Gabb.XR
             }
         }
 
-        void Unsubscribe(LocomotionProvider provider)
+        void Unsubscribe(UnityEngine.XR.Interaction.Toolkit.Locomotion.LocomotionProvider provider)
         {
             if (provider != null)
             {
