@@ -1,0 +1,228 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6a4566c8b774512813a3992aa8b88d, type: 3}
+  m_Name: BeautifyProfile
+  m_EditorClassIdentifier: 
+  dither: 0.02
+  ditherDepth: 0
+  sharpenMinDepth: 0
+  sharpenMaxDepth: 0.999
+  sharpen: 4
+  sharpenMinMaxDepthFallOff: 0
+  sharpenDepthThreshold: 0.035
+  tintColor: {r: 1, g: 1, b: 1, a: 0}
+  sharpenRelaxation: 0.065
+  sharpenClamp: 0.4
+  sharpenMotionSensibility: 0
+  sharpenMotionRestoreSpeed: 0.5
+  downscale: 1
+  superSampling: 1
+  antialiasStrength: 5
+  antialiasMaxSpread: 3
+  antialiasDepthThreshold: 0.000001
+  antialiasDepthAtten: 0
+  saturate: 0.5
+  contrast: 1.005
+  brightness: 1.05
+  daltonize: 0
+  hardLightIntensity: 0.5
+  hardLightBlend: 0
+  vignetting: 0
+  vignettingColor: {r: 0.3, g: 0.3, b: 0.3, a: 0.05}
+  vignettingFade: 0
+  vignettingCircularShape: 0
+  vignettingAspectRatio: 1
+  vignettingBlink: 0
+  vignettingBlinkStyle: 0
+  vignettingMask: {fileID: 0}
+  vignettingCenter: {x: 0.5, y: 0.5}
+  frame: 0
+  frameColor: {r: 1, g: 1, b: 1, a: 0.047}
+  frameMask: {fileID: 0}
+  frameStyle: 0
+  frameBandHorizontalSize: 0
+  frameBandHorizontalSmoothness: 0
+  frameBandVerticalSize: 0.1
+  frameBandVerticalSmoothness: 0
+  lut: 0
+  lutIntensity: 1
+  lutTexture: {fileID: 0}
+  lutTexture3D: {fileID: 0}
+  nightVision: 0
+  nightVisionColor: {r: 0.5, g: 1, b: 0.5, a: 0.5}
+  outline: 0
+  outlineColor: {r: 0, g: 0, b: 0, a: 0.8}
+  outlineCustomize: 0
+  outlineBlurDownscale: 1
+  outlineStage: 0
+  outlineSpread: 1
+  outlineBlurPassCount: 1
+  outlineIntensityMultiplier: 1
+  outlineMinDepthThreshold: 0
+  thermalVision: 0
+  lensDirt: 0
+  lensDirtThreshold: 0.5
+  lensDirtIntensity: 0.9
+  lensDirtTexture: {fileID: 2800000, guid: f5c5080de097a4274bab7bc2bf5017f6, type: 3}
+  chromaticAberration: 0
+  chromaticAberrationIntensity: 0
+  chromaticAberrationSmoothing: 0
+  bloom: 1
+  bloomCullingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  bloomLayerMaskDownsampling: 1
+  bloomIntensity: 1
+  bloomMaxBrightness: 1000
+  bloomBoost0: 0
+  bloomBoost1: 0
+  bloomBoost2: 0
+  bloomBoost3: 0
+  bloomBoost4: 0
+  bloomBoost5: 0
+  bloomAntiflicker: 1
+  bloomAntiflickerMaxOutput: 10
+  bloomUltra: 0
+  bloomUltraResolution: 10
+  bloomThreshold: 1.139
+  bloomConservativeThreshold: 1
+  bloomCustomize: 0
+  bloomWeight0: 0.5
+  bloomWeight1: 0.5
+  bloomWeight2: 0.5
+  bloomWeight3: 0.5
+  bloomWeight4: 0.5
+  bloomWeight5: 0.5
+  bloomBlur: 1
+  bloomIterations: 4
+  bloomQuickerBlur: 0
+  bloomDepthAtten: 0
+  bloomNearAtten: 0
+  bloomLayerZBias: 0.0001
+  bloomTint: {r: 1, g: 1, b: 1, a: 0}
+  bloomTint0: {r: 1, g: 1, b: 1, a: 1}
+  bloomTint1: {r: 1, g: 1, b: 1, a: 1}
+  bloomTint2: {r: 1, g: 1, b: 1, a: 1}
+  bloomTint3: {r: 1, g: 1, b: 1, a: 1}
+  bloomTint4: {r: 1, g: 1, b: 1, a: 1}
+  bloomTint5: {r: 1, g: 1, b: 1, a: 1}
+  anamorphicFlares: 0
+  anamorphicFlaresCullingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  anamorphicFlaresLayerMaskDownsampling: 1
+  anamorphicFlaresIntensity: 1
+  anamorphicFlaresAntiflicker: 0
+  anamorphicFlaresAntiflickerMaxOutput: 10
+  anamorphicFlaresUltra: 0
+  anamorphicFlaresUltraResolution: 10
+  anamorphicFlaresThreshold: 0.75
+  anamorphicFlaresConservativeThreshold: 0
+  anamorphicFlaresSpread: 1
+  anamorphicFlaresVertical: 0
+  anamorphicFlaresTint: {r: 0.5, g: 0.5, b: 1, a: 0}
+  anamorphicFlaresBlur: 1
+  depthOfField: 0
+  depthOfFieldTransparencySupport: 0
+  depthOfFieldTargetFocus: {fileID: 0}
+  depthOfFieldAutofocus: 0
+  depthofFieldAutofocusViewportPoint: {x: 0.5, y: 0.5}
+  depthOfFieldAutofocusLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  depthOfFieldAutofocusMinDistance: 0
+  depthOfFieldAutofocusMaxDistance: 10000
+  depthOfFieldAutofocusDistanceShift: 0
+  depthOfFieldExclusionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  depthOfFieldExclusionLayerMaskDownsampling: 1
+  depthOfFieldTransparencyCullMode: 2
+  depthOfFieldTransparencySupportDownsampling: 1
+  depthOfFieldExclusionBias: 0.99
+  depthOfFieldDistance: 1
+  depthOfFieldFocusSpeed: 1
+  depthOfFieldDownsampling: 2
+  depthOfFieldMaxSamples: 4
+  depthOfFieldCameraSettings: 0
+  depthOfFieldFocalLength: 0.05
+  depthOfFieldAperture: 2.8
+  depthOfFieldFocalLengthReal: 50
+  depthOfFieldFStop: 2
+  depthOfFieldImageSensorHeight: 24
+  depthOfFieldForegroundBlur: 1
+  depthOfFieldForegroundBlurHQ: 0
+  depthOfFieldForegroundBlurHQSpread: 16
+  depthOfFieldForegroundDistance: 0.25
+  depthOfFieldBokeh: 1
+  depthOfFieldBokehComposition: 0
+  depthOfFieldBokehThreshold: 1
+  depthOfFieldBokehIntensity: 2
+  depthOfFieldMaxBrightness: 1000
+  depthOfFieldMaxDistance: 1
+  depthOfFieldFilterMode: 1
+  depthOfFieldTransparencyLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  depthOfFieldExclusionCullMode: 2
+  eyeAdaptation: 0
+  eyeAdaptationMinExposure: 0.2
+  eyeAdaptationMaxExposure: 5
+  eyeAdaptationSpeedToLight: 0.4
+  eyeAdaptationSpeedToDark: 0.2
+  purkinje: 0
+  purkinjeAmount: 1
+  purkinjeLuminanceThreshold: 0.15
+  tonemap: 20
+  tonemapGamma: 2.5
+  tonemapExposurePre: 1
+  tonemapBrightnessPost: 1
+  sunFlares: 0
+  sunFlaresIntensity: 1
+  sunFlaresRevealSpeed: 1
+  sunFlaresHideSpeed: 1
+  sunFlaresSolarWindSpeed: 0.01
+  sunFlaresTint: {r: 1, g: 1, b: 1, a: 1}
+  sunFlaresDownsampling: 2
+  sunFlaresSunIntensity: 0.1
+  sunFlaresSunDiskSize: 0.05
+  sunFlaresSunRayDiffractionIntensity: 3.5
+  sunFlaresSunRayDiffractionThreshold: 0.13
+  sunFlaresCoronaRays1Length: 0.02
+  sunFlaresCoronaRays1Streaks: 12
+  sunFlaresCoronaRays1Spread: 0.001
+  sunFlaresCoronaRays1AngleOffset: 0
+  sunFlaresCoronaRays2Length: 0.05
+  sunFlaresCoronaRays2Streaks: 12
+  sunFlaresCoronaRays2Spread: 0.1
+  sunFlaresCoronaRays2AngleOffset: 0
+  sunFlaresGhosts1Size: 0.03
+  sunFlaresGhosts1Offset: 1.04
+  sunFlaresGhosts1Brightness: 0.037
+  sunFlaresGhosts2Size: 0.1
+  sunFlaresGhosts2Offset: 0.71
+  sunFlaresGhosts2Brightness: 0.03
+  sunFlaresGhosts3Size: 0.24
+  sunFlaresGhosts3Brightness: 0.025
+  sunFlaresGhosts3Offset: 0.31
+  sunFlaresGhosts4Size: 0.016
+  sunFlaresGhosts4Offset: 0
+  sunFlaresGhosts4Brightness: 0.017
+  sunFlaresHaloOffset: 0.22
+  sunFlaresHaloAmplitude: 15.1415
+  sunFlaresHaloIntensity: 0.01
+  sunFlaresRotationDeadZone: 0
+  sunFlaresRadialOffset: 0
+  blur: 0
+  blurIntensity: 1.469
+  pixelateAmount: 1
+  pixelateDownscale: 0
