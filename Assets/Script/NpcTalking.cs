@@ -23,6 +23,12 @@ public class NpcTalking : MonoBehaviour
     public AudioSource speechAudioSource;
     private ConversationUI conversationUI;
     public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
+    public static LineOfDialogue GetCurrentLineOfDialogueGlobal() {
+        if (currentNpcTalking != null) {
+            return currentNpcTalking.dialogue.linesOfDialogue[currentNpcTalking.lineOfDialogueIndex];
+        }
+        return null;
+    }
     void Start()
     {
         renderers = GetComponentsInChildren<Renderer>();
@@ -59,7 +65,7 @@ public class NpcTalking : MonoBehaviour
         if (canTalkWithPlayer && currentNpcTalking == null)
         {
             convoCancellation = new CancellationTokenSource();
-            StartConvo(convoCancellation.Token);
+            StartConvo(convoCancellation.Token); // intentionally not awaiting this
         }
 
         // if player leaves the trigger zone, end the convo

@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Cafe MaleBarista
+  m_EditorClassIdentifier: 
+  linesOfDialogue:
+  - speaker: 0
+    text: "Hola, \xBFqu\xE9 te gustar\xEDa tomar hoy?"
+    audioClip: {fileID: 8300000, guid: e603a3fa12ca446a88d6596cc75c8519, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "\xBFQu\xE9 tipos de t\xE9 tienes?"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint1.mp4
+  - speaker: 0
+    text: "Nosotros tenemos t\xE9 negro y t\xE9 verde."
+    audioClip: {fileID: 8300000, guid: cc38d09f8f7d343549ec2f2b81365381, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "\xBFPodr\xEDa darme un t\xE9 negro, por favor"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint2.mp4
+  - speaker: 0
+    text: "Claro, \xBFalgo para comer con eso? \xBFQuieres una galleta o un muffin?"
+    audioClip: {fileID: 8300000, guid: 0c0d92f48c0b4403692593f24f459fd0, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "\xBFQu\xE9 tipo de galletas tienes?"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint3.mp4
+  - speaker: 0
+    text: "Nosotros tenemos galletas de mantequilla de man\xED."
+    audioClip: {fileID: 8300000, guid: 9b69c931cbc2a44d9bc926cf084e9c73, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "Quiero una galleta de mantequilla de man\xED, por favor."
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint4.mp4
+  - speaker: 0
+    text: "\xBFEso ser\xEDa todo?"
+    audioClip: {fileID: 8300000, guid: 9416c98306209483ab0fee2dbd28c0ad, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "Si, eso es. Cu\xE1nto cuesta."
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint5.mp4
+  - speaker: 0
+    text: "Ser\xE1n cuatro d\xF3lares y sesenta centavos."
+    audioClip: {fileID: 8300000, guid: 956d6cfb9fcc04c9d8910af66439b5c1, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "Aqu\xED tienes."
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint6.mp4
+  - speaker: 0
+    text: "Gracias. Aqu\xED tienes: tu t\xE9 y tu galleta. \xA1Que tenga un buen
+      d\xEDa!"
+    audioClip: {fileID: 8300000, guid: 1062618bd381f4c54b3b43ae810a1554, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "T\xFA tambi\xE9n. adi\xF3s"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint7.mp4
