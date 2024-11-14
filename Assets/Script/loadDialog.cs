@@ -26,6 +26,7 @@ public class loadDialog : MonoBehaviour
 
     public void UpdateText(string _text)
     {
+        Debug.Log($"[loadDialog.UpdateText] _text: {_text}");
         //text.text = _text;
         StartCoroutine(SettingTexts(_text));
     }
@@ -34,12 +35,13 @@ public class loadDialog : MonoBehaviour
         text.text = "";
     }
     IEnumerator SettingTexts(string _text) {
-        WaitForEndOfFrame _wait= new WaitForEndOfFrame();
+        WaitForEndOfFrame _wait = new WaitForEndOfFrame();
         int i = 0; 
         while(i <= _text.Length)
         {
             string _t = _text.Substring(0,i);
             text.text = _t;
+            //Debug.Log($"[loadDialog.SettingTexts] _t: {_t}");
             yield return _wait;
             i++;
         }

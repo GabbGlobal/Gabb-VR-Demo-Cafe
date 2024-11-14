@@ -19,7 +19,8 @@ public class DialogUIAnim : MonoBehaviour
 
     }
     public void UIDisplay() {
-        interactionManager.SetText1(speaker);
+        //Debug.Log("STUTTERBUG: UIDisplay calling SetText1");
+        //interactionManager.SetText1(speaker);
     }
 
     IEnumerator PopupAnim()
@@ -35,7 +36,7 @@ public class DialogUIAnim : MonoBehaviour
         transform.localScale = Vector3.one;
 
         yield return _wait;
-
-        interactionManager.SetText1(speaker);
+        //Debug.Log("STUTTERBUG: PopupAnim calling SetText1");
+        //interactionManager.SetText1(speaker);
     }
 }

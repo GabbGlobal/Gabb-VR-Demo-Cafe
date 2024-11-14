@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Video;
-using System;
 using Newtonsoft.Json;
 using System.IO;
 using UnityEngine.InputSystem;
@@ -169,7 +169,7 @@ public class InteractionManager : MonoBehaviour
         // Load the dictionary JSON data into a Dictionary object
         LoadDictionary();
 
-        pronunciationAssessor = gameObject.AddComponent<PronunciationAssessor>();
+        pronunciationAssessor = GetComponent<PronunciationAssessor>();
     }
 
     // CreateTextures method
@@ -208,7 +208,8 @@ public class InteractionManager : MonoBehaviour
         lessons = gameManager.lesson;
         string _json = jsonFile.ToString();
         Debug.Log(_json);
-        var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Root>(_json);
+        var data = JsonConvert.DeserializeObject<Root>(_json);
+        //Debug.Log(JsonConvert.SerializeObject(_json));
 
         // Find the character index to retrieve the relevant dialogue data from the JSON file.
         int characterIndex = System.Array.IndexOf(characters, currentCharacter);
@@ -277,10 +278,10 @@ public class InteractionManager : MonoBehaviour
         // Handle input for showing ending screen and restarting game
         // This section checks if the player presses the E or R keys to either show the ending screen
         // or restart the game, respectively.
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             ShowEndingScreen();
-        }
+        }*/
     
         // Call function to handle mouse hover over words
         HandleWordHover();
@@ -311,14 +312,14 @@ public class InteractionManager : MonoBehaviour
         }
 
         // Get the current mouse position in world space
-        Vector3 mousePosition = Input.mousePosition;
+        Vector3 mousePosition = Vector3.zero;
         Camera camera = Camera.main; // Assuming the main camera is used for screen space calculations
         Vector3 cursorWorldPosition = Vector3.zero;
         if (pointAtWords.pointerWorldPositionOnUI.HasValue) {
             cursorWorldPosition = pointAtWords.pointerWorldPositionOnUI.Value;
             mousePosition = Camera.main.WorldToScreenPoint(cursorWorldPosition);
         } else {
-           // mousePosition = Vector3.zero;
+            //mousePosition = Input.mousePosition;
         }
 
         int wordIndex = TMP_TextUtilities.FindIntersectingWord(dialogueText, mousePosition, camera);
@@ -361,7 +362,7 @@ public class InteractionManager : MonoBehaviour
         textComponent.text = $"{meaning}\n({pos})"; // Include both meaning and POS
 
         // Position the popup higher above the word
-        Debug.Log(cursorWorldPosition);
+        //Debug.Log(cursorWorldPosition);
         popup.transform.position = cursorWorldPosition + new Vector3(0f, 0.17f, 0f); // Offset to place popup higher above word
         popupFaceCamera.FaceCamera(); // face camera here to avoid a 1 frame flicker where the popup is not facing the camera
     }
@@ -413,8 +414,9 @@ public class InteractionManager : MonoBehaviour
     // StartConv method
     // This method initiates a conversation with an NPC. It sets up the dialogue, updates the UI,
     // and starts playing the corresponding dialogue audio. If no NPC is provided, it triggers a UI animation.
-    public void StartConv(NpcTalking npcTalking = null)
+    /*public void StartConv(NpcTalking npcTalking = null)
     {
+        Debug.Log("[InteractionManager.StartConv]");
         if (npcTalking != null)
         {
             currentCharacter = npcTalking.gameObject;
@@ -424,36 +426,25 @@ public class InteractionManager : MonoBehaviour
             {
                 Debug.LogError("npctalking is null");
             }
-            npcTalking.Talk(true);
-            conversationUI.StartConv(npcTalking.gameObject);
+            //npcTalking.Talk(true);
+            conversationUI.OnStartConvo(npcTalking);
             dialogPanel[CheckSpeaker()].SetActive(true);
 
             // Only show the hint button if the user dialogue text is not empty
             string userDialogueText = dialogData[progress][1];
             hintButton.gameObject.SetActive(!string.IsNullOrEmpty(userDialogueText));
+            Debug.Log("STUTTERBUG: StartConv calling SetText1");
             SetText1(CheckSpeaker());
         }
         else
         {
             UIAnim[CheckSpeaker()].UIDisplay();
         }
-        Debug.Log("Dialogue Character Text Played.");
-        PlayDialogueAudio();
+        //Debug.Log("Dialogue Character Text Played.");
+        //Debug.Log("STUTTERBUG: StartConv playing dialogue audio");
+        //PlayDialogueAudio();
 
-        StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
-    }
-
-    System.Collections.IEnumerator StartAssessmentAfterAudio(string userDialogueText)
-    {
-        // Wait until the audio source finishes playing
-        while (audioSource.isPlaying)
-        {
-            yield return null;  // Wait until the next frame and check again
-        }
-
-        Debug.Log("Starting pronunciation assessment for: " + userDialogueText);
-        pronunciationAssessor.StartAssessment(userDialogueText);  // Start the assessment
-    }
+    }*/
 
     // EndConv method
     // This method ends the current conversation by hiding the dialogue panels, resetting the NPC's talking state,
@@ -470,7 +461,7 @@ public class InteractionManager : MonoBehaviour
         hintButton.gameObject.SetActive(false);
         if (CurrentNpc != null)
         {
-            CurrentNpc.Talk(false);
+            //CurrentNpc.Talk(false);
             CurrentNpc = null;
         }
 
@@ -505,6 +496,7 @@ public class InteractionManager : MonoBehaviour
     // dialogue data and displays it in the corresponding UI element. It also ensures the progress is within range.
     public void SetText1(int _speaker)
     {
+        Debug.Log($"[InteractionManager.SetText1] speaker: {_speaker}");
         if (progress < dialogData.Count)
         {
             text[_speaker].SetActive(true);
@@ -527,6 +519,7 @@ public class InteractionManager : MonoBehaviour
     // audio playback for the new dialogue and sets the dialogue state (e.g., if the conversation is complete).
     public void SetText2(int _speaker)
     {
+        Debug.Log($"[InteractionManager.SetText2] speaker: {_speaker}");
         if (_speaker == CheckSpeaker())
         {
             int newSpeaker = (CheckSpeaker() - 1) * -1;
@@ -538,6 +531,8 @@ public class InteractionManager : MonoBehaviour
             {
                 dialogPanel[newSpeaker].SetActive(true);
             }
+
+            //Debug.Log("STUTTERBUG: SetText2 calling SetText1");
             SetText1(newSpeaker);
         }
         else
@@ -545,9 +540,17 @@ public class InteractionManager : MonoBehaviour
             completeDialog = true;
         }
 
-        audioSource.Stop(); // Stop any currently playing audio
+        //Debug.Log("STUTTERBUG: SetText2 playing dialogue audio");
+        //audioSource.Stop(); // Stop any currently playing audio
         PlayDialogueAudio(); // Play the corresponding audio when dialogue advances
     }
+
+    // Temporary patch for dialogue audio stuttering until I can overhaul the conversation system.
+    /*bool canPlayDialogueAudio = true;
+    private IEnumerator DialogueCoolDown() {
+        yield return new WaitForSecondsRealtime(0.5f);
+        canPlayDialogueAudio = true;
+    }*/
 
     // PlayDialogueAudio method
     // This method handles the playback of dialogue audio. It constructs the audio clip name based on the
@@ -562,9 +565,20 @@ public class InteractionManager : MonoBehaviour
 
         if (clip != null)
         {
-            audioSource.Stop(); // Stop any currently playing audio
-            audioSource.clip = clip;
-            audioSource.Play();
+            
+            //audioSource.clip = clip;
+            /*if (canPlayDialogueAudio) {
+                Debug.Log("[InteractionManager.PlayDialogueAudio] playing audio: dialogue");
+                audioSource.PlayOneShot(clip);
+                //audioSource.Stop(); // Stop any currently playing audio
+                canPlayDialogueAudio = false;
+                StartCoroutine(DialogueCoolDown());
+            } else {
+                Debug.LogWarning("[InteractionManager.PlayDialogueAudio] audio on cooldown");
+            }*/
+            Debug.Log("[InteractionManager.PlayDialogueAudio] playing audio: dialogue");
+            audioSource.PlayOneShot(clip);
+            //audioSource.Play();
         }
         else
         {
@@ -580,7 +594,7 @@ public class InteractionManager : MonoBehaviour
         if (usedHintJustNow) {
             Debug.Log("This round does not count.");
             usedHintJustNow = false;
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
             return;
         }
 
@@ -591,7 +605,7 @@ public class InteractionManager : MonoBehaviour
         text[0].GetComponent<TMP_Text>().color = Color.green;
         advisorText.gameObject.SetActive(true);
         advisorText.text = "Well done! Let's hear what they have to say next.";
-
+        // TODO: adapt experience gained to this system
         float experienceGained = 3f;
 
         if (consecutiveIncorrect == 1)
@@ -615,10 +629,11 @@ public class InteractionManager : MonoBehaviour
         usedHint = false;
         consecutiveIncorrect = 0;
         progressDialogueNext = true;
-
+        // TODO: make UI play tone instead
         AudioClip clip = Resources.Load<AudioClip>("positive tone");
-        audioSource.clip = clip;
-        audioSource.Play();
+        //audioSource.clip = clip;
+        Debug.Log("[InteractionManager.HandleCorrectPronunciation] playing audio: positive tone");
+        audioSource.PlayOneShot(clip);
     }
 
     // HandleIncorrectPronunciation method
@@ -629,7 +644,7 @@ public class InteractionManager : MonoBehaviour
         if (usedHintJustNow) {
             Debug.Log("This round does not count.");
             usedHintJustNow = false;
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
             return;
         }
 
@@ -645,13 +660,13 @@ public class InteractionManager : MonoBehaviour
         {
             advisorText.text = "That wasn't quite right. Let's see what went wrong.";
             Debug.Log("Advisor 1 Audio Played.");
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
         }
         else if (consecutiveIncorrect == 2)
         {
             advisorText.text = "Let's try that again.";
             Debug.Log("Advisor 2 Audio Played.");
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
         }
         else if (consecutiveIncorrect == 3)
         {
@@ -662,8 +677,9 @@ public class InteractionManager : MonoBehaviour
         }
 
         AudioClip clip = Resources.Load<AudioClip>("negative tone");
-        audioSource.clip = clip;
-        audioSource.Play();
+        //audioSource.clip = clip;
+        Debug.Log("[InteractionManager.HandleIncorrectPronunciation] playing audio: negative tone");
+        audioSource.PlayOneShot(clip);
     }
 
     // ShowEndingScreen method
@@ -696,7 +712,7 @@ public class InteractionManager : MonoBehaviour
         ResetDialogueTextColors();
         advisorText.gameObject.SetActive(false);
         progress = 0;
-        StartConv(CurrentNpc);
+        //StartConv(CurrentNpc);
     }
 
     // ProgressDialogue method
@@ -712,7 +728,7 @@ public class InteractionManager : MonoBehaviour
         }
         else
         {
-            StartConv(CurrentNpc);
+            //StartConv(CurrentNpc);
         }
         completeDialog = false;
         ResetDialogueTextColors();
@@ -776,6 +792,7 @@ public class InteractionManager : MonoBehaviour
     // It includes the experience bar, speed controller, and the ending screen with star ratings and feedback text.
     void OnGUI()
     {
+        //return; // OnGUI based UI is obsolete
         // Define the rectangle dimensions and position
         // These variables define the size and position of the experience bar, including the rectangle and circle shapes.
         float rectWidth = Screen.width * 0.25f;

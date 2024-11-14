@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Cafe Typing
+  m_EditorClassIdentifier: 
+  linesOfDialogue:
+  - speaker: 0
+    text: "Buenos d\xEDas. \xBFC\xF3mo est\xE1 hoy?"
+    audioClip: {fileID: 8300000, guid: b259df3e975fc4a2db3124c77dc6c473, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "Bien gracias, \xBFy t\xFA?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint1.mp4
+  - speaker: 0
+    text: "Lo estoy haciendo bien. \xBFSabes d\xF3nde est\xE1 la estaci\xF3n de autobuses?"
+    audioClip: {fileID: 8300000, guid: 1939caf83b08f451b8664abafdbf2df5, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "S\xED, est\xE1 cerca. Est\xE1 al otro lado de la calle"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint2.mp4
+  - speaker: 0
+    text: "Oh, eso no est\xE1 lejos. \xBFSon caros los billetes de autob\xFAs?"
+    audioClip: {fileID: 8300000, guid: c8d35ef83463d46a797fb9b7422fa08e, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "No, son econ\xF3micos. Un billete cuesta dos d\xF3lares con veinticinco
+      centavos."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint3.mp4
+  - speaker: 0
+    text: "No esta mal. \xBFC\xF3mo te mueves por la ciudad?"
+    audioClip: {fileID: 8300000, guid: ae6241d8c15ee4ac29f8f25c9c3df7b7, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: Conduzco mi bici.
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint4.mp4
+  - speaker: 0
+    text: "\xA1Fresco!"
+    audioClip: {fileID: 8300000, guid: b2ab2802eb601432eb451a1bbe3aa64c, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "S\xED, es divertido y un buen ejercicio."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint5.mp4

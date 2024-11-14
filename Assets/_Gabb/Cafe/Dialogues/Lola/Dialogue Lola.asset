@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Lola
+  m_EditorClassIdentifier: 
+  linesOfDialogue:
+  - speaker: 0
+    text: "\xA1Hola! \xBFC\xF3mo est\xE1 usted hoy?"
+    audioClip: {fileID: 8300000, guid: c0607e4bb759f423686c12aed971ad62, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "Bien gracias, \xBFy usted?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint1.mp4
+  - speaker: 0
+    text: "\xA1Estoy genial! Ma\xF1ana viajo a casa de mi hermana."
+    audioClip: {fileID: 8300000, guid: 5bcf6eaf9af504f9f979bf3e445dfb14, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "\xA1Eso es genial! \xBFD\xF3nde vive?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint2.mp4
+  - speaker: 0
+    text: Ella vive en Boston.
+    audioClip: {fileID: 8300000, guid: b8c9dc81d0bde46c8825b099d3f4b073, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "\xBFC\xF3mo te gusta viajar?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint3.mp4
+  - speaker: 0
+    text: "Me gusta viajar en avi\xF3n. Es r\xE1pido y f\xE1cil."
+    audioClip: {fileID: 8300000, guid: c03d8a4457045446bb192a217903e27c, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "S\xED, pero es caro."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint4.mp4
+  - speaker: 0
+    text: "Eso es cierto. \xBFC\xF3mo te gusta viajar?"
+    audioClip: {fileID: 8300000, guid: f445de88ee9db4c6b8c60e3ace41db69, type: 3}
+    hintVideoPath: 
+  - speaker: 1
+    text: "Me gusta tomar el autob\xFAs. Es econ\xF3mico."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint5.mp4
+  - speaker: 0
+    text: "\xA1Oh, deber\xEDas ir a decirle a Lola d\xF3nde est\xE1 la estaci\xF3n
+      de autobuses!"
+    audioClip: {fileID: 8300000, guid: cc32689769be84699bc1f847001a0e59, type: 3}
+    hintVideoPath: 

@@ -9,55 +9,76 @@ using System.Linq;
 
 public class PronunciationAssessor : MonoBehaviour
 {
-    private const string SubscriptionKey = "placeholder_key";
-    private const string Region = "region";
+    // Azure Speech Recongiton config
+    //private const string SubscriptionKey = "key"; // DO NOT COMMIT THE SECRET KEY. 
+    private const string Region = "eastus";
+    // Must be a BCP-47 locale value https://gist.github.com/typpo/b2b828a35e683b9bf8db91b5404f1bd1
+    // es-ES is Castilian Spanish (as spoken in Central-Northern Spain)
+    private const string languageCode = "es-ES";
+
     private SpeechConfig speechConfig;
     private AudioConfig audioConfig;
 
     // Reference to InteractionManager
     private InteractionManager interactionManager;
+    public bool englishTestingMode = false; // if true, just say "Test" in US English. For faster testing.
 
-    void Awake()
+    // singleton
+    public static PronunciationAssessor Instance {get; private set;}
+    void Awake() {
+        if (Instance == null) {
+            DestroyImmediate(Instance);
+        }
+        Instance = this;
+    }
+
+    IEnumerator Start()
     {
-        speechConfig = SpeechConfig.FromSubscription(SubscriptionKey, Region);
-        speechConfig.SpeechRecognitionLanguage = "es-ES";  // Spanish language setting
+        // Get the InteractionManager component
+        interactionManager = FindFirstObjectByType<InteractionManager>();  // Ensure InteractionManager exists in the scene
+
+        // Configuser speech sdk
+        speechConfig = SpeechConfig.FromSubscription(
+            SecretsManager.Instance.secretsAsset.azureSpeechSubscriptionKey,
+            Region);
+        speechConfig.SpeechRecognitionLanguage = languageCode;  // Apply language setting
+
+        // Use US English for testing if enabled
+        if (Debug.isDebugBuild && englishTestingMode)
+        {
+            speechConfig.SpeechRecognitionLanguage = "en-US"; // use US english for testing only
+        }
+        
         audioConfig = AudioConfig.FromDefaultMicrophoneInput();
 
-        // Get the InteractionManager component
-        interactionManager = FindObjectOfType<InteractionManager>();  // Ensure InteractionManager exists in the scene
+        yield break;
     }
 
-    public void StartAssessment(string referenceText)
+    public async Awaitable<AssessmentResult> AssessPronunciation(string referenceText)
     {
-        Debug.Log("Assessing pronunciation for: " + referenceText);
-        StartCoroutine(AssessPronunciation(referenceText));
-    }
-
-    private IEnumerator AssessPronunciation(string referenceText)
-    {
-        AssessmentResult result = null;
-        yield return StartCoroutine(AssessPronunciationCoroutine(referenceText, r => result = r));
-
+        if (Debug.isDebugBuild && englishTestingMode)
+        {
+            referenceText = "Test"; // Say "Test" in US english. For testing only.
+        }
+        Log($"[AssessPronunciation] referenceText: {referenceText}");
+        AssessmentResult result = await AssessWithSpeechRecognition(referenceText);
         if (result != null)
         {
+            Log($"[AssessPronunciation] result not null");
             LogAssessmentResult(result);
         }
         else
         {
-            Debug.Log("No speech recognized or assessment failed.");
-            interactionManager.HandleIncorrectPronunciation();  // Call HandleIncorrectPronunciation on failure
+            Log("[AssessPronunciation]  No speech recognized or assessment failed.");
+            //interactionManager.HandleIncorrectPronunciation();  // Call HandleIncorrectPronunciation on failure
         }
+        Debug.Log("End of AssessPronunciation");
+        return result;
     }
 
-    private IEnumerator AssessPronunciationCoroutine(string referenceText, System.Action<AssessmentResult> callback)
+    private async Awaitable<AssessmentResult> AssessWithSpeechRecognition(string referenceText)
     {
-        var task = AssessPronunciationAsync(referenceText);
-        yield return new WaitUntil(() => task.IsCompleted);
-        callback(task.Result);
-    }
-
-    private async Task<AssessmentResult> AssessPronunciationAsync(string referenceText)
-    {
+        Log($"[AssessPronunciationAsync] referenceText: {referenceText}");
         using (var recognizer = new SpeechRecognizer(speechConfig, audioConfig))
         {
             var pronunciationAssessmentConfig = new PronunciationAssessmentConfig(
@@ -71,6 +92,7 @@ public class PronunciationAssessor : MonoBehaviour
             var taskCompletionSource = new TaskCompletionSource<SpeechRecognitionResult>();
             recognizer.Recognized += (s, e) =>
             {
+                Log($"[AssessPronunciationAsync] s: {s} e: {e} {e.Result}");
                 if (e.Result.Reason == ResultReason.RecognizedSpeech)
                 {
                     taskCompletionSource.TrySetResult(e.Result);
@@ -91,12 +113,12 @@ public class PronunciationAssessor : MonoBehaviour
 
             if (completedTask == timeoutTask)
             {
-                Debug.Log("Speech recognition timeout.");
+                Log("[AssessPronunciationAsync] Speech recognition timeout.");
                 return null;
             }
 
             var speechRecognitionResult = await taskCompletionSource.Task;
-            Debug.Log("Recognized: " + speechRecognitionResult.Text);
+            Log("[AssessPronunciationAsync] Recognized: " + speechRecognitionResult.Text);
 
             // Extract pronunciation assessment results from Properties
             var pronunciationAssessmentResultJson = speechRecognitionResult.Properties.GetProperty(PropertyId.SpeechServiceResponse_JsonResult);
@@ -110,6 +132,7 @@ public class PronunciationAssessor : MonoBehaviour
             // Implement custom scoring
             float customScore = CalculateCustomScore(speechRecognitionResult.Text, referenceText);
 
+            Debug.Log("Returning Assesment Result");
             return new AssessmentResult
             {
                 recognized_text = speechRecognitionResult.Text,
@@ -134,7 +157,7 @@ public class PronunciationAssessor : MonoBehaviour
 
         int matchedWords = recognizedWords.Count(word => referenceWords.Contains(word));
         float wordAccuracy = (float)matchedWords / referenceWords.Length;
-        float lengthRatio = Mathf.Min(recognizedWords.Length, referenceWords.Length) / 
+        float lengthRatio = Mathf.Min(recognizedWords.Length, referenceWords.Length) /
                             (float)Mathf.Max(recognizedWords.Length, referenceWords.Length);
 
         return Mathf.Min(100f, 100f * (wordAccuracy * 0.7f + lengthRatio * 0.3f));
@@ -147,23 +170,30 @@ public class PronunciationAssessor : MonoBehaviour
 
     private void LogAssessmentResult(AssessmentResult result)
     {
-        Debug.Log($"Pronunciation Score: {result.scores.pronunciation_score}");
-        Debug.Log($"Fluency Score: {result.scores.fluency_score}");
-        Debug.Log($"Completeness Score: {result.scores.completeness_score}");
-        Debug.Log($"Accuracy Score: {result.scores.accuracy_score}");
-        Debug.Log($"Custom Score: {result.scores.custom_score}");
-        Debug.Log($"Recognized Text: {result.recognized_text}");
-        Debug.Log($"Reference Text: {result.reference_text}");
-        Debug.Log($"Recognition Status: {result.recognition_status}");
+        string message = "AssessmentResult:\n"
+        + $"Pronunciation Score: {result.scores.pronunciation_score}\n"
+        + $"Fluency Score: {result.scores.fluency_score}\n"
+        + $"Completeness Score: {result.scores.completeness_score}\n"
+        + $"Accuracy Score: {result.scores.accuracy_score}\n"
+        + $"Custom Score: {result.scores.custom_score}\n"
+        + $"Recognized Text: {result.recognized_text}\n"
+        + $"Reference Text: {result.reference_text}\n"
+        + $"Recognition Status: {result.recognition_status}";
+        Debug.Log(message);
 
         if (result.recognition_status == "success")
         {
-            interactionManager.HandleCorrectPronunciation();
+            //interactionManager.HandleCorrectPronunciation();
         }
         else
         {
-            interactionManager.HandleIncorrectPronunciation();
+            //interactionManager.HandleIncorrectPronunciation();
         }
+    }
+
+    void Log(string message)
+    {
+        Debug.Log($"[PronunciationAssesor] {message}");
     }
 
     // Helper classes for result handling
