@@ -456,7 +456,7 @@ public class InteractionManager : MonoBehaviour
         }
 
         Debug.Log("Starting pronunciation assessment for: " + userDialogueText);
-        pronunciationAssessor.StartAssessment(userDialogueText);  // Start the assessment
+        //pronunciationAssessor.StartAssessment(userDialogueText);  // Start the assessment
     }
 
     // EndConv method

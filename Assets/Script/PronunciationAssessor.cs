@@ -37,12 +37,13 @@ public class PronunciationAssessor : MonoBehaviour
         // Get the InteractionManager component
         interactionManager = FindFirstObjectByType<InteractionManager>();  // Ensure InteractionManager exists in the scene
 
+        // Configuser speech sdk
         speechConfig = SpeechConfig.FromSubscription(
             SecretsManager.Instance.secretsAsset.azureSpeechSubscriptionKey,
             Region);
         speechConfig.SpeechRecognitionLanguage = languageCode;  // Apply language setting
 
-        // US English language setting for debug only
+        // Use US English for testing if enabled
         if (Debug.isDebugBuild && englishTestingMode)
         {
             speechConfig.SpeechRecognitionLanguage = "en-US"; // use US english for testing only
@@ -53,24 +54,20 @@ public class PronunciationAssessor : MonoBehaviour
         yield break;
     }
 
-
-
-    public void StartAssessment(string referenceText)
+    public async Awaitable StartAssessment(string referenceText)
     {
         if (Debug.isDebugBuild && englishTestingMode)
         {
             referenceText = "Test"; // Say "Test" in US english. For testing only.
         }
         Log($"[StartAssessment] Assessing pronunciation for: {referenceText}");
-        StartCoroutine(AssessPronunciation(referenceText));
+        await AssessPronunciation(referenceText);
     }
 
-    private IEnumerator AssessPronunciation(string referenceText)
+    private async Awaitable AssessPronunciation(string referenceText)
     {
         Log($"[AssessPronunciation] referenceText: {referenceText}");
-        AssessmentResult result = null;
-        yield return StartCoroutine(AssessPronunciationCoroutine(referenceText, r => result = r));
-
+        AssessmentResult result = await AssessPronunciationAsync(referenceText);
         if (result != null)
         {
             Log($"[AssessPronunciation] result not null");
@@ -83,15 +80,7 @@ public class PronunciationAssessor : MonoBehaviour
         }
     }
 
-    private IEnumerator AssessPronunciationCoroutine(string referenceText, System.Action<AssessmentResult> callback)
-    {
-        Log($"[AssessPronunciationCoroutine] referenceText: {referenceText}");
-        var task = AssessPronunciationAsync(referenceText);
-        yield return new WaitUntil(() => task.IsCompleted);
-        callback(task.Result);
-    }
-
-    private async Task<AssessmentResult> AssessPronunciationAsync(string referenceText)
+    private async Awaitable<AssessmentResult> AssessPronunciationAsync(string referenceText)
     {
         Log($"[AssessPronunciationAsync] referenceText: {referenceText}");
         using (var recognizer = new SpeechRecognizer(speechConfig, audioConfig))

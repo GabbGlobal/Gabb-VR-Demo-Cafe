@@ -116,8 +116,8 @@ public class NpcTalking : MonoBehaviour
 
             case DialogueSpeaker.Player: {
                 // begin pronunciationa ssement
-                PronunciationAssessor.Instance.StartAssessment(line.text);
-                yield return new WaitForSeconds(20f); // as a test
+                var assessmentTask = PronunciationAssessor.Instance.StartAssessment(line.text);
+                yield return new WaitUntil(()=> assessmentTask.IsCompleted);
                 break;
             }
         }
