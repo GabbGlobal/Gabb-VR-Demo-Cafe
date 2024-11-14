@@ -6,7 +6,6 @@ using UnityEngine.UI;
 #if UNITY_STANDALONE_WIN
     using UnityEngine.Windows.Speech;
 #endif
-using TMPro;
 
 public class VoiceToText: MonoBehaviour
 {

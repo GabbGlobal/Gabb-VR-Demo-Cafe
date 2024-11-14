@@ -1128,6 +1128,61 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "Keyboard Turn",
+                    "id": "63673281-93ed-437d-a969-fe7c313ec8bb",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "de3a230c-f06e-4e87-a8ae-3179204d89f0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Continuous Move",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "a73ece3c-d7ee-47e4-ab51-93f2c482d5a6",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Continuous Move",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "0018da53-cef6-4752-944f-799d14d405f9",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "3101ea1c-e4b6-445a-a6e2-1483f4283531",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Continuous Move",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "849446c8-8d91-4f08-9667-7da5c0d495e9",
                     "path": "<XRController>/thumbstick",

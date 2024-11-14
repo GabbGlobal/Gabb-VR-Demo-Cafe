@@ -426,7 +426,7 @@ public class InteractionManager : MonoBehaviour
             {
                 Debug.LogError("npctalking is null");
             }
-            npcTalking.Talk(true);
+            //npcTalking.Talk(true);
             conversationUI.StartConvo(npcTalking);
             dialogPanel[CheckSpeaker()].SetActive(true);
 
@@ -444,19 +444,6 @@ public class InteractionManager : MonoBehaviour
         //Debug.Log("STUTTERBUG: StartConv playing dialogue audio");
         //PlayDialogueAudio();
 
-        StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
-    }
-
-    System.Collections.IEnumerator StartAssessmentAfterAudio(string userDialogueText)
-    {
-        // Wait until the audio source finishes playing
-        while (audioSource.isPlaying)
-        {
-            yield return null;  // Wait until the next frame and check again
-        }
-
-        Debug.Log("Starting pronunciation assessment for: " + userDialogueText);
-        //pronunciationAssessor.StartAssessment(userDialogueText);  // Start the assessment
     }
 
     // EndConv method
@@ -474,7 +461,7 @@ public class InteractionManager : MonoBehaviour
         hintButton.gameObject.SetActive(false);
         if (CurrentNpc != null)
         {
-            CurrentNpc.Talk(false);
+            //CurrentNpc.Talk(false);
             CurrentNpc = null;
         }
 
@@ -607,7 +594,7 @@ public class InteractionManager : MonoBehaviour
         if (usedHintJustNow) {
             Debug.Log("This round does not count.");
             usedHintJustNow = false;
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
             return;
         }
 
@@ -618,7 +605,7 @@ public class InteractionManager : MonoBehaviour
         text[0].GetComponent<TMP_Text>().color = Color.green;
         advisorText.gameObject.SetActive(true);
         advisorText.text = "Well done! Let's hear what they have to say next.";
-
+        // TODO: adapt experience gained to this system
         float experienceGained = 3f;
 
         if (consecutiveIncorrect == 1)
@@ -642,7 +629,7 @@ public class InteractionManager : MonoBehaviour
         usedHint = false;
         consecutiveIncorrect = 0;
         progressDialogueNext = true;
-
+        // TODO: make UI play tone instead
         AudioClip clip = Resources.Load<AudioClip>("positive tone");
         //audioSource.clip = clip;
         Debug.Log("[InteractionManager.HandleCorrectPronunciation] playing audio: positive tone");
@@ -657,7 +644,7 @@ public class InteractionManager : MonoBehaviour
         if (usedHintJustNow) {
             Debug.Log("This round does not count.");
             usedHintJustNow = false;
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
             return;
         }
 
@@ -673,13 +660,13 @@ public class InteractionManager : MonoBehaviour
         {
             advisorText.text = "That wasn't quite right. Let's see what went wrong.";
             Debug.Log("Advisor 1 Audio Played.");
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
         }
         else if (consecutiveIncorrect == 2)
         {
             advisorText.text = "Let's try that again.";
             Debug.Log("Advisor 2 Audio Played.");
-            StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
+            //StartCoroutine(StartAssessmentAfterAudio(dialogData[progress][1]));
         }
         else if (consecutiveIncorrect == 3)
         {

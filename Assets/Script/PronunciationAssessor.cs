@@ -54,20 +54,14 @@ public class PronunciationAssessor : MonoBehaviour
         yield break;
     }
 
-    public async Awaitable StartAssessment(string referenceText)
+    public async Awaitable<AssessmentResult> AssessPronunciation(string referenceText)
     {
         if (Debug.isDebugBuild && englishTestingMode)
         {
             referenceText = "Test"; // Say "Test" in US english. For testing only.
         }
-        Log($"[StartAssessment] Assessing pronunciation for: {referenceText}");
-        await AssessPronunciation(referenceText);
-    }
-
-    private async Awaitable AssessPronunciation(string referenceText)
-    {
         Log($"[AssessPronunciation] referenceText: {referenceText}");
-        AssessmentResult result = await AssessPronunciationAsync(referenceText);
+        AssessmentResult result = await AssessWithSpeechRecognition(referenceText);
         if (result != null)
         {
             Log($"[AssessPronunciation] result not null");
@@ -76,11 +70,13 @@ public class PronunciationAssessor : MonoBehaviour
         else
         {
             Log("[AssessPronunciation]  No speech recognized or assessment failed.");
-            interactionManager.HandleIncorrectPronunciation();  // Call HandleIncorrectPronunciation on failure
+            //interactionManager.HandleIncorrectPronunciation();  // Call HandleIncorrectPronunciation on failure
         }
+        Debug.Log("End of AssessPronunciation");
+        return result;
     }
 
-    private async Awaitable<AssessmentResult> AssessPronunciationAsync(string referenceText)
+    private async Awaitable<AssessmentResult> AssessWithSpeechRecognition(string referenceText)
     {
         Log($"[AssessPronunciationAsync] referenceText: {referenceText}");
         using (var recognizer = new SpeechRecognizer(speechConfig, audioConfig))
@@ -136,6 +132,7 @@ public class PronunciationAssessor : MonoBehaviour
             // Implement custom scoring
             float customScore = CalculateCustomScore(speechRecognitionResult.Text, referenceText);
 
+            Debug.Log("Returning Assesment Result");
             return new AssessmentResult
             {
                 recognized_text = speechRecognitionResult.Text,
@@ -182,14 +179,15 @@ public class PronunciationAssessor : MonoBehaviour
         + $"Recognized Text: {result.recognized_text}\n"
         + $"Reference Text: {result.reference_text}\n"
         + $"Recognition Status: {result.recognition_status}";
+        Debug.Log(message);
 
         if (result.recognition_status == "success")
         {
-            interactionManager.HandleCorrectPronunciation();
+            //interactionManager.HandleCorrectPronunciation();
         }
         else
         {
-            interactionManager.HandleIncorrectPronunciation();
+            //interactionManager.HandleIncorrectPronunciation();
         }
     }
 

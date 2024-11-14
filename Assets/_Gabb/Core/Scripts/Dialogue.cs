@@ -14,6 +14,10 @@ public class LineOfDialogue {
     public DialogueSpeaker speaker;
     public string text;
     public AudioClip audioClip;
+
+    public override string ToString() {
+        return $"[LineOfDialogue] {speaker.ToString()}: {text}";
+    }
 }
 
 [System.Serializable]

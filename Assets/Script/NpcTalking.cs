@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,107 +36,139 @@ public class NpcTalking : MonoBehaviour
         }
         originalRotation = transform.rotation;
         conversationUI = FindFirstObjectByType<ConversationUI>(); // TODO: replace with proper singleton
-
     }
 
-    public void Talk(bool _talk)
-    {
-        /*talking = _talk;
 
-        if (talking)
+    CancellationTokenSource convoCancellation;
+    void Update()
+    {
+        // if facing player is in trigger zone and looking at this NPC
+        bool canTalkWithPlayer = playerTriggerZone.PlayerIsInTriggerZone && IsInView();
+
+        // if can talk, face player
+        if (canTalkWithPlayer)
         {
-            animator.SetInteger("talking", Random.Range(0, 1));
-            animator.SetTrigger("Talk");
-            if (turnBackCoroutine != null)
-            {
-                StopCoroutine(turnBackCoroutine);
-            }
+            npcFacing.facePlayer = true; // look at the player   
         }
         else
         {
-            animator.ResetTrigger("Talk");
-        }*/
-    }
-
-    void Update() {
-         // if facing player is in trigger zone and looking at this NPC
-        bool canTalkWithPlayer = playerTriggerZone.PlayerIsInTriggerZone && IsInView(); 
-
-        // if can talk, face player
-        if (canTalkWithPlayer) {
-            npcFacing.facePlayer = true; // look at the player   
-        } else { 
-            npcFacing.facePlayer = false;
+            npcFacing.facePlayer = false; 
         }
 
         // if can talk and not player is not already talking to somebody
-        if (canTalkWithPlayer && currentNpcTalking == null) {
-            StartCoroutine(StartConvo());
+        if (canTalkWithPlayer && currentNpcTalking == null)
+        {
+            convoCancellation = new CancellationTokenSource();
+            StartConvo(convoCancellation.Token);
         }
 
         // if player leaves the trigger zone, end the convo
-        if (!playerTriggerZone.PlayerIsInTriggerZone && currentNpcTalking == this) {
-            EndConvo();
+        if (!playerTriggerZone.PlayerIsInTriggerZone && currentNpcTalking == this)
+        {
+            StopConvo();
         }
     }
 
-    IEnumerator StartConvo() {
-        currentNpcTalking = this;
-        conversationUI.StartConvo(this); // bring up the conversation UI
+    private int lineOfDialogueIndex = 0;
+    async Awaitable StartConvo(CancellationToken cancellationToken)
+    {
+        try {
+            lineOfDialogueIndex = 0; // start at the beginning
+            Debug.Log($"[NpcTalking.Start] {gameObject.name}", gameObject);
+            currentNpcTalking = this;
+            conversationUI.StartConvo(this); // bring up the conversation UI
 
-        // iterate through all lines of dialogue
-        for (int i = 0; i < dialogue.linesOfDialogue.Count; i++) {
-            yield return HandleLineOfDialogue(i);
+            // iterate through all lines of dialogue
+            while (lineOfDialogueIndex < dialogue.linesOfDialogue.Count)
+            {
+                if (cancellationToken.IsCancellationRequested) { return; } // end early
+                Debug.Log($"LINE #{lineOfDialogueIndex}");
+                await HandleLineOfDialogue(lineOfDialogueIndex, cancellationToken);
+                await Awaitable.NextFrameAsync();
+            }
+        } catch (Exception e) {
+            Debug.LogException(e);
         }
     }
 
-    void EndConvo() {
+    void StopConvo()
+    {
+        Debug.Log($"[NpcTalking.StopConvo] {gameObject.name}", gameObject);
+        if (convoCancellation != null)
+        {
+            Debug.Log($"[NpcTalking.StopConvo] {gameObject.name} Cancelling convo awaitable", gameObject);
+            convoCancellation.Cancel();
+            convoCancellation = null;
+        }
         currentNpcTalking = null;
     }
 
     // runs for every line of dialogue in order during a conversation
-    IEnumerator HandleLineOfDialogue(int lineIndex) {
+    async Awaitable HandleLineOfDialogue(int lineIndex, CancellationToken cancellationToken)
+    {
         var line = dialogue.linesOfDialogue[lineIndex];
+        Debug.Log(line.ToString());
         conversationUI.DisplayLineOfDialogue(line); // show current line of dialogue on the UI
 
-        switch (line.speaker) {
-            
-            case DialogueSpeaker.NPC: {
-                 // play npc talking animation
-                animator.SetTrigger("Talk");
-                // play speech audio clip
-                if (line.speaker == DialogueSpeaker.NPC) {
-                    if (line.audioClip == null) {
-                        Debug.LogWarning($"Missing audio clip for NPC dialogue at line {line} on {gameObject.name}", gameObject);
-                    } else {
-                        speechAudioSource.PlayOneShot(line.audioClip);
-                        // wait for the NPC to finish speaking
-                        yield return new WaitForSecondsRealtime(line.audioClip.length);
+        switch (line.speaker)
+        {
+            case DialogueSpeaker.NPC:
+                {
+                    // play npc talking animation
+                    animator.SetTrigger("Talk");
+                    // play speech audio clip
+                    if (line.speaker == DialogueSpeaker.NPC)
+                    {
+                        if (line.audioClip == null)
+                        {
+                            Debug.LogWarning($"Missing audio clip for NPC dialogue at line {line} on {gameObject.name}", gameObject);
+                        }
+                        else
+                        {
+                            speechAudioSource.PlayOneShot(line.audioClip);
+                            // wait for the NPC to finish speaking
+                            await Awaitable.WaitForSecondsAsync(line.audioClip.length, cancellationToken);
+                        }
                     }
+                    lineOfDialogueIndex++; // move onto next line of dialogue
+                    break;
                 }
-                break;
-            }
 
-            case DialogueSpeaker.Player: {
-                // begin pronunciationa ssement
-                var assessmentTask = PronunciationAssessor.Instance.StartAssessment(line.text);
-                yield return new WaitUntil(()=> assessmentTask.IsCompleted);
-                break;
-            }
+            case DialogueSpeaker.Player:
+                {
+                    // begin pronunciationa ssement
+                    PronunciationAssessor.AssessmentResult assessmentTask = await PronunciationAssessor.Instance.AssessPronunciation(line.text);
+                    if (cancellationToken.IsCancellationRequested) { return; } // end early
+                    if (assessmentTask?.recognition_status == "success") {
+                        //InteractionManager.Instance.HandleCorrectPronunciation();
+                        conversationUI.ShowSuccess(); // let the player know they succeeded
+                        await Awaitable.WaitForSecondsAsync(5f, cancellationToken); // TODO: replace this with progress button click
+                        lineOfDialogueIndex++; // move onto next line of dialogue
+                    } else {
+                        conversationUI.ShowFail(); // let the player know they fucked up
+                        //InteractionManager.Instance.HandleIncorrectPronunciation();
+                        //DO NOT move onto next line of dialogue, we'll try this one again
+                    }
+                    break;
+                }
         }
-        yield break;
+        if (cancellationToken.IsCancellationRequested) { return; } // end early
+        Debug.Log("OK TIME FOR NEXT");
     }
 
 
 
     // Check if the NPC is in view of the camera. Does not account for occlusion.
-    public bool IsInView() {
+    public bool IsInView()
+    {
         var planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-        foreach (Renderer r in renderers) {
-            if(GeometryUtility.TestPlanesAABB(planes, r.bounds)) {
+        foreach (Renderer r in renderers)
+        {
+            if (GeometryUtility.TestPlanesAABB(planes, r.bounds))
+            {
                 return true;
             }
         }
-        return false;        
+        return false;
     }
 }
