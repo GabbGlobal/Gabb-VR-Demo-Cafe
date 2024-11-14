@@ -182,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -334,6 +334,12 @@ MonoBehaviour:
   playerDialogueText: {fileID: 2861298452565275899}
   advisorText: {fileID: 1570127591066447769}
   showHideChild: {fileID: 1570127590618633240}
+  successColor: {r: 0, g: 1, b: 0, a: 1}
+  failColor: {r: 1, g: 0, b: 0, a: 1}
+  audioSource: {fileID: 0}
+  successSound: {fileID: 0}
+  failSound: {fileID: 0}
+  advisorFailMessages: []
 --- !u!114 &1058475970
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +535,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1570127591212429443}
-  - component: {fileID: 1570127591212429444}
   - component: {fileID: 1570127591212429445}
   - component: {fileID: 1570127591212429442}
   m_Layer: 5
@@ -558,21 +563,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1570127591212429444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570127591212429440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93b8b5034e36f44b8be8e1f81ca340f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 1570127591212429442}
-  interactionManager: {fileID: 0}
-  speaker: 1
 --- !u!222 &1570127591212429445
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -931,7 +921,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -950,7 +940,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7419991707407223786}
-  - component: {fileID: 1966481915859881946}
   - component: {fileID: 1873737473242269628}
   - component: {fileID: 2861298452565275899}
   m_Layer: 5
@@ -979,21 +968,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1966481915859881946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6821863249203601214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93b8b5034e36f44b8be8e1f81ca340f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 2861298452565275899}
-  interactionManager: {fileID: 0}
-  speaker: 1
 --- !u!222 &1873737473242269628
 CanvasRenderer:
   m_ObjectHideFlags: 0

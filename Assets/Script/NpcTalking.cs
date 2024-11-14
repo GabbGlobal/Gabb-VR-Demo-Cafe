@@ -69,16 +69,18 @@ public class NpcTalking : MonoBehaviour
         }
     }
 
+    // Conversation state
     private int lineOfDialogueIndex = 0;
+
     async Awaitable StartConvo(CancellationToken cancellationToken)
     {
         try {
-            lineOfDialogueIndex = 0; // start at the beginning
             Debug.Log($"[NpcTalking.Start] {gameObject.name}", gameObject);
             currentNpcTalking = this;
-            conversationUI.StartConvo(this); // bring up the conversation UI
+            conversationUI.OnStartConvo(this); // bring up the conversation UI
 
             // iterate through all lines of dialogue
+            lineOfDialogueIndex = 0; // start at the beginning
             while (lineOfDialogueIndex < dialogue.linesOfDialogue.Count)
             {
                 if (cancellationToken.IsCancellationRequested) { return; } // end early
@@ -93,6 +95,7 @@ public class NpcTalking : MonoBehaviour
 
     void StopConvo()
     {
+        conversationUI.OnEndConvo();
         Debug.Log($"[NpcTalking.StopConvo] {gameObject.name}", gameObject);
         if (convoCancellation != null)
         {
@@ -170,5 +173,11 @@ public class NpcTalking : MonoBehaviour
             }
         }
         return false;
+    }
+
+    void OnDestroy() {
+        if (convoCancellation != null) {
+            convoCancellation.Cancel();
+        }
     }
 }

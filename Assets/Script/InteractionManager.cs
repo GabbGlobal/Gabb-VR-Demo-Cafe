@@ -414,7 +414,7 @@ public class InteractionManager : MonoBehaviour
     // StartConv method
     // This method initiates a conversation with an NPC. It sets up the dialogue, updates the UI,
     // and starts playing the corresponding dialogue audio. If no NPC is provided, it triggers a UI animation.
-    public void StartConv(NpcTalking npcTalking = null)
+    /*public void StartConv(NpcTalking npcTalking = null)
     {
         Debug.Log("[InteractionManager.StartConv]");
         if (npcTalking != null)
@@ -427,7 +427,7 @@ public class InteractionManager : MonoBehaviour
                 Debug.LogError("npctalking is null");
             }
             //npcTalking.Talk(true);
-            conversationUI.StartConvo(npcTalking);
+            conversationUI.OnStartConvo(npcTalking);
             dialogPanel[CheckSpeaker()].SetActive(true);
 
             // Only show the hint button if the user dialogue text is not empty
@@ -444,7 +444,7 @@ public class InteractionManager : MonoBehaviour
         //Debug.Log("STUTTERBUG: StartConv playing dialogue audio");
         //PlayDialogueAudio();
 
-    }
+    }*/
 
     // EndConv method
     // This method ends the current conversation by hiding the dialogue panels, resetting the NPC's talking state,
@@ -712,7 +712,7 @@ public class InteractionManager : MonoBehaviour
         ResetDialogueTextColors();
         advisorText.gameObject.SetActive(false);
         progress = 0;
-        StartConv(CurrentNpc);
+        //StartConv(CurrentNpc);
     }
 
     // ProgressDialogue method
@@ -728,7 +728,7 @@ public class InteractionManager : MonoBehaviour
         }
         else
         {
-            StartConv(CurrentNpc);
+            //StartConv(CurrentNpc);
         }
         completeDialog = false;
         ResetDialogueTextColors();

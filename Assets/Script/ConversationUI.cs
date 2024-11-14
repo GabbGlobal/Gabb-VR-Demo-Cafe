@@ -20,6 +20,7 @@ public class ConversationUI : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip successSound;
     public AudioClip failSound;
+    public List<string> advisorFailMessages;
 
     void Start() {
 
@@ -27,7 +28,7 @@ public class ConversationUI : MonoBehaviour
         showHideChild.gameObject.SetActive(false); // hide ui
     }
 
-    public void StartConvo(NpcTalking npcTalking)
+    public void OnStartConvo(NpcTalking npcTalking)
     {
         showHideChild.gameObject.SetActive(true); // show ui
         ResetText();
@@ -35,7 +36,12 @@ public class ConversationUI : MonoBehaviour
         transform.position = npcTalking.placeUIHere.position;
         transform.rotation = npcTalking.placeUIHere.rotation;
         transform.SetParent(npcTalking.placeUIHere);
+    }
 
+    public void OnEndConvo() {
+        showHideChild.gameObject.SetActive(true); // show ui
+        ResetText();
+        transform.SetParent(null);
     }
 
     public void DisplayLineOfDialogue(LineOfDialogue lineOfDialogue) {
@@ -61,7 +67,7 @@ public class ConversationUI : MonoBehaviour
 
     public void ShowFail() {
         playerDialogueText.color = failColor;
-        advisorText.text = "And now you will cast into a pit for all time. :(";
+        advisorText.text = advisorFailMessages[Random.Range(0, advisorFailMessages.Count)]; // random advisor message
         audioSource.PlayOneShot(failSound);
     }
 
