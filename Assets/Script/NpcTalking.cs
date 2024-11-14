@@ -23,6 +23,8 @@ public class NpcTalking : MonoBehaviour
     public AudioSource speechAudioSource;
     private ConversationUI conversationUI;
     public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
+    public static NpcTalking previousNpcTalking = null;
+    bool hasFinishedFullConvo = false;
     public static LineOfDialogue GetCurrentLineOfDialogueGlobal() {
         if (currentNpcTalking != null) {
             return currentNpcTalking.dialogue.linesOfDialogue[currentNpcTalking.lineOfDialogueIndex];
@@ -82,6 +84,10 @@ public class NpcTalking : MonoBehaviour
     {
         try {
             Debug.Log($"[NpcTalking.Start] {gameObject.name}", gameObject);
+            if (previousNpcTalking == this && hasFinishedFullConvo) {
+                Debug.Log("Preventing endless looping convo after finishing. Go talk to somebody else.");
+                return;
+            }
             currentNpcTalking = this;
             conversationUI.OnStartConvo(this); // bring up the conversation UI
 
@@ -94,6 +100,11 @@ public class NpcTalking : MonoBehaviour
                 await HandleLineOfDialogue(lineOfDialogueIndex, cancellationToken);
                 await Awaitable.NextFrameAsync();
             }
+            // finished all dialogue with this NPC
+            hasFinishedFullConvo = true;
+            if (cancellationToken.IsCancellationRequested) { return; } // end early
+            convoCancellation = null;
+            StopConvo();
         } catch (Exception e) {
             Debug.LogException(e);
         }
@@ -102,6 +113,7 @@ public class NpcTalking : MonoBehaviour
     void StopConvo()
     {
         conversationUI.OnEndConvo();
+
         Debug.Log($"[NpcTalking.StopConvo] {gameObject.name}", gameObject);
         if (convoCancellation != null)
         {
@@ -109,6 +121,7 @@ public class NpcTalking : MonoBehaviour
             convoCancellation.Cancel();
             convoCancellation = null;
         }
+        previousNpcTalking = this;
         currentNpcTalking = null;
     }
 
@@ -151,7 +164,7 @@ public class NpcTalking : MonoBehaviour
                     if (assessmentTask?.recognition_status == "success") {
                         //InteractionManager.Instance.HandleCorrectPronunciation();
                         conversationUI.ShowSuccess(); // let the player know they succeeded
-                        await Awaitable.WaitForSecondsAsync(5f, cancellationToken); // TODO: replace this with progress button click
+                        await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
                         lineOfDialogueIndex++; // move onto next line of dialogue
                     } else {
                         conversationUI.ShowFail(); // let the player know they fucked up
