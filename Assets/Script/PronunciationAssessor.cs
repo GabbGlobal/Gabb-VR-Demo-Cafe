@@ -23,10 +23,19 @@ public class PronunciationAssessor : MonoBehaviour
     private InteractionManager interactionManager;
     public bool englishTestingMode = false; // if true, just say "Test" in US English. For faster testing.
 
+    // singleton
+    public static PronunciationAssessor Instance {get; private set;}
+    void Awake() {
+        if (Instance == null) {
+            DestroyImmediate(Instance);
+        }
+        Instance = this;
+    }
+
     IEnumerator Start()
     {
         // Get the InteractionManager component
-        interactionManager = FindObjectOfType<InteractionManager>();  // Ensure InteractionManager exists in the scene
+        interactionManager = FindFirstObjectByType<InteractionManager>();  // Ensure InteractionManager exists in the scene
 
         speechConfig = SpeechConfig.FromSubscription(
             SecretsManager.Instance.secretsAsset.azureSpeechSubscriptionKey,

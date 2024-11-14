@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2717349020355960018, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
@@ -81,9 +82,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8030914855903010677, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
       propertyPath: m_Name
-      value: NPC Lola Variant
+      value: NPC Lola
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2717349020355960018, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6076420421357457767}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
 --- !u!4 &2124157197139475620 stripped
 Transform:
@@ -95,6 +102,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 2124157197139475620}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 12018c603cfab3e46a829352a0321e23, type: 3}
@@ -158,7 +166,21 @@ PrefabInstance:
       value: Lola
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12018c603cfab3e46a829352a0321e23, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1372120931}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 12018c603cfab3e46a829352a0321e23, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1372120929}
   m_SourcePrefab: {fileID: 100100000, guid: 12018c603cfab3e46a829352a0321e23, type: 3}
+--- !u!4 &6076420421357457767 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 12018c603cfab3e46a829352a0321e23, type: 3}
+  m_PrefabInstance: {fileID: 6041984966429881996}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6852253776619801565 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 12018c603cfab3e46a829352a0321e23, type: 3}
@@ -172,14 +194,22 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6852253776619801565}
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
   m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!95 &1372120929
 Animator:
-  serializedVersion: 4
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -193,7 +223,9 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

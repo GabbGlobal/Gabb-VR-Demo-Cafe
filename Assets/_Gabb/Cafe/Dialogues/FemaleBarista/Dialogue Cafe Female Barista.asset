@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Cafe Female Barista
+  m_EditorClassIdentifier: 
+  linesOfDialogue:
+  - speaker: 0
+    text: "Buen d\xEDa. \xBFLe puedo ayudar en algo?"
+    audioClip: {fileID: 8300000, guid: 3979023d2fde64d06ae46b5aa4c21809, type: 3}
+  - speaker: 1
+    text: "Hola, \xBFpuedo ver el men\xFA por favor?"
+    audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Si, aqu\xED tienes."
+    audioClip: {fileID: 8300000, guid: 28acdffb8abed4b64ac636a0c75f1aeb, type: 3}
+  - speaker: 1
+    text: "Quiero un caf\xE9 con leche por favor."
+    audioClip: {fileID: 0}
+  - speaker: 0
+    text: "\xBFAlgo para comer con eso?"
+    audioClip: {fileID: 8300000, guid: 018f31e55761846229d57a3991fb318e, type: 3}
+  - speaker: 1
+    text: "S\xED, me gustar\xEDa un s\xE1ndwich de huevo."
+    audioClip: {fileID: 0}
+  - speaker: 0
+    text: "\xBFAlgo m\xE1s?"
+    audioClip: {fileID: 8300000, guid: 79a30a3a099f24d58a51dc4659390018, type: 3}
+  - speaker: 1
+    text: "\xBFQu\xE9 clase de panecillo es ese?"
+    audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Es un muffin de ar\xE1ndanos. \xBFQuieres uno?"
+    audioClip: {fileID: 8300000, guid: 22db9b2e0ebe645c88d19525202c0b0a, type: 3}
+  - speaker: 1
+    text: No gracias, hoy no.
+    audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Ok, ser\xE1n cinco d\xF3lares con cuarenta y siete centavos."
+    audioClip: {fileID: 8300000, guid: 931679e3a41b74475a4be79dde66ddb6, type: 3}
+  - speaker: 1
+    text: "\xBFPuedo pagar con tarjeta?"
+    audioClip: {fileID: 0}
+  - speaker: 0
+    text: "No, s\xF3lo aceptamos efectivo."
+    audioClip: {fileID: 8300000, guid: 66c7fb690903c434c8b55eda7031de5a, type: 3}
+  - speaker: 1
+    text: "Bien, aqu\xED tienes. Aqu\xED tienes seis d\xF3lares."
+    audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Aqu\xED tienes el cambio, cincuenta y tres centavos."
+    audioClip: {fileID: 8300000, guid: 915f717eade2a4d7aa7e79ff2897b2fb, type: 3}
+  - speaker: 1
+    text: "\xA1Gracias!"
+    audioClip: {fileID: 0}

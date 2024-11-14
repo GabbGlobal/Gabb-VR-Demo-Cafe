@@ -278,10 +278,10 @@ public class InteractionManager : MonoBehaviour
         // Handle input for showing ending screen and restarting game
         // This section checks if the player presses the E or R keys to either show the ending screen
         // or restart the game, respectively.
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             ShowEndingScreen();
-        }
+        }*/
     
         // Call function to handle mouse hover over words
         HandleWordHover();
@@ -312,14 +312,14 @@ public class InteractionManager : MonoBehaviour
         }
 
         // Get the current mouse position in world space
-        Vector3 mousePosition = Input.mousePosition;
+        Vector3 mousePosition = Vector3.zero;
         Camera camera = Camera.main; // Assuming the main camera is used for screen space calculations
         Vector3 cursorWorldPosition = Vector3.zero;
         if (pointAtWords.pointerWorldPositionOnUI.HasValue) {
             cursorWorldPosition = pointAtWords.pointerWorldPositionOnUI.Value;
             mousePosition = Camera.main.WorldToScreenPoint(cursorWorldPosition);
         } else {
-           // mousePosition = Vector3.zero;
+            //mousePosition = Input.mousePosition;
         }
 
         int wordIndex = TMP_TextUtilities.FindIntersectingWord(dialogueText, mousePosition, camera);
@@ -427,7 +427,7 @@ public class InteractionManager : MonoBehaviour
                 Debug.LogError("npctalking is null");
             }
             npcTalking.Talk(true);
-            conversationUI.StartConv(npcTalking.gameObject);
+            conversationUI.StartConvo(npcTalking);
             dialogPanel[CheckSpeaker()].SetActive(true);
 
             // Only show the hint button if the user dialogue text is not empty
@@ -559,11 +559,11 @@ public class InteractionManager : MonoBehaviour
     }
 
     // Temporary patch for dialogue audio stuttering until I can overhaul the conversation system.
-    bool canPlayDialogueAudio = true;
+    /*bool canPlayDialogueAudio = true;
     private IEnumerator DialogueCoolDown() {
         yield return new WaitForSecondsRealtime(0.5f);
         canPlayDialogueAudio = true;
-    }
+    }*/
 
     // PlayDialogueAudio method
     // This method handles the playback of dialogue audio. It constructs the audio clip name based on the
@@ -580,7 +580,7 @@ public class InteractionManager : MonoBehaviour
         {
             
             //audioSource.clip = clip;
-            if (canPlayDialogueAudio) {
+            /*if (canPlayDialogueAudio) {
                 Debug.Log("[InteractionManager.PlayDialogueAudio] playing audio: dialogue");
                 audioSource.PlayOneShot(clip);
                 //audioSource.Stop(); // Stop any currently playing audio
@@ -588,8 +588,9 @@ public class InteractionManager : MonoBehaviour
                 StartCoroutine(DialogueCoolDown());
             } else {
                 Debug.LogWarning("[InteractionManager.PlayDialogueAudio] audio on cooldown");
-            }
-
+            }*/
+            Debug.Log("[InteractionManager.PlayDialogueAudio] playing audio: dialogue");
+            audioSource.PlayOneShot(clip);
             //audioSource.Play();
         }
         else

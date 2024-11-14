@@ -16,6 +16,10 @@ public class NpcTalking : MonoBehaviour
     private Renderer[] renderers;
     private PlayerTriggerZone playerTriggerZone;
     private NpcFacing npcFacing;
+    public Dialogue dialogue;
+    public AudioSource speechAudioSource;
+    private ConversationUI conversationUI;
+    public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
     void Start()
     {
         renderers = GetComponentsInChildren<Renderer>();
@@ -28,11 +32,13 @@ public class NpcTalking : MonoBehaviour
             Debug.LogError("animator is null");
         }
         originalRotation = transform.rotation;
+        conversationUI = FindFirstObjectByType<ConversationUI>(); // TODO: replace with proper singleton
+
     }
 
     public void Talk(bool _talk)
     {
-        talking = _talk;
+        /*talking = _talk;
 
         if (talking)
         {
@@ -46,7 +52,7 @@ public class NpcTalking : MonoBehaviour
         else
         {
             animator.ResetTrigger("Talk");
-        }
+        }*/
     }
 
     void Update() {
@@ -60,21 +66,65 @@ public class NpcTalking : MonoBehaviour
             npcFacing.facePlayer = false;
         }
 
-        /*// can talk and progress dialogue input is pressed
-        if (canTalkWithPlayer && && InteractionManager.Instance.CurrentNpc == null && progressDialogueInput.action.WasPressedThisFrame()) {
-            InteractionManager.Instance.StartConv(this); // start conversation with this NPC
-        }*/
-
         // if can talk and not player is not already talking to somebody
-        if (canTalkWithPlayer && InteractionManager.Instance.CurrentNpc == null) {
-            InteractionManager.Instance.StartConv(this); // start conversation with this NPC
+        if (canTalkWithPlayer && currentNpcTalking == null) {
+            StartCoroutine(StartConvo());
         }
 
         // if player leaves the trigger zone, end the convo
-        if (!playerTriggerZone.PlayerIsInTriggerZone && InteractionManager.Instance.CurrentNpc == this) {
-            InteractionManager.Instance.EndConv();
+        if (!playerTriggerZone.PlayerIsInTriggerZone && currentNpcTalking == this) {
+            EndConvo();
         }
     }
+
+    IEnumerator StartConvo() {
+        currentNpcTalking = this;
+        conversationUI.StartConvo(this); // bring up the conversation UI
+
+        // iterate through all lines of dialogue
+        for (int i = 0; i < dialogue.linesOfDialogue.Count; i++) {
+            yield return HandleLineOfDialogue(i);
+        }
+    }
+
+    void EndConvo() {
+        currentNpcTalking = null;
+    }
+
+    // runs for every line of dialogue in order during a conversation
+    IEnumerator HandleLineOfDialogue(int lineIndex) {
+        var line = dialogue.linesOfDialogue[lineIndex];
+        conversationUI.DisplayLineOfDialogue(line); // show current line of dialogue on the UI
+
+        switch (line.speaker) {
+            
+            case DialogueSpeaker.NPC: {
+                 // play npc talking animation
+                animator.SetTrigger("Talk");
+                // play speech audio clip
+                if (line.speaker == DialogueSpeaker.NPC) {
+                    if (line.audioClip == null) {
+                        Debug.LogWarning($"Missing audio clip for NPC dialogue at line {line} on {gameObject.name}", gameObject);
+                    } else {
+                        speechAudioSource.PlayOneShot(line.audioClip);
+                        // wait for the NPC to finish speaking
+                        yield return new WaitForSecondsRealtime(line.audioClip.length);
+                    }
+                }
+                break;
+            }
+
+            case DialogueSpeaker.Player: {
+                // begin pronunciationa ssement
+                PronunciationAssessor.Instance.StartAssessment(line.text);
+                yield return new WaitForSeconds(20f); // as a test
+                break;
+            }
+        }
+        yield break;
+    }
+
+
 
     // Check if the NPC is in view of the camera. Does not account for occlusion.
     public bool IsInView() {

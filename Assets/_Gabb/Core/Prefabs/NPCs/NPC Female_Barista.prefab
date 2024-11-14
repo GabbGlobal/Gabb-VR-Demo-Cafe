@@ -5,6 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 7766404937856758024}
     m_Modifications:
     - target: {fileID: -9128164618144333796, guid: 3031096f98855394997bd341786cc3e1, type: 3}
@@ -191,6 +192,18 @@ PrefabInstance:
       propertyPath: m_LightProbeVolumeOverride
       value: 
       objectReference: {fileID: 138939627490916276}
+    - target: {fileID: 2927051370377652379, guid: 3031096f98855394997bd341786cc3e1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.202
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927051370377652379, guid: 3031096f98855394997bd341786cc3e1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2927051370377652379, guid: 3031096f98855394997bd341786cc3e1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.003
+      objectReference: {fileID: 0}
     - target: {fileID: 4911166471447042333, guid: 3031096f98855394997bd341786cc3e1, type: 3}
       propertyPath: m_LightProbeUsage
       value: 1
@@ -248,6 +261,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 138939627490916276}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3031096f98855394997bd341786cc3e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1197686279}
   m_SourcePrefab: {fileID: 100100000, guid: 3031096f98855394997bd341786cc3e1, type: 3}
 --- !u!1 &138939627490916276 stripped
 GameObject:
@@ -256,7 +275,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!95 &1197686279
 Animator:
-  serializedVersion: 4
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -270,17 +289,29 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &767384858340257038 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3031096f98855394997bd341786cc3e1, type: 3}
+  m_PrefabInstance: {fileID: 949403049093171941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5652623011066949082
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 163862283921353451, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 11400000, guid: 6e73bdf23080c624fa1e1d90420b44f4, type: 2}
     - target: {fileID: 2717349020355960018, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -342,6 +373,12 @@ PrefabInstance:
       value: NPC Female_Barista
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2717349020355960018, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 767384858340257038}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7d20970103465ba42a97c0b99f7b31a6, type: 3}
 --- !u!4 &7766404937856758024 stripped
 Transform:

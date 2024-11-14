@@ -8,36 +8,42 @@ public class ConversationUI : MonoBehaviour
 {
 
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject NPC;
-    //English dialogInJson;
-    private int sentence;
-    private int turn;
 
     [SerializeField] private float yOffset;
+    public TMP_Text npcDialogueText;
+    public TMP_Text playerDialogueText;
+    public TMP_Text advisorText;
+    public Transform showHideChild;
 
-    private void Start()
-    {
-        //InteractionManager.interact += StartGame;
-        //dialogInJson = JsonUtility.FromJson<English>(jsonFile.text);
-        //InteractionManager.interact += StartConv;
+    void Start() {
+        showHideChild.gameObject.SetActive(false); // hide ui
     }
 
-    public void StartConv(GameObject _NPC)
+    public void StartConvo(NpcTalking npcTalking)
     {
+        showHideChild.gameObject.SetActive(true); // show ui
+        npcDialogueText.text = "";
+        playerDialogueText.text = "";
+        advisorText.text = "";
         transform.SetParent(null);
-        NPC = _NPC;
-        //Vector3 _pos = NPC.transform.position;
-        //_pos.y = yOffset;
-        var npcTalking = NPC.GetComponent<NpcTalking>();
         transform.position = npcTalking.placeUIHere.position;
         transform.rotation = npcTalking.placeUIHere.rotation;
         transform.SetParent(npcTalking.placeUIHere);
 
     }
 
-    private void OnDisable()
-    {
-        //transform.SetParent(null);
-       // InteractionManager.interact -= StartConv;
+    public void DisplayLineOfDialogue(LineOfDialogue lineOfDialogue) {
+        switch (lineOfDialogue.speaker) {
+            case (DialogueSpeaker.NPC): {
+                npcDialogueText.text = lineOfDialogue.text;
+                // when speaking npc dialogue, clear the player's dialogue
+                playerDialogueText.text = "";
+                break;
+            }
+            case (DialogueSpeaker.Player):  {
+                playerDialogueText.text = lineOfDialogue.text;
+                break;
+            }
+        }
     }
 }

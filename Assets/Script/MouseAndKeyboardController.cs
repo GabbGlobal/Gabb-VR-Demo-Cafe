@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Locomotion.Movement;
 
 // This script is designed for PC testing purposes only.
 // It allows the main camera to navigate using the arrow keys and rotate using the mouse.
 // This is not intended for final deployment.
+
 
 public class MouseAndKeyboardController : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class MouseAndKeyboardController : MonoBehaviour
     public float fixedYPosition = 1.75f; // Set this to the desired fixed height of the camera
 
     private CharacterController characterController;
+    private ContinuousMoveProvider continuousMoveProvider;
     private Camera cam;
 
     void Start()
@@ -20,11 +23,19 @@ public class MouseAndKeyboardController : MonoBehaviour
         cam = Camera.main;
         // Disable tracked pose driver so we don't have to fight HMD tracking
         cam.GetComponent<UnityEngine.InputSystem.XR.TrackedPoseDriver>().enabled = false;
+        Vector3 pos = cam.transform.position;
+        pos.y = fixedYPosition;
+        cam.transform.position = pos;
+
+        continuousMoveProvider = GetComponent<ContinuousMoveProvider>();
+        continuousMoveProvider.forwardSource = cam.transform;
+        
     }
 
     void Update()
     {
         if (!Application.isEditor) { return; }
+        /*
         // Get horizontal input (left/right)
         float moveHorizontal = Input.GetAxis("Horizontal");
         // Get vertical input (forward/backward)
@@ -58,9 +69,10 @@ public class MouseAndKeyboardController : MonoBehaviour
         Vector3 localPosition = cam.transform.localPosition;
         localPosition.y = fixedYPosition;
         cam.transform.localPosition = localPosition;
+        */
 
         // Check if the Q key is pressed
-        if (!Input.GetKey(KeyCode.Q))
+        /*if (!Input.GetKey(KeyCode.Q))
         {
             // Get input from the mouse's horizontal movement (left/right mouse movement)
             float turnHorizontal = Input.GetAxis("Mouse X");
@@ -71,6 +83,6 @@ public class MouseAndKeyboardController : MonoBehaviour
             cam.transform.Rotate(Vector3.up, turnHorizontal * turnSpeed, Space.World);
             // Rotate the camera around the x-axis (pitch) based on vertical mouse movement
             cam.transform.Rotate(Vector3.left, turnVertical * turnSpeed);
-        }
+        }*/
     }
 }
