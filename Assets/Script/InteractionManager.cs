@@ -792,7 +792,7 @@ public class InteractionManager : MonoBehaviour
     // It includes the experience bar, speed controller, and the ending screen with star ratings and feedback text.
     void OnGUI()
     {
-        return; // OnGUI based UI is obsolete
+        //return; // OnGUI based UI is obsolete
         // Define the rectangle dimensions and position
         // These variables define the size and position of the experience bar, including the rectangle and circle shapes.
         float rectWidth = Screen.width * 0.25f;

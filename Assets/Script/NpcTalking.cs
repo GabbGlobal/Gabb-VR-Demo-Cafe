@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.AffordanceSystem.Receiver.Primitives;
 
 public class NpcTalking : MonoBehaviour
 {
@@ -21,7 +22,6 @@ public class NpcTalking : MonoBehaviour
     private NpcFacing npcFacing;
     public Dialogue dialogue;
     public AudioSource speechAudioSource;
-    private ConversationUI conversationUI;
     public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
     public static NpcTalking previousNpcTalking = null;
     bool hasFinishedFullConvo = false;
@@ -43,7 +43,6 @@ public class NpcTalking : MonoBehaviour
             Debug.LogError("animator is null");
         }
         originalRotation = transform.rotation;
-        conversationUI = FindFirstObjectByType<ConversationUI>(); // TODO: replace with proper singleton
     }
 
 
@@ -79,7 +78,6 @@ public class NpcTalking : MonoBehaviour
 
     // Conversation state
     private int lineOfDialogueIndex = 0;
-
     async Awaitable StartConvo(CancellationToken cancellationToken)
     {
         try {
@@ -89,7 +87,7 @@ public class NpcTalking : MonoBehaviour
                 return;
             }
             currentNpcTalking = this;
-            conversationUI.OnStartConvo(this); // bring up the conversation UI
+            ConversationUI.Instance.OnStartConvo(this); // bring up the conversation UI
 
             // iterate through all lines of dialogue
             lineOfDialogueIndex = 0; // start at the beginning
@@ -100,7 +98,11 @@ public class NpcTalking : MonoBehaviour
                 await HandleLineOfDialogue(lineOfDialogueIndex, cancellationToken);
                 await Awaitable.NextFrameAsync();
             }
-            // finished all dialogue with this NPC
+            // Reward xp once after finishing this dialogue the first time
+            if (!hasFinishedFullConvo) {
+                RewardXP(); 
+            }
+            // remember that we finished this dialogue once. Should be replaced with persistent user data later.
             hasFinishedFullConvo = true;
             if (cancellationToken.IsCancellationRequested) { return; } // end early
             convoCancellation = null;
@@ -112,7 +114,7 @@ public class NpcTalking : MonoBehaviour
 
     void StopConvo()
     {
-        conversationUI.OnEndConvo();
+        ConversationUI.Instance.OnEndConvo();
 
         Debug.Log($"[NpcTalking.StopConvo] {gameObject.name}", gameObject);
         if (convoCancellation != null)
@@ -130,7 +132,7 @@ public class NpcTalking : MonoBehaviour
     {
         var line = dialogue.linesOfDialogue[lineIndex];
         Debug.Log(line.ToString());
-        conversationUI.DisplayLineOfDialogue(line); // show current line of dialogue on the UI
+        ConversationUI.Instance.DisplayLineOfDialogue(line); // show current line of dialogue on the UI
 
         switch (line.speaker)
         {
@@ -158,16 +160,16 @@ public class NpcTalking : MonoBehaviour
 
             case DialogueSpeaker.Player:
                 {
-                    // begin pronunciationa ssement
+                    // begin pronunciation assessment
                     PronunciationAssessor.AssessmentResult assessmentTask = await PronunciationAssessor.Instance.AssessPronunciation(line.text);
                     if (cancellationToken.IsCancellationRequested) { return; } // end early
                     if (assessmentTask?.recognition_status == "success") {
                         //InteractionManager.Instance.HandleCorrectPronunciation();
-                        conversationUI.ShowSuccess(); // let the player know they succeeded
+                        ConversationUI.Instance.ShowSuccess(); // let the player know they succeeded
                         await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
                         lineOfDialogueIndex++; // move onto next line of dialogue
                     } else {
-                        conversationUI.ShowFail(); // let the player know they fucked up
+                        ConversationUI.Instance.ShowFail(); // let the player know they fucked up
                         //InteractionManager.Instance.HandleIncorrectPronunciation();
                         //DO NOT move onto next line of dialogue, we'll try this one again
                     }
@@ -198,5 +200,11 @@ public class NpcTalking : MonoBehaviour
         if (convoCancellation != null) {
             convoCancellation.Cancel();
         }
+    }
+
+    public void RewardXP() {
+        float xpForOnePlayerResponse = 3f;
+        float xp = (dialogue.linesOfDialogue.Count / 2f) * xpForOnePlayerResponse;
+        ExperienceUI.Instance.AddXP(xp);
     }
 }

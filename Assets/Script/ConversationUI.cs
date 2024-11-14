@@ -27,6 +27,15 @@ public class ConversationUI : MonoBehaviour
     public VideoPlayer videoPlayer;
     public Button hintButton;
 
+    public static ConversationUI Instance {get; private set;}
+
+    void Awake() {
+        if (Instance != null) {
+            DestroyImmediate(Instance);
+        }
+        Instance = this;
+    }
+
     void Start()
     {
         playerTextStartColor = playerDialogueText.color;

@@ -32,7 +32,7 @@ MonoBehaviour:
   - Assets/_Gabb/Cafe/Models/bathroomDoor.fbx
   - Assets/Asset/Model/GG_Level1_Asset_Laptop.fbx
   - Assets/_Gabb/Cafe/Models/cafeUpdate/cafeUpdate.fbx
-  modifiedAssetPaddingHash: d6a958ff372f88b3f4805c3c5b0a88f4552f20140d5af19370928d4eb0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493e6dcc93b6d67e2a89994552c
+  modifiedAssetPaddingHash: d6a958ff10d6292ff4805c3c5b0a88f4552f20140d5af193293548f5b0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493ded568076d67e2a89994552c
   modifiedMeshList: []
   modifiedMeshPaddingList: 
   modifiedAssets:
@@ -419,7 +419,7 @@ MonoBehaviour:
     - ggCafe_staffKnob01
     - ggCafe_staffDoor01
     - ggCafe_doorFrame02
-    padding: c50000001400000020000000
+    padding: bb000000130000001e000000
     unwrapper: 010000000100000001000000
   - meshName:
     - ggCafe_ottomanSeat01
@@ -502,7 +502,7 @@ MonoBehaviour:
     - ggCafe_entranceFrame01
     - ggCafe_entranceDoor02
     - ggCafe_entranceDoor01
-    padding: 0001000000010000eb000000eb0000001d0000001b0000001b000000
+    padding: 0001000000010000e0000000e00000001c0000001900000019000000
     unwrapper: 01000000010000000100000001000000010000000100000001000000
   - meshName:
     - ggCafe_armChair_support02
@@ -597,7 +597,7 @@ MonoBehaviour:
     - ggCafe_Knob03
     - ggCafe_doorFrame01
     - ggCafe_bathroomDoor01
-    padding: 00010000eb0000002000000014000000
+    padding: 00010000e00000001e00000013000000
     unwrapper: 01000000010000000100000001000000
   - meshName:
     - laptop_pCube32
@@ -634,7 +634,12 @@ MonoBehaviour:
   - Assets/FastFakeSkin/Demo/Meshes/char_kid_01.FBX
   - Assets/FastFakeSkin/Demo/Meshes/hand_01.FBX
   - Assets/FastFakeSkin/Demo/Meshes/scene_props_01.FBX
-  uvOverlapAssetList: 00000000ffffffff010100000000000001010000000000000000000000000000000000000000000000000000010100000101000000000000000000000000000000000000010100000000000001010000
+  - Assets/SimpleHands/Source/StylizedHand.fbx
+  - Assets/_Gabb/Hands/HandStylizedblend.blend
+  - Assets/_Gabb/Hands/HandStylizedblend.fbx
+  - Assets/_Gabb/Hands/HandStylized.fbx
+  - Assets/_Gabb/Hands/HandStylized.blend
+  uvOverlapAssetList: 00000000ffffffff0101000000000000010100000000000000000000000000000000000000000000000000000101000001010000000000000000000000000000000000000101000000000000010100000000000000000000000000000000000000000000
   xatlasWarningShown: 1
   foundCompatibleSetup: 1
   gpuName: NVIDIA GeForce RTX 4090
@@ -726,5 +731,5 @@ MonoBehaviour:
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
   tagOverrides: []
-  modifiedMeshPaddingArray: 0300000003000000020000000400000002000000d400000003000000
-  modifiedMeshUnwrapperArray: 01000000010000000100000001000000010000000100000001000000
+  modifiedMeshPaddingArray: bb000000130000001e000000
+  modifiedMeshUnwrapperArray: 010000000100000001000000
