@@ -70,9 +70,11 @@ public class PermissionsManager : MonoBehaviour
     // Notably, the denied callbacks are not called any time after the user denies permission with "Remember" checked.
     IEnumerator ShowUIDelayed() {
         yield return new WaitForSecondsRealtime(2f);
+#if PLATFORM_ANDROID
         if (!Permission.HasUserAuthorizedPermission(Permission.Microphone)) {
             ui.gameObject.SetActive(true);
         }
+#endif
     }
 
     void LoadNextScene()
