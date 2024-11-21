@@ -8,9 +8,6 @@ using System.Threading;
 
 public class ConversationUI : MonoBehaviour
 {
-
-    [SerializeField] private GameObject player;
-
     [SerializeField] private float yOffset;
     public TMP_Text npcDialogueText;
     public TMP_Text playerDialogueText;
@@ -41,6 +38,7 @@ public class ConversationUI : MonoBehaviour
         playerTextStartColor = playerDialogueText.color;
         ResetText();
         ResetVideo();
+        hintButton.gameObject.SetActive(false); // hide hint button
         showHideChild.gameObject.SetActive(false); // hide ui
         hintButton.onClick.AddListener(OnHintButtonClick);
     }
@@ -48,6 +46,7 @@ public class ConversationUI : MonoBehaviour
     public void OnStartConvo(NpcTalking npcTalking)
     {
         ResetText();
+        hintButton.gameObject.SetActive(false); // hide hint button
         showHideChild.gameObject.SetActive(true); // show ui
         transform.SetParent(null);
         transform.position = npcTalking.placeUIHere.position;
@@ -76,16 +75,18 @@ public class ConversationUI : MonoBehaviour
             case DialogueSpeaker.NPC:
                 {
                     Debug.Log("NPC");
+                    hintButton.gameObject.SetActive(false); // hide hint button
                     ResetVideo();
                     ResetText(); // when speaking npc dialogue, clear the previous dialogue
-                    npcDialogueText.text = lineOfDialogue.text;
+                    npcDialogueText.text = $"THEM: {lineOfDialogue.text}";
                     // when speaking npc dialogue, clear the player's dialogue
                     break;
                 }
             case DialogueSpeaker.Player:
                 {
                     Debug.Log("PLAYER");
-                    playerDialogueText.text = lineOfDialogue.text;
+                    hintButton.gameObject.SetActive(true); // show hint button
+                    playerDialogueText.text = $"YOU: {lineOfDialogue.text}";
                     break;
                 }
         }

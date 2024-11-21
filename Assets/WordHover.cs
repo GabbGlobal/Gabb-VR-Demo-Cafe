@@ -6,21 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(ConversationUI))]
 public class WordHover : MonoBehaviour
 {
-    public PointAtWords pointAtWords;
+    private PointAtWords pointAtWords;
     public GameObject popupPrefab;
-    private ConversationUI conversationUI;
     private Dictionary<string, DictionaryEntry> dictionary; // Dictionary to store word-meaning and POS pairs
     private GameObject popup; // Reference to the popup GameObject
     private UIFaceCamera popupFaceCamera; // cache reference to the UIFaceCamera script on the popup
     private TMP_Text currentlyHoveredText; // Track which text is currently being hovered
     
     void Awake() {
-        conversationUI = GetComponent<ConversationUI>();
         LoadDictionary();
     }
 
     void Start() {
         // Create a new popup GameObject
+        pointAtWords = FindFirstObjectByType<PointAtWords>();
         popup = Instantiate(popupPrefab);
         Canvas canvas = popup.GetComponent<Canvas>();
         canvas.worldCamera = Camera.main;
@@ -31,8 +30,8 @@ public class WordHover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        HandleWordHoverForText(conversationUI.npcDialogueText);
-        HandleWordHoverForText(conversationUI.playerDialogueText);
+        HandleWordHoverForText(ConversationUI.Instance.npcDialogueText);
+        HandleWordHoverForText(ConversationUI.Instance.playerDialogueText);
     }
 
     private void HandleWordHoverForText(TMP_Text dialogueText)

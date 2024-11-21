@@ -19,7 +19,7 @@ public class MouseAndKeyboardController : MonoBehaviour
     void Start()
     {
         if (!Application.isEditor) { return; }
-        characterController = transform.root.GetComponent<CharacterController>();
+        characterController = transform.root.GetComponentInChildren<CharacterController>();
         cam = Camera.main;
         // Disable tracked pose driver so we don't have to fight HMD tracking
         cam.GetComponent<UnityEngine.InputSystem.XR.TrackedPoseDriver>().enabled = false;
