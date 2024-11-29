@@ -32,7 +32,20 @@ MonoBehaviour:
   - Assets/_Gabb/Cafe/Models/bathroomDoor.fbx
   - Assets/Asset/Model/GG_Level1_Asset_Laptop.fbx
   - Assets/_Gabb/Cafe/Models/cafeUpdate/cafeUpdate.fbx
-  modifiedAssetPaddingHash: d6a958ff10d6292ff4805c3c5b0a88f4552f20140d5af193293548f5b0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493ded568076d67e2a89994552c
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Build4_2X2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX5_2x2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX2_Windows.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Build1_2x2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Build2_2x2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX6_windows.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX6_2X2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX_windows.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX_2x2_NoWindows.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX2_2x2_NoWindows.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX6_2X1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX_2x21_NoWindows.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX2_2x21_NoWin.fbx
+  modifiedAssetPaddingHash: d6a958ff10d6292ff4805c3c5b0a88f4552f20140d5af193293548f5b0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493ded568076d67e2a89994552c323fd3d9333fd3d980c5d890353fd3d9353fd3d94adc894b333fd3d94adc894b333fd3d9323fd3d9333fd3d9323fd3d9353fd3d9
   modifiedMeshList: []
   modifiedMeshPaddingList: 
   modifiedAssets:
@@ -613,6 +626,58 @@ MonoBehaviour:
     - ggCafe_wallLeft01
     padding: 0300000003000000020000000400000002000000d400000003000000
     unwrapper: 01000000010000000100000001000000010000000100000001000000
+  - meshName:
+    - Plane
+    padding: 05000000
+    unwrapper: 01000000
+  - meshName:
+    - Plane
+    padding: 04000000
+    unwrapper: 01000000
+  - meshName:
+    - BuildEX2.001
+    padding: 0e000000
+    unwrapper: 01000000
+  - meshName:
+    - StoreFront.001
+    padding: 06000000
+    unwrapper: 01000000
+  - meshName:
+    - StoreFront2EX
+    padding: 06000000
+    unwrapper: 01000000
+  - meshName:
+    - Plane.001
+    padding: 10000000
+    unwrapper: 01000000
+  - meshName:
+    - Plane
+    padding: 04000000
+    unwrapper: 01000000
+  - meshName:
+    - BuildEXOne.001
+    padding: 10000000
+    unwrapper: 01000000
+  - meshName:
+    - BuildEXOne
+    padding: 04000000
+    unwrapper: 01000000
+  - meshName:
+    - BuildEX2.003
+    padding: 05000000
+    unwrapper: 01000000
+  - meshName:
+    - Plane
+    padding: 04000000
+    unwrapper: 01000000
+  - meshName:
+    - BuildEXOne
+    padding: 05000000
+    unwrapper: 01000000
+  - meshName:
+    - BuildEX2.003
+    padding: 06000000
+    unwrapper: 01000000
   assetList:
   - Assets/Bakery/examples/content/sponza/bush.FBX
   - Assets/Bakery/examples/content/floor_lamp.FBX
@@ -731,7 +796,7 @@ MonoBehaviour:
   uvOverlapAssetList: 00000000ffffffff010100000000000001010000000000000000000000000000000000000000000000000000010100000101000000000000000000000000000000000000010100000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000001010000000000000101000000000000000000000000000000000000000000000101000000000000000000000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000001010000000000000101000000000000000000000000000000000000000000000101000000000000000000000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000
   xatlasWarningShown: 1
   foundCompatibleSetup: 1
-  gpuName: NVIDIA GeForce RTX 4090
+  gpuName: NVIDIA GeForce RTX 4070 Laptop GPU
   runsNonRTX: 0
   runsOptix5: 0
   runsOptix6: 1
@@ -820,5 +885,5 @@ MonoBehaviour:
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
   tagOverrides: []
-  modifiedMeshPaddingArray: bb000000130000001e000000
-  modifiedMeshUnwrapperArray: 010000000100000001000000
+  modifiedMeshPaddingArray: 06000000
+  modifiedMeshUnwrapperArray: 01000000
