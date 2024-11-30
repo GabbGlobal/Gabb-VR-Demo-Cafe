@@ -252,6 +252,7 @@ public class ftErrorCodes
         if (app == "ftrace") return TranslateFtrace(code, false);
         if (app == "ftraceRTX") return TranslateFtrace(code, true);
         if (app == "combineMasks") return TranslateCombineMasks(code);
+        if (app == "combineSH") return TranslateCombineMasks(code);
         if (app == "denoiser") return TranslateDenoiser(code);
         if (app == "denoiser72") return TranslateDenoiser(code);
         if (app == "denoiserLegacy") return TranslateDenoiser(code);

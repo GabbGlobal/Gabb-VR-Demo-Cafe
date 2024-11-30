@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+[HelpURL("https://geom.io/bakery/wiki/index.php?title=Manual#Bakery_Direct_Light")]
 [ExecuteInEditMode]
 [DisallowMultipleComponent]
 public class BakeryDirectLight : MonoBehaviour
@@ -50,6 +51,8 @@ public class BakeryDirectLight : MonoBehaviour
 
     public void Start()
     {
+        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+        
         if (gameObject.GetComponent<BakerySkyLight>() != null ||
             gameObject.GetComponent<BakeryPointLight>() != null ||
             gameObject.GetComponent<BakeryLightMesh>() != null)
@@ -67,7 +70,6 @@ public class BakeryDirectLight : MonoBehaviour
             return;
         }
 
-        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
         if (UID == 0) UID = Guid.NewGuid().GetHashCode(); // legacy
     }
 

@@ -517,7 +517,7 @@ public class ftPointLightInspector : UnityEditor.Editor
             if (ftraceLightShadowmask.boolValue)
             {
                 EditorGUILayout.PropertyField(ftraceShadowmaskGroupID, new GUIContent("Shadowmask Group ID", "If set to 0, each shadowmasked light will have a separate mask. Lights sharing any other positive value will share the same mask. This is useful to avoid 4 channel limit in cases where light bounds overlap, but the overlapping part is occluded in both anyway."));
-                EditorGUILayout.PropertyField(ftraceLightShadowmaskFalloff, new GUIContent("Shadowmask with falloff", "Only useful for custom lighting. Bakes complete light attenuation (except distance) into the shadowmask."));
+                EditorGUILayout.PropertyField(ftraceLightShadowmaskFalloff, new GUIContent("Shadowmask with falloff", "Only useful for custom lighting. Bakes complete light attenuation into the shadowmask."));
             }
 
             serializedObject.ApplyModifiedProperties();

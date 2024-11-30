@@ -51,7 +51,11 @@ public class ftDetectSettings
         }
     }
 
+#if BAKERY_TOOLSMENU
+    [MenuItem("Tools/Bakery/Utilities/Detect optimal settings", false, 54)]
+#else
     [MenuItem("Bakery/Utilities/Detect optimal settings", false, 54)]
+#endif
     public static void DetectCompatSettings()
     {
         var bakeryPath = ftLightmaps.GetEditorPath();

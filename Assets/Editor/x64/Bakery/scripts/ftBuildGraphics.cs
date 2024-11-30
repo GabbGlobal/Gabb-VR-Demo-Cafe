@@ -70,6 +70,9 @@ public class ftBuildGraphics : ScriptableWizard
     public static extern void SetUVGBFlags(int flags);
 
     [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    public static extern void SetUVGBTangents(int hasTangents);
+
+    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
     public static extern void SetFixPos(bool enabled);
 
     [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
@@ -86,6 +89,9 @@ public class ftBuildGraphics : ScriptableWizard
 
     [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
     public static extern int GetABGErrorCode();
+
+    [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
+    public static extern int ToggleABGDither(int on);
 
     [DllImport ("frender", CallingConvention=CallingConvention.Cdecl)]
     public static extern int GetUVGBErrorCode();
@@ -119,7 +125,31 @@ public class ftBuildGraphics : ScriptableWizard
 
     static public string scenePath = "";
 
-    static BufferedBinaryWriterFloat fvbfull, fvbtrace, fvbtraceTex, fvbtraceUV0;
+    class VBFull
+    {
+        public BufferedBinaryWriterFloat vbfull_p, vbfull_n, vbfull_t, vbfull_uv0, vbfull_uv1;
+
+        public VBFull(bool anyUVTangents)
+        {
+            vbfull_p = new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbfull_p.bin", FileMode.Create)) );
+            vbfull_n = new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbfull_n.bin", FileMode.Create)) );
+            vbfull_t = anyUVTangents ? new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbfull_t.bin", FileMode.Create)) ) : null;
+            vbfull_uv0 = new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbfull_uv0.bin", FileMode.Create)) );
+            vbfull_uv1 = new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbfull_uv1.bin", FileMode.Create)) );
+        }
+
+        public void Close()
+        {
+            if (vbfull_p != null) vbfull_p.Close();
+            if (vbfull_n != null) vbfull_n.Close();
+            if (vbfull_t != null) vbfull_t.Close();
+            if (vbfull_uv0 != null) vbfull_uv0.Close();
+            if (vbfull_uv1 != null) vbfull_uv1.Close();
+        }
+    }
+
+    static VBFull fvbfull;
+    static BufferedBinaryWriterFloat fvbtrace, fvbtraceTex, fvbtraceUV0;
     static BufferedBinaryWriterInt fib;
     static BinaryWriter fscene, fmesh, flmid, fseamfix, fsurf, fmatid, fmatide, fmatidh, fmatideb, falphaid, fib32, fhmaps;
     static BinaryWriter[] fib32lod;
@@ -140,6 +170,7 @@ public class ftBuildGraphics : ScriptableWizard
     public static bool splitByScene = false;
     public static bool splitByTag = true;
     public static bool uvPaddingMax = false;
+    public static bool uvPaddingPreserveIfExisted = false;
     public static bool exportTerrainAsHeightmap = true;
     public static bool exportTerrainTrees = false;
     public static bool uvgbHeightmap = true;
@@ -215,6 +246,8 @@ public class ftBuildGraphics : ScriptableWizard
     public static bool postPacking = true;
     public static bool holeFilling = false;
 
+    public static bool alphaDithering = true;
+
     static int floatOverWarnCount = 0;
     const int maxFloatOverWarn = 10;
 
@@ -222,6 +255,11 @@ public class ftBuildGraphics : ScriptableWizard
     static BakeryProjectSettings pstorage;
 
     static ExportSceneData _tempData;
+
+    static bool anySharedLODs;
+    static Dictionary<GameObject, Renderer[]> isSharedLOD;
+
+    static bool anyUVTangents = false;
 
     static public void DebugLogError(string text)
     {
@@ -354,6 +392,39 @@ public class ftBuildGraphics : ScriptableWizard
             }
         }
         return newStr;
+    }
+
+    static int NameSimilarity(string a, string b)
+    {
+        // Just count any repeating characters between strings
+        int lena = a.Length;
+        int lenb = b.Length;
+        int match = 0;
+        int highestMatch = 0;
+        for(int i=0; i<lena; i++)
+        {
+            int offset = 0;
+            for(int j=0; j<lenb; j++)
+            {
+                if (a[i+offset] == b[j])
+                {
+                    match++;
+                }
+                else
+                {
+                    if (match > highestMatch) highestMatch = match;
+                    match = 0;
+                    offset = -1;
+                }
+                offset++;
+                if (i+offset >= lena)
+                {
+                    if (match > highestMatch) highestMatch = match;
+                    break;
+                }
+            }
+        }
+        return highestMatch;
     }
 
     static void exportVBPos(BinaryWriter f, Transform t, Mesh m, Vector3[] vertices)
@@ -556,8 +627,9 @@ public class ftBuildGraphics : ScriptableWizard
                 //u = lmid * 10;
                 if (uv2.Length>0)
                 {
-                    u = Mathf.Clamp(uv2[i].x, 0, 0.99999f);
-                    v = Mathf.Clamp(1.0f - uv2[i].y, 0, 0.99999f);
+                    float invMaxTile = 0.1f;
+                    u = Mathf.Clamp(uv2[i].x * invMaxTile, 0, 0.99999f);
+                    v = Mathf.Clamp(1.0f - uv2[i].y * invMaxTile, 0, 0.99999f);
                 }
             }
             else
@@ -761,7 +833,7 @@ public class ftBuildGraphics : ScriptableWizard
         }
     }
 
-    static void exportVBFull(BufferedBinaryWriterFloat f, Vector3[] vertices, Vector3[] normals, Vector4[] tangents, Vector2[] uv, Vector2[] uv2)
+    static void exportVBFull(VBFull f, Vector3[] vertices, Vector3[] normals, Vector4[] tangents, Vector2[] uv, Vector2[] uv2, bool anyUVTangents)
     {
         bool hasUV = uv.Length > 0;
         bool hasUV2 = uv2.Length > 0;
@@ -769,51 +841,54 @@ public class ftBuildGraphics : ScriptableWizard
         for(int i=0;i<vertices.Length;i++)
         {
             Vector3 pos = vertices[i];//t.(vertices[i]);
-            f.Write(pos.x);
-            f.Write(pos.y);
-            f.Write(pos.z);
+            f.vbfull_p.Write(pos.x);
+            f.vbfull_p.Write(pos.y);
+            f.vbfull_p.Write(pos.z);
 
             Vector3 normal = normals[i];//t.TransformDirection(normals[i]);
-            f.Write(normal.x);
-            f.Write(normal.y);
-            f.Write(normal.z);
+            f.vbfull_n.Write(normal.x);
+            f.vbfull_n.Write(normal.y);
+            f.vbfull_n.Write(normal.z);
 
-            if (tangents == null)
+            if (anyUVTangents)
             {
-                f.Write(0.0f);
-                f.Write(0.0f);
-                f.Write(0.0f);
-                f.Write(0.0f);
-            }
-            else
-            {
-                Vector4 tangent = tangents[i];
-                f.Write(tangent.x);
-                f.Write(tangent.y);
-                f.Write(tangent.z);
-                f.Write(tangent.w);
+                if (tangents == null)
+                {
+                    f.vbfull_t.Write(0.0f);
+                    f.vbfull_t.Write(0.0f);
+                    f.vbfull_t.Write(0.0f);
+                    f.vbfull_t.Write(0.0f);
+                }
+                else
+                {
+                    Vector4 tangent = tangents[i];
+                    f.vbfull_t.Write(tangent.x);
+                    f.vbfull_t.Write(tangent.y);
+                    f.vbfull_t.Write(tangent.z);
+                    f.vbfull_t.Write(tangent.w);
+                }
             }
 
             if (hasUV)
             {
-                f.Write(uv[i].x);
-                f.Write(uv[i].y);
+                f.vbfull_uv0.Write(uv[i].x);
+                f.vbfull_uv0.Write(uv[i].y);
             }
             else
             {
-                f.Write(0.0f);
-                f.Write(0.0f);
+                f.vbfull_uv0.Write(0.0f);
+                f.vbfull_uv0.Write(0.0f);
             }
 
             if (hasUV2)
             {
-                f.Write(uv2[i].x);
-                f.Write(uv2[i].y);
+                f.vbfull_uv1.Write(uv2[i].x);
+                f.vbfull_uv1.Write(uv2[i].y);
             }
             else
             {
-                f.Write(0.0f);
-                f.Write(0.0f);
+                f.vbfull_uv1.Write(0.0f);
+                f.vbfull_uv1.Write(0.0f);
             }
         }
     }
@@ -959,6 +1034,7 @@ public class ftBuildGraphics : ScriptableWizard
         }
     }
 
+    // Just sequential indices
     static Vector2[] GenerateVertexBakeUVs(int voffset, int vlength, int totalVertexCount)
     {
         int atlasTexSize = (int)Mathf.Ceil(Mathf.Sqrt((float)totalVertexCount));
@@ -971,6 +1047,34 @@ public class ftBuildGraphics : ScriptableWizard
             int x = (i + voffset) % atlasTexSize;
             int y = (i + voffset) / atlasTexSize;
             uvs[i] = new Vector2(x * mul + add, y * mul + add);// - 1.0f);
+        }
+        return uvs;
+    }
+
+    // Indices to neighbouring data points in the densely sampled mesh
+    static Vector2[] GenerateVertexBakeUVs2(int voffset, int vlength, Mesh m, int vertexSamplingDensity, int totalVertexCount)
+    {
+        int atlasTexSize = (int)Mathf.Ceil(Mathf.Sqrt((float)totalVertexCount));
+        atlasTexSize = (int)Mathf.Ceil(atlasTexSize / (float)ftRenderLightmap.tileSize) * ftRenderLightmap.tileSize;
+        var uvs = new Vector2[vlength];
+        float mul = 1.0f / atlasTexSize;
+        float add = mul * 0.5f;
+        int numSubMeshes = m.subMeshCount;
+        int cnt = voffset;
+        for(int s=0; s<numSubMeshes; s++)
+        {
+            var indices = m.GetIndices(s);
+            int numTris = indices.Length / 3;
+            for(int t=0; t<numTris; t++)
+            {
+                int uvIndexA = indices[t*3];
+                int uvIndexB = indices[t*3+1];
+                int uvIndexC = indices[t*3+2];
+                int x = cnt % atlasTexSize;
+                int y = cnt / atlasTexSize;
+                uvs[uvIndexA] = uvs[uvIndexB] = uvs[uvIndexC] = new Vector2(x * mul + add, y * mul + add);// - 1.0f);
+                cnt += vertexSamplingDensity;
+            }
         }
         return uvs;
     }
@@ -1228,7 +1332,8 @@ public class ftBuildGraphics : ScriptableWizard
         {
             for(int i=0; i<falphaidlod.Length; i++) falphaidlod[i].Close();
         }
-        fvbfull = fvbtrace = fvbtraceTex = fvbtraceUV0 = null;
+        fvbfull = null;
+        fvbtrace = fvbtraceTex = fvbtraceUV0 = null;
         fib = null;
         fscene = fmesh = flmid = fsurf = fmatid = fmatide = fmatideb = falphaid  = fib32 = fseamfix = fmatidh = fhmaps = null;
         fib32lod = falphaidlod = null;
@@ -1580,7 +1685,41 @@ public class ftBuildGraphics : ScriptableWizard
                     //var lpos2 = SnapProbePos(lpos);
                     //go.name = "# " + lpos2.x+" "+lpos2.y+" "+lpos2.z;
 
-                    ftRenderLightmap.sectorProbePosHash.Add(ftRenderLightmap.SnapProbePos(lpos));
+                    //ftRenderLightmap.sectorProbePosHash.Add(ftRenderLightmap.SnapProbePos(lpos));
+
+                    float x = lpos.x * ftRenderLightmap.posPrecision;// + (lpos.x > 0 ? posEpsilon : -posEpsilon);
+                    float y = lpos.y * ftRenderLightmap.posPrecision;// + (lpos.y > 0 ? posEpsilon : -posEpsilon);
+                    float z = lpos.z * ftRenderLightmap.posPrecision;// + (lpos.z > 0 ? posEpsilon : -posEpsilon);
+
+                    float ix = Mathf.Floor(x);
+                    float iy = Mathf.Floor(y);
+                    float iz = Mathf.Floor(z);
+
+                    //float fx = x - ix;
+                    //float fy = y - iy;
+                    //float fz = z - iz;
+
+                    //float neps = ftRenderLightmap.posEpsilon;
+                    //float peps = 1.0f-ftRenderLightmap.posEpsilon;
+
+                    // LightProbeGroup.positions and LightProbes.positions are different. Unity rounds them unpredictably (?) after the grid is generated.
+                    // Just mark nearest cells to take that into account (assuming Unity won't round beyond posEpsilon)
+                    for(int zz=-2; zz<=2; zz+=1)
+                    {
+                        //if (zz < 0 && fz > neps) continue;
+                        //if (zz > 0 && fz < peps) continue;
+                        for(int yy=-2; yy<=2; yy+=1)
+                        {
+                            //if (yy < 0 && fy > neps) continue;
+                            //if (yy > 0 && fy < peps) continue;
+                            for(int xx=-2; xx<=2; xx+=1)
+                            {
+                                //if (xx < 0 && fx > neps) continue;
+                                //if (xx > 0 && fx < peps) continue;
+                                ftRenderLightmap.sectorProbePosHash.Add(new Vector3((int)ix+xx, (int)iy+yy, (int)iz+zz));
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -1675,6 +1814,9 @@ public class ftBuildGraphics : ScriptableWizard
             var bmax = vol.bounds.max;
             halfVoxelSize = bmax - bmin;
             halfVoxelSize = new Vector3(halfVoxelSize.x/rx, halfVoxelSize.y/ry, halfVoxelSize.z/rz) * 0.5f;
+            bool rotateAroundY = vol.rotateAroundY;
+            var sc = vol.GetRotationY();
+            var bcenter = vol.bounds.center;
             float lx, ly, lz;
             for(int z=0; z<rz; z++)
             {
@@ -1685,7 +1827,19 @@ public class ftBuildGraphics : ScriptableWizard
                     for(int x=0; x<rx; x++)
                     {
                         lx = Mathf.Lerp(bmin.x, bmax.x, x/(float)rx) + halfVoxelSize.x;
-                        positions[i] = new Vector3(lx, ly, lz);
+
+                        if (rotateAroundY)
+                        {
+                            float px = lx - bcenter.x;
+                            float pz = lz - bcenter.z;
+                            float lx2 = px*sc.y  + pz*sc.x + bcenter.x;
+                            float lz2 = px*-sc.x + pz*sc.y + bcenter.z;
+                            positions[i] = new Vector3(lx2, ly, lz2);
+                        }
+                        else
+                        {
+                            positions[i] = new Vector3(lx, ly, lz);
+                        }
                         i++;
                     }
                 }
@@ -2328,6 +2482,7 @@ public class ftBuildGraphics : ScriptableWizard
         var objToLodLevel = data.objToLodLevel;
         var objToLodLevelVisible = data.objToLodLevelVisible;
         lodLevelsVisibleInLodLevel = new Dictionary<int, List<int>>();
+        anySharedLODs = false;
 
         const int maxSceneLodLevels = 100;
         var sceneLodUsed = new int[maxSceneLodLevels];
@@ -2348,13 +2503,40 @@ public class ftBuildGraphics : ScriptableWizard
             if ((obj.hideFlags & (HideFlags.DontSave|HideFlags.HideAndDontSave)) != 0) continue; // skip temp objects
             if (obj.tag == "EditorOnly") continue; // skip temp objects
 
+            var isShared = lodgroup.GetComponent<BakerySharedLodUv>() != null;
+            Renderer[] lod0Renderers = null;
+            if (isShared)
+            {
+                if (!anySharedLODs)
+                {
+                    isSharedLOD = new Dictionary<GameObject, Renderer[]>();
+                }
+                anySharedLODs = true;
+            }
+
             var lods = lodgroup.GetLODs();
             if (lods.Length == 0) continue;
 
             for(int i=0; i<lods.Length; i++)
             {
                 var lodRenderers = lods[i].renderers;
+                if (isShared && i == 0)
+                {
+                    lod0Renderers = lodRenderers;
+                }
                 if (lodRenderers.Length == 0) continue;
+
+                if (isShared && i > 0)
+                {
+                    for(int j=0; j<lodRenderers.Length; j++)
+                    {
+                        if (lodRenderers[j] != null)
+                        {
+                            isSharedLOD[lodRenderers[j].gameObject] = lod0Renderers;
+                        }
+                    }
+                    continue;
+                }
 
                 bool lightmappedLOD = false;
                 for(int j=0; j<lodRenderers.Length; j++)
@@ -2553,6 +2735,8 @@ public class ftBuildGraphics : ScriptableWizard
 
     public static int IsInsideSector(Transform tform, Transform sectorTform, Bounds b, BakerySector s)
     {
+        if (tform.GetComponent<BakeryLightMesh>() != null) return 1; // always make light meshes belong
+
         var parent = tform;
         while(parent != null)
         {
@@ -2785,7 +2969,7 @@ public class ftBuildGraphics : ScriptableWizard
             farSphereMatOcc.SetPass(0);
             for(int o=0; o<objCount; o++)
             {
-                var m = objsToWrite[o].GetComponent<MeshFilter>().sharedMesh;
+                var m = GetSharedMesh(objsToWrite[o]);//.GetComponent<MeshFilter>().sharedMesh;
                 var worldMatrix = objsToWrite[o].transform.localToWorldMatrix;
                 for(int s=0; s<m.subMeshCount; s++)
                 {
@@ -2811,7 +2995,7 @@ public class ftBuildGraphics : ScriptableWizard
                 GL.LoadProjectionMatrix(vp);
                 for(int o=0; o<outsideRenderers.Count; o++)
                 {
-                    var m = outsideRenderers[o].GetComponent<MeshFilter>().sharedMesh;
+                    var m = GetSharedMesh(outsideRenderers[o]);//.GetComponent<MeshFilter>().sharedMesh;
                     var worldMatrix = outsideRenderers[o].transform.localToWorldMatrix;
                     var mats = outsideRenderers[o].sharedMaterials;
                     for(int s=0; s<m.subMeshCount; s++)
@@ -3405,6 +3589,11 @@ public class ftBuildGraphics : ScriptableWizard
             var mrEnabled = mr.enabled || obj.GetComponent<BakeryAlwaysRender>() != null;
             if (!mrEnabled && areaLight == null) continue;
 
+            if (anySharedLODs)
+            {
+                if (isSharedLOD.ContainsKey(obj)) continue;
+            }
+
             var so = new SerializedObject(mr);//obj.GetComponent<Renderer>());
             var scaleInLm = so.FindProperty("m_ScaleInLightmap").floatValue;
 #if UNITY_2019_2_OR_NEWER
@@ -3558,6 +3747,16 @@ public class ftBuildGraphics : ScriptableWizard
         return true;
     }
 
+    public static int GetNumVertexSamples(Mesh mesh, int vertexSamplingDensity)
+    {
+        int cnt = 0;
+        for(int s=0; s<mesh.subMeshCount; s++)
+        {
+            cnt += (int)mesh.GetIndexCount(s);
+        }
+        return (cnt/3) * vertexSamplingDensity;
+    }
+
     static void CalculateVertexCountForVertexGroups(ExportSceneData data)
     {
         var objsToWrite = data.objsToWrite;
@@ -3569,7 +3768,16 @@ public class ftBuildGraphics : ScriptableWizard
             var lmgroup = objsToWriteGroup[i];
             if (lmgroup == null || lmgroup.mode != BakeryLightmapGroup.ftLMGroupMode.Vertex) continue;
             var sharedMesh = GetSharedMesh(objsToWrite[i]);
-            lmgroup.totalVertexCount += sharedMesh.vertexCount;
+            int sampleCount = 0;
+            if (lmgroup.vertexSamplingDensity <= 1)
+            {
+                sampleCount = sharedMesh.vertexCount;
+            }
+            else
+            {
+                sampleCount = GetNumVertexSamples(sharedMesh, lmgroup.vertexSamplingDensity);
+            }
+            lmgroup.totalVertexCount += sampleCount;
         }
     }
 
@@ -3796,6 +4004,8 @@ public class ftBuildGraphics : ScriptableWizard
             }
             if (NeedsTangents(lmgroup, tangentSHLights))
             {
+                anyUVTangents = true;
+
                 var tangents = m.tangents;
                 while(objsToWriteVerticesTangentW.Count <= i) objsToWriteVerticesTangentW.Add(null);
                 objsToWriteVerticesTangentW[i] = new Vector4[vertices.Length];
@@ -4042,6 +4252,10 @@ public class ftBuildGraphics : ScriptableWizard
                     if (uvPaddingMax)
                     {
                         shouldModify = oldValue < requiredPaddingClamped;
+                    }
+                    if (uvPaddingPreserveIfExisted)
+                    {
+                        shouldModify = false;
                     }
                     if (oldUnwrapperValue != ftRenderLightmap.unwrapper) shouldModify = true;
                     if (shouldModify)
@@ -4525,11 +4739,21 @@ public class ftBuildGraphics : ScriptableWizard
         return comparisonResult;
     }
 
-    static void ApplyAreaToUVBounds(float area, Vector4 uvbounds, out float width, out float height)
+    static void ApplyAreaToUVBounds(float area, Vector4 uvbounds, bool roundTexels, out float width, out float height)
     {
         if (pstorage.alternativeScaleInLightmap) area *= 2;
         width = height = Mathf.Sqrt(area);
-        if (pstorage.alternativeScaleInLightmap) width = height = Mathf.Max(1.0f, Mathf.Floor(height * 0.5f));
+        if (pstorage.alternativeScaleInLightmap && roundTexels)
+        {
+            if (pstorage.texelRoundingBehaviour == BakeryProjectSettings.Rounding.ToSmaller)
+            {
+                width = height = Mathf.Max(1.0f, Mathf.Floor(height * 0.5f));
+            }
+            else
+            {
+                width = height = Mathf.Max(1.0f, Mathf.Ceil(height * 0.5f));
+            }
+        }
         float uwidth = uvbounds.z - uvbounds.x;
         float uheight = uvbounds.w - uvbounds.y;
         if (uwidth == 0 && uheight == 0)
@@ -4599,7 +4823,7 @@ public class ftBuildGraphics : ScriptableWizard
             else
             {
                 // Automatic: width and height = sqrt(area) transformed by UV AABB aspect ratio
-                ApplyAreaToUVBounds(area, uvbounds, out width, out height);
+                ApplyAreaToUVBounds(area, uvbounds, lmgroup.isImplicit, out width, out height);
 
                 if (pstorage.alternativeScaleInLightmap)
                 {
@@ -5151,7 +5375,7 @@ public class ftBuildGraphics : ScriptableWizard
                 firstAutoAtlasIndex = 0;
             }
 
-            if (lmgroup.isImplicit)
+            if (lmgroup.isImplicit || pstorage.alternativeGroupPacking)
             {
                 float bucketArea = SumObjectsArea(holderObjs, bStart, bEnd, data);
                 lmgroup.resolution = ResolutionFromArea(bucketArea);
@@ -5221,7 +5445,7 @@ public class ftBuildGraphics : ScriptableWizard
 
                 // Automatic: width and height = sqrt(area) transformed by UV AABB aspect ratio
                 float width, height;
-                ApplyAreaToUVBounds(area, uvbounds, out width, out height);
+                ApplyAreaToUVBounds(area, uvbounds, lmgroup.isImplicit, out width, out height);
 
                 if (pstorage.alternativeScaleInLightmap)
                 {
@@ -5641,7 +5865,7 @@ public class ftBuildGraphics : ScriptableWizard
 
                 // Normalize by worldspace area and uv area
                 // Read/write holderObjArea
-                NormalizeHolderArea(lmgroup, holderObjs, data);
+                if (!pstorage.alternativeGroupPacking) NormalizeHolderArea(lmgroup, holderObjs, data);
 
                 // Sort objects by area and scene LOD level
                 // + optionally by scene
@@ -6109,6 +6333,7 @@ public class ftBuildGraphics : ScriptableWizard
         var data = new ExportSceneData(sceneCount);
 
         bool tangentSHLights = CheckForTangentSHLights();
+        anyUVTangents = tangentSHLights;
 
         // Per-LMGroup data
         var lmAlbedoList = new List<IntPtr>(); // list of albedo texture for UV GBuffer rendering
@@ -6121,7 +6346,7 @@ public class ftBuildGraphics : ScriptableWizard
 
         // lod-related
         var lmVOffset = new List<int>();
-        var lmUVArrays = new List<List<float>>();
+        //var lmUVArrays = new List<List<float>>();
         var lmIndexArrays = new List<List<int>>();
         var lmLocalToGlobalIndices = new List<List<int>>();
 
@@ -6839,10 +7064,12 @@ public class ftBuildGraphics : ScriptableWizard
                 {
                     uvgbGlobalFlags = UVGBFLAG_NORMAL | UVGBFLAG_FACENORMAL | UVGBFLAG_ALBEDO | UVGBFLAG_EMISSIVE | UVGBFLAG_POS | _UVGBFLAG_SMOOTHPOS;
                 }
+
 #if USE_TERRAINS
                 if (terrainObjectToActual.Count > 0) uvgbGlobalFlags |= UVGBFLAG_TERRAIN;
 #endif
                 SetUVGBFlags(uvgbGlobalFlags);
+                SetUVGBTangents(anyUVTangents ? 1 : 0);
 
                 for(int i=0; i<groupList.Count; i++)
                 {
@@ -6865,6 +7092,12 @@ public class ftBuildGraphics : ScriptableWizard
                         uvgbflags = UVGBFLAG_NORMAL | UVGBFLAG_FACENORMAL | UVGBFLAG_POS | _UVGBFLAG_SMOOTHPOS | UVGBFLAG_TANGENT;
 
                     if (lmgroup.probes) uvgbflags = UVGBFLAG_RESERVED;
+
+                    if (lmgroup.mode == BakeryLightmapGroup.ftLMGroupMode.Vertex && lmgroup.vertexSamplingDensity > 1)
+                    {
+                        uvgbflags &= ~UVGBFLAG_NORMAL; // we need to ouput normal buffer from Unity
+                        uvgbflags |= _UVGBFLAG_SMOOTHPOS; // set at least one flag to prevent from reverting to global flags
+                    }
 
                     flmuvgb.Write(uvgbflags);
 
@@ -7044,7 +7277,7 @@ public class ftBuildGraphics : ScriptableWizard
                 fmatidh = new BinaryWriter(File.Open(scenePath + "/heightmapid.bin", FileMode.Create));
                 falphaid = new BinaryWriter(File.Open(scenePath + "/alphaid.bin", FileMode.Create));
 
-                fvbfull =     new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbfull.bin", FileMode.Create)) );
+                fvbfull =     new VBFull(anyUVTangents);// new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbfull.bin", FileMode.Create)) );
                 fvbtrace =    new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbtrace.bin", FileMode.Create)) );
                 fvbtraceTex = new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbtraceTex.bin", FileMode.Create)) );
                 fvbtraceUV0 = new BufferedBinaryWriterFloat( new BinaryWriter(File.Open(scenePath + "/vbtraceUV0.bin", FileMode.Create)) );
@@ -7186,13 +7419,14 @@ public class ftBuildGraphics : ScriptableWizard
                             if (tex == null)
                             {
                                 // Create dummy 1px texture
-                                var dummyTex = new Texture2D(1,1);
+                                var dummyTexM = new Texture2D(1,1);
                                 dummyPixelArray[0] = (mat == null || !mat.HasProperty("_Color")) ? Color.white : mat.color;
-                                dummyTex.SetPixels(dummyPixelArray);
-                                dummyTex.Apply();
-                                texWrite = dummyTex;
-                                dummyTexList.Add(dummyTex);
-                                texPtr = dummyTex.GetNativeTexturePtr();
+                                dummyTexM.SetPixels(dummyPixelArray);
+                                dummyTexM.Apply();
+                                texWrite = dummyTexM;
+                                dummyTexList.Add(dummyTexM);
+                                texPtr = dummyTexM.GetNativeTexturePtr();
+                                if (alphaDithering && mat != null) tex = dummyTexM;
                                 if (texPtr == (IntPtr)0)
                                 {
                                     Debug.LogError("Failed to call GetNativeTexturePtr() on newly created texture");
@@ -7253,8 +7487,8 @@ public class ftBuildGraphics : ScriptableWizard
                             {
                                 var matTag = mat.GetTag("RenderType", true);
                                 bool isCutout = matTag == "TransparentCutout";
-                                if (isCutout || matTag == "Transparent" || matTag == "TreeLeaf") {
-
+                                if (isCutout || matTag == "Transparent" || matTag == "TreeLeaf")
+                                {
                                     float alphaRef = 0.5f;
                                     if (mat != null && mat.HasProperty("_Cutoff"))
                                     {
@@ -7268,6 +7502,8 @@ public class ftBuildGraphics : ScriptableWizard
                                     // let constant alpha affect cutout theshold for alphablend materials
                                     alphaRef = 1.0f - (1.0f - alphaRef) * opacity;
                                     if (alphaRef > 1) alphaRef = 1;
+
+                                    if (!isCutout && alphaDithering) alphaRef = -Mathf.Max(opacity, 0.1f/255.0f);
 
                                     // Using alpha texture directly
 
@@ -7485,7 +7721,7 @@ public class ftBuildGraphics : ScriptableWizard
                         var indexCount = exportIB(fib, inds[k], isFlipped, false, 0, null, 0);
 
                         bool submeshCastsShadows = castsShadows;
-                        if (submeshCastsShadows)
+                        if (submeshCastsShadows && !alphaDithering)
                         {
                             var mats = mmr.sharedMaterials;
                             if (mats.Length > k)
@@ -7632,7 +7868,7 @@ public class ftBuildGraphics : ScriptableWizard
                     {
                         tformedTangents = objsToWriteVerticesTangentW[i];
                     }
-                    Vector2[] tformedUV2;
+                    Vector2[] tformedUV2, tformedUV2MeshExport;
                     if (areaLight == null && !vertexBake)
                     {
                         tformedUV2 = holderObj == null ? uv2 : new Vector2[tformedPos.Length];
@@ -7644,21 +7880,32 @@ public class ftBuildGraphics : ScriptableWizard
                                 tformedUV2[t].y = uv2[t].y * rc.height + rc.y;
                             }
                         }
+                        tformedUV2MeshExport = tformedUV2;
                         objsToWriteUVOverride.Add(null);
                     }
                     else if (vertexBake)
                     {
-                        tformedUV2 = GenerateVertexBakeUVs(lmgroup.vertexCounter, tformedPos.Length, lmgroup.totalVertexCount);
-                        lmgroup.vertexCounter += tformedPos.Length;
+                        int numSamples = tformedPos.Length;
+                        if (lmgroup.vertexSamplingDensity > 1)
+                        {
+                            numSamples = GetNumVertexSamples(m, lmgroup.vertexSamplingDensity);
+                            tformedUV2 =            GenerateVertexBakeUVs(lmgroup.vertexCounter, numSamples, lmgroup.totalVertexCount); // for UVGBuffer rendering
+                            tformedUV2MeshExport =  GenerateVertexBakeUVs2(lmgroup.vertexCounter, tformedPos.Length, m, lmgroup.vertexSamplingDensity, lmgroup.totalVertexCount); // for sampling on the mesh
+                        }
+                        else
+                        {
+                            tformedUV2 = tformedUV2MeshExport = GenerateVertexBakeUVs(lmgroup.vertexCounter, numSamples, lmgroup.totalVertexCount);
+                        }
+                        lmgroup.vertexCounter += numSamples;
                         objsToWriteUVOverride.Add(tformedUV2);
                     }
                     else
                     {
-                        tformedUV2 = uv;
+                        tformedUV2 = tformedUV2MeshExport = uv;
                         objsToWriteUVOverride.Add(null);
                     }
 
-                    if (id >= 0)
+                    /*if (id >= 0)
                     {
                         while(lmUVArrays.Count <= id)
                         {
@@ -7670,11 +7917,11 @@ public class ftBuildGraphics : ScriptableWizard
                             lmUVArray.Add(tformedUV2[k].x);
                             lmUVArray.Add(tformedUV2[k].y);
                         }
-                    }
+                    }*/
 
-                    if (objsToWriteHasMetaAlpha[i]) uv = tformedUV2; // objects using Meta Pass alpha use UV2 instead of UV1
+                    if (objsToWriteHasMetaAlpha[i]) uv = tformedUV2MeshExport; // objects using Meta Pass alpha use UV2 instead of UV1
 
-                    exportVBFull(fvbfull, tformedPos, tformedNormals, tformedTangents, uv, tformedUV2);
+                    exportVBFull(fvbfull, tformedPos, tformedNormals, tformedTangents, uv, tformedUV2MeshExport, anyUVTangents);
                         vbTimeWriteFull += GetTime() - time;
                         time = GetTime();
                     //if (castsShadows)
@@ -7682,7 +7929,7 @@ public class ftBuildGraphics : ScriptableWizard
                         exportVBTrace(fvbtrace, m, tformedPos, tformedNormals);
                             vbTimeWriteT += GetTime() - time;
                             time = GetTime();
-                        exportVBTraceTexAttribs(vbtraceTexPosNormalArray, vbtraceTexUVArray, tformedPos, tformedNormals, tformedUV2, id, vertexBake, obj);
+                        exportVBTraceTexAttribs(vbtraceTexPosNormalArray, vbtraceTexUVArray, tformedPos, tformedNormals, tformedUV2MeshExport, id, vertexBake, obj);
                             vbTimeWriteT2 += GetTime() - time;
                             time = GetTime();
                         exportVBTraceUV0(fvbtraceUV0, uv, tformedPos.Length);
@@ -7695,7 +7942,11 @@ public class ftBuildGraphics : ScriptableWizard
 
                     // update storage
                     // also write seamfix.bin
-                    var sceneID = sceneToID[obj.scene];
+                    int sceneID;
+                    if (!sceneToID.TryGetValue(obj.scene, out sceneID))
+                    {
+                        Debug.LogError("Scene " + obj.scene + " is not present in sceneToID (" + obj.name + ")");
+                    }
                     if (obj.name == "__ExportTerrain")
                     {
 #if USE_TERRAINS
@@ -7731,11 +7982,63 @@ public class ftBuildGraphics : ScriptableWizard
                                 storages[sceneID].bakedRenderers.Add(GetValidRenderer(obj));
                                 storages[sceneID].bakedIDs.Add(CorrectLMGroupID(id, lmgroup, groupList));
                                 storages[sceneID].bakedScaleOffset.Add(scaleOffset);
-                                storages[sceneID].bakedVertexOffset.Add(vertexBake ? (lmgroup.vertexCounter - tformedPos.Length) : -1);
+                                int vcount = 0;
+                                if (lmgroup == null || lmgroup.vertexSamplingDensity <= 1)
+                                {
+                                    vcount = tformedPos.Length;
+                                }
+                                else
+                                {
+                                    vcount = GetNumVertexSamples(m, lmgroup.vertexSamplingDensity);
+                                }
+                                storages[sceneID].bakedVertexOffset.Add(vertexBake ? (lmgroup.vertexCounter - vcount) : -1);
                                 storages[sceneID].bakedVertexColorMesh.Add(null);
                             }
                         }
                         objsToWriteScaleOffset.Add(vertexBake ? emptyVec4 : scaleOffset);
+                    }
+                }
+
+                if (anySharedLODs)
+                {
+                    foreach(var pair in isSharedLOD)
+                    {
+                        var obj = pair.Key;
+                        var lod0Renderers = pair.Value;
+
+                        Renderer mostSimilarObj = null;
+                        int highestSimilarity = 0;
+                        var objName = obj.name;
+                        for(int l0=0; l0<lod0Renderers.Length; l0++)
+                        {
+                            int similarity = NameSimilarity(lod0Renderers[l0].name, obj.name);
+                            if (similarity > highestSimilarity)
+                            {
+                                highestSimilarity = similarity;
+                                mostSimilarObj = lod0Renderers[l0];
+                            }
+                        }
+
+                        if (mostSimilarObj == null) continue;
+
+                        var sceneIDLOD0 = sceneToID[mostSimilarObj.gameObject.scene];
+                        var storageLOD0 = storages[sceneIDLOD0];
+                        int mostSimilarIndex = storageLOD0.bakedRenderers.IndexOf(GetValidRenderer(mostSimilarObj.gameObject));
+                        if (mostSimilarIndex < 0) continue;
+
+                        int l = storageLOD0.bakedIDs.Count;
+                        if (l == 0 || l <= mostSimilarIndex) continue;
+
+                        var sceneID = sceneToID[obj.scene];
+                        storages[sceneID].bakedRenderers.Add(GetValidRenderer(obj));
+                        storages[sceneID].bakedIDs.Add(storageLOD0.bakedIDs[mostSimilarIndex]);
+                        storages[sceneID].bakedScaleOffset.Add(storageLOD0.bakedScaleOffset[mostSimilarIndex]);
+                        int l2 = storages[sceneID].bakedVertexColorMesh.Count;
+                        if (l2 > mostSimilarIndex)
+                        {
+                            storages[sceneID].bakedVertexOffset.Add(storageLOD0.bakedVertexOffset[mostSimilarIndex]);
+                            storages[sceneID].bakedVertexColorMesh.Add(storageLOD0.bakedVertexColorMesh[mostSimilarIndex]);
+                        }
                     }
                 }
 
@@ -7868,15 +8171,31 @@ public class ftBuildGraphics : ScriptableWizard
                     atlasTexSize = (int)Mathf.Ceil(atlasTexSize / (float)ftRenderLightmap.tileSize) * ftRenderLightmap.tileSize;
                     res = atlasTexSize;
                 }
+                else
+                {
+                    res = System.Math.Min(res, ftAdditionalConfig.clampLightmapSize);
+                }
 
                 var bakeWithNormalMaps = (groupList[g].renderDirMode == BakeryLightmapGroup.RenderDirMode.BakedNormalMaps) ?
                     true : (ftRenderLightmap.renderDirMode == ftRenderLightmap.RenderDirMode.BakedNormalMaps);
 
                 if (groupList[g].probes) bakeWithNormalMaps = false;
 
+                int vertexBakeSampleBufferSize = 0;
+                int vertexBakeSampleBufferSizeSqrt = 0;
+                if (vertexBake && groupList[g].vertexSamplingDensity > 1)
+                {
+                    bakeWithNormalMaps = true; // we need to ouput normal buffer from Unity; TODO: actually ignore normal maps here
+                    int totalVertexCount = groupList[g].totalVertexCount;
+                    int atlasTexSize = (int)Mathf.Ceil(Mathf.Sqrt((float)totalVertexCount));
+                    atlasTexSize = (int)Mathf.Ceil(atlasTexSize / (float)ftRenderLightmap.tileSize) * ftRenderLightmap.tileSize;
+                    vertexBakeSampleBufferSize = atlasTexSize * atlasTexSize;
+                    vertexBakeSampleBufferSizeSqrt = atlasTexSize;
+                }
+
                 bool hasMetaAlpha = false;
 
-                ftUVGBufferGen.StartUVGBuffer(res, hasEmissive, bakeWithNormalMaps);
+                ftUVGBufferGen.StartUVGBuffer(res, hasEmissive, bakeWithNormalMaps, vertexBakeSampleBufferSize);
                 for(int i=0; i<objsToWrite.Count; i++)
                 {
                     var obj = objsToWrite[i];
@@ -7890,6 +8209,8 @@ public class ftBuildGraphics : ScriptableWizard
                         objsToWriteScaleOffset[i],
                         obj.transform,
                         vertexBake,
+                        lmgroup.vertexSamplingDensity,
+                        objsToWriteVerticesPosW[i],
                         objsToWriteUVOverride[i],
                         bakeWithNormalMaps && !exportTerrainAsHeightmap && obj.name == "__ExportTerrain",
                         objsToWriteHasMetaAlpha[i]);
@@ -7966,11 +8287,16 @@ public class ftBuildGraphics : ScriptableWizard
                 {
                     if (isDX11)
                     {
+                        int cnt = 0;
+                        var _path = scenePath + "/uvnormal_" + groupList[g].name + (ftRenderLightmap.compressedGBuffer ? ".lz4" : ".dds");
+                        if (File.Exists(_path)) File.Delete(_path);
                         SaveGBufferMap(normal.GetNativeTexturePtr(),
-                            scenePath + "/uvnormal_" + groupList[g].name + (ftRenderLightmap.compressedGBuffer ? ".lz4" : ".dds"),
+                            _path,
                             ftRenderLightmap.compressedGBuffer);
                         GL.IssuePluginEvent(5);
                         yield return null;
+                        while(!File.Exists(_path) && cnt < 10) { cnt++; yield return null; }
+                        if (!File.Exists(_path)) DebugLogError("Failed to write UVNormal: "+_path);
                     }
                     else
                     {
@@ -7980,6 +8306,24 @@ public class ftBuildGraphics : ScriptableWizard
                             ftRenderLightmap.compressedGBuffer);
                     }
                     DestroyImmediate(normal);
+                }
+
+                if (vertexBake && groupList[g].vertexSamplingDensity > 1)
+                {
+                    // Output sample position
+                    var pos = ftUVGBufferGen.vertexBakeSamples;
+
+                    var bytes = new byte[128 + pos.Length * 4];
+                    var sizeBytes = BitConverter.GetBytes(vertexBakeSampleBufferSizeSqrt);
+                    System.Buffer.BlockCopy(ftDDS.ddsHeaderFloat4, 0, bytes, 0, 128);
+                    System.Buffer.BlockCopy(sizeBytes, 0, bytes, 12, 4);
+                    System.Buffer.BlockCopy(sizeBytes, 0, bytes, 16, 4);
+                    System.Buffer.BlockCopy(pos, 0, bytes, 128, pos.Length * 4);
+
+                    SaveGBufferMapFromRAM(bytes, bytes.Length,
+                        scenePath + "/uvpos_" + groupList[g].name + (ftRenderLightmap.compressedGBuffer ? ".lz4" : ".dds"),
+                        ftRenderLightmap.compressedGBuffer);
+                    yield return null;
                 }
 
                 if (hasMetaAlpha)
@@ -8105,6 +8449,8 @@ public class ftBuildGraphics : ScriptableWizard
             lmAlphaListRAMHandle = GCHandle.Alloc(lmAlphaListRAMArray, GCHandleType.Pinned);
             SetAlphasFromRAM(lmAlphaListRAM.Count, lmAlphaListRAMHandle.AddrOfPinnedObject(), lmAlphaRefList.ToArray(), lmAlphaChannelList.ToArray(), sceneLodsUsed, flipAlpha);
         }
+
+        ToggleABGDither(alphaDithering ? 1 : 0);
 
         GL.IssuePluginEvent(6); // render alpha buffer
         int uerr = 0;

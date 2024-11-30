@@ -61,6 +61,7 @@ public class PronunciationAssessor : MonoBehaviour
             referenceText = "Test"; // Say "Test" in US english. For testing only.
         }
         Log($"[AssessPronunciation] referenceText: {referenceText}");
+        await Awaitable.BackgroundThreadAsync();
         AssessmentResult result = await AssessWithSpeechRecognition(referenceText);
         if (result != null)
         {
@@ -73,6 +74,7 @@ public class PronunciationAssessor : MonoBehaviour
             //interactionManager.HandleIncorrectPronunciation();  // Call HandleIncorrectPronunciation on failure
         }
         Debug.Log("End of AssessPronunciation");
+        await Awaitable.MainThreadAsync();
         return result;
     }
 

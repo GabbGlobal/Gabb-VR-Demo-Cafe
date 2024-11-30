@@ -49,6 +49,9 @@
         _VolumeMask("Volume Mask", 3D) = "white" {}
         _VolumeMin("Volume min", Vector) = (0,0,0)
         _VolumeInvSize("Volume Inv Size", Vector) = (1000001, 1000001, 1000001)
+        _VolumeNormalOffset("Volume Normal Offset", Range(0.0, 8.0)) = 0
+
+        _SpecOcclusionParams("Reflection occlusion parameters", Vector) = (10, -0.5, 0.8, 0)
 
         [HideInInspector] _BAKERY_2SIDED ("__2s", Float) = 2.0
         [Toggle(BAKERY_2SIDEDON)] _BAKERY_2SIDEDON ("Double-sided", Float) = 0
@@ -65,7 +68,9 @@
         [Toggle(BAKERY_BICUBIC)] _BAKERY_BICUBIC ("Enable Bicubic Filter", Float) = 0
         [Toggle(BAKERY_PROBESHNONLINEAR)] _BAKERY_PROBESHNONLINEAR ("Use non-linear SH for light probes", Float) = 0
         [Toggle(BAKERY_VOLUME)] _BAKERY_VOLUME ("Use volumes", Float) = 0
-        [Toggle(BAKERY_VOLROTATION)] _BAKERY_VOLROTATION ("Support volume rotation", Float) = 0
+        [Toggle(BAKERY_VOLROTATIONY)] _BAKERY_VOLROTATIONY ("Support baked volume rotation", Float) = 0
+        [Toggle(BAKERY_VOLROTATION)] _BAKERY_VOLROTATION ("Support runtime volume rotation", Float) = 0
+        [Toggle(BAKERY_VOLPUSHBYNORMAL)] _BAKERY_VOLPUSHBYNORMAL ("Offset volume by normal", Float) = 0
 	}
 
 	CGINCLUDE
@@ -118,6 +123,8 @@
             #pragma shader_feature BAKERY_PROBESHNONLINEAR
             #pragma shader_feature BAKERY_VOLUME
             #pragma shader_feature BAKERY_VOLROTATION
+            #pragma shader_feature BAKERY_VOLROTATIONY
+            #pragma shader_feature BAKERY_VOLPUSHBYNORMAL
 
 			#pragma multi_compile_fwdbase
 			#pragma multi_compile_fog
@@ -234,6 +241,8 @@
             #pragma shader_feature BAKERY_PROBESHNONLINEAR
             #pragma shader_feature BAKERY_VOLUME
             #pragma shader_feature BAKERY_VOLROTATION
+            #pragma shader_feature BAKERY_VOLROTATIONY
+            #pragma shader_feature BAKERY_VOLPUSHBYNORMAL
 
             #pragma multi_compile_prepassfinal
             #pragma multi_compile_instancing

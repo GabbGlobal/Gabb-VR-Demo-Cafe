@@ -345,7 +345,7 @@ public class ftDirectLightInspector : UnityEditor.Editor
                     ftSceneView.ToggleProjMode();
                     projectionMode = ftSceneView.enabled;
 
-                    UnityEditor.EditorWindow.GetWindow<SceneView>();
+                    var sceneView = UnityEditor.EditorWindow.GetWindow<SceneView>();
                     var lastView = SceneView.lastActiveSceneView;
                     if (lastView == null)
                     {

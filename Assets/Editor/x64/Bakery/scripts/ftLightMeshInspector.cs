@@ -215,6 +215,8 @@ public class ftLightMeshInspector : UnityEditor.Editor
             EditorGUILayout.PropertyField(ftraceLightTexture, new GUIContent("Texture", "Texture"));
             EditorGUILayout.PropertyField(ftraceLightCutoff, new GUIContent("Cutoff", "Lighting distance limit. For maximum physical corectness set to a very high value. Using smaller values is useful for faster render times and to match real-time lights. Bakery uses Skyforge falloff to maintain balance between correct inverse-squared attenuation and practical limits (https://habr.com/company/mailru/blog/248873/)"));
 
+            EditorGUILayout.PropertyField(ftraceLightSelfShadow, new GUIContent("Self shadow", "Determines if light mesh itself casts shadows."));
+
             if (ftraceLightSelfShadow.boolValue)
             {
                 if (ftraceLightSamples2_previous.intValue != ftraceLightSamples2.intValue)
@@ -234,8 +236,6 @@ public class ftLightMeshInspector : UnityEditor.Editor
             int prevVal = ftraceLightBitmask.intValue;
             int newVal = EditorGUILayout.MaskField(new GUIContent("Bitmask", "Lights only affect renderers with overlapping bits"), ftraceLightBitmask.intValue, selStrings);
             if (prevVal != newVal) ftraceLightBitmask.intValue = newVal;
-
-            EditorGUILayout.PropertyField(ftraceLightSelfShadow, new GUIContent("Self shadow", "Determines if light mesh itself casts shadows."));
 
             //EditorGUILayout.PropertyField(ftraceLightBakeToIndirect, new GUIContent("Bake to indirect", "Add direct contribution from this light to indirect-only lightmaps"));
 

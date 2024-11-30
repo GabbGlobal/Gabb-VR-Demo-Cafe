@@ -17,7 +17,7 @@ using UnityEditor.SceneManagement;
 public class BakerySectorInspector : Editor
 {
     BoxBoundsHandle boundsHandle = new BoxBoundsHandle(typeof(BakerySectorInspector).GetHashCode());
-    SerializedProperty ftraceCaptureMode, ftraceCaptureAssetName, ftraceCaptureAsset, ftraceAllowUV, ftraceBakeLightProbes;
+    SerializedProperty ftraceCaptureMode, ftraceCaptureAssetName, ftraceCaptureAsset, ftraceAllowUV, ftraceBakeLightProbes, ftraceCPoints;
     int curSelectedB = -1;
     int curSelectedC = -1;
     Tool lastTool = Tool.None;
@@ -40,6 +40,7 @@ public class BakerySectorInspector : Editor
         ftraceCaptureAsset = serializedObject.FindProperty("captureAsset");
         ftraceAllowUV = serializedObject.FindProperty("allowUVPaddingAdjustment");
         ftraceBakeLightProbes = serializedObject.FindProperty("bakeChildLightProbeGroups");
+        ftraceCPoints = serializedObject.FindProperty("cpoints");
     }
 
     void RemoveWithUndo()
@@ -341,6 +342,24 @@ public class BakerySectorInspector : Editor
         }
 
         EditorGUILayout.EndVertical();
+
+        EditorGUILayout.PropertyField(ftraceCPoints, new GUIContent("Capture points array", ""), true);
+
+#if RENDERBUTTON
+        if (GUILayout.Button("Render", GUILayout.Height(32)))
+        {
+            if (EditorUtility.DisplayDialog("Bakery", "Set this sector as active and render it?", "OK", "Cancel"))
+            {
+                ftLightmapsStorage storage = ftRenderLightmap.FindRenderSettingsStorage();
+                storage.renderSettingsSector = target;
+
+                ftRenderLightmap bakery = ftRenderLightmap.instance != null ? ftRenderLightmap.instance : new ftRenderLightmap();
+                bakery.LoadRenderSettings();
+
+                bakery.RenderButton(true);
+            }
+        }
+#endif
 
         if (previewEnabled) GUI.enabled = true;
 

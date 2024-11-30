@@ -26,6 +26,13 @@ public class BakeryProjectSettings : ScriptableObject
         HDR = 0,
         Asset = 1
     }
+
+    public enum Rounding
+    {
+        ToSmaller = 0,
+        ToLarger = 1
+    }
+
     [SerializeField]
     public FileFormatHDR formatHDR = FileFormatHDR.HDR;
 
@@ -81,6 +88,14 @@ public class BakeryProjectSettings : ScriptableObject
     [SerializeField]
     public bool alternativeScaleInLightmap = false;
 
+    // How texels are rounded
+    [SerializeField]
+    public Rounding texelRoundingBehaviour = Rounding.ToSmaller;
+
+    // Another approach to maintain better texel uniformity, suggested by Jan
+    [SerializeField]
+    public bool alternativeGroupPacking = false;
+
     // Make xatlas align charts to 4x4 block boundaries to make texture compression happy
     [SerializeField]
     public bool alignToTextureBlocksWithXatlas = true;
@@ -98,6 +113,12 @@ public class BakeryProjectSettings : ScriptableObject
 
     [SerializeField]
     public bool removeRinging = false;
+
+    [SerializeField]
+    public bool autoRenderRefProbes = false;
+
+    [SerializeField]
+    public bool legacyFixPos3D = false;
 }
 
 #endif

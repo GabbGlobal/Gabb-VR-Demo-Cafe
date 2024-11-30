@@ -1,5 +1,8 @@
 #if UNITY_EDITOR
 
+// Disable 'unreachable code' because of const branching from ftAdditionalConfig
+#pragma warning disable 0162
+
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEditor;
@@ -83,7 +86,7 @@ public class ftPreview : EditorWindow
 
     static float lastIndirectBoost, lastBackFaceWeight, lastAORadius, lastAOIntensity;
     static int lastBounces;
-    static float exposure = 1.0f;
+    public static float exposure = 1.0f;
     static bool origViewportRefresh;
     static bool exiting = false;
 
@@ -136,8 +139,8 @@ public class ftPreview : EditorWindow
 
     static void OnSceneOpen(Scene scene, OpenSceneMode mode)
     {
+        // TODO: probably remove this after adding OnSceneChanged
         bool previewActive = (pprocess != (System.IntPtr)0 && !ftRenderLightmap.IsProcessFinished(pprocess));
-        Debug.LogWarning(previewActive);
         if (previewActive)
         {
             if (!SendPreviewInput(0,0,0,
@@ -272,7 +275,10 @@ public class ftPreview : EditorWindow
                     Debug.LogError("Light mesh " + obj.name + " must have either a mesh or an area light");
                     continue;
                 }
+                int prevID = obj.lmid;
                 float lightPointSize = ftBuildLights.BuildLight(obj, System.Math.Min(obj.samples, sampleForceLimit), corners, "light" + i + ".bin", l);
+                obj.lmid = prevID;
+
                 if (l != null)
                 {
                     smallAreas.Add(obj);
@@ -586,6 +592,66 @@ public class ftPreview : EditorWindow
         return ftRenderLightmap.IsProcessFinished(proc);
     }
 
+    public void EnablePreview()
+    {
+        ValidateVersion();
+
+        ftRenderLightmap.restoreFromGlobalSector = false;
+        ftRenderLightmap.userCanceled = false;
+
+        ftRenderLightmap bakery = ftRenderLightmap.instance != null ? ftRenderLightmap.instance : new ftRenderLightmap();
+        bakery.LoadRenderSettings();
+
+        if (bakery.TestSystemSpecs())
+        {
+            if (bakery.TestNeedsBenchmark()) return;
+            progressFunc = StartPreviewFunc();
+
+            // Do not use sceneClosing/closed because it's broken before 2020
+            EditorSceneManager.sceneOpening -= OnSceneChanged;
+            EditorSceneManager.sceneOpening += OnSceneChanged;
+
+            EditorApplication.update += StartPreview;
+        }
+    }
+
+    public void DisablePreview()
+    {
+        ValidateVersion();
+
+        ftRenderLightmap.restoreFromGlobalSector = false;
+        ftRenderLightmap.userCanceled = false;
+
+        if (ftAdditionalConfig.terminateImmediately)
+        {
+            if (pprocess == (System.IntPtr)0)
+            {
+                Debug.LogError("No process found");
+            }
+            else
+            {
+                if (ftRenderLightmap.StopFTrace(pprocess) == 0) Debug.LogError("Failed stopping process");
+                pprocess = (System.IntPtr)0;
+            }
+        }
+        exiting = true;
+    }
+
+    public bool IsPreviewActive()
+    {
+        bool previewActive = pprocess != (System.IntPtr)0;
+        return previewActive;
+    }
+
+    void ValidateVersion()
+    {
+        if (ftRenderLightmap.GetRTPreviewCompatibilityVersion() != compatibilityVersion)
+        {
+            EditorUtility.DisplayDialog("Bakery error", "RTPreview and Lightmapper have incompatible versions. Lightmapper: " + ftRenderLightmap.GetRTPreviewCompatibilityVersion() + ", RTPreview: " + compatibilityVersion + ".", "OK");
+            return;
+        }
+    }
+
     void OnGUI()
     {
         int y = 0;
@@ -635,8 +701,9 @@ public class ftPreview : EditorWindow
         if (pheight > 8192) pheight = 8192;
         y += 20;
 
-        if (!previewActive)
+        //if (!previewActive)
         {
+            GUI.enabled = !previewActive;
             exportScene = GUI.Toggle(new Rect(10, y, 200, 20), exportScene, new GUIContent("Export geometry and maps", "Exports geometry, textures and lightmap properties to Bakery format. This is required, but if you already rendered the scene, and if no changes to meshes/maps/lightmap resolution took place, you may disable this checkbox to skip this step."));
             y += 20;
 
@@ -651,33 +718,18 @@ public class ftPreview : EditorWindow
                 isHDR = GUI.Toggle(new Rect(10, y, 200, 20), isHDR, new GUIContent("HDR", "Use HDR image in Scene View to correctly apply post-processing (e.g. tonemapping)."));
                 y += 20;
             }
+            GUI.enabled = true;
         }
 
         if (GUI.Button(new Rect(10, y, 230, 30), previewActive ? "Close Preview" : "Open Preview"))
         {
-            if (ftRenderLightmap.GetRTPreviewCompatibilityVersion() != compatibilityVersion)
-            {
-                EditorUtility.DisplayDialog("Bakery error", "RTPreview and Lightmapper have incompatible versions. Lightmapper: " + ftRenderLightmap.GetRTPreviewCompatibilityVersion() + ", RTPreview: " + compatibilityVersion + ".", "OK");
-                return;
-            }
-
-            ftRenderLightmap.restoreFromGlobalSector = false;
-            ftRenderLightmap.userCanceled = false;
             if (!previewActive)
             {
-                ftRenderLightmap bakery = ftRenderLightmap.instance != null ? ftRenderLightmap.instance : new ftRenderLightmap();
-                bakery.LoadRenderSettings();
-
-                if (bakery.TestSystemSpecs())
-                {
-                    if (bakery.TestNeedsBenchmark()) return;
-                    progressFunc = StartPreviewFunc();
-                    EditorApplication.update += StartPreview;
-                }
+                EnablePreview();
             }
             else
             {
-                exiting = true;
+                DisablePreview();
             }
         }
         y += 30;
@@ -731,7 +783,8 @@ public class ftPreview : EditorWindow
                 renderSettingsStorage.renderSettingsRTPVSceneView != renderInSceneView ||
                 renderSettingsStorage.renderSettingsRTPVHDR != isHDR ||
                 renderSettingsStorage.renderSettingsRTPVWidth != pwidth ||
-                renderSettingsStorage.renderSettingsRTPVHeight != pheight)
+                renderSettingsStorage.renderSettingsRTPVHeight != pheight ||
+                renderSettingsStorage.renderSettingsRTPVExposure != exposure)
             {
                 Undo.RecordObject(renderSettingsStorage, "Change Bakery RTPreview settings");
                 renderSettingsStorage.renderSettingsRTPVExport = exportScene;
@@ -739,6 +792,7 @@ public class ftPreview : EditorWindow
                 renderSettingsStorage.renderSettingsRTPVHDR = isHDR;
                 renderSettingsStorage.renderSettingsRTPVWidth = pwidth;
                 renderSettingsStorage.renderSettingsRTPVHeight = pheight;
+                renderSettingsStorage.renderSettingsRTPVExposure = exposure;
             }
         }
     }
@@ -746,6 +800,16 @@ public class ftPreview : EditorWindow
     void OnEnable()
     {
         LoadRenderSettings();
+    }
+
+    void OnSceneChanged(string path, OpenSceneMode mode)
+    {
+        if (pprocess != (System.IntPtr)0)
+        {
+            Debug.LogWarning("Closing RTPreview due to scene change");
+            exiting = true;
+            UpdateInput();
+        }
     }
 
     public void LoadRenderSettings()
@@ -758,6 +822,7 @@ public class ftPreview : EditorWindow
             isHDR = renderSettingsStorage.renderSettingsRTPVHDR;
             pwidth = renderSettingsStorage.renderSettingsRTPVWidth;
             pheight = renderSettingsStorage.renderSettingsRTPVHeight;
+            exposure = renderSettingsStorage.renderSettingsRTPVExposure;
         }
     }
 
@@ -960,6 +1025,14 @@ public class ftPreview : EditorWindow
 
     static void UpdateInput()
     {
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            if (pprocess != (System.IntPtr)0)
+            {
+                Active.DisablePreview();
+            }
+        }
+
         if (pprocess != (System.IntPtr)0)
         {
             if (!ftRenderLightmap.IsProcessFinished(pprocess))
@@ -1135,9 +1208,22 @@ public class ftPreview : EditorWindow
                 StopPreview();
             }
         }
+
+        if (EditorApplication.isPlayingOrWillChangePlaymode)
+        {
+            if (pprocess != (System.IntPtr)0)
+            {
+                pprocess = (System.IntPtr)0;
+                StopPreview();
+            }
+        }
     }
 
+#if BAKERY_TOOLSMENU
+    [MenuItem ("Tools/Bakery/Preview...", false, 1000)]
+#else
 	[MenuItem ("Bakery/Preview...", false, 1000)]
+#endif
 	public static void Preview ()
     {
         GetWindow(typeof(ftRenderLightmap));

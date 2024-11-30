@@ -22,7 +22,11 @@ public class ftClearMenu : EditorWindow
     public bool clearLightmapFiles = false;
     public bool clearVertexStreams = false;
 
+#if BAKERY_TOOLSMENU
+    [MenuItem("Tools/Bakery/Utilities/Clear baked data", false, 44)]
+#else
     [MenuItem("Bakery/Utilities/Clear baked data", false, 44)]
+#endif
     private static void ClearBakedDataShow()
     {
         var instance = (ftClearMenu)GetWindow(typeof(ftClearMenu));
@@ -169,9 +173,18 @@ public class ftClearMenu : EditorWindow
             {
                 var scene = SceneManager.GetSceneAt(i);
                 if (!scene.isLoaded) continue;
-                var go = ftLightmaps.FindInScene("!ftraceLightmaps", scene);
-                if (go == null) continue;
-                Undo.DestroyObjectImmediate(go);
+                int tries = 0;
+                while(tries < 10)
+                {
+                    var go = ftLightmaps.FindInScene("!ftraceLightmaps", scene);
+                    if (go == null) break;
+                    Undo.DestroyObjectImmediate(go);
+                    tries++;
+                }
+                if (tries == 10)
+                {
+                    Debug.LogError("More than 10 storage objects in one scene? " + scene.name);
+                }
             }
             LightmapSettings.lightmaps = new LightmapData[0];
         }

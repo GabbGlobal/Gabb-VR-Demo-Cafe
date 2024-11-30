@@ -1,4 +1,9 @@
 #define USE_TERRAINS
+//#define BAKERY_STORE_OUTSIDE_OF_SCENE
+
+#if UNITY_EDITOR
+#define VALIDATE_MULTIPLE_STORAGES
+#endif
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +17,12 @@ using UnityEditor;
 
 [ExecuteInEditMode]
 public class ftLightmapsStorage : MonoBehaviour{
+
+#if BAKERY_STORE_OUTSIDE_OF_SCENE
+    public const bool externalStorage = true;
+#else
+    public const bool externalStorage = false;
+#endif
 
 #if UNITY_EDITOR
         [System.Serializable]
@@ -73,12 +84,14 @@ public class ftLightmapsStorage : MonoBehaviour{
         public bool renderSettingsUseScenePath = false;
         public float renderSettingsHackAOIntensity = 0;
         public int renderSettingsHackAOSamples = 16;
+        public bool renderSettingsHackAOSofter = false;
         public float renderSettingsHackAORadius = 1;
         public bool renderSettingsShowAOSettings = false;
         public bool renderSettingsShowTasks = true;
         public bool renderSettingsShowTasks2 = false;
         public bool renderSettingsShowPaths = true;
         public bool renderSettingsShowNet = true;
+        public bool renderSettingsShowSettingsAsset = false;
         public bool renderSettingsOcclusionProbes = false;
         public bool renderSettingsTexelsPerMap = false;
         public float renderSettingsTexelsColor = 1;
@@ -90,11 +103,14 @@ public class ftLightmapsStorage : MonoBehaviour{
         public bool renderSettingsSamplesWarning = true;
         public bool renderSettingsSuppressPopups = false;
         public bool renderSettingsPrefabWarning = true;
+        public bool renderSettingsSectorWarning = false;
         public bool renderSettingsSplitByScene = false;
         public bool renderSettingsSplitByTag = false;
         public bool renderSettingsUVPaddingMax = false;
+        public bool renderSettingsUVPaddingPreserveIfExisted = false;
         public bool renderSettingsPostPacking = true;
         public bool renderSettingsHoleFilling = false;
+        public bool renderSettingsAlphaDithering = false;
         public bool renderSettingsBeepOnFinish = false;
         public bool renderSettingsExportTerrainAsHeightmap = true;
         public bool renderSettingsRTXMode = false;
@@ -111,11 +127,14 @@ public class ftLightmapsStorage : MonoBehaviour{
         public bool renderSettingsCompressVolumes = false;
         public int renderSettingsBatchAreaLightSampleLimit = 0;
         public UnityEngine.Object renderSettingsSector = null;
+        public UnityEngine.Object renderSettingsAsset = null;
         public bool renderSettingsRTPVExport = true;
         public bool renderSettingsRTPVSceneView = false;
         public bool renderSettingsRTPVHDR = false;
         public int renderSettingsRTPVWidth = 640;
         public int renderSettingsRTPVHeight = 360;
+        public float renderSettingsRTPVExposure = 1.0f;
+        public bool renderSettingsRemoveDuplicateLightmaps = false;
         public int lastBakeTime = 0;
 
         public bool enlightenWarningShown = false;
@@ -123,7 +142,6 @@ public class ftLightmapsStorage : MonoBehaviour{
 
         // Light settings from the last bake
         public List<GameObject> uniqueLights = new List<GameObject>();
-        public List<LightData> lights = new List<LightData>();
         public Dictionary<GameObject, LightData> lightsDict;
 
         // List of implicit groups
@@ -131,6 +149,8 @@ public class ftLightmapsStorage : MonoBehaviour{
         public List<Object> implicitGroups = new List<Object>();
         public List<GameObject> implicitGroupedObjects;
 
+#if BAKERY_STORE_OUTSIDE_OF_SCENE
+#else
         //public List<BakeryLightmapGroupPlain> previouslyBakedGroups = new List<BakeryLightmapGroupPlain>();
 
         // List of baked lightmap world-space bounds
@@ -161,9 +181,16 @@ public class ftLightmapsStorage : MonoBehaviour{
         public List<bool> lightmapHasDir = new List<bool>();
         public List<bool> lightmapHasRNM = new List<bool>();
 
+        public List<LightData> lights = new List<LightData>();
+
         // Partial copy of GlobalStorage to recover UV padding if needed
         public List<string> modifiedAssetPathList = new List<string>();
         public List<ftGlobalStorage.AdjustedMesh> modifiedAssets = new List<ftGlobalStorage.AdjustedMesh>();
+#endif
+
+#if VALIDATE_MULTIPLE_STORAGES
+        static Dictionary<Scene, ftLightmapsStorage> sceneToStorage = new Dictionary<Scene, ftLightmapsStorage>();
+#endif
 
         //public Texture2D debugTex;
         //public RenderTexture debugRT;
@@ -246,12 +273,14 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsUseScenePath = src.renderSettingsUseScenePath;
             dest.renderSettingsHackAOIntensity = src.renderSettingsHackAOIntensity;
             dest.renderSettingsHackAOSamples = src.renderSettingsHackAOSamples;
+            dest.renderSettingsHackAOSofter = src.renderSettingsHackAOSofter;
             dest.renderSettingsHackAORadius = src.renderSettingsHackAORadius;
             dest.renderSettingsShowAOSettings = src.renderSettingsShowAOSettings;
             dest.renderSettingsShowTasks = src.renderSettingsShowTasks;
             dest.renderSettingsShowTasks2 = src.renderSettingsShowTasks2;
             dest.renderSettingsShowPaths = src.renderSettingsShowPaths;
             dest.renderSettingsShowNet = src.renderSettingsShowNet;
+            dest.renderSettingsShowSettingsAsset = src.renderSettingsShowSettingsAsset;
             dest.renderSettingsOcclusionProbes = src.renderSettingsOcclusionProbes;
             dest.renderSettingsTexelsPerMap = src.renderSettingsTexelsPerMap;
             dest.renderSettingsTexelsColor = src.renderSettingsTexelsColor;
@@ -263,11 +292,14 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
             dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
             dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
+            dest.renderSettingsSectorWarning = src.renderSettingsSectorWarning;
             dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
             dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
             dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
+            dest.renderSettingsUVPaddingPreserveIfExisted = src.renderSettingsUVPaddingPreserveIfExisted;
             dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
             dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
+            dest.renderSettingsAlphaDithering = src.renderSettingsAlphaDithering;
             dest.renderSettingsBeepOnFinish = src.renderSettingsBeepOnFinish;
             dest.renderSettingsExportTerrainAsHeightmap = src.renderSettingsExportTerrainAsHeightmap;
             dest.renderSettingsRTXMode = src.renderSettingsRTXMode;
@@ -287,7 +319,9 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
             dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
             dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
+            dest.renderSettingsRTPVExposure = src.renderSettingsRTPVExposure;
             dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
+            dest.renderSettingsRemoveDuplicateLightmaps = src.renderSettingsRemoveDuplicateLightmaps;
             dest.renderSettingsShowPerf = src.renderSettingsShowPerf;
         }
 
@@ -329,12 +363,14 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsUseScenePath = src.renderSettingsUseScenePath;
             dest.renderSettingsHackAOIntensity = src.renderSettingsHackAOIntensity;
             dest.renderSettingsHackAOSamples = src.renderSettingsHackAOSamples;
+            dest.renderSettingsHackAOSofter = src.renderSettingsHackAOSofter;
             dest.renderSettingsHackAORadius = src.renderSettingsHackAORadius;
             dest.renderSettingsShowAOSettings = src.renderSettingsShowAOSettings;
             dest.renderSettingsShowTasks = src.renderSettingsShowTasks;
             dest.renderSettingsShowTasks2 = src.renderSettingsShowTasks2;
             dest.renderSettingsShowPaths = src.renderSettingsShowPaths;
             dest.renderSettingsShowNet = src.renderSettingsShowNet;
+            dest.renderSettingsShowSettingsAsset = src.renderSettingsShowSettingsAsset;
             dest.renderSettingsOcclusionProbes = src.renderSettingsOcclusionProbes;
             dest.renderSettingsTexelsPerMap = src.renderSettingsTexelsPerMap;
             dest.renderSettingsTexelsColor = src.renderSettingsTexelsColor;
@@ -346,11 +382,14 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
             dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
             dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
+            dest.renderSettingsSectorWarning = src.renderSettingsSectorWarning;
             dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
             dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
             dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
+            dest.renderSettingsUVPaddingPreserveIfExisted = src.renderSettingsUVPaddingPreserveIfExisted;
             dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
             dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
+            dest.renderSettingsAlphaDithering = src.renderSettingsAlphaDithering;
             dest.renderSettingsBeepOnFinish = src.renderSettingsBeepOnFinish;
             dest.renderSettingsExportTerrainAsHeightmap = src.renderSettingsExportTerrainAsHeightmap;
             dest.renderSettingsRTXMode = src.renderSettingsRTXMode;
@@ -370,8 +409,10 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
             dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
             dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
+            dest.renderSettingsRTPVExposure = src.renderSettingsRTPVExposure;
             dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
             dest.renderSettingsAutoAtlas = src.renderSettingsAutoAtlas;
+            dest.renderSettingsRemoveDuplicateLightmaps = src.renderSettingsRemoveDuplicateLightmaps;
         }
 
         public static void CopySettings(ftGlobalStorage src, ftLightmapsStorage dest)
@@ -412,12 +453,14 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsUseScenePath = src.renderSettingsUseScenePath;
             dest.renderSettingsHackAOIntensity = src.renderSettingsHackAOIntensity;
             dest.renderSettingsHackAOSamples = src.renderSettingsHackAOSamples;
+            dest.renderSettingsHackAOSofter = src.renderSettingsHackAOSofter;
             dest.renderSettingsHackAORadius = src.renderSettingsHackAORadius;
             dest.renderSettingsShowAOSettings = src.renderSettingsShowAOSettings;
             dest.renderSettingsShowTasks = src.renderSettingsShowTasks;
             dest.renderSettingsShowTasks2 = src.renderSettingsShowTasks2;
             dest.renderSettingsShowPaths = src.renderSettingsShowPaths;
             dest.renderSettingsShowNet = src.renderSettingsShowNet;
+            dest.renderSettingsShowSettingsAsset = src.renderSettingsShowSettingsAsset;
             dest.renderSettingsOcclusionProbes = src.renderSettingsOcclusionProbes;
             dest.renderSettingsTexelsPerMap = src.renderSettingsTexelsPerMap;
             dest.renderSettingsTexelsColor = src.renderSettingsTexelsColor;
@@ -429,11 +472,14 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
             dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
             dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
+            dest.renderSettingsSectorWarning = src.renderSettingsSectorWarning;
             dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
             dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
             dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
+            dest.renderSettingsUVPaddingPreserveIfExisted = src.renderSettingsUVPaddingPreserveIfExisted;
             dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
             dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
+            dest.renderSettingsAlphaDithering = src.renderSettingsAlphaDithering;
             dest.renderSettingsBeepOnFinish = src.renderSettingsBeepOnFinish;
             dest.renderSettingsExportTerrainAsHeightmap = src.renderSettingsExportTerrainAsHeightmap;
             dest.renderSettingsRTXMode = src.renderSettingsRTXMode;
@@ -453,11 +499,284 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
             dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
             dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
+            dest.renderSettingsRTPVExposure = src.renderSettingsRTPVExposure;
             dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
             dest.renderSettingsAutoAtlas = src.renderSettingsAutoAtlas;
+            dest.renderSettingsRemoveDuplicateLightmaps = src.renderSettingsRemoveDuplicateLightmaps;
+        }
+
+        public static void CopySettings(ftLightmapsStorage src, ftSettingsAsset dest)
+        {
+            dest.renderSettingsBounces = src.renderSettingsBounces;
+            dest.renderSettingsGISamples = src.renderSettingsGISamples;
+            dest.renderSettingsGIBackFaceWeight = src.renderSettingsGIBackFaceWeight;
+            dest.renderSettingsTileSize = src.renderSettingsTileSize;
+            dest.renderSettingsPriority = src.renderSettingsPriority;
+            dest.renderSettingsTexelsPerUnit = src.renderSettingsTexelsPerUnit;
+            dest.renderSettingsForceRefresh = src.renderSettingsForceRefresh;
+            dest.renderSettingsForceRebuildGeometry = src.renderSettingsForceRebuildGeometry;
+            dest.renderSettingsPerformRendering = src.renderSettingsPerformRendering;
+            dest.renderSettingsUserRenderMode = src.renderSettingsUserRenderMode;
+            dest.renderSettingsDistanceShadowmask = src.renderSettingsDistanceShadowmask;
+            dest.renderSettingsSettingsMode = src.renderSettingsSettingsMode;
+            dest.renderSettingsFixSeams = src.renderSettingsFixSeams;
+            dest.renderSettingsDenoise = src.renderSettingsDenoise;
+            dest.renderSettingsDenoise2x = src.renderSettingsDenoise2x;
+            dest.renderSettingsEncode = src.renderSettingsEncode;
+            dest.renderSettingsEncodeMode = src.renderSettingsEncodeMode;
+            dest.renderSettingsOverwriteWarning = src.renderSettingsOverwriteWarning;
+            dest.renderSettingsAutoAtlas = src.renderSettingsAutoAtlas;
+            dest.renderSettingsUnwrapUVs = src.renderSettingsUnwrapUVs;
+            dest.renderSettingsForceDisableUnwrapUVs = src.renderSettingsForceDisableUnwrapUVs;
+            dest.renderSettingsMaxAutoResolution = src.renderSettingsMaxAutoResolution;
+            dest.renderSettingsMinAutoResolution = src.renderSettingsMinAutoResolution;
+            dest.renderSettingsUnloadScenes = src.renderSettingsUnloadScenes;
+            dest.renderSettingsAdjustSamples = src.renderSettingsAdjustSamples;
+            dest.renderSettingsGILODMode = src.renderSettingsGILODMode;
+            dest.renderSettingsGILODModeEnabled = src.renderSettingsGILODModeEnabled;
+            dest.renderSettingsCheckOverlaps = src.renderSettingsCheckOverlaps;
+            dest.renderSettingsSkipOutOfBoundsUVs = src.renderSettingsSkipOutOfBoundsUVs;
+            dest.renderSettingsHackEmissiveBoost = src.renderSettingsHackEmissiveBoost;
+            dest.renderSettingsHackIndirectBoost = src.renderSettingsHackIndirectBoost;
+            dest.renderSettingsTempPath = src.renderSettingsTempPath;
+            dest.renderSettingsOutPath = src.renderSettingsOutPath;
+            dest.renderSettingsUseScenePath = src.renderSettingsUseScenePath;
+            dest.renderSettingsHackAOIntensity = src.renderSettingsHackAOIntensity;
+            dest.renderSettingsHackAOSamples = src.renderSettingsHackAOSamples;
+            dest.renderSettingsHackAOSofter = src.renderSettingsHackAOSofter;
+            dest.renderSettingsHackAORadius = src.renderSettingsHackAORadius;
+            dest.renderSettingsShowAOSettings = src.renderSettingsShowAOSettings;
+            dest.renderSettingsShowTasks = src.renderSettingsShowTasks;
+            dest.renderSettingsShowTasks2 = src.renderSettingsShowTasks2;
+            dest.renderSettingsShowPaths = src.renderSettingsShowPaths;
+            dest.renderSettingsShowNet = src.renderSettingsShowNet;
+            dest.renderSettingsShowSettingsAsset = src.renderSettingsShowSettingsAsset;
+            dest.renderSettingsOcclusionProbes = src.renderSettingsOcclusionProbes;
+            dest.renderSettingsTexelsPerMap = src.renderSettingsTexelsPerMap;
+            dest.renderSettingsTexelsColor = src.renderSettingsTexelsColor;
+            dest.renderSettingsTexelsMask = src.renderSettingsTexelsMask;
+            dest.renderSettingsTexelsDir = src.renderSettingsTexelsDir;
+            dest.renderSettingsShowDirWarning = src.renderSettingsShowDirWarning;
+            dest.renderSettingsRenderDirMode = src.renderSettingsRenderDirMode;
+            dest.renderSettingsShowCheckerSettings = src.renderSettingsShowCheckerSettings;
+            dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
+            dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
+            dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
+            dest.renderSettingsSectorWarning = src.renderSettingsSectorWarning;
+            dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
+            dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
+            dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
+            dest.renderSettingsUVPaddingPreserveIfExisted = src.renderSettingsUVPaddingPreserveIfExisted;
+            dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
+            dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
+            dest.renderSettingsAlphaDithering = src.renderSettingsAlphaDithering;
+            dest.renderSettingsBeepOnFinish = src.renderSettingsBeepOnFinish;
+            dest.renderSettingsExportTerrainAsHeightmap = src.renderSettingsExportTerrainAsHeightmap;
+            dest.renderSettingsRTXMode = src.renderSettingsRTXMode;
+            dest.renderSettingsLightProbeMode = src.renderSettingsLightProbeMode;
+            dest.renderSettingsClientMode = src.renderSettingsClientMode;
+            dest.renderSettingsServerAddress = src.renderSettingsServerAddress;
+            dest.renderSettingsUnwrapper = src.renderSettingsUnwrapper;
+            dest.renderSettingsDenoiserType = src.renderSettingsDenoiserType;
+            dest.renderSettingsExportTerrainTrees = src.renderSettingsExportTerrainTrees;
+            dest.renderSettingsShowPerf = src.renderSettingsShowPerf;
+            dest.renderSettingsSampleDiv = src.renderSettingsSampleDiv;
+            dest.renderSettingsBatchPoints = src.renderSettingsBatchPoints;
+            dest.renderSettingsCompressVolumes = src.renderSettingsCompressVolumes;
+            dest.renderSettingsBatchAreaLightSampleLimit = src.renderSettingsBatchAreaLightSampleLimit;
+            dest.renderSettingsRTPVExport = src.renderSettingsRTPVExport;
+            dest.renderSettingsRTPVSceneView = src.renderSettingsRTPVSceneView;
+            dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
+            dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
+            dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
+            dest.renderSettingsRTPVExposure = src.renderSettingsRTPVExposure;
+            dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
+            dest.renderSettingsAutoAtlas = src.renderSettingsAutoAtlas;
+            dest.renderSettingsRemoveDuplicateLightmaps = src.renderSettingsRemoveDuplicateLightmaps;
+        }
+
+        public static void CopySettings(ftSettingsAsset src, ftLightmapsStorage dest)
+        {
+            dest.renderSettingsBounces = src.renderSettingsBounces;
+            dest.renderSettingsGISamples = src.renderSettingsGISamples;
+            dest.renderSettingsGIBackFaceWeight = src.renderSettingsGIBackFaceWeight;
+            dest.renderSettingsTileSize = src.renderSettingsTileSize;
+            dest.renderSettingsPriority = src.renderSettingsPriority;
+            dest.renderSettingsTexelsPerUnit = src.renderSettingsTexelsPerUnit;
+            dest.renderSettingsForceRefresh = src.renderSettingsForceRefresh;
+            dest.renderSettingsForceRebuildGeometry = src.renderSettingsForceRebuildGeometry;
+            dest.renderSettingsPerformRendering = src.renderSettingsPerformRendering;
+            dest.renderSettingsUserRenderMode = src.renderSettingsUserRenderMode;
+            dest.renderSettingsDistanceShadowmask = src.renderSettingsDistanceShadowmask;
+            dest.renderSettingsSettingsMode = src.renderSettingsSettingsMode;
+            dest.renderSettingsFixSeams = src.renderSettingsFixSeams;
+            dest.renderSettingsDenoise = src.renderSettingsDenoise;
+            dest.renderSettingsDenoise2x = src.renderSettingsDenoise2x;
+            dest.renderSettingsEncode = src.renderSettingsEncode;
+            dest.renderSettingsEncodeMode = src.renderSettingsEncodeMode;
+            dest.renderSettingsOverwriteWarning = src.renderSettingsOverwriteWarning;
+            dest.renderSettingsAutoAtlas = src.renderSettingsAutoAtlas;
+            dest.renderSettingsUnwrapUVs = src.renderSettingsUnwrapUVs;
+            dest.renderSettingsForceDisableUnwrapUVs = src.renderSettingsForceDisableUnwrapUVs;
+            dest.renderSettingsMaxAutoResolution = src.renderSettingsMaxAutoResolution;
+            dest.renderSettingsMinAutoResolution = src.renderSettingsMinAutoResolution;
+            dest.renderSettingsUnloadScenes = src.renderSettingsUnloadScenes;
+            dest.renderSettingsAdjustSamples = src.renderSettingsAdjustSamples;
+            dest.renderSettingsGILODMode = src.renderSettingsGILODMode;
+            dest.renderSettingsGILODModeEnabled = src.renderSettingsGILODModeEnabled;
+            dest.renderSettingsCheckOverlaps = src.renderSettingsCheckOverlaps;
+            dest.renderSettingsSkipOutOfBoundsUVs = src.renderSettingsSkipOutOfBoundsUVs;
+            dest.renderSettingsHackEmissiveBoost = src.renderSettingsHackEmissiveBoost;
+            dest.renderSettingsHackIndirectBoost = src.renderSettingsHackIndirectBoost;
+            dest.renderSettingsTempPath = src.renderSettingsTempPath;
+            dest.renderSettingsOutPath = src.renderSettingsOutPath;
+            dest.renderSettingsUseScenePath = src.renderSettingsUseScenePath;
+            dest.renderSettingsHackAOIntensity = src.renderSettingsHackAOIntensity;
+            dest.renderSettingsHackAOSamples = src.renderSettingsHackAOSamples;
+            dest.renderSettingsHackAOSofter = src.renderSettingsHackAOSofter;
+            dest.renderSettingsHackAORadius = src.renderSettingsHackAORadius;
+            dest.renderSettingsShowAOSettings = src.renderSettingsShowAOSettings;
+            dest.renderSettingsShowTasks = src.renderSettingsShowTasks;
+            dest.renderSettingsShowTasks2 = src.renderSettingsShowTasks2;
+            dest.renderSettingsShowPaths = src.renderSettingsShowPaths;
+            dest.renderSettingsShowNet = src.renderSettingsShowNet;
+            dest.renderSettingsShowSettingsAsset = src.renderSettingsShowSettingsAsset;
+            dest.renderSettingsOcclusionProbes = src.renderSettingsOcclusionProbes;
+            dest.renderSettingsTexelsPerMap = src.renderSettingsTexelsPerMap;
+            dest.renderSettingsTexelsColor = src.renderSettingsTexelsColor;
+            dest.renderSettingsTexelsMask = src.renderSettingsTexelsMask;
+            dest.renderSettingsTexelsDir = src.renderSettingsTexelsDir;
+            dest.renderSettingsShowDirWarning = src.renderSettingsShowDirWarning;
+            dest.renderSettingsRenderDirMode = src.renderSettingsRenderDirMode;
+            dest.renderSettingsShowCheckerSettings = src.renderSettingsShowCheckerSettings;
+            dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
+            dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
+            dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
+            dest.renderSettingsSectorWarning = src.renderSettingsSectorWarning;
+            dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
+            dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
+            dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
+            dest.renderSettingsUVPaddingPreserveIfExisted = src.renderSettingsUVPaddingPreserveIfExisted;
+            dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
+            dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
+            dest.renderSettingsAlphaDithering = src.renderSettingsAlphaDithering;
+            dest.renderSettingsBeepOnFinish = src.renderSettingsBeepOnFinish;
+            dest.renderSettingsExportTerrainAsHeightmap = src.renderSettingsExportTerrainAsHeightmap;
+            dest.renderSettingsRTXMode = src.renderSettingsRTXMode;
+            dest.renderSettingsLightProbeMode = src.renderSettingsLightProbeMode;
+            dest.renderSettingsClientMode = src.renderSettingsClientMode;
+            dest.renderSettingsServerAddress = src.renderSettingsServerAddress;
+            dest.renderSettingsUnwrapper = src.renderSettingsUnwrapper;
+            dest.renderSettingsDenoiserType = src.renderSettingsDenoiserType;
+            dest.renderSettingsExportTerrainTrees = src.renderSettingsExportTerrainTrees;
+            dest.renderSettingsShowPerf = src.renderSettingsShowPerf;
+            dest.renderSettingsSampleDiv = src.renderSettingsSampleDiv;
+            dest.renderSettingsBatchPoints = src.renderSettingsBatchPoints;
+            dest.renderSettingsCompressVolumes = src.renderSettingsCompressVolumes;
+            dest.renderSettingsBatchAreaLightSampleLimit = src.renderSettingsBatchAreaLightSampleLimit;
+            dest.renderSettingsRTPVExport = src.renderSettingsRTPVExport;
+            dest.renderSettingsRTPVSceneView = src.renderSettingsRTPVSceneView;
+            dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
+            dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
+            dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
+            dest.renderSettingsRTPVExposure = src.renderSettingsRTPVExposure;
+            dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
+            dest.renderSettingsAutoAtlas = src.renderSettingsAutoAtlas;
+            dest.renderSettingsRemoveDuplicateLightmaps = src.renderSettingsRemoveDuplicateLightmaps;
         }
 #endif
 
+    public List<Renderer> bakedRenderers = new List<Renderer>();
+    public List<Renderer> nonBakedRenderers = new List<Renderer>();
+    public List<Light> bakedLights = new List<Light>();
+#if USE_TERRAINS
+    public List<Terrain> bakedRenderersTerrain = new List<Terrain>();
+#endif
+
+#if BAKERY_STORE_OUTSIDE_OF_SCENE
+    
+    public ftStorageAsset _s;
+
+    void _init()
+    {
+        var curScenePath = gameObject.scene.path;
+        if (_s == null)
+        {
+            var s = ScriptableObject.CreateInstance<ftStorageAsset>();
+            s.path = curScenePath;
+            AssetDatabase.CreateAsset(s, System.IO.Path.ChangeExtension(curScenePath, null) + "_lightmapStorage.asset");
+            AssetDatabase.SaveAssets();
+            _s = s;
+        }
+        else
+        {
+            if (_s.path != curScenePath)
+            {
+                var s = ScriptableObject.CreateInstance<ftStorageAsset>();
+                s.path = curScenePath;
+                EditorUtility.CopySerialized(_s, s);
+                AssetDatabase.CreateAsset(s, System.IO.Path.ChangeExtension(curScenePath, null) + "_lightmapStorage.asset");
+                AssetDatabase.SaveAssets();
+                _s = s;
+            }
+        }
+        EditorUtility.SetDirty(_s);
+    }
+
+    public int[] idremap{get{_init();return _s.idremap;} set{_init();_s.idremap=value;}}
+
+    public List<Texture2D> maps{get{_init();return _s.maps;} set{_init();_s.maps=value;}}
+    public List<Texture2D> masks{get{_init();return _s.masks;} set{_init();_s.masks=value;}}
+    public List<Texture2D> dirMaps{get{_init();return _s.dirMaps;} set{_init();_s.dirMaps=value;}}
+    public List<Texture2D> rnmMaps0{get{_init();return _s.rnmMaps0;} set{_init();_s.rnmMaps0=value;}}
+    public List<Texture2D> rnmMaps1{get{_init();return _s.rnmMaps1;} set{_init();_s.rnmMaps1=value;}}
+    public List<Texture2D> rnmMaps2{get{_init();return _s.rnmMaps2;} set{_init();_s.rnmMaps2=value;}}
+    public List<int> mapsMode{get{_init();return _s.mapsMode;} set{_init();_s.mapsMode=value;}}
+
+    public List<int> bakedIDs{get{_init();return _s.bakedIDs;} set{_init();_s.bakedIDs=value;}}
+    public List<Vector4> bakedScaleOffset{get{_init();return _s.bakedScaleOffset;} set{_init();_s.bakedScaleOffset=value;}}
+    public List<Mesh> bakedVertexColorMesh{get{_init();return _s.bakedVertexColorMesh;} set{_init();_s.bakedVertexColorMesh=value;}}
+    public List<int> bakedLightChannels{get{_init();return _s.bakedLightChannels;} set{_init();_s.bakedLightChannels=value;}}
+
+#if USE_TERRAINS
+    public List<int> bakedIDsTerrain{get{_init();return _s.bakedIDsTerrain;} set{_init();_s.bakedIDsTerrain=value;}}
+    public List<Vector4> bakedScaleOffsetTerrain{get{_init();return _s.bakedScaleOffsetTerrain;} set{_init();_s.bakedScaleOffsetTerrain=value;}}
+#endif
+
+#if UNITY_EDITOR
+    public List<LightData> lights{get{_init();return _s.lights;} set{_init();_s.lights=value;}}
+    public List<int> bakedVertexOffset{get{_init();return _s.bakedVertexOffset;} set{_init();_s.bakedVertexOffset=value;}}
+
+    public int[] uvBuffOffsets{get{_init();return _s.uvBuffOffsets;} set{_init();_s.uvBuffOffsets=value;}}
+    public int[] uvBuffLengths{get{_init();return _s.uvBuffLengths;} set{_init();_s.uvBuffLengths=value;}}
+    public float[] uvSrcBuff{get{_init();return _s.uvSrcBuff;} set{_init();_s.uvSrcBuff=value;}}
+    public float[] uvDestBuff{get{_init();return _s.uvDestBuff;} set{_init();_s.uvDestBuff=value;}}
+    public int[] lmrIndicesOffsets{get{_init();return _s.lmrIndicesOffsets;} set{_init();_s.lmrIndicesOffsets=value;}}
+    public int[] lmrIndicesLengths{get{_init();return _s.lmrIndicesLengths;} set{_init();_s.lmrIndicesLengths=value;}}
+    public int[] lmrIndicesBuff{get{_init();return _s.lmrIndicesBuff;} set{_init();_s.lmrIndicesBuff=value;}}
+
+    public int[] lmGroupLODResFlags{get{_init();return _s.lmGroupLODResFlags;} set{_init();_s.lmGroupLODResFlags=value;}}
+    public int[] lmGroupMinLOD{get{_init();return _s.lmGroupMinLOD;} set{_init();_s.lmGroupMinLOD=value;}}
+    public int[] lmGroupLODMatrix{get{_init();return _s.lmGroupLODMatrix;} set{_init();_s.lmGroupLODMatrix=value;}}
+
+    public List<bool> hasEmissive{get{_init();return _s.hasEmissive;} set{_init();_s.hasEmissive=value;}}
+
+    public List<Bounds> bounds{get{_init();return _s.bounds;} set{_init();_s.bounds=value;}}
+
+    public List<string> modifiedAssetPathList{get{_init();return _s.modifiedAssetPathList;} set{_init();_s.modifiedAssetPathList=value;}}
+    public List<ftGlobalStorage.AdjustedMesh> modifiedAssets{get{_init();return _s.modifiedAssets;} set{_init();_s.modifiedAssets=value;}}
+
+    public List<string> serverGetFileList{get{_init();return _s.serverGetFileList;} set{_init();_s.serverGetFileList=value;}}
+    public List<bool> lightmapHasColor{get{_init();return _s.lightmapHasColor;} set{_init();_s.lightmapHasColor=value;}}
+    public List<int> lightmapHasMask{get{_init();return _s.lightmapHasMask;} set{_init();_s.lightmapHasMask=value;}}
+    public List<bool> lightmapHasDir{get{_init();return _s.lightmapHasDir;} set{_init();_s.lightmapHasDir=value;}}
+    public List<bool> lightmapHasRNM{get{_init();return _s.lightmapHasRNM;} set{_init();_s.lightmapHasRNM=value;}}
+    
+    public L2[] prevBakedProbes{get{_init();return _s.prevBakedProbes;} set{_init();_s.prevBakedProbes=value;}}
+    public Vector3[] prevBakedProbePos{get{_init();return _s.prevBakedProbePos;} set{_init();_s.prevBakedProbePos=value;}}
+#endif
+
+#else
     // List of baked lightmaps
     public List<Texture2D> maps = new List<Texture2D>();
     public List<Texture2D> masks = new List<Texture2D>();
@@ -468,7 +787,6 @@ public class ftLightmapsStorage : MonoBehaviour{
     public List<int> mapsMode = new List<int>();
 
     // new props
-    public List<Renderer> bakedRenderers = new List<Renderer>();
     public List<int> bakedIDs = new List<int>();
     public List<Vector4> bakedScaleOffset = new List<Vector4>();
 #if UNITY_EDITOR
@@ -476,13 +794,9 @@ public class ftLightmapsStorage : MonoBehaviour{
 #endif
     public List<Mesh> bakedVertexColorMesh = new List<Mesh>();
 
-    public List<Renderer> nonBakedRenderers = new List<Renderer>();
-
-    public List<Light> bakedLights = new List<Light>();
     public List<int> bakedLightChannels = new List<int>();
 
 #if USE_TERRAINS
-    public List<Terrain> bakedRenderersTerrain = new List<Terrain>();
     public List<int> bakedIDsTerrain = new List<int>();
     public List<Vector4> bakedScaleOffsetTerrain = new List<Vector4>();
 #endif
@@ -491,6 +805,7 @@ public class ftLightmapsStorage : MonoBehaviour{
     public List<int> uvOverlapAssetList = new List<int>(); // -1 = no UV1, 0 = no overlap, 1 = overlap
 
     public int[] idremap;
+#endif
 
     public bool usesRealtimeGI;
 
@@ -652,8 +967,12 @@ public class ftLightmapsStorage : MonoBehaviour{
         }
     };
 
+#if BAKERY_STORE_OUTSIDE_OF_SCENE
+#else
     public L2[] prevBakedProbes;
     public Vector3[] prevBakedProbePos;
+#endif
+
 #endif
 
     void Awake()
@@ -664,10 +983,24 @@ public class ftLightmapsStorage : MonoBehaviour{
     void Start()
     {
         // Unity can for some reason alter lightmapIndex after the scene is loaded in a multi-scene setup, so fix that
-//#if UNITY_2021_1_OR_NEWER
-//         ftLightmaps.RefreshScene(gameObject.scene, this); // new Unity can destroy lightmaps after Awake if the lighting data asset is set
-//#endif
+#if UNITY_2021_1_OR_NEWER
+         ftLightmaps.RefreshScene(gameObject.scene, this); // new Unity can destroy lightmaps after Awake if the lighting data asset is set
+#endif
         ftLightmaps.RefreshScene2(gameObject.scene, this);//, appendOffset);
+
+#if VALIDATE_MULTIPLE_STORAGES
+        if (sceneToStorage == null) sceneToStorage = new Dictionary<Scene, ftLightmapsStorage>();
+        if (gameObject.name == "!ftraceLightmaps")
+        {
+            ftLightmapsStorage existing;
+            sceneToStorage.TryGetValue(gameObject.scene, out existing);
+            if (existing != null && existing != this)
+            {
+                Debug.LogError("Multiple lightmap storages detected. Try Bakery->Utilities->Clear baked data (Data and Settings) and rebaking. If you remember a specific sequence of actions leading to this error, please report to https://github.com/guycalledfrank/bakery-issues/issues");
+            }
+            sceneToStorage[gameObject.scene] = this;
+        }
+#endif
     }
 
     void OnDestroy()

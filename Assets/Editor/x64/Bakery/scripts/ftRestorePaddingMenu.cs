@@ -4,7 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class ftRestorePaddingMenu
 {
+#if BAKERY_TOOLSMENU
+    [MenuItem("Tools/Bakery/Utilities/Re-adjust UV padding", false, 43)]
+#else
     [MenuItem("Bakery/Utilities/Re-adjust UV padding", false, 43)]
+#endif
     private static void RestorePadding()
     {
         var bakeryRuntimePath = ftLightmaps.GetRuntimePath();

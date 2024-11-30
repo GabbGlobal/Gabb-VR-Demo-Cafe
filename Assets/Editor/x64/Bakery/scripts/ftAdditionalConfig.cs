@@ -40,6 +40,12 @@ public class ftAdditionalConfig
 
     public const int volumeSceneLODLevel = -1;
 
+    public const int clampLightmapSize = 32000;
+
+    // Terminate lightmapping jobs immediately, without waiting for them to finish a tile.
+    // Originally during development it was noted that abpruptly terminating it could randomly cause a driver crash, thus it waits for the kernel to finish and quits "gracefully".
+    public const bool terminateImmediately = false;
+
 /*
     Following settings are moved to Project Settings
     (on >= 2018.3; you can also edit BakeryProjectSettings.asset directly)

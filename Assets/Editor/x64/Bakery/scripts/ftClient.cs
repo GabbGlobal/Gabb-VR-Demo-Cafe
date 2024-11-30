@@ -57,7 +57,7 @@ public class ftClient
     public const byte SERVERERROR_STATUSLIMIT = 18;
 
     public static string serverAddress = "127.0.0.1";
-    const int serverPort = 27777;
+    public static int serverPort = 27777;
     public static bool connectedToServer = false;
     public static string lastServerMsg = "Server: no data";
     public static string lastServerScene = ""; // last baked scene

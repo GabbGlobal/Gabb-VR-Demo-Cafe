@@ -77,10 +77,16 @@ namespace UnityEditor
             public static GUIContent shnLabel = new GUIContent("Non-linear SH", "This option can enhance contrast (closer to ground truth), but it makes the shader a bit slower.");
             public static GUIContent specLabel = new GUIContent("Enable Lightmap Specular", "Enables baked specular for all directional modes.");
             public static GUIContent specOcclusionLabel = new GUIContent("Use Lightmap Specular as Reflection Occlusion", "Uses baked specular as a mask for reflection probes.");
+            public static GUIContent specOcclusionMulLabel = new GUIContent("Reflection occlusion multiplier");
+            public static GUIContent specOcclusionAddLabel = new GUIContent("Reflection occlusion offset");
+            public static GUIContent specOcclusionRghLabel = new GUIContent("Reflection occlusion reference roughness");
             public static GUIContent bicubicLabel = new GUIContent("Force Bicubic Filter", "Enables bicubic filtering for all lightmaps (color/shadowmask/direction/etc) used in the material.");
             public static GUIContent pshnLabel = new GUIContent("Non-linear Light Probe SH", "Prevents negative values in light probes. This is recommended when baking probes in L1 mode. Can slow down the shader a bit.");
             public static GUIContent volLabel = new GUIContent("Enable Volumes", "Enable usages of BakeryVolumes");
-            public static GUIContent volLabelRot = new GUIContent("Support Volume Rotation", "Normally volumes can only be repositioned or rescaled at runtime. With this checkbox volume's rotation matrix will also be used. Volumes must have a similar checkbox enabled.");
+            public static GUIContent volLabelRot = new GUIContent("Support Runtime Volume Rotation", "Normally volumes can only be repositioned or rescaled at runtime. With this checkbox volume's rotation matrix will also be used. Volumes must have a similar checkbox enabled.");
+            public static GUIContent volLabelRotY = new GUIContent("Support Baked Volume Rotation", "Allows rotating volumes around the Y axis before baking. Volumes must have a similar checkbox enabled.");
+            public static GUIContent volLabelOffset = new GUIContent("Volume normal offset", "Can be used to sample volumes on static geometry that is baked into it. Keep to 0 for other objects.");
+            public static GUIContent volLabelOffsetEnable = new GUIContent("Enable volume normal offset", "Can be used to sample volumes on static geometry that is baked into it. Keep to 0 for other objects.");
             public static GUIContent volLabel0 = new GUIContent("Volume 0");
             public static GUIContent volLabel1 = new GUIContent("Volume 1");
             public static GUIContent volLabel2 = new GUIContent("Volume 2");
@@ -125,16 +131,20 @@ namespace UnityEditor
         MaterialProperty enableRNM = null;
         MaterialProperty enableSpec = null;
         MaterialProperty enableSpecOcclusion = null;
+        MaterialProperty specOcclusionParams = null;
         MaterialProperty enableBicubic = null;
         MaterialProperty enablePSHN = null;
         MaterialProperty enableVolumes = null;
         MaterialProperty enableVolumeRot = null;
+        MaterialProperty enableVolumeRotY = null;
         MaterialProperty volume0 = null;
         MaterialProperty volume1 = null;
         MaterialProperty volume2 = null;
         MaterialProperty volumeMask = null;
         MaterialProperty volumeMin = null;
         MaterialProperty volumeInvSize = null;
+        MaterialProperty volumeOffset = null;
+        MaterialProperty enableVolumeOffset = null;
 
         BakeryVolume assignedVolume = null;
 
@@ -190,18 +200,22 @@ namespace UnityEditor
             enableRNM = FindProperty("_BAKERY_RNM", props);
             enableSpec = FindProperty("_BAKERY_LMSPEC", props);
             enableSpecOcclusion = FindProperty("_BAKERY_LMSPECOCCLUSION", props);
+            specOcclusionParams = FindProperty("_SpecOcclusionParams", props);
             enableBicubic = FindProperty("_BAKERY_BICUBIC", props);
             enablePSHN = FindProperty("_BAKERY_PROBESHNONLINEAR", props);
             try
             {
                 enableVolumes = FindProperty("_BAKERY_VOLUME", props);
                 enableVolumeRot = FindProperty("_BAKERY_VOLROTATION", props);
+                enableVolumeRotY = FindProperty("_BAKERY_VOLROTATIONY", props);
                 volume0 = FindProperty("_Volume0", props);
                 volume1 = FindProperty("_Volume1", props);
                 volume2 = FindProperty("_Volume2", props);
                 volumeMask = FindProperty("_VolumeMask", props);
                 volumeMin = FindProperty("_VolumeMin", props);
                 volumeInvSize = FindProperty("_VolumeInvSize", props);
+                volumeOffset = FindProperty("_VolumeNormalOffset", props);
+                enableVolumeOffset = FindProperty("_BAKERY_VOLPUSHBYNORMAL", props);
             }
             catch
             {
@@ -297,6 +311,18 @@ namespace UnityEditor
                 if (enableSpec.floatValue > 0)
                 {
                     m_MaterialEditor.ShaderProperty(enableSpecOcclusion, Styles.specOcclusionLabel);
+                    if (enableSpecOcclusion.floatValue > 0)
+                    {
+                        //m_MaterialEditor.ShaderProperty(specOcclusionParams, Styles.Styles.specOcclusionMulLabel);
+                        var vec = specOcclusionParams.vectorValue;
+                        float mul = EditorGUILayout.FloatField(Styles.specOcclusionMulLabel, vec.x);
+                        float add = EditorGUILayout.FloatField(Styles.specOcclusionAddLabel, vec.y);
+                        float rgh = EditorGUILayout.Slider(Styles.specOcclusionRghLabel, vec.z, 0.0f, 1.0f);
+                        if (vec.x != mul || vec.y != add || vec.z != rgh)
+                        {
+                            specOcclusionParams.vectorValue = new Vector4(mul, add, rgh, 0);
+                        }
+                    }
                 }
                 m_MaterialEditor.ShaderProperty(enableBicubic, Styles.bicubicLabel);
                 m_MaterialEditor.ShaderProperty(enablePSHN, Styles.pshnLabel);
@@ -344,7 +370,13 @@ namespace UnityEditor
                         EditorGUILayout.LabelField("Min: " + bmin);
                         EditorGUILayout.LabelField("Max: " + bmax);
                         EditorGUI.EndDisabledGroup();
+                        m_MaterialEditor.ShaderProperty(enableVolumeRotY, Styles.volLabelRotY);
                         m_MaterialEditor.ShaderProperty(enableVolumeRot, Styles.volLabelRot);
+                        m_MaterialEditor.ShaderProperty(enableVolumeOffset, Styles.volLabelOffsetEnable);
+                        if (enableVolumeOffset.floatValue > 0)
+                        {
+                            m_MaterialEditor.ShaderProperty(volumeOffset, Styles.volLabelOffset);
+                        }
                     }
                 }
                 catch
@@ -359,6 +391,8 @@ namespace UnityEditor
                 foreach (var obj in blendMode.targets)
                     MaterialChanged((Material)obj, m_WorkflowMode);
             }
+
+            m_MaterialEditor.EnableInstancingField();
         }
 
         internal void DetermineWorkflow(MaterialProperty[] props)

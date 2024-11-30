@@ -476,6 +476,7 @@ MonoBehaviour:
   advisorFailMessages:
   - That wasn't quite right. Let's see what went wrong.
   - Let's try that again.
+  - All right, let's start from the beginning
   videoSurface: {fileID: 184978564}
   videoPlayer: {fileID: 1570127591990127607}
   hintButton: {fileID: 1570127592299641039}
@@ -504,7 +505,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 226fa15daf95d3841a92f5cc2f547ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointAtWords: {fileID: 0}
   popupPrefab: {fileID: 3061650488792274220, guid: 433d8621a398d2e468d67bbcc8b04b71, type: 3}
 --- !u!1 &1570127590855901120
 GameObject:

@@ -81,6 +81,7 @@ public class ftAtlasPreview : EditorWindow
             if (curAtlas < firstID) curAtlas = firstID;
 
             grp = null;
+            var selection = Selection.objects;
             for(int i=0; i<objs.Count; i++)
             {
                 if (ids[i] != curAtlas) continue;
@@ -96,7 +97,7 @@ public class ftAtlasPreview : EditorWindow
                 {
                     Graphics.DrawMeshNow(mesh, worldMatrix, s);
                 }
-                if (System.Array.IndexOf(Selection.objects, objs[i].gameObject) >= 0)
+                if (System.Array.IndexOf(selection, objs[i].gameObject) >= 0)
                 {
                     GL.wireframe = true;
                     Shader.SetGlobalFloat("isSelected", 1.0f);
@@ -107,6 +108,37 @@ public class ftAtlasPreview : EditorWindow
                     }
                     GL.wireframe = false;
                     Shader.SetGlobalFloat("isSelected", 0.0f);
+                }
+                else
+                {
+                    bool selectedParent = false;
+                    var tform = objs[i].transform;
+                    var prt = tform.parent;
+                    while(prt != null)
+                    {
+                        tform = prt;
+                        if (System.Array.IndexOf(selection, tform.gameObject) >= 0)
+                        {
+                            selectedParent = true;
+                            break;
+                        }
+                        else
+                        {
+                            prt = tform.parent;
+                        }
+                    }
+                    if (selectedParent)
+                    {
+                        GL.wireframe = true;
+                        Shader.SetGlobalFloat("isSelected", 2.0f);
+                        mat.SetPass(0);
+                        for(int s=0; s<numSubs; s++)
+                        {
+                            Graphics.DrawMeshNow(mesh, worldMatrix, s);
+                        }
+                        GL.wireframe = false;
+                        Shader.SetGlobalFloat("isSelected", 0.0f);
+                    }
                 }
                 grp = groups[i];
             }
@@ -143,10 +175,10 @@ public class ftAtlasPreview : EditorWindow
             y = -10;
         #endif
 
-        GUI.Label(new Rect(64, y, 320, 32), "Showing atlas "+((curAtlas-firstID)+1)+" of "+numAtlases);
+        GUI.Label(new Rect(64, y, 512, 32), "Showing atlas "+((curAtlas-firstID)+1)+" of "+numAtlases);
         if (grp != null)
         {
-            GUI.Label(new Rect(64, y+15, 320, 32), grp.name + " (" + grp.resolution + "x" + grp.resolution + ")");
+            GUI.Label(new Rect(64, y+15, 512, 32), grp.name + " (" + grp.resolution + "x" + grp.resolution + ")");
         }
         else
         {

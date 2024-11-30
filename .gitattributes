@@ -1,5 +1,4 @@
 ## Unity ##
-
 *.cs diff=csharp text
 *.cginc text
 *.shader text
@@ -52,4 +51,6 @@
 *.rns filter=lfs diff=lfs merge=lfs -text
 *.reason filter=lfs diff=lfs merge=lfs -text
 *.lxo filter=lfs diff=lfs merge=lfs -text
-
+*.hdr filter=lfs diff=lfs merge=lfs -text
+# Bakery
+Assets/BakeryLightmaps/** filter=lfs diff=lfs merge=lfs -text
