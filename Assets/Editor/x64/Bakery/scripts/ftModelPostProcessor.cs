@@ -26,6 +26,7 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
     static ftGlobalStorage storage;
     UnwrapParam uparams;
     const int res = 1024;
+    static Shader shdr;
     static Material mat;
     public static RenderTexture rt;
     public static Texture2D tex;
@@ -156,7 +157,7 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
     {
         rt = new RenderTexture(res, res, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.Linear);
         tex = new Texture2D(res, res, TextureFormat.ARGB32, false, true);
-        var shdr = Shader.Find("Hidden/ftOverlapTest");
+        if (shdr == null) shdr = Shader.Find("Hidden/ftOverlapTest");
         if (shdr == null)
         {
             var bakeryRuntimePath = ftLightmaps.GetRuntimePath();
@@ -167,7 +168,7 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
                 return false;
             }
         }
-        mat = new Material(shdr);
+        if (mat == null) mat = new Material(shdr);
         return true;
     }
 
@@ -224,10 +225,10 @@ public partial class ftModelPostProcessor : ftModelPostProcessorInternal
         int overlap = DoOverlapCheck(g, true);
         EndOverlapCheck();
 
-        if (overlap != 1 && overlap > 0)
-        {
-            Debug.LogWarning("[Bakery warning] " + overlap + " pixels overlap: " + assetPath);
-        }
+        //if (overlap != 1 && overlap > 0)
+        //{
+            //Debug.LogWarning("[Bakery warning] " + overlap + " pixels overlap: " + assetPath);
+        //}
 
         //var index = storage.assetList.IndexOf(assetPath);
         var index = storage.assetList.IndexOf(assetPath);

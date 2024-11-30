@@ -768,7 +768,11 @@ public class ftShaderTweaks : ScriptableWizard
         GUI.EndGroup();
     }
 
+#if BAKERY_TOOLSMENU
+    [MenuItem ("Tools/Bakery/Global shader tweaks", false, 60)]
+#else
     [MenuItem ("Bakery/Global shader tweaks", false, 60)]
+#endif
     public static void RenderLightmap () {
         ScriptableWizard.DisplayWizard("Bakery - shader tweaks", typeof(ftShaderTweaks), "RenderLightmap");
     }

@@ -8,6 +8,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+[HelpURL("https://geom.io/bakery/wiki/index.php?title=Manual#Bakery_Light_Mesh")]
 [ExecuteInEditMode]
 [DisallowMultipleComponent]
 public class BakeryLightMesh : MonoBehaviour
@@ -17,6 +18,8 @@ public class BakeryLightMesh : MonoBehaviour
     public Color color = Color.white;
     public float intensity = 1.0f;
     public Texture2D texture = null;
+    //public Vector2 texScale = new Vector2(1,1);
+    //public Vector2 texOffset = new Vector2(0,0);
     public float cutoff = 100;
     public int samples = 256;
     public int samples2 = 16;
@@ -43,6 +46,8 @@ public class BakeryLightMesh : MonoBehaviour
 
     public void Start()
     {
+        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
+        
         if (gameObject.GetComponent<BakeryDirectLight>() != null ||
             gameObject.GetComponent<BakeryPointLight>() != null ||
             gameObject.GetComponent<BakerySkyLight>() != null)
@@ -59,8 +64,6 @@ public class BakeryLightMesh : MonoBehaviour
             DestroyImmediate(this);
             return;
         }
-
-        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
 
         if (UID == 0) UID = Guid.NewGuid().GetHashCode(); // legacy
     }

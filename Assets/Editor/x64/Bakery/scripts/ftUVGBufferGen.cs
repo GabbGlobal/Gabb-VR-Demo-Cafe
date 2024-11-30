@@ -1,8 +1,11 @@
 #if UNITY_EDITOR
 
+//#define SUPPORT_MBLOCKS
+
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using System.Reflection;
 
 public class ftUVGBufferGen
 {
@@ -22,11 +25,20 @@ public class ftUVGBufferGen
     static int fallbackMatMetaPass;
     static BakeryProjectSettings pstorage;
 
+    public static float[] vertexBakeSamples;
+    static int vertexBakeSampleCounter;
+
     const int PASS_ALBEDO = 0;
     const int PASS_EMISSIVE = 1;
     const int PASS_NORMAL = 2;
     const int PASS_ALPHA = 3;
     const int PASS_COUNT = 4; // just a marker
+
+
+    static Material activeMaterial;
+    static int activeMaterialPass;
+    static MaterialPropertyBlock mb = new MaterialPropertyBlock();
+    static Material tmpMaterial;
 
     public static float[] uvOffset =
     {
@@ -100,11 +112,119 @@ public class ftUVGBufferGen
         GL.LoadProjectionMatrix(proj);
     }
 
-    static public void StartUVGBuffer(int size, bool hasEmissive, bool hasNormal)
+    static Mesh GenerateVertexBakeSamples(Mesh mesh, int vertexSamplingDensity, Vector3[] wpos)
+    {
+        int vertexCount = mesh.vertexCount;
+        var verts = wpos;//mesh.vertices;
+        var normals = mesh.normals;
+        var uv = mesh.uv;
+        bool hasUV = uv != null && uv.Length > 0;
+        Vector2 tA = Vector2.zero;
+        Vector2 tB = Vector2.zero;
+        Vector2 tC = Vector2.zero;
+        int newVertexCount = ftBuildGraphics.GetNumVertexSamples(mesh, vertexSamplingDensity);
+        var newMesh = new Mesh();
+        if (newVertexCount > 65000)
+        {
+#if UNITY_2017_3_OR_NEWER
+            newMesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+#else
+            ftBuildGraphics.DebugLogError("Using this vertexSamplingDensity value (" + vertexSamplingDensity + ") on this mesh (" + mesh.name + ") results in more than 65000 new vertices. Please lower the value, split the mesh, or use Unity >= 2017.3. Alternatively, annoy me via email, so I fix it.");
+            return null;
+#endif
+        }
+        var newVerts = new Vector3[newVertexCount];
+        var newNormals = new Vector3[newVertexCount];
+        var newUV = new Vector2[newVertexCount];
+        int subMeshCount = mesh.subMeshCount;
+        int sampleCount = 0;
+        UnityEngine.Random.InitState(vertexCount); // instead of storing barycentrics we will regenerate them
+        for(int subMesh=0; subMesh<subMeshCount; subMesh++)
+        {
+            var inds = mesh.GetIndices(subMesh);
+            int tris = inds.Length / 3;
+            for(int tri=0; tri<tris; tri++)
+            {
+                var A = verts[inds[tri*3]];
+                var B = verts[inds[tri*3+1]];
+                var C = verts[inds[tri*3+2]];
+                
+                var nA = normals[inds[tri*3]];
+                var nB = normals[inds[tri*3+1]];
+                var nC = normals[inds[tri*3+2]];
+
+                if (hasUV)
+                {
+                    tA = uv[inds[tri*3]];
+                    tB = uv[inds[tri*3+1]];
+                    tC = uv[inds[tri*3+2]];
+                }
+
+                for(int i=0; i<vertexSamplingDensity; i++)
+                {
+                    float rndA = UnityEngine.Random.value;
+                    float rndB = UnityEngine.Random.value;
+                    float rndC = UnityEngine.Random.value;
+
+                    float baryA = 1.0f - Mathf.Sqrt(rndA);
+                    float baryB = Mathf.Sqrt(rndA) * (1.0f - rndB);
+                    float baryC = Mathf.Sqrt(rndA) * rndB;
+            
+                    //var testPos = new Vector3[3];
+                    //testPos[0] = A;
+                    //testPos[1] = B;
+                    //testPos[2] = C;
+                    //var testNormal = new Vector3[3];
+                    //testNormal[0] = nA;
+                    //testNormal[1] = nB;
+                    //testNormal[2] = nC;
+
+                    newVerts[sampleCount]   = baryA * A + baryB * B + baryC * C;
+                    newNormals[sampleCount] = baryA * nA + baryB * nB + baryC * nC;
+                    newUV[sampleCount] = baryA * tA + baryB * tB + baryC * tC;
+
+                    vertexBakeSamples[vertexBakeSampleCounter*4] = newVerts[sampleCount].x;
+                    vertexBakeSamples[vertexBakeSampleCounter*4+1] = newVerts[sampleCount].y;
+                    vertexBakeSamples[vertexBakeSampleCounter*4+2] = newVerts[sampleCount].z;
+
+                    sampleCount++;
+                    vertexBakeSampleCounter++;
+                }
+                
+            }
+        }
+        newMesh.vertices = newVerts;
+        newMesh.normals = newNormals;
+        newMesh.uv = newUV;
+        newMesh.subMeshCount = subMeshCount;
+        int offset = 0;
+        for(int subMesh=0; subMesh<subMeshCount; subMesh++)
+        {
+            int tris = (int)mesh.GetIndexCount(subMesh)/3;
+            int samples = tris * vertexSamplingDensity;
+            var newIndices = new int[samples];
+            for(int i=0; i<samples; i++)
+            {
+                newIndices[i] = offset + i;
+            }
+            offset += samples;
+            newMesh.SetIndices(newIndices, MeshTopology.Points, subMesh, false);
+        }
+
+        return newMesh;
+    }
+
+    static public void StartUVGBuffer(int size, bool hasEmissive, bool hasNormal, int vertexBakeSampleBufferSize = 0)
     {
         emissiveEnabled = hasEmissive;
         normalEnabled = hasNormal;
         alphaEnabled = false;
+
+        vertexBakeSampleCounter = 0;
+        if (vertexBakeSampleBufferSize > 0)
+        {
+            vertexBakeSamples = new float[vertexBakeSampleBufferSize * 4];
+        }
 
         rtAlbedo = new RenderTexture(size, size, 0, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
         texAlbedo = new Texture2D(size, size, TextureFormat.RGBA32, false, false);
@@ -164,7 +284,115 @@ public class ftUVGBufferGen
         GL.Clear(true, true, new Color(0,0,0,0));
     }
 
-    static public void RenderUVGBuffer(Mesh mesh, Renderer renderer, Vector4 scaleOffset, Transform worldTransform, bool vertexBake,
+#if SUPPORT_MBLOCKS
+        static void OverrideColor(MaterialPropertyBlock mb, string pname)
+        {
+    #if UNITY_2021_1_OR_NEWER
+            if (!mb.HasColor(pname)) return;
+            tmpMaterial.SetColor(pname, mb.GetColor(pname));
+    #else
+    
+        #if UNITY_2017_3_OR_NEWER
+                var v = mb.GetColor(pname);
+                if (v.r == 0 && v.g == 0 && v.b == 0 && v.a == 0) return; // not the best workaround - can't override with 0 on < 2021.1
+                tmpMaterial.SetColor(pname, v);
+        #else
+            var v = mb.GetVector(pname);
+            if (v.x == 0 && v.y == 0 && v.z == 0 && v.w == 0) return; // not the best workaround - can't override with 0 on < 2021.1
+            tmpMaterial.SetVector(pname, v);
+        #endif
+
+    #endif
+        }
+
+        static void OverrideVector(MaterialPropertyBlock mb, string pname)
+        {
+    #if UNITY_2021_1_OR_NEWER
+            if (!mb.HasVector(pname)) return;
+            tmpMaterial.SetVector(pname, mb.GetVector(pname));
+    #else
+            var v = mb.GetVector(pname);
+            if (v.x == 0 && v.y == 0 && v.z == 0 && v.w == 0) return; // not the best workaround - can't override with 0 on < 2021.1
+            tmpMaterial.SetVector(pname, v);
+    #endif
+        }
+
+        static void OverrideFloat(MaterialPropertyBlock mb, string pname)
+        {
+    #if UNITY_2021_1_OR_NEWER
+            if (!mb.HasFloat(pname)) return;
+            tmpMaterial.SetFloat(pname, mb.GetFloat(pname));
+    #else
+            var v = mb.GetFloat(pname);
+            if (v == 0) return; // not the best workaround - can't override with 0 on < 2021.1
+            tmpMaterial.SetFloat(pname, v);
+    #endif
+        }
+
+        static void OverrideTexture(MaterialPropertyBlock mb, string pname)
+        {
+    #if UNITY_2021_1_OR_NEWER
+            if (!mb.HasTexture(pname)) return;
+            tmpMaterial.SetTexture(pname, mb.GetTexture(pname));
+    #else
+            var v = mb.GetTexture(pname);
+            if (v == null) return;
+            tmpMaterial.SetTexture(pname, v);
+    #endif
+        }
+#endif
+
+    static void DrawWithOverrides(Renderer renderer, Mesh m, ref Matrix4x4 worldMatrix, int i)
+    {
+#if SUPPORT_MBLOCKS
+
+    #if UNITY_2018_1_OR_NEWER
+            if (renderer.HasPropertyBlock())
+    #endif
+            {
+
+            //#if UNITY_2018_1_OR_NEWER
+              //  renderer.GetPropertyBlock(mb, i);
+            //#else
+                renderer.GetPropertyBlock(mb);
+            //#endif
+
+                var shader = activeMaterial.shader;
+                if ((!mb.isEmpty) && activeMaterial != null && shader != null)
+                {
+                    tmpMaterial = new Material(activeMaterial);
+
+                    int numPropsInShader = ShaderUtil.GetPropertyCount(shader);
+                    for(int j=0; j<numPropsInShader; j++)
+                    {
+                        var pname = ShaderUtil.GetPropertyName(shader, j);
+                        int ptype = (int)ShaderUtil.GetPropertyType(shader, j);
+                        if (ptype == 0) // color
+                        {
+                            OverrideColor(mb, pname);
+                        }
+                        else if (ptype == 1) // vector
+                        {
+                            OverrideVector(mb, pname);
+                        }
+                        else if (ptype == 2) // float
+                        {
+                            OverrideFloat(mb, pname);
+                        }
+                        else if (ptype == 4) // TexEnv
+                        {
+                            OverrideTexture(mb, pname);
+                        }
+                    }
+
+                    tmpMaterial.SetPass(activeMaterialPass);
+                }
+            }
+#endif
+        Graphics.DrawMeshNow(m, worldMatrix, i);
+    }
+
+    static public void RenderUVGBuffer(Mesh mesh, Renderer renderer, Vector4 scaleOffset, Transform worldTransform, bool vertexBake, int vertexSamplingDensity, Vector3[] tformedPos,
         Vector2[] uvOverride, bool terrainNormals = false, bool metaAlpha = false)
     {
         var worldMatrix = worldTransform.localToWorldMatrix;
@@ -179,33 +407,27 @@ public class ftUVGBufferGen
         }
 
         Material[] materials = renderer.sharedMaterials;
-#if SUPPORT_MBLOCKS
-        var mb = new MaterialPropertyBlock();
-#endif
 
         var m = mesh;
         if (uvOverride != null)
         {
-            m = Mesh.Instantiate(mesh);
-            //var uvs = m.uv2;
-            //if (uvs.Length == 0) uvs = m.uv;
-            //var pos = new Vector3[uvs.Length];
-            /*for(int i=0; i<uvs.Length; i++)
+            if (vertexBake && vertexSamplingDensity > 1)
             {
-                pos[i] = new Vector3(uvs[i].x * scaleOffset.x + scaleOffset.z, uvs[i].y * scaleOffset.y + scaleOffset.w, 0.0f);
+                m = GenerateVertexBakeSamples(mesh, vertexSamplingDensity, tformedPos);
             }
-            m.vertices = pos;*/
-
-            m.uv2 = uvOverride;
-
-            if (vertexBake)
+            else
             {
-                for(int i=0; i<mesh.subMeshCount; i++)
+                m = Mesh.Instantiate(mesh);
+                if (vertexBake)
                 {
-                    var indices = m.GetIndices(i);
-                    m.SetIndices(indices, MeshTopology.Points, i, false);
+                    for(int i=0; i<mesh.subMeshCount; i++)
+                    {
+                        var indices = m.GetIndices(i);
+                        m.SetIndices(indices, MeshTopology.Points, i, false);
+                    }
                 }
             }
+            m.uv2 = uvOverride;
         }
 
         //var scaleOffsetFlipped = new Vector4(scaleOffset.x, -scaleOffset.y, scaleOffset.z, 1.0f - scaleOffset.w);
@@ -278,6 +500,8 @@ public class ftUVGBufferGen
                     if (metaPass >= 0)
                     {
                         materials[i].SetPass(metaPass);
+                        activeMaterial = materials[i];
+                        activeMaterialPass = metaPass;
                     }
                     else
                     {
@@ -289,6 +513,8 @@ public class ftUVGBufferGen
                             }
                             Shader.SetGlobalVector("unity_LightmapST", scaleOffset);
                             blackMat.SetPass(0);
+                            activeMaterial = blackMat;
+                            activeMaterialPass = 0;
                         }
                         else
                         {
@@ -344,6 +570,8 @@ public class ftUVGBufferGen
                                 fallbackMat.SetVector("_EmissionColor", Color.black);
                             }
                             fallbackMat.SetPass(fallbackMatMetaPass);
+                            activeMaterial = fallbackMat;
+                            activeMaterialPass = fallbackMatMetaPass;
                         }
                     }
                 }
@@ -398,12 +626,16 @@ public class ftUVGBufferGen
                         normalMat.SetTexture("bestFitNormalMap", texBestFit);
                         normalMat.SetFloat("_IsPerPixel", (isURP||isHDRP) ? 1.0f : 0.0f);
                         normalMat.SetPass(0);
+                        activeMaterial = normalMat;
+                        activeMaterialPass = 0;
                     }
                     else
                     {
                         materials[i].SetTexture("bestFitNormalMap", texBestFit);
                         materials[i].SetFloat("_IsPerPixel", (isURP||isHDRP) ? 1.0f : 0.0f);
                         materials[i].SetPass(metaPass);
+                        activeMaterial = materials[i];
+                        activeMaterialPass = metaPass;
                     }
                     Shader.SetGlobalVector("unity_MetaFragmentControl", metaControlNormal);
                 }
@@ -418,6 +650,8 @@ public class ftUVGBufferGen
                     }
                     bakeryPass = metaPass;
                     materials[i].SetPass(metaPass);
+                    activeMaterial = materials[i];
+                    activeMaterialPass = metaPass;
                     Shader.SetGlobalVector("unity_MetaFragmentControl", metaControlAlpha);
                 }
 
@@ -440,6 +674,8 @@ public class ftUVGBufferGen
                             if (bakeryPass >= 0)
                             {
                                 materials[i].SetPass(bakeryPass);
+                                activeMaterial = materials[i];
+                                activeMaterialPass = bakeryPass;
                             }
                             else
                             {
@@ -447,24 +683,18 @@ public class ftUVGBufferGen
                                 bool isFlipped = Mathf.Sign(s.x*s.y*s.z) < 0;
                                 normalMat.SetFloat("_IsFlipped", isFlipped ? -1.0f : 1.0f);
                                 normalMat.SetPass(0);
+                                activeMaterial = normalMat;
+                                activeMaterialPass = 0;
                             }
                         }
-                        Graphics.DrawMeshNow(m, worldMatrix, i);
+                        DrawWithOverrides(renderer, m, ref worldMatrix, i);
                     }
                 }
                 else
                 {
                     UpdateMatrix(worldMatrix, 0, 0);
-#if SUPPORT_MBLOCKS
-    #if UNITY_2018_1_OR_NEWER
-                    renderer.GetPropertyBlock(mb, i);
-    #else
-                    renderer.GetPropertyBlock(mb);
-    #endif
-                    Graphics.DrawMesh(m, worldMatrix, materials[i], 0, null, i, mb, false, false, false);
-#else
-                    Graphics.DrawMeshNow(m, worldMatrix, i);
-#endif
+
+                    DrawWithOverrides(renderer, m, ref worldMatrix, i);
                 }
             }
         }

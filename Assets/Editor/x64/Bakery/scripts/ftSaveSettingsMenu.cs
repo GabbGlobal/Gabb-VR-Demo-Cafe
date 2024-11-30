@@ -4,7 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class ftSaveSettingsMenu
 {
+#if BAKERY_TOOLSMENU
+    [MenuItem("Tools/Bakery/Utilities/Save settings as default", false, 41)]
+#else
     [MenuItem("Bakery/Utilities/Save settings as default", false, 41)]
+#endif
     private static void SaveSettings()
     {
         var bakeryRuntimePath = ftLightmaps.GetRuntimePath();
@@ -27,7 +31,11 @@ public class ftSaveSettingsMenu
         }
     }
 
+#if BAKERY_TOOLSMENU
+    [MenuItem("Tools/Bakery/Utilities/Load default settings", false, 42)]
+#else
     [MenuItem("Bakery/Utilities/Load default settings", false, 42)]
+#endif
     private static void LoadSettings()
     {
         var bakeryRuntimePath = ftLightmaps.GetRuntimePath();

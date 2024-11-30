@@ -57,6 +57,7 @@ public class ftLMGroupSelectorInspector : UnityEditor.Editor
 
             EditorGUI.BeginChangeCheck();
 
+            EditorGUI.showMixedValue = ftraceAsset.hasMultipleDifferentValues;
             var selectedLMGroup = EditorGUILayout.ObjectField(new GUIContent("Lightmap group", "Select ftrace lightmap group asset"),
                     ftraceAsset.objectReferenceValue, typeof(BakeryLightmapGroup), false);
             var changed = EditorGUI.EndChangeCheck();
@@ -129,8 +130,15 @@ public class ftLMGroupSelectorInspector : UnityEditor.Editor
                     EditorGUILayout.PropertyField(ftraceOverride, new GUIContent("Override resolution", "Manually set the resolution of this object in the atlas"));
                     if (ftraceOverride.boolValue)
                     {
-                        ftraceResolution.intValue = EditorGUILayout.IntSlider("Resolution", ftraceResolution.intValue, 1, 8192);
-                        ForceSavePrefabOverride(targets);
+                        EditorGUI.BeginChangeCheck();
+                        EditorGUI.showMixedValue = ftraceResolution.hasMultipleDifferentValues;
+                        int res2 = EditorGUILayout.IntSlider("Resolution", ftraceResolution.intValue, 1, 8192);
+                        var changedRes = EditorGUI.EndChangeCheck();
+                        if (changedRes)
+                        {
+                            ftraceResolution.intValue = res2;
+                            ForceSavePrefabOverride(targets);
+                        }
                     }
                 }
             }

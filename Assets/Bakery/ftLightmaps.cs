@@ -30,7 +30,7 @@ public class ftLightmaps {
 
     static List<int> lightmapRefCount;
     static List<LightmapAdditionalData> globalMapsAdditional;
-    static int directionalMode; // -1 undefined, 0 off, 1 on
+    static int directionalMode = -1; // -1 undefined, 0 off, 1 on
     //static List<ftLightmapsStorage> loadedStorages;
 
 #if UNITY_EDITOR
@@ -380,7 +380,8 @@ public class ftLightmaps {
     }
 #endif
 
-    public static void RefreshFull() {
+    public static void RefreshFull()
+    {
         var activeScene = SceneManager.GetActiveScene();
         var sceneCount = SceneManager.sceneCount;
 
@@ -829,8 +830,8 @@ public class ftLightmaps {
             else
             {
                 output.lightmapBakeType = LightmapBakeType.Mixed;
-                output.mixedLightingMode = channel > 100 ? MixedLightingMode.Subtractive : MixedLightingMode.Shadowmask;
-                output.occlusionMaskChannel = channel > 100 ? -1 : channel;
+                output.mixedLightingMode = channel >= 100 ? MixedLightingMode.Subtractive : MixedLightingMode.Shadowmask;
+                output.occlusionMaskChannel = channel >= 100 ? (channel-100) : channel;
                 output.probeOcclusionLightIndex  = storage.bakedLights[i].bakingOutput.probeOcclusionLightIndex;
             }
             storage.bakedLights[i].bakingOutput = output;

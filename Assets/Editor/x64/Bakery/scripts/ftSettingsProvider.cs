@@ -5,6 +5,8 @@ public class ftSettingsProvider
 {
     static BakeryProjectSettings pstorage;
 
+    static int toolsMenuSet = -1;
+
     static void GUIHandler(string searchContext)
     {
         if (pstorage == null) pstorage = ftLightmaps.GetProjectSettings();
@@ -39,6 +41,11 @@ public class ftSettingsProvider
         EditorGUILayout.PropertyField(so.FindProperty("deletePreviousLightmapsBeforeBake"), new GUIContent("Delete previous lightmaps before bake", "Should previously rendered Bakery lightmaps be deleted before the new bake?"));
         EditorGUILayout.PropertyField(so.FindProperty("logLevel"), new GUIContent("Log level", "Print information about the bake process to console? 0 = don't. 1 = info only; 2 = warnings only; 3 = everything."));
         EditorGUILayout.PropertyField(so.FindProperty("alternativeScaleInLightmap"), new GUIContent("Alternative Scale in Lightmap", "Make 'Scale in Lightmap' renderer property act more similar to built-in Unity behaviour."));
+        if (so.FindProperty("alternativeScaleInLightmap").boolValue)
+        {
+            EditorGUILayout.PropertyField(so.FindProperty("texelRoundingBehaviour"), new GUIContent("Texel rounding", "How texels are rounded during atlas packing."));
+            EditorGUILayout.PropertyField(so.FindProperty("alternativeGroupPacking"), new GUIContent("Alternative LMGroup packing"));
+        }
         EditorGUILayout.PropertyField(so.FindProperty("alignToTextureBlocksWithXatlas"), new GUIContent("Align to texture compression blocks with xatlas", "Make xatlas align charts to 4x4 block boundaries to make texture compression happy."));
         EditorGUILayout.PropertyField(so.FindProperty("generateSmoothPos"), new GUIContent("Generate smooth positions", "Should we adjust sample positions to prevent incorrect shadowing on very low-poly meshes with smooth normals?"));
         bool smoothPos = so.FindProperty("generateSmoothPos").boolValue;
@@ -47,6 +54,34 @@ public class ftSettingsProvider
         if (!smoothPos) GUI.enabled = true;
         EditorGUILayout.PropertyField(so.FindProperty("takeReceiveGIIntoAccount"), new GUIContent("Use 'Receive GI' values", "Take 'Receive Global Illumination' values into account on renderers. Originally Bakery ignored it."));
         EditorGUILayout.PropertyField(so.FindProperty("removeRinging"), new GUIContent("Remove ringing in Legacy light probes", "Use softer light probe convolution in Legacy mode to prevent artifacts in high-contrast areas."));
+        EditorGUILayout.PropertyField(so.FindProperty("autoRenderRefProbes"), new GUIContent("Always render reflection probes", "Automatically render reflection probes after every Render/Render Light Probes."));
+        EditorGUILayout.PropertyField(so.FindProperty("legacyFixPos3D"), new GUIContent("Legacy volume leak fixing", "Use pre-1.97 sample adjustment algorithm for 3D texture volumes."));
+
+        if (toolsMenuSet < 0)
+        {
+            var platform = EditorUserBuildSettings.selectedBuildTargetGroup;
+            var defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(platform);
+            toolsMenuSet = defines.Contains("BAKERY_TOOLSMENU") ? 1 : 0;
+        }
+
+        bool toolsMenuSet1 = toolsMenuSet == 1;
+        bool toolsMenuSet2 = EditorGUILayout.Toggle("Put menu under Tools", toolsMenuSet1);
+        if (toolsMenuSet1 != toolsMenuSet2)
+        {
+            var platform = EditorUserBuildSettings.selectedBuildTargetGroup;
+            var defines = PlayerSettings.GetScriptingDefineSymbolsForGroup(platform);
+            if (toolsMenuSet2)
+            {
+                if (defines.Length > 0) defines += ";";
+                defines += "BAKERY_TOOLSMENU";
+            }
+            else
+            {
+                defines = defines.Replace("BAKERY_TOOLSMENU;", "").Replace("BAKERY_TOOLSMENU", "");
+            }
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(platform, defines);
+            toolsMenuSet = -1;
+        }
 
         EditorGUIUtility.labelWidth = prev;
 
@@ -67,10 +102,14 @@ public class ftSettingsProvider
                 so.FindProperty("logLevel").intValue = 3;
                 so.FindProperty("alternativeScaleInLightmap").boolValue = false;
                 so.FindProperty("alignToTextureBlocksWithXatlas").boolValue = true;
+                so.FindProperty("texelRoundingBehaviour").intValue = 0;
+                so.FindProperty("alternativeGroupPacking").boolValue = false;
                 so.FindProperty("generateSmoothPos").boolValue = true;
                 so.FindProperty("perTriangleSmoothPos").boolValue = true;
                 so.FindProperty("takeReceiveGIIntoAccount").boolValue = true;
                 so.FindProperty("removeRinging").boolValue = false;
+                so.FindProperty("autoRenderRefProbes").boolValue = false;
+                so.FindProperty("legacyFixPos3D").boolValue = false;
             }
         }
 

@@ -6,6 +6,7 @@ using UnityEngine;
 // Disable 'obsolete' warnings
 #pragma warning disable 0618
 
+[HelpURL("https://geom.io/bakery/wiki/index.php?title=Manual#Bakery_Lightmapped_Prefab")]
 [DisallowMultipleComponent]
 public class BakeryLightmappedPrefab : MonoBehaviour
 {

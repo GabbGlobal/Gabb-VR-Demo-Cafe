@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[HelpURL("https://geom.io/bakery/wiki/index.php?title=Partial_scene_baking")]
 public class BakerySector : MonoBehaviour
 {
     public enum CaptureMode

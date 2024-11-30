@@ -23,6 +23,7 @@ public struct BakeryLightmapGroupPlain
     public int sceneLodLevel;
     public bool autoResolution;
     public int holeFilling;
+    public int vertexSamplingDensity;
 };
 
 [CreateAssetMenu(menuName = "Bakery lightmap group")]
@@ -127,6 +128,9 @@ public class BakeryLightmapGroup : ScriptableObject
     [SerializeField]
     public HoleFilling holeFilling = HoleFilling.Auto;
 
+    [SerializeField]
+    public int vertexSamplingDensity = 0;
+
     //[SerializeField]
     //public bool aoIsThickness = false;
 
@@ -180,6 +184,7 @@ public class BakeryLightmapGroup : ScriptableObject
         str.renderDirMode = (int)renderDirMode;
         str.atlasPacker = (int)atlasPacker;
         str.holeFilling = (int)holeFilling;
+        str.vertexSamplingDensity = vertexSamplingDensity;
         str.computeSSS = computeSSS;
         str.sssSamples = sssSamples;
         str.sssDensity = sssDensity;
