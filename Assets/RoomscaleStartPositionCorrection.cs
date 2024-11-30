@@ -1,8 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-// Adjust position to compensate for roomscale position
-// Ensures that the player always starts where the player object was placed.
+// Adjust position to compensate for the player starting away from their roomscale center
+// Ensures player always starts where its prefab was placed
 public class RoomscaleStartPositionCorrection : MonoBehaviour
 {
     Vector3 startPosition;
@@ -19,6 +19,8 @@ public class RoomscaleStartPositionCorrection : MonoBehaviour
     }
 
     void CorrectPosition() {
-        transform.position += startPosition - camTransform.position;
+        Vector3 offset = startPosition - camTransform.position;
+        offset.y = 0;
+        transform.position += offset;
     }
 }
