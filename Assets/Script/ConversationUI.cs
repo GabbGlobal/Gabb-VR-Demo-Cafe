@@ -147,10 +147,10 @@ public class ConversationUI : MonoBehaviour
         audioSource.PlayOneShot(successSound);
     }
 
-    public void ShowFail()
+    public void ShowFail(int failedAttempts)
     {
         playerDialogueText.color = failColor;
-        advisorText.text = advisorFailMessages[Random.Range(0, advisorFailMessages.Count)]; // random advisor message
+        advisorText.text = advisorFailMessages[failedAttempts - 1]; // show advisor message by failed attempt #
         audioSource.PlayOneShot(failSound);
     }
 
