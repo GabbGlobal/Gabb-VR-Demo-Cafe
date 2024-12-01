@@ -1,24 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Autohand;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
 public class PointAtWords : MonoBehaviour
 {
-    private UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor rayInteractor;
+    private Autohand.HandCanvasPointer handCanvasPointer;
     public Vector3? pointerWorldPositionOnUI;
+    private AutoInputModule autoInputModule;
     // Start is called before the first frame update
     void Start()
     {
-        rayInteractor = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactors.XRRayInteractor>();
+        autoInputModule = FindAnyObjectByType<AutoInputModule>();
+        handCanvasPointer = GetComponent<Autohand.HandCanvasPointer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rayInteractor.TryGetCurrentUIRaycastResult(out RaycastResult result)) {
-            pointerWorldPositionOnUI = result.worldPosition;
+        // get pointer position on canvas in worldspace if any
+        var target = handCanvasPointer.currTarget;
+        if (target != null) {
+            var pointerData = autoInputModule.GetData(handCanvasPointer.pointerIndex);
+            pointerWorldPositionOnUI = pointerData.pointerCurrentRaycast.worldPosition;
         } else {
             pointerWorldPositionOnUI = null;
         }
