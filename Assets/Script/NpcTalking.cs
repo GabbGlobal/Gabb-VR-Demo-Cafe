@@ -142,6 +142,7 @@ public class NpcTalking : MonoBehaviour
                             speechAudioSource.PlayOneShot(line.audioClip);
                             // wait for the NPC to finish speaking
                             await Awaitable.WaitForSecondsAsync(line.audioClip.length, cancellationToken);
+                            await Awaitable.WaitForSecondsAsync(1f, cancellationToken); // 1 second buffer
                         }
                     }
                     MoveToNextLineOfDialogue();
@@ -168,6 +169,7 @@ public class NpcTalking : MonoBehaviour
                             StopConvo(); // to many failed attempts, stop the convo. it should then automatically restart.
                         } else {
                             Log($"{failedAttempts} failed attempts, trying again.");
+                            //await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
                             // we'll try this line again
                         }
                     }
