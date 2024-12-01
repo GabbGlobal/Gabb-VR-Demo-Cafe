@@ -6,6 +6,7 @@ using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.CognitiveServices.Speech.PronunciationAssessment;
 using System.Threading.Tasks;
 using System.Linq;
+using Newtonsoft.Json;
 
 public class PronunciationAssessor : MonoBehaviour
 {
@@ -22,7 +23,7 @@ public class PronunciationAssessor : MonoBehaviour
     // Reference to InteractionManager
     private InteractionManager interactionManager;
     public bool englishTestingMode = false; // if true, just say "Test" in US English. For faster testing.
-
+    private const string englishTestPhrase = "Test";
     // singleton
     public static PronunciationAssessor Instance {get; private set;}
     void Awake() {
@@ -54,15 +55,15 @@ public class PronunciationAssessor : MonoBehaviour
         yield break;
     }
 
-    public async Awaitable<AssessmentResult> AssessPronunciation(string referenceText)
+    public async Awaitable<CustomAssessmentResult> AssessPronunciation(string referenceText)
     {
         if (Debug.isDebugBuild && englishTestingMode)
         {
-            referenceText = "Test"; // Say "Test" in US english. For testing only.
+            referenceText = englishTestPhrase; // Say "Test" or another specified phrase in US english. For testing only.
         }
         Log($"[AssessPronunciation] referenceText: {referenceText}");
         await Awaitable.BackgroundThreadAsync();
-        AssessmentResult result = await AssessWithSpeechRecognition(referenceText);
+        CustomAssessmentResult result = await AssessWithSpeechRecognition(referenceText);
         if (result != null)
         {
             Log($"[AssessPronunciation] result not null");
@@ -78,7 +79,7 @@ public class PronunciationAssessor : MonoBehaviour
         return result;
     }
 
-    private async Awaitable<AssessmentResult> AssessWithSpeechRecognition(string referenceText)
+    private async Awaitable<CustomAssessmentResult> AssessWithSpeechRecognition(string referenceText)
     {
         Log($"[AssessPronunciationAsync] referenceText: {referenceText}");
         using (var recognizer = new SpeechRecognizer(speechConfig, audioConfig))
@@ -94,7 +95,8 @@ public class PronunciationAssessor : MonoBehaviour
             var taskCompletionSource = new TaskCompletionSource<SpeechRecognitionResult>();
             recognizer.Recognized += (s, e) =>
             {
-                Log($"[AssessPronunciationAsync] s: {s} e: {e} {e.Result}");
+                //Log($"[AssessPronunciationAsync] s: {s} e: {e} {e.Result}");
+                Log($"[AssessPronunciationAsync] AAAAAAAAResult: {e.Result}");
                 if (e.Result.Reason == ResultReason.RecognizedSpeech)
                 {
                     taskCompletionSource.TrySetResult(e.Result);
@@ -119,12 +121,13 @@ public class PronunciationAssessor : MonoBehaviour
                 return null;
             }
 
-            var speechRecognitionResult = await taskCompletionSource.Task;
+            SpeechRecognitionResult speechRecognitionResult = await taskCompletionSource.Task;
             Log("[AssessPronunciationAsync] Recognized: " + speechRecognitionResult.Text);
 
             // Extract pronunciation assessment results from Properties
             var pronunciationAssessmentResultJson = speechRecognitionResult.Properties.GetProperty(PropertyId.SpeechServiceResponse_JsonResult);
-            var pronunciationAssessmentResult = JsonUtility.FromJson<PronunciationAssessmentJsonResult>(pronunciationAssessmentResultJson);
+            Log(pronunciationAssessmentResultJson);
+            var pronunciationAssessmentResult = JsonConvert.DeserializeObject<PronunciationAssessmentResultRoot>(pronunciationAssessmentResultJson);
 
             var pronunciationScore = pronunciationAssessmentResult.NBest[0].PronunciationAssessment.PronScore;
             var fluencyScore = pronunciationAssessmentResult.NBest[0].PronunciationAssessment.FluencyScore;
@@ -135,11 +138,11 @@ public class PronunciationAssessor : MonoBehaviour
             float customScore = CalculateCustomScore(speechRecognitionResult.Text, referenceText);
 
             Debug.Log("Returning Assesment Result");
-            return new AssessmentResult
+            return new CustomAssessmentResult
             {
                 recognized_text = speechRecognitionResult.Text,
                 reference_text = referenceText,
-                scores = new Scores
+                scores = new CustomScores
                 {
                     pronunciation_score = pronunciationScore,
                     fluency_score = fluencyScore,
@@ -147,7 +150,8 @@ public class PronunciationAssessor : MonoBehaviour
                     accuracy_score = accuracyScore,
                     custom_score = customScore
                 },
-                recognition_status = customScore >= 90.0f ? "success" : "failure"
+                recognition_status = customScore >= 90.0f ? "success" : "failure",
+                rawResult = pronunciationAssessmentResult
             };
         }
     }
@@ -170,7 +174,7 @@ public class PronunciationAssessor : MonoBehaviour
         return System.Text.RegularExpressions.Regex.Replace(text.ToLower(), @"[^\w\s]", "");
     }
 
-    private void LogAssessmentResult(AssessmentResult result)
+    private void LogAssessmentResult(CustomAssessmentResult result)
     {
         string message = "AssessmentResult:\n"
         + $"Pronunciation Score: {result.scores.pronunciation_score}\n"
@@ -198,39 +202,82 @@ public class PronunciationAssessor : MonoBehaviour
         Debug.Log($"[PronunciationAssesor] {message}");
     }
 
-    // Helper classes for result handling
+    // JSON model classes
     [System.Serializable]
-    private class PronunciationAssessmentJsonResult
+    public class PronunciationAssessmentResultRoot
     {
-        public List<NBestResult> NBest;
+        public string Id { get; set; }
+        public string RecognitionStatus { get; set; }
+        public int Offset { get; set; }
+        public int Duration { get; set; }
+        public int Channel { get; set; }
+        public string DisplayText { get; set; }
+        public float SNR { get; set; }
+        public List<NBestModel> NBest { get; set; }
     }
 
     [System.Serializable]
-    private class NBestResult
+    public class NBestModel
     {
-        public PronunciationAssessmentResult PronunciationAssessment;
+        public float Confidence { get; set; }
+        public string Lexical { get; set; }
+        public string ITN { get; set; }
+        public string MaskedITN { get; set; }
+        public string Display { get; set; }
+        public PronunciationAssessmentModel PronunciationAssessment { get; set; }
+        public List<WordModel> Words { get; set; }
     }
 
-    [System.Serializable]
-    private class PronunciationAssessmentResult
+    public class PhonemeModel
     {
-        public float PronScore;
-        public float FluencyScore;
-        public float CompletenessScore;
-        public float AccuracyScore;
+        public string Phoneme { get; set; }
+        public PronunciationAssessmentModel PronunciationAssessment { get; set; }
+        public int Offset { get; set; }
+        public int Duration { get; set; }
     }
 
+    public class PronunciationAssessmentModel
+    {
+        public float AccuracyScore { get; set; }
+        public float FluencyScore { get; set; }
+        public float CompletenessScore { get; set; }
+        public float PronScore { get; set; }
+        public string ErrorType { get; set; }
+    }
+
+    public class SyllableModel
+    {
+        public string Syllable { get; set; }
+        public string Grapheme { get; set; }
+        public PronunciationAssessmentModel PronunciationAssessment { get; set; }
+        public int Offset { get; set; }
+        public int Duration { get; set; }
+    }
+
+    public class WordModel
+    {
+        public string Word { get; set; }
+        public int Offset { get; set; }
+        public int Duration { get; set; }
+        public PronunciationAssessmentModel PronunciationAssessment { get; set; }
+        public List<SyllableModel> Syllables { get; set; }
+        public List<PhonemeModel> Phonemes { get; set; }
+    }
+    // ----- classes for custom data
+
+
     [System.Serializable]
-    public class AssessmentResult
+    public class CustomAssessmentResult
     {
         public string recognized_text;
         public string reference_text;
-        public Scores scores;
+        public CustomScores scores;
         public string recognition_status;
+        public PronunciationAssessmentResultRoot rawResult; // raw speech result from Azure Speech
     }
 
     [System.Serializable]
-    public class Scores
+    public class CustomScores
     {
         public float pronunciation_score;
         public float fluency_score;

@@ -352,22 +352,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dialog UI
       objectReference: {fileID: 0}
-    - target: {fileID: 1570127592299641024, guid: 5d92c0fd0f77f5841b1062fb7dbf89a4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.72
-      objectReference: {fileID: 0}
-    - target: {fileID: 1570127592299641024, guid: 5d92c0fd0f77f5841b1062fb7dbf89a4, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 34.66
-      objectReference: {fileID: 0}
-    - target: {fileID: 1570127592299641024, guid: 5d92c0fd0f77f5841b1062fb7dbf89a4, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -4.83
-      objectReference: {fileID: 0}
-    - target: {fileID: 4438405372547350283, guid: 5d92c0fd0f77f5841b1062fb7dbf89a4, type: 3}
-      propertyPath: pointAtWords
-      value: 
-      objectReference: {fileID: 7289328589703664122}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -445,17 +429,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7261574041348027581, guid: 3fc54f8898f6c1c419784b0f4657a101, type: 3}
   m_PrefabInstance: {fileID: 5737501661286150519}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7289328589703664122 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3078024423074062477, guid: 3fc54f8898f6c1c419784b0f4657a101, type: 3}
-  m_PrefabInstance: {fileID: 5737501661286150519}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d7646d32ca11d84f80bdf0f1d688bf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7067234161470326338
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -151,25 +151,25 @@ public class NpcTalking : MonoBehaviour
             case DialogueSpeaker.Player:
                 {
                     // begin pronunciation assessment
-                    PronunciationAssessor.AssessmentResult assessmentTask = await PronunciationAssessor.Instance.AssessPronunciation(line.text);
+                    PronunciationAssessor.CustomAssessmentResult assessmentTask = await PronunciationAssessor.Instance.AssessPronunciation(line.text);
                     if (cancellationToken.IsCancellationRequested) { return; } // end early
                     if (assessmentTask?.recognition_status == "success") {
-                        ConversationUI.Instance.ShowSuccess(); // let the player know they succeeded
+                        ConversationUI.Instance.ShowSuccess(assessmentTask?.rawResult); // let the player know they succeeded
                         xpToReward += 3f - failedAttempts; // keep track of xp to reward. Up to 3 points, -1 for every failed attempt.
-                        await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
+                        await Awaitable.WaitForSecondsAsync(5f, cancellationToken);
                         MoveToNextLineOfDialogue();
                     } else {
                         failedAttempts++; // count the failed attempt
-                        ConversationUI.Instance.ShowFail(failedAttempts); // let the player know they fucked up
+                        ConversationUI.Instance.ShowFail(failedAttempts, assessmentTask?.rawResult); // let the player know they fucked up
                         if (failedAttempts >= 3) {
-                            Log($"{failedAttempts} failed attempts, stopping convo.");
-                            await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
+                            Log($"{failedAttempts} failed attempts, stopping convo to restart.");
                             if (cancellationToken.IsCancellationRequested) { return; } // end early
                             StopConvo(); // to many failed attempts, stop the convo. it should then automatically restart.
                         } else {
                             Log($"{failedAttempts} failed attempts, trying again.");
                             // we'll try this line again
                         }
+                        await Awaitable.WaitForSecondsAsync(5f, cancellationToken);
                     }
                     break;
                 }
