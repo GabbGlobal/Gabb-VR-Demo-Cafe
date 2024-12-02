@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8693231493317755394}
   - component: {fileID: 6808184777104828634}
   - component: {fileID: 5026779942130610365}
+  - component: {fileID: 1727546080338992088}
   m_Layer: 0
   m_Name: ggCafe_10_21_Props_low_ggCafe_Cup_low_ggCafeCup_Lid01
   m_TagString: Untagged
@@ -25,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925707987629745331}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: 0.0000005960464, w: 0}
   m_LocalPosition: {x: -3.0479999, y: -0.00000011920929, z: 0.00000035762787}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5412957089904765989}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
 --- !u!33 &6808184777104828634
 MeshFilter:
@@ -58,6 +59,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,6 +87,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1727546080338992088
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925707987629745331}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6.4151154, y: 1.702528, z: 6.7452545}
+  m_Center: {x: -60.96, y: 9.539014, z: 30.48}
 --- !u!1 &2651857722440640274
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,6 +131,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2651857722440640274}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.21, y: 1.034, z: -0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -114,7 +140,6 @@ Transform:
   - {fileID: 8693231493317755394}
   - {fileID: 2741517111996105325}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2767901976108223668
 GameObject:
@@ -127,6 +152,7 @@ GameObject:
   - component: {fileID: 2741517111996105325}
   - component: {fileID: 1849570332308746384}
   - component: {fileID: 8612469666747053175}
+  - component: {fileID: 3522150069870838967}
   m_Layer: 0
   m_Name: ggCafe_10_21_Props_low_ggCafe_Cup_Paper01_ggCafe_Cup_low
   m_TagString: Untagged
@@ -141,13 +167,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2767901976108223668}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: 0.0000005960464, w: 0}
   m_LocalPosition: {x: -3.0479999, y: -0.00000011920929, z: 0.00000035762787}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5412957089904765989}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 180, y: 0, z: 180}
 --- !u!33 &1849570332308746384
 MeshFilter:
@@ -174,6 +200,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -199,3 +228,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3522150069870838967
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2767901976108223668}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.3278046, y: 9.216846, z: 5.601984}
+  m_Center: {x: -60.96, y: 4.6084194, z: 30.48}

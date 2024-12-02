@@ -23,6 +23,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4749709230886578574}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.21, y: 1.034, z: -0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,7 +32,6 @@ Transform:
   - {fileID: 3755238192564140901}
   - {fileID: 4466564686325098817}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4856908863432634657
 GameObject:
@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 4466564686325098817}
   - component: {fileID: 262109192013085461}
   - component: {fileID: 1344691177036903244}
+  - component: {fileID: 7795481591883293395}
   m_Layer: 0
   m_Name: ggCafe_10_21_Props_low_ggCafe_napkinDispenser_low_ggCafe_Napkin01
   m_TagString: Untagged
@@ -58,13 +59,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4856908863432634657}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.00000019402722, y: -1, z: -0.00000000675639, w: -0.000000014901159}
   m_LocalPosition: {x: 3.0543978, y: -0.0000320673, z: -0.00006246567}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8565979688300200506}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 360}
 --- !u!33 &262109192013085461
 MeshFilter:
@@ -91,6 +92,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -116,6 +120,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7795481591883293395
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4856908863432634657}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.610777, y: 4.730926, z: 1.286057}
+  m_Center: {x: 60.96, y: 2.6696699, z: -26.43191}
 --- !u!1 &8690267529203421897
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +152,7 @@ GameObject:
   - component: {fileID: 3755238192564140901}
   - component: {fileID: 6420447647035276808}
   - component: {fileID: 3992168670264166498}
+  - component: {fileID: 1225397210131842389}
   m_Layer: 0
   m_Name: ggCafe_10_21_Props_low_ggCafe_Dispenser01_ggCafe_napkinDispenser_low
   m_TagString: Untagged
@@ -141,13 +167,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8690267529203421897}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.00000019402722, y: -1, z: -0.00000000675639, w: -0.000000014901159}
   m_LocalPosition: {x: 3.0543978, y: -0.0000320673, z: -0.00006246567}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8565979688300200506}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 360}
 --- !u!33 &6420447647035276808
 MeshFilter:
@@ -174,6 +200,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -199,3 +228,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1225397210131842389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8690267529203421897}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.598098, y: 6.977054, z: 6.810121}
+  m_Center: {x: 60.96, y: 3.3960698, z: -30.480007}

@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 186188367618625903}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.0000003576257, y: 1, z: 8.881134e-14, w: -0.00000008940674}
   m_LocalPosition: {x: 1.5239999, y: 0.0000014305115, z: 0.0000003054156}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2831950602627582393}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &3989855089146338492
 MeshFilter:
@@ -58,6 +58,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -108,13 +111,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352040347426684103}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.0000003576257, y: 1, z: 8.881134e-14, w: -0.00000008940674}
   m_LocalPosition: {x: 1.5239999, y: 0.0000014305115, z: 0.0000003054156}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2831950602627582393}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &7435358005678334087
 MeshFilter:
@@ -141,6 +144,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -177,6 +183,7 @@ GameObject:
   - component: {fileID: 4762529393712097795}
   - component: {fileID: 239766671067407294}
   - component: {fileID: 3156200072413431497}
+  - component: {fileID: 3044441741165955978}
   m_Layer: 0
   m_Name: ggCafe_10_21_Props_low_ggCafe_espressoGrinder_low_ggCafe_espressoGrinder_Caps01
   m_TagString: Untagged
@@ -191,13 +198,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364703877127318952}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.0000003576257, y: 1, z: 8.881134e-14, w: -0.00000008940674}
   m_LocalPosition: {x: 1.5239999, y: 0.0000014305115, z: 0.0000003054156}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2831950602627582393}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &239766671067407294
 MeshFilter:
@@ -224,6 +231,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -249,6 +259,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3044441741165955978
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364703877127318952}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10.126358, y: 8.888596, z: 9.630743}
+  m_Center: {x: 30.479984, y: 16.849903, z: 0.0000071525574}
 --- !u!1 &2297774275518207392
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,13 +305,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2297774275518207392}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.0000003576257, y: 1, z: 8.881134e-14, w: -0.00000008940674}
   m_LocalPosition: {x: 1.5239999, y: 0.0000014305115, z: 0.0000003054156}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2831950602627582393}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &6692134712780158526
 MeshFilter:
@@ -307,6 +338,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -343,6 +377,7 @@ GameObject:
   - component: {fileID: 7259753254287851321}
   - component: {fileID: 768509620617276486}
   - component: {fileID: 2346399757500332875}
+  - component: {fileID: 2400842478420449186}
   m_Layer: 0
   m_Name: ggCafe_10_21_Props_low_ggCafe_espressoGrinder_Frame01_ggCafe_espressoGrinder_low
   m_TagString: Untagged
@@ -357,13 +392,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4418934077403438393}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.0000003576257, y: 1, z: 8.881134e-14, w: -0.00000008940674}
   m_LocalPosition: {x: 1.5239999, y: 0.0000014305115, z: 0.0000003054156}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2831950602627582393}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &768509620617276486
 MeshFilter:
@@ -390,6 +425,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -415,6 +453,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2400842478420449186
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4418934077403438393}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 9.8183975, y: 12.405605, z: 9.857931}
+  m_Center: {x: 30.479984, y: 6.2028027, z: 0.26004505}
 --- !u!1 &6067465954114145785
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,13 +499,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6067465954114145785}
+  serializedVersion: 2
   m_LocalRotation: {x: -0.0000003576257, y: 1, z: 8.881134e-14, w: -0.00000008940674}
   m_LocalPosition: {x: 1.5239999, y: 0.0000014305115, z: 0.0000003054156}
   m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2831950602627582393}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &4811134719395068570
 MeshFilter:
@@ -473,6 +532,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -521,6 +583,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8374848328976215735}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.21, y: 1.034, z: -0.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -533,5 +596,4 @@ Transform:
   - {fileID: 4438085386639170469}
   - {fileID: 8509707507699465579}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
