@@ -10,27 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 15003, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Demo Build
+  m_Name: Quest 3 Demo
   m_EditorClassIdentifier: 
   m_AssetVersion: 1
   m_BuildTarget: 13
   m_Subtarget: 0
   m_PlatformId: b9b35072a6f44c2e863f17467ea3dc13
   m_PlatformBuildProfile:
-    rid: 8991243456164659439
-  m_OverrideGlobalSceneList: 1
-  m_Scenes:
-  - m_enabled: 1
-    m_path: Assets/_Gabb/Permissions/Scenes/Scene_Permissions.unity
-  - m_enabled: 1
-    m_path: Assets/_Gabb/Cafe/Scenes/Level_1_Cafe.unity
+    rid: 2112049751412965376
+  m_OverrideGlobalSceneList: 0
+  m_Scenes: []
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings: []
   references:
     version: 2
     RefIds:
-    - rid: 8991243456164659439
+    - rid: 2112049751412965376
       type: {class: AndroidPlatformBuildSettings, ns: UnityEditor.Android, asm: UnityEditor.Android.Extensions}
       data:
         m_Development: 0
