@@ -16,14 +16,14 @@ Material:
   - BAKERY_PROBESHNONLINEAR
   - BAKERY_SHNONLINEAR
   - BAKERY_VOLUME
-  - _ALPHABLEND_ON
+  - _ALPHATEST_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2450
   stringTagMap:
-    RenderType: Transparent
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -39,10 +39,11 @@ Material:
     - _BAKERY_LMSPECOCCLUSION: 0
     - _BAKERY_MONOSH: 0
     - _BAKERY_PROBESHNONLINEAR: 0
-    - _DstBlend: 10
-    - _Mode: 2
-    - _SrcBlend: 5
-    - _ZWrite: 0
+    - _Cutoff: 0.52
+    - _DstBlend: 0
+    - _Mode: 1
+    - _SrcBlend: 1
+    - _ZWrite: 1
     m_Colors:
     - _Color: {r: 0.7605507, g: 0.8301887, b: 0.57564974, a: 1}
   m_BuildTextureStacks: []
