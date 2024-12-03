@@ -20,7 +20,7 @@ public class XRRefreshRateManager : MonoBehaviour
             }
             catch (NullReferenceException nre)
             {
-                Log("XR Diaplay Subsystem not ready.");
+                //Log("XR Diaplay Subsystem not ready.");
             }
             yield return null;
         }

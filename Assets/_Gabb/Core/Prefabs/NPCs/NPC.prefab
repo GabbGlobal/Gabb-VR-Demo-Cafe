@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5545536505170174019}
   - component: {fileID: 2754077474018325631}
+  - component: {fileID: 6782032112298598678}
   m_Layer: 0
   m_Name: Speech Audio Source
   m_TagString: Untagged
@@ -41,7 +42,7 @@ AudioSource:
   m_GameObject: {fileID: 2174093474473331276}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2244591266001049993, guid: 9f6a9e3d72433034facee56bbf1ea1c3, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
@@ -129,6 +130,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6782032112298598678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174093474473331276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c5436deff410564da587474ebff7e0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4082649876039842086
 GameObject:
   m_ObjectHideFlags: 0
