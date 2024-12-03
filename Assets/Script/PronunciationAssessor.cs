@@ -6,41 +6,100 @@ using Microsoft.CognitiveServices.Speech.Audio;
 using Microsoft.CognitiveServices.Speech.PronunciationAssessment;
 using System.Threading.Tasks;
 using System.Linq;
+using UnityEngine.Networking;
 
 public class PronunciationAssessor : MonoBehaviour
 {
-    // Azure Speech Recongiton config
+
+    // -- Azure API Management --
+    // Request a speech token from this URL
+    private string APIM_ENDPOINT = "https://speech-apim.azure-api.net/speech/token";
+    // Subscription key for requesting a token via Azure APIM.
+    // Not a true secret because this can easily be obtained from a decompiled APK.
+    // True secret subscription keys do not need to be and should not be in the Unity project at all anymore.
+    private const string APIM_SUBSCRIPTION_KEY = "41f39d5a6b424fa58c31b9f1e8d16fa9";
+    private const int TOKEN_EXPIRATION_BUFFER_SECCONDS = 120; // 2 minute buffer so token is refreshed early with time to spare
+    // the token we will get back from APIM and pass to the Speech SDK
+    private string tokenFromAPIM = "";
+    private System.DateTime? tokenExpirationTime; // cached time the current token will expire
+
+    // -- Azure Speech Recongiton --
     //private const string SubscriptionKey = "key"; // DO NOT COMMIT THE SECRET KEY. 
-    private const string Region = "eastus";
+    private const string AZURE_REGION = "eastus";
     // Must be a BCP-47 locale value https://gist.github.com/typpo/b2b828a35e683b9bf8db91b5404f1bd1
     // es-ES is Castilian Spanish (as spoken in Central-Northern Spain)
     private const string languageCode = "es-ES";
-
     private SpeechConfig speechConfig;
     private AudioConfig audioConfig;
 
-    // Reference to InteractionManager
-    private InteractionManager interactionManager;
-    public bool englishTestingMode = false; // if true, just say "Test" in US English. For faster testing.
+    // -- public inspector variables --
+    public bool englishTestingMode = false; // if true, just say "test" in US English for faster testing.
 
     // singleton
-    public static PronunciationAssessor Instance {get; private set;}
-    void Awake() {
-        if (Instance == null) {
+    public static PronunciationAssessor Instance { get; private set; }
+    void Awake()
+    {
+        if (Instance == null)
+        {
             DestroyImmediate(Instance);
         }
         Instance = this;
     }
 
-    IEnumerator Start()
+    async void Start()
     {
-        // Get the InteractionManager component
-        interactionManager = FindFirstObjectByType<InteractionManager>();  // Ensure InteractionManager exists in the scene
+        await RefreshSpeechSDKConfig();
+    }
 
-        // Configuser speech sdk
-        speechConfig = SpeechConfig.FromSubscription(
-            SecretsManager.Instance.secretsAsset.azureSpeechSubscriptionKey,
-            Region);
+    async Awaitable RefreshSpeechSDKConfig()
+    {
+        if (!IsTokenValid())
+        {
+            Log("Need a new token from APIM, getting one now...");
+            await GetTokenFromAPIM();
+            ConfigureSpeechSDK();
+        }
+    }
+
+    private async Awaitable GetTokenFromAPIM()
+    {
+        Log("Requesting authorization token from APIM");
+        UnityWebRequest request = new UnityWebRequest(APIM_ENDPOINT, UnityWebRequest.kHttpVerbPOST);
+        request.SetRequestHeader("Ocp-Apim-Subscription-Key", APIM_SUBSCRIPTION_KEY);
+        request.downloadHandler = new DownloadHandlerBuffer();
+        await request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Log("Got token from APIM");
+            tokenFromAPIM = request.downloadHandler.text;
+            tokenExpirationTime = JWTUtil.GetTokenExpiration(tokenFromAPIM);
+            Log($"Got token from APIM");
+        }
+        else
+        {
+            LogError("Failed to get token: " + request.error);
+            LogError(request.downloadHandler.text);
+            LogError(request.responseCode.ToString());
+        }
+        request.Dispose();
+    }
+
+    private bool IsTokenValid()
+    {
+        // if token exists and is not going to expire soon
+        return !string.IsNullOrEmpty(tokenFromAPIM) &&
+            tokenExpirationTime.HasValue &&
+            System.DateTime.UtcNow < tokenExpirationTime.Value.AddSeconds(-TOKEN_EXPIRATION_BUFFER_SECCONDS);
+    }
+
+    void ConfigureSpeechSDK()
+    {
+        Log("Configuring Speech SDK...");
+        // Configuer speech sdk
+        speechConfig = SpeechConfig.FromAuthorizationToken(
+            tokenFromAPIM,
+            AZURE_REGION);
         speechConfig.SpeechRecognitionLanguage = languageCode;  // Apply language setting
 
         // Use US English for testing if enabled
@@ -48,14 +107,14 @@ public class PronunciationAssessor : MonoBehaviour
         {
             speechConfig.SpeechRecognitionLanguage = "en-US"; // use US english for testing only
         }
-        
-        audioConfig = AudioConfig.FromDefaultMicrophoneInput();
 
-        yield break;
+        audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+        Log("Configuring Speech SDK done.");
     }
 
     public async Awaitable<AssessmentResult> AssessPronunciation(string referenceText)
     {
+        await RefreshSpeechSDKConfig(); // always make sure speech sdk config is valid before assessment
         if (Debug.isDebugBuild && englishTestingMode)
         {
             referenceText = "Test"; // Say "Test" in US english. For testing only.
@@ -194,6 +253,11 @@ public class PronunciationAssessor : MonoBehaviour
     }
 
     void Log(string message)
+    {
+        Debug.Log($"[PronunciationAssesor] {message}");
+    }
+
+    void LogError(string message)
     {
         Debug.Log($"[PronunciationAssesor] {message}");
     }

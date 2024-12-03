@@ -18408,6 +18408,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1047334512299196685, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
+      propertyPath: englishTestingMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2406065881079208411, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.566
@@ -18580,7 +18584,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6678385865491267169, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
