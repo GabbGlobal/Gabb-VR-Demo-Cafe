@@ -892,7 +892,341 @@ MonoBehaviour:
   - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPro/Materials/MetaQuestProLeft_Material.fbx
   - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPro/Materials/MetaQuestProRight_Material.fbx
   - Packages/com.unity.xr.arfoundation/Assets/Prefabs/Handles.fbx
-  uvOverlapAssetList: 00000000ffffffff0101000000000000010100000000000000000000000000000000000000000000000000000101000001010000000000000000000000000000000000000101000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000010100000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000010100000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000010100000000000000000000000000000101000001010000000000000101000001010000ffffffff000000000000000000000000010100000101000000000000ffffffff00000000000000000000000000000000ffffffff010100000101000000000000010100000000000000000000010100000000000000000000010100000101000001010000010100000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000001010000000000000000000000000000010100000000000000000000000000000000000001010000010100000101000001010000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000001010000
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BillboardWideXL.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_broadleaf_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BollardSmall1.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_04m.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_03m.fbx
+  - Packages/com.unity.render-pipelines.core/Runtime/Debug/ProbeSamplingDebugMesh.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BollardSmall.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FenceRail1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/AddDisplay.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_pine_03.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Brick_BaseBoard.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Door_Exterior.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Scaffolding.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Flag.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_grass_patch_large.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadCone1z.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_S_1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockMidPlastic1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BenchWood2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Bollard.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLight90.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBlockRound.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_flower_grass.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_flower_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan2z.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockSmallPlastic2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RailCol.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_flowertestnew.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_hoodie_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Neon_HotDrinks.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/NewspaperVending1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BenchWood3.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/DecalQuad.fbx
+  - Assets/Asset/Character/Barista_female/Barista_female.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadPoliceBlock1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_small_01.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_flower_03.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Door_Interior.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_pine_01.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Shelf_Wide.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoofWaterTower.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBedMetal2.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_raglanrolled_01f.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Light_Wall_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadCone2z.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/MetalSupportFrame.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BillboardTall.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Path.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_great_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBed1.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coach_Table.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_hairfacial_d_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildWindows.fbx
+  - Assets/Asset/Character/Barista_male/Barista_male.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BusStopSign1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BenchWood1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLight2.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_01f.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockadeSmall.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_pine_02.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Light_Wall_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBed2.fbx
+  - Assets/Asset/Character/Animation/Typing/Typing.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Mug.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Wallpaper_Door_Left.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLightMini2NY.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/NewspaperVending4.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Sink.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadCone.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_large_03.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_a_02.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_special_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FireEscape1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliff_nature_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan4.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_hatknit_01.fbx
+  - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/Shelf_retextured316140.fbx
+  - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/Dining Table.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoofAirConDuct.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Barista_Counter.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadPole.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Rail.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoofAirConSmall2.fbx
+  - Assets/Asset/Character/Lola_Patron/Lola_Fix.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_R_2.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_large_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBedPlastic.fbx
+  - Assets/Idyllic Nature/FBX FILES/Clouds/SM_clouds_01.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliffs_river.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/MailBox2.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_maple_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/SteamTube.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/CanopyThree.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FireEscape2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Rail90Col.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_06.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BikeRail.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_R_1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliff_rock_02.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Light_Wall_03.fbx
+  - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/dinner_plate.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_08.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadCone1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BenchMetal2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Drain4.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_jacket_01.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_shoe_02.fbx
+  - Assets/Asset/Character/Seth/Seth_Fix.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BollardSmall2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/MetalRailStack.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/SteamTube2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockLargePlastic.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FenceChainLink.fbx
+  - Assets/_Gabb/Hands/Blender/HandStylized.blend
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBlockRound1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/StreetLight2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockMidcement2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FenceRail.fbx
+  - Assets/Idyllic Nature/FBX FILES/Clouds/SM_clouds_04.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Table.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_c_01.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_special_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/StreetLight.fbx
+  - Assets/Asset/Character/Animation/HoldingIdle/Holding Idle.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Camaras1NY.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_02.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliff_nature_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/StreetBlock1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliff_nature_02.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Brick_Thin.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FireEscape.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLightMini1LA.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Scaffolding2.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coach_Carpet.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/3DText.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_branch_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlasticSign2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBed4.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/StreetBlock2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockSmallPlastic1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_maple_01.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Wallpaper_Door_Right.fbx
+  - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/GG_Level#1_Asset_ChalkboardMenus_001.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoofAirConSmall1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BusStopSign.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_birch_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Bollard1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_birch_01.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_d_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLight1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliffs_river_02.fbx
+  - Assets/Asset/Character/Lola_Patron/Lola_low.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_S_2.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_hairfacial_a_01.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_shoe_01.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_pants_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BillboardTallXL.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_R_4.fbx
+  - Assets/Asset/Character/Animation/Typing/Typing (1).fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_flower_01.fbx
+  - Assets/Idyllic Nature/FBX FILES/Clouds/SM_clouds_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Path_SlimCornerR.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/SolarTrafficLA.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/MetalRail.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_branch_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Roof.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_flower_plant_02.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliff_wall_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Drain1.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_hairfacial_b_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLightMini1NY.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_05f.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Wallpaper_Thin.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_skirt_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Bollard2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockade.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BenchMetal1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_medium_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/AddDisplay2.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_02f.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_c_02.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_R_3.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_01.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_tshirt_01m.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_special_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan2.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coffee_Machine.fbx
+  - Packages/com.unity.render-pipelines.core/Runtime/RenderPipelineResources/Mesh/UnityMaterialBall.fbx
+  - Assets/Idyllic Nature/FBX FILES/Bushes/SM_bush_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BikeRail2.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_S_3.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_breeches_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLight1LA.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_04.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBed3.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_tanktop_01f.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Drain2.fbx
+  - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/stool_1.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_CeilLight.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLightTwin1NY.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Path_WideCornerR.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockLargePlastic2.fbx
+  - Assets/Asset/Character/Seth/GG_Level1_Model_Seth.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coach_FootRest.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_e_01.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_TrashCan.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockMidcement1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/StreetLight1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BusStop2.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_leaves_flower.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_broadleaf_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/SolarLA.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_tshirt_01f.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_maple_03.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_a_03.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_01m.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Brick_Wide.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_a_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BusStop.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Car.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Exit_Sign.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Table_chair.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/LampTwin2NY.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBedPlastic2.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_03f.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBedTree.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Table_LongCouch.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/CanopyOne.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_branch_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Rail90.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_flower_04.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_broadleaf_03.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_medium_02.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_jacketsleeveles_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockMidPlastic2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan1z.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Wallpaper_Wide.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BenchMetal3.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_oak_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBedMetal1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBlock.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBed5.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BikeRail1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_pine_04.fbx
+  - Assets/Idyllic Nature/FBX FILES/Bushes/SM_bush_02.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliff_rock_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan5.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/ScrollingAdd.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Shelf_Narrow.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_04f.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BillboardWide.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/SteamTube1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FenceRail2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLight.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Drain3.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_birch_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FireHydrant.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockade2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BusStopSign2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Flag1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLight1NY.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Scaffolding1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/MailBox1.fbx
+  - Assets/Asset/Character/Barista_male/Barista_male_temp.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_cliff_wall_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Path_Wide.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_small_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/LampTwin1NY.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BillboardCorner.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FoodCart.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoofWindow.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Floor.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/NewspaperVending2.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_MyloChair.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Lamsp2NY.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_large_02.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_hmn_01f.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBlockRound2.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_hmn_01m.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_pants_01f.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coach_Wide.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_R_5.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadPoliceBlock2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoofWaterTowerSupport.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockLargePlastic3.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/BusStop1.fbx
+  - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/Barista_Counter1_Textured.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_haircut_c_03.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_raglan_01m.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Brick_Door.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_backpack_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Path_Block.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_05m.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Wallpaper_Window.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_07.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlasticSign1.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/LampTwin1LA.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_01_character_02m.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Drain5.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Coaster_S_4.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/AddDisplay1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Rocks and Cliffs/SM_rock_medium_03.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Lamsp1NY.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/FenceSpiked.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_shirtrolled_01m.fbx
+  - Packages/com.unity.render-pipelines.core/Editor/Resources/DebugProbe.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadBlockade1.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_pine_05.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Display Platform,.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Flag2.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_great_01.fbx
+  - Assets/Idyllic Nature/FBX FILES/Others/SM_grass_patch_small.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Neon_Open.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_maple_04.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoadCone2.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Path_SlimCornerL.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/RoofAirConTall.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/CanopyTwo.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/NewspaperVending3.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Neon_GoodFood.fbx
+  - Assets/Idyllic Nature/FBX FILES/Clouds/SM_clouds_02.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrashCan3.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/TrafficLightTwin1LA.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_dead_05.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/PlantBedBench.fbx
+  - Assets/Asset/Model/GG_Level1_Asset_Wall_Wallpaper_Door_Center.fbx
+  - Assets/Idyllic Nature/FBX FILES/Trees/SM_tree_special_04.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_hairfacial_c_01.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Lamp1LA.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_pants_01.fbx
+  - Assets/npc_casual_set_01/Mesh/npc_csl_cap_01.fbx
+  uvOverlapAssetList: 00000000ffffffff0101000000000000010100000000000000000000000000000000000000000000000000000101000001010000000000000000000000000000000000000101000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000010100000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000010100000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000010100000000000000000000000000000101000001010000000000000101000001010000ffffffff000000000000000000000000010100000101000000000000ffffffff00000000000000000000000000000000ffffffff01010000010100000000000001010000000000000000000001010000000000000000000001010000010100000101000001010000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000001010000000000000101000000000000000000000000000001010000000000000000000000000000000000000101000001010000010100000101000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000000000000000000000000000000000000000000000101000001010000010100000101000000000000000000000101000000000000000000000000000001010000000000000101000000000000000000000101000000000000000000000000000000000000000000000101000000000000010100000000000000000000000000000101000001010000000000000101000000000000000000000101000000000000010100000000000000000000000000000101000001010000010100000000000000000000000000000101000000000000000000000000000001010000010100000000000000000000000000000000000001010000010100000000000001010000000000000000000001010000010100000101000000000000000000000000000001010000010100000000000000000000000000000000000000000000010100000101000001010000000000000000000001010000000000000000000000000000000000000101000000000000010100000000000000000000000000000101000001010000010100000101000000000000000000000101000001010000010100000000000000000000010100000101000000000000010100000101000000000000000000000000000000000000010100000101000001010000010100000000000001010000000000000000000001010000000000000000000001010000000000000000000001010000000000000000000001010000010100000101000000000000010100000000000001010000000000000101000000000000010100000000000000000000000000000000000000000000010100000101000001010000000000000101000001010000000000000101000000000000010100000101000001010000000000000000000000000000000000000101000000000000000000000000000001010000000000000101000000000000000000000000000001010000010100000000000000000000010100000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000001010000010100000000000000000000010100000000000000000000000000000000000001010000000000000000000000000000010100000101000001010000000000000101000001010000000000000000000000000000000000000101000001010000010100000101000000000000000000000101000000000000000000000000000000000000000000000101000000000000000000000101000000000000000000000000000001010000000000000000000001010000000000000101000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000101000001010000010100000000000000000000010100000000000000000000010100000000000001010000000000000101000000000000000000000101000000000000010100000101000001010000010100000101000000000000000000000101000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000001010000010100000000000000000000000000000000000000000000000000000000000001010000000000000101000000000000000000000000000001010000000000000101000001010000000000000000000000000000010100000101000000000000010100000101000001010000010100000101000000000000000000000101000000000000010100000101000000000000010100000101000000000000000000000101000000000000000000000000000000000000
   xatlasWarningShown: 1
   foundCompatibleSetup: 1
   gpuName: NVIDIA GeForce RTX 4090
@@ -991,5 +1325,5 @@ MonoBehaviour:
   renderSettingsRTPVExposure: 1
   renderSettingsRemoveDuplicateLightmaps: 0
   tagOverrides: []
-  modifiedMeshPaddingArray: 17000000
+  modifiedMeshPaddingArray: 06000000
   modifiedMeshUnwrapperArray: 01000000

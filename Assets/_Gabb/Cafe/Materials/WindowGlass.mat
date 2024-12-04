@@ -8,35 +8,59 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: WindowGlass
-  m_Shader: {fileID: 4800000, guid: 3334d0a534d2dac45b2c1a9a7e0a6c64, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 5307d81f6ff873f45a88212286d0a150, type: 3}
   m_Parent: {fileID: 2100000, guid: 1129ef35d65984647b1f9ec388962a21, type: 2}
   m_ModifiedSerializedProperties: 16
   m_ValidKeywords:
   - BAKERY_LMSPEC
+  - BAKERY_MODE_MONOSH
+  - _ALPHAPREMULTIPLY_ON
+  - _REFLECTIONS
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords:
   - BAKERY_LMSPECOCCLUSION
   - BAKERY_MONOSH
-  - BAKERY_PROBESHNONLINEAR
   - BAKERY_SHNONLINEAR
-  - _ALPHAPREMULTIPLY_ON
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  - DepthOnly
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 1
     - _DstBlend: 10
     - _Glossiness: 0.98
+    - _Metallic: 0
     - _Mode: 3
+    - _Smoothness: 1
+    - _SrcBlend: 1
+    - _Surface: 1
     - _ZWrite: 0
     m_Colors:
+    - _BaseColor: {r: 0.13962269, g: 0.13962269, b: 0.13962269, a: 0.1254902}
     - _Color: {r: 0, g: 0.11046546, b: 0.20754716, a: 0.14117648}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!114 &3953531428915100975
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9

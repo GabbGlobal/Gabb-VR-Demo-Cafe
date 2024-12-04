@@ -8,14 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BakeryDynamicBase
-  m_Shader: {fileID: 4800000, guid: 3334d0a534d2dac45b2c1a9a7e0a6c64, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 5307d81f6ff873f45a88212286d0a150, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - BAKERY_LMSPECOCCLUSION
-  - BAKERY_MONOSH
-  - BAKERY_SHNONLINEAR
-  - BAKERY_VOLUME
+  - BAKERY_MODE_VOLUME
+  - _REFLECTIONS
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -23,12 +21,19 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
-  disabledShaderPasses: []
-  m_LockedProperties: _BAKERY_MONOSH _BAKERY_PROBESHNONLINEAR _BAKERY_SHNONLINEAR
-    _BAKERY_VOLUME _GlossyReflections _SpecularHighlights
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: BAKERY_MODE _BAKERY_MONOSH _BAKERY_PROBESHNONLINEAR _BAKERY_SHNONLINEAR
+    _BAKERY_VOLUME _GlossyReflections _Lightmap_specular_as_reflection_occlusion
+    _REFLECTIONS _SpecOcclusionParamsInvZ _SpecOcclusionParamsX _SpecOcclusionParamsY
+    _SpecularHighlights
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -65,6 +70,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Smoothness_map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Specular_map:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Volume0:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -81,8 +94,25 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - BAKERY_LMSPEC: 0
+    - BAKERY_MODE: 4
+    - VOLUME_SHADOWMASK: 0
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
     - _BAKERY_2SIDED: 2
     - _BAKERY_2SIDEDON: 0
     - _BAKERY_BICUBIC: 0
@@ -101,28 +131,66 @@ Material:
     - _BAKERY_VOLROTATION: 0
     - _BAKERY_VOLROTATIONY: 0
     - _BAKERY_VOLUME: 1
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 0
     - _BumpScale: 1
+    - _CastShadows: 1
+    - _Cull: 2
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _Metallic: 0
+    - _Lightmap_specular_as_reflection_occlusion: 0
+    - _Metallic: 1
     - _Mode: 0
+    - _Normal_map_power: 1
     - _OcclusionStrength: 1
+    - _Occlusion_map_power: 1
+    - _PER_VERTEX: 0
     - _Parallax: 0.02
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _REFLECTIONS: 1
+    - _ReceiveShadows: 1
+    - _Smoothness: 0.85
+    - _SmoothnessSource: 1
     - _SmoothnessTextureChannel: 0
+    - _SpecOcclusionParamsInvZ: 0.3
+    - _SpecOcclusionParamsX: 2
+    - _SpecOcclusionParamsY: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _SupportBakedVolumeRotation: 0
+    - _Surface: 0
     - _UVSec: 0
     - _VolumeNormalOffset: 0
+    - _WorkflowMode: 1
+    - _ZTest: 4
     - _ZWrite: 1
+    - _ZWriteControl: 0
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecOcclusionParams: {r: 10, g: -0.5, b: 0.8, a: 0}
+    - _Specular_color: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling_and_offset: {r: 1, g: 1, b: 0, a: 0}
     - _VolumeInvSize: {r: 1000001, g: 1000001, b: 1000001, a: 1}
     - _VolumeMin: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
+--- !u!114 &6997219282418633101
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
