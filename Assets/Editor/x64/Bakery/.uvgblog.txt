@@ -7689,3 +7689,96 @@ Finished compiling graph: 1641 nodes, 4642 flattened edges (4636 ToBuild, 6 ToUs
 [1445/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/arm64-v8a/libil2cpp.so
 [1446/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/libil2cpp.so
 *** Tundra build success (37.37 seconds), 744 items updated, 1447 evaluated
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+
+Symbol file LoadedFromMemory is not a mono symbol file
+[ 149/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/xrmanifest.androidlib/AndroidManifest.xml
+[ 150/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/sharedassets1.resource
+[ 151/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/resources.resource
+[ 153/1447  0s] AddBootConfigGUID Library/Bee/artifacts/Android/boot.config
+[ 154/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/boot.config
+[ 155/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/data.unity3d
+[ 156/1447  3s] UnityLinker C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/unitylinker_xy1a.traceevents
+C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\il2cpp\build\deploy\UnityLinker.exe @Library\Bee\artifacts\rsp\12870635421491586973.rsp
+*** Tundra requires additional run (3.56 seconds), 7 items updated, 1447 evaluated
+*** Additional run caused by: contents change of Library/Bee/artifacts/Android/ManagedStripped
+Finished compiling graph: 1640 nodes, 4639 flattened edges (4633 ToBuild, 6 ToUse), maximum node priority 1293
+[           0s] Delete 1 artifact files that are no longer in use. (like C:\UnityProjects\Gabb-VR-Demo-Cafe\Library\Bee\Android\Prj\IL2CPP\Il2CppBackup\Managed\icallsummary.txt)
+[ 379/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/Assembly-CSharp.pdb
+[ 380/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/UnityEngine.XRModule.dll
+[ 381/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/Assembly-CSharp.dll
+[ 382/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/UnityEngine.XRModule.pdb
+[ 384/1446  0s] ExtractUsedFeatures Library/Bee/artifacts/Android/Features/UnityEngine.XRModule-FeaturesChecked.txt
+[ 385/1446  0s] ExtractUsedFeatures Library/Bee/artifacts/Android/Features/Assembly-CSharp-FeaturesChecked.txt
+[ 386/1446  0s] ICallRegistrationGenerator C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/UnityICallRegistration.cpp
+[ 387/1446  0s] ClassRegistrationGenerator C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/UnityClassRegistration.cpp
+[ 389/1446  0s] Compile UnityICallRegistration Library/Bee/artifacts/Android/libunity/arm64-v8a/UnityICallRegistration.o
+[ 390/1446  0s] Link libunity Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so
+[ 391/1446  0s] Stripping Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so -> Library/Bee/artifacts/Android/libunity/arm64-v8a/stripped/libunity.so Library/Bee/artifacts/Android/libunity/arm64-v8a/stripped/libunity.so
+[ 392/1446  0s] Generate Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.dbg.so from Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.dbg.so
+[ 393/1446  0s] Generate Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.sym.so from Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.dbg.so Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.sym.so
+[ 394/1446  0s] Adding note Library/Bee/artifacts/Android/libunity/arm64-v8a/stripped/libunity.so -> C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/arm64-v8a/libunity.so C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/arm64-v8a/libunity.so
+[ 395/1446  3s] IL2CPP_CodeGen C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/il2cpp_conv_sfyh.traceevents
+C:\Program Files\Unity\Hub\Editor\6000.0.26f1\Editor\Data\il2cpp\build\deploy\il2cpp.exe @Library\Bee\artifacts\rsp\10751604588744259255.rsp
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshPro::GenerateTextMesh() - Method was given it's own cpp file because it is large and costly to compile
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshProUGUI::GenerateTextMesh() - Method was given it's own cpp file because it is large and costly to compile
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TMP_TextParsingUtilities::.cctor() - Method was given it's own cpp file because it is large and costly to compile
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Void UnityEngine.TextCore.Text.TextGeneratorUtilities::.cctor() - Method was given it's own cpp file because it is large and costly to compile
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Boolean UnityEngine.TextCore.Text.TextGenerator::ValidateHtmlTag(UnityEngine.TextCore.Text.TextProcessingElement[],System.Int32,System.Int32&,UnityEngine.TextCore.Text.TextGenerationSettings,UnityEngine.TextCore.Text.TextInfo,System.Boolean&) - High Variable Count of 242
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Boolean UnityEngine.TextCore.Text.TextGenerator::ValidateHtmlTag(UnityEngine.TextCore.Text.TextProcessingElement[],System.Int32,System.Int32&,UnityEngine.TextCore.Text.TextGenerationSettings,UnityEngine.TextCore.Text.TextInfo,System.Boolean&) - High Instruction Count of 6342
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Boolean UnityEngine.TextCore.Text.TextGenerator::ValidateHtmlTag(UnityEngine.TextCore.Text.TextProcessingElement[],System.Int32,System.Int32&,UnityEngine.TextCore.Text.TextGenerationSettings,UnityEngine.TextCore.Text.TextInfo,System.Boolean&) - High CodeSize of 18047
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Void UnityEngine.TextCore.Text.TextGenerator::ParsingPhase(UnityEngine.TextCore.Text.TextInfo,UnityEngine.TextCore.Text.TextGenerationSettings,System.UInt32&,System.Single&) - High Variable Count of 310
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Void UnityEngine.TextCore.Text.TextGenerator::ParsingPhase(UnityEngine.TextCore.Text.TextInfo,UnityEngine.TextCore.Text.TextGenerationSettings,System.UInt32&,System.Single&) - High Instruction Count of 6675
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Void UnityEngine.TextCore.Text.TextGenerator::ParsingPhase(UnityEngine.TextCore.Text.TextInfo,UnityEngine.TextCore.Text.TextGenerationSettings,System.UInt32&,System.Single&) - High CodeSize of 17381
+Warning: [UnityEngine.TextCoreTextEngineModule] - UnityEngine.Vector2 UnityEngine.TextCore.Text.TextGenerator::CalculatePreferredValues(System.Single&,UnityEngine.Vector2,System.Boolean,UnityEngine.TextCore.Text.TextGenerationSettings,UnityEngine.TextCore.Text.TextInfo) - High Variable Count of 207
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Void UnityEngine.TextCore.Text.TextGeneratorUtilities::.cctor() - High Instruction Count of 10585
+Warning: [UnityEngine.TextCoreTextEngineModule] - System.Void UnityEngine.TextCore.Text.TextGeneratorUtilities::.cctor() - High CodeSize of 31741
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshPro::GenerateTextMesh() - High Variable Count of 216
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshPro::GenerateTextMesh() - High Instruction Count of 9682
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshPro::GenerateTextMesh() - High CodeSize of 29729
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshProUGUI::GenerateTextMesh() - High Variable Count of 221
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshProUGUI::GenerateTextMesh() - High Instruction Count of 9773
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TextMeshProUGUI::GenerateTextMesh() - High CodeSize of 30008
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TMP_TextParsingUtilities::.cctor() - High Instruction Count of 10579
+Warning: [Unity.TextMeshPro] - System.Void TMPro.TMP_TextParsingUtilities::.cctor() - High CodeSize of 31711
+Warning: [mscorlib] - System.Void System.Security.Cryptography.RIPEMD160Managed::MDTransform(System.UInt32*,System.UInt32*,System.Byte*) - High Instruction Count of 5579
+Warning: [Unity.InputSystem] - System.Void UnityEngine.InputSystem.FastTouchscreen::.ctor() - High Variable Count of 315
+[ 441/1446  3s] GenerateNativePluginsForAssemblies Library/Bee/artifacts/Android/AsyncPluginsFromLinker
+[ 957/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Resources/System.Drawing.dll-resources.dat
+[1063/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/Data/Resources/System.Data.dll-resources.dat
+[1076/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Resources/System.Data.dll-resources.dat
+[1082/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/il2cppOutput/Assembly-CSharp.cpp
+[1086/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/Data/Resources/mscorlib.dll-resources.dat
+[1134/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/il2cppOutput/Il2CppToEditorData.json
+[1166/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/il2cppOutput/Il2CppRgctxTable.c
+[1194/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/il2cppOutput/Il2CppGenericMethodDefinitions.c
+[1203/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/il2cppOutput/UnityEngine.XRModule_CodeGen.c
+[1222/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/il2cppOutput/UnityEngine.XRModule.cpp
+[1244/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/il2cppOutput/Il2CppMetadataUsage.c
+[1281/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/Data/Resources/System.Drawing.dll-resources.dat
+[1340/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/Data/Metadata/global-metadata.dat
+[1372/1446  0s] C_Android_arm64 Library/Bee/artifacts/Android/d8kzr/dhee8nirkl4m.o
+[1411/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Resources/mscorlib.dll-resources.dat
+[1412/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Metadata/global-metadata.dat
+[1427/1446  0s] GuidGenerator C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/unity_app_guid
+[1430/1446  0s] C_Android_arm64 Library/Bee/artifacts/Android/d8kzr/oq5vmj8r7sck.o
+[1431/1446  0s] C_Android_arm64 Library/Bee/artifacts/Android/d8kzr/opp088za10pr.o
+[1432/1446  0s] C_Android_arm64 Library/Bee/artifacts/Android/d8kzr/opoi0pbq1q6v.o
+[1433/1446  0s] C_Android_arm64 Library/Bee/artifacts/Android/d8kzr/5dzzo832s8gd.o
+[1434/1446  1s] C_Android_arm64 Library/Bee/artifacts/Android/d8kzr/ck8ifrtbxxu8.o
+[1435/1446  1s] Link_Android_arm64 Library/Bee/artifacts/Android/d8kzr/libil2cpp.so
+[1436/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/libil2cpp.dbg.so
+[1437/1446  0s] CopyFiles Library/Bee/artifacts/objcopy_5lmi/libil2cpp.dbg.so
+[1438/1446  0s] NdkObjCopy Library/Bee/artifacts/objcopy_5lmi/stripped/libil2cpp.so
+[1439/1446  0s] NdkObjCopy Library/Bee/artifacts/objcopy_5lmi/libil2cpp.sym.so
+[1440/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/libil2cpp.sym.so
+[1441/1446  0s] NdkObjCopy Library/Bee/artifacts/objcopy_5lmi/libil2cpp.so
+[1442/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/artifacts/Android/il2cppOutput/build/arm64-v8a/libil2cpp.so
+[1443/1446  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/arm64-v8a/libil2cpp.so
+*** Tundra requires additional run (6.58 seconds), 47 items updated, 1446 evaluated
+*** Additional run caused by: timestamp change of Library/Bee/artifacts/Android/Features/Assembly-CSharp-FeaturesChecked.txt
+Finished compiling graph: 1641 nodes, 4642 flattened edges (4636 ToBuild, 6 ToUse), maximum node priority 1294
+[ 398/1447  0s] CopyFiles C:/UnityProjects/Gabb-VR-Demo-Cafe/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/icallsummary.txt
+*** Tundra build success (0.16 seconds), 1 items updated, 1447 evaluated

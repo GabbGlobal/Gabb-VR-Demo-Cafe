@@ -30,6 +30,9 @@ public class XRRefreshRateManager : MonoBehaviour
         bool success = displaySubsystem.TryRequestDisplayRefreshRate(120f);
         Log($"TryRequestDisplayRefreshRate success: {success}");
 
+        Log("Setting foveatedRenderingLevel");
+        displaySubsystem.foveatedRenderingLevel = 0.5f; // medium fixed foveation
+
         // Get the supported refresh rates.
         // If you will save the refresh rate values for longer than this frame, pass
         // Allocator.Persistent and remember to Dispose the array when you are done with it.
