@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6100730001809545653
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -8,43 +21,37 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: lambert5.009
-  m_Shader: {fileID: 4800000, guid: 3334d0a534d2dac45b2c1a9a7e0a6c64, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 5307d81f6ff873f45a88212286d0a150, type: 3}
+  m_Parent: {fileID: 2100000, guid: 1129ef35d65984647b1f9ec388962a21, type: 2}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - BAKERY_LMSPEC
+  - BAKERY_MODE_MONOSH
+  - _REFLECTIONS
+  m_InvalidKeywords:
   - BAKERY_LMSPECOCCLUSION
   - BAKERY_MONOSH
   - BAKERY_PROBESHNONLINEAR
   - BAKERY_SHNONLINEAR
   - _NORMALMAP
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
     RenderType: Opaque
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 0cfa1fae45ebaf0459c77a96eba72671, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: d066f9ed4c5be504ba0028fd1d9e39b6, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -52,70 +59,17 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Volume0:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Volume1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Volume2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _VolumeMask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 10aec6eea9836674e94695cbee409f6e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BAKERY_2SIDED: 2
-    - _BAKERY_2SIDEDON: 0
-    - _BAKERY_BICUBIC: 0
-    - _BAKERY_LMSPEC: 1
-    - _BAKERY_LMSPECOCCLUSION: 1
-    - _BAKERY_MONOSH: 1
+    - BAKERY_LMSPEC: 0
+    - BAKERY_MODE: 0
     - _BAKERY_PROBESHNONLINEAR: 1
-    - _BAKERY_RNM: 0
-    - _BAKERY_SH: 0
-    - _BAKERY_SHNONLINEAR: 1
-    - _BAKERY_VERTEXLM: 0
-    - _BAKERY_VERTEXLMDIR: 0
-    - _BAKERY_VERTEXLMMASK: 0
-    - _BAKERY_VERTEXLMSH: 0
-    - _BAKERY_VOLROTATION: 0
-    - _BAKERY_VOLUME: 0
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _GlossMapScale: 1
-    - _Glossiness: 0
-    - _GlossyReflections: 1
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SmoothnessTextureChannel: 0
-    - _SpecularHighlights: 1
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _VolumeInvSize: {r: 1000001, g: 1000001, b: 1000001, a: 1}
-    - _VolumeMin: {r: 0, g: 0, b: 0, a: 1}
+    - _Lightmap_specular_as_reflection_occlusion: 0
+    - _REFLECTIONS: 0
+    - _SmoothnessSource: 0
+    m_Colors: []
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
