@@ -7,25 +7,19 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BakeryDynamicBase
-  m_Shader: {fileID: 4800000, guid: 3334d0a534d2dac45b2c1a9a7e0a6c64, type: 3}
+  m_Name: Blocker
+  m_Shader: {fileID: 4800000, guid: 1e49512045b19ea43aa6379ab4fb957b, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - BAKERY_LMSPECOCCLUSION
-  - BAKERY_MONOSH
-  - BAKERY_SHNONLINEAR
-  - BAKERY_VOLUME
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _BAKERY_MONOSH _BAKERY_PROBESHNONLINEAR _BAKERY_SHNONLINEAR
-    _BAKERY_VOLUME _GlossyReflections _SpecularHighlights
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -65,42 +59,8 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Volume0:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Volume1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _Volume2:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _VolumeMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BAKERY_2SIDED: 2
-    - _BAKERY_2SIDEDON: 0
-    - _BAKERY_BICUBIC: 0
-    - _BAKERY_LMSPEC: 0
-    - _BAKERY_LMSPECOCCLUSION: 1
-    - _BAKERY_MONOSH: 1
-    - _BAKERY_PROBESHNONLINEAR: 0
-    - _BAKERY_RNM: 0
-    - _BAKERY_SH: 0
-    - _BAKERY_SHNONLINEAR: 1
-    - _BAKERY_VERTEXLM: 0
-    - _BAKERY_VERTEXLMDIR: 0
-    - _BAKERY_VERTEXLMMASK: 0
-    - _BAKERY_VERTEXLMSH: 0
-    - _BAKERY_VOLPUSHBYNORMAL: 0
-    - _BAKERY_VOLROTATION: 0
-    - _BAKERY_VOLROTATIONY: 0
-    - _BAKERY_VOLUME: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -111,18 +71,16 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
+    - _Opacity: 1
     - _Parallax: 0.02
+    - _Size: 128
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
-    - _VolumeNormalOffset: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 0}
-    - _SpecOcclusionParams: {r: 10, g: -0.5, b: 0.8, a: 0}
-    - _VolumeInvSize: {r: 1000001, g: 1000001, b: 1000001, a: 1}
-    - _VolumeMin: {r: 0, g: 0, b: 0, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.6103287, a: 0.85882354}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

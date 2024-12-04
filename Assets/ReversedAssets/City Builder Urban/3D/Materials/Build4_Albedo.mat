@@ -28,11 +28,9 @@ Material:
   - BAKERY_LMSPEC
   - BAKERY_LMSPECOCCLUSION
   - BAKERY_MONOSH
-  - BAKERY_PROBESHNONLINEAR
   - BAKERY_SHNONLINEAR
   - _METALLICGLOSSMAP
   - _NORMALMAP
-  - _PARALLAXMAP
   m_InvalidKeywords:
   - _EMISSIVE_COLOR_MAP
   - _HEIGHTMAP
@@ -72,7 +70,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 9b6475fc1ccb83c44aaf8c5ea25cb18b, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

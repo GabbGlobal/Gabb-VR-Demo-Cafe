@@ -28,7 +28,6 @@ Material:
   - BAKERY_LMSPEC
   - BAKERY_LMSPECOCCLUSION
   - BAKERY_MONOSH
-  - BAKERY_PROBESHNONLINEAR
   - BAKERY_SHNONLINEAR
   - _NORMALMAP
   m_InvalidKeywords: []
@@ -55,11 +54,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 99, y: 99}
+        m_Scale: {x: 75, y: 75}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 0606ae90f6e34a04c80f3365c93d68e9, type: 3}
-        m_Scale: {x: 99, y: 99}
+        m_Scale: {x: 75, y: 75}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:

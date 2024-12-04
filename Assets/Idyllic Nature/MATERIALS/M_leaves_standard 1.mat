@@ -13,11 +13,9 @@ Material:
   m_ModifiedSerializedProperties: 16
   m_ValidKeywords:
   - BAKERY_MONOSH
-  - BAKERY_PROBESHNONLINEAR
   - BAKERY_SHNONLINEAR
   - BAKERY_VOLUME
   - _ALPHATEST_ON
-  - _NORMALMAP
   m_InvalidKeywords:
   - BAKERY_2SIDEDON
   - _WINDQUALITY_NONE
@@ -33,7 +31,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 1bfb25a91f2c5e04db868dd669b7d5fb, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
