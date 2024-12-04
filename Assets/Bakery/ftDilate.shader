@@ -16,7 +16,7 @@
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
-            #pragma exclude_renderers gles gles3
+            #pragma exclude_renderers gles
 
 			#include "UnityCG.cginc"
 
@@ -114,7 +114,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            #pragma exclude_renderers gles gles3
+            #pragma exclude_renderers gles
 
             #include "UnityCG.cginc"
 

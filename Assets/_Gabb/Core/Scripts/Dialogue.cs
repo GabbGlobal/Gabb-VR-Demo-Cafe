@@ -6,6 +6,17 @@ using UnityEngine;
 public class Dialogue : ScriptableObject
 {
     public List<LineOfDialogue> linesOfDialogue;
+
+    /*public float GetTotalXPValue() {
+        float totalXpValue = 0;
+        foreach (LineOfDialogue line in linesOfDialogue) {
+            if (line.speaker == DialogueSpeaker.Player) {
+                totalXpValue += 3f;
+            }
+        }
+        return totalXpValue;
+    }*/
+
     //public string language; not used now, usedlater for modular language
 }
 

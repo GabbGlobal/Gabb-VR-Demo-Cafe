@@ -23,7 +23,9 @@ public class ConversationUI : MonoBehaviour
     public Renderer videoSurface;
     public VideoPlayer videoPlayer;
     public Button hintButton;
-
+    public Transform tutorialPlayerText;
+    public Transform tutorialNpcText;
+    private bool tutorialDone = false;
     public static ConversationUI Instance {get; private set;}
 
     void Awake() {
@@ -70,6 +72,8 @@ public class ConversationUI : MonoBehaviour
 
     public void DisplayLineOfDialogue(LineOfDialogue lineOfDialogue)
     {
+        tutorialNpcText.gameObject.SetActive(false);
+        tutorialPlayerText.gameObject.SetActive(false);
         switch (lineOfDialogue.speaker)
         {
             case DialogueSpeaker.NPC:
@@ -78,7 +82,12 @@ public class ConversationUI : MonoBehaviour
                     hintButton.gameObject.SetActive(false); // hide hint button
                     ResetVideo();
                     ResetText(); // when speaking npc dialogue, clear the previous dialogue
-                    npcDialogueText.text = $"THEM: {lineOfDialogue.text}";
+                    npcDialogueText.text = lineOfDialogue.text;
+                    // tutorial
+                    if (!tutorialDone) {
+                        tutorialNpcText.gameObject.SetActive(true);
+                        tutorialPlayerText.gameObject.SetActive(false);
+                    }
                     // when speaking npc dialogue, clear the player's dialogue
                     break;
                 }
@@ -86,7 +95,12 @@ public class ConversationUI : MonoBehaviour
                 {
                     Debug.Log("PLAYER");
                     hintButton.gameObject.SetActive(true); // show hint button
-                    playerDialogueText.text = $"YOU: {lineOfDialogue.text}";
+                    playerDialogueText.text = lineOfDialogue.text;
+                    // tutorial
+                    if (!tutorialDone) {
+                        tutorialNpcText.gameObject.SetActive(false);
+                        tutorialPlayerText.gameObject.SetActive(true);
+                    }
                     break;
                 }
         }
@@ -145,12 +159,13 @@ public class ConversationUI : MonoBehaviour
         playerDialogueText.color = successColor;
         advisorText.text = "Well done! Let's hear what they have to say next.";
         audioSource.PlayOneShot(successSound);
+        tutorialDone = true; // finish tutorial after succeeding at 1 line of dialogue
     }
 
-    public void ShowFail()
+    public void ShowFail(int failedAttempts)
     {
         playerDialogueText.color = failColor;
-        advisorText.text = advisorFailMessages[Random.Range(0, advisorFailMessages.Count)]; // random advisor message
+        advisorText.text = advisorFailMessages[failedAttempts - 1]; // show advisor message by failed attempt #
         audioSource.PlayOneShot(failSound);
     }
 

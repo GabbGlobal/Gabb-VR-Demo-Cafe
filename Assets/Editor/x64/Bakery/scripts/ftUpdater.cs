@@ -35,7 +35,11 @@ public class ftUpdater : EditorWindow
 
     bool anythingDownloaded = false;
 
+#if BAKERY_TOOLSMENU
+    [MenuItem ("Tools/Bakery/Utilities/Check for patches", false, 1000)]
+#else
 	[MenuItem ("Bakery/Utilities/Check for patches", false, 1000)]
+#endif
 	public static void Check()
     {
         var instance = (ftUpdater)GetWindow(typeof(ftUpdater));
@@ -202,46 +206,69 @@ public class ftUpdater : EditorWindow
 
             if (downloadLM)
             {
+                int err;
+
                 // Extract runtime files
-                int err = ExtractZIP("bakery-csharp.zip", 1, "Bakery", runtimePath);
-                if (err != 0)
+                if (File.Exists(Application.dataPath+"/../bakery-csharp.zip"))
                 {
-                    DebugLogError("ExtractZIP: " + err);
-                    yield break;
-                }
+                    err = ExtractZIP("bakery-csharp.zip", 1, "Bakery", runtimePath);
+                    if (err != 0)
+                    {
+                        DebugLogError("ExtractZIP: " + err);
+                        yield break;
+                    }
 
-                // Extract editor files
-                err = ExtractZIP("bakery-csharp.zip", 3, "Bakery", editorPath);
-                if (err != 0)
+                    // Extract editor files
+                    err = ExtractZIP("bakery-csharp.zip", 3, "Bakery", editorPath);
+                    if (err != 0)
+                    {
+                        DebugLogError("ExtractZIP: " + err);
+                        yield break;
+                    }
+
+                    Debug.Log("Extracted bakery-csharp");
+                }
+                else
                 {
-                    DebugLogError("ExtractZIP: " + err);
-                    yield break;
+                    Debug.LogError(Application.dataPath+"/../bakery-csharp.zip was not found, but the corresponding -cver.txt file exists - remove it.");
                 }
-
-                Debug.Log("Extracted bakery-csharp");
 
                 // Extract binaries
-                err = ExtractZIP("bakery-compiled.zip", 1, "", editorPath);
-                if (err != 0)
+                if (File.Exists(Application.dataPath+"/../bakery-compiled.zip"))
                 {
-                    DebugLogError("ExtractZIP: " + err);
-                    yield break;
-                }
+                    err = ExtractZIP("bakery-compiled.zip", 1, "", editorPath);
+                    if (err != 0)
+                    {
+                        DebugLogError("ExtractZIP: " + err);
+                        yield break;
+                    }
 
-                Debug.Log("Extracted bakery-compiled");
+                    Debug.Log("Extracted bakery-compiled");
+                }
+                else
+                {
+                    Debug.LogError(Application.dataPath+"/../bakery-compiled.zip was not found, but the corresponding -cver.txt file exists - remove it.");
+                }
             }
 
             if (downloadRT)
             {
                 // Extract RTPreview files
-                int err = ExtractZIP("bakery-rtpreview-csharp.zip", 1, "", editorPath);
-                if (err != 0)
+                if (File.Exists(Application.dataPath+"/../bakery-rtpreview-csharp.zip"))
                 {
-                    DebugLogError("ExtractZIP: " + err);
-                    yield break;
-                }
+                    int err = ExtractZIP("bakery-rtpreview-csharp.zip", 1, "", editorPath);
+                    if (err != 0)
+                    {
+                        DebugLogError("ExtractZIP: " + err);
+                        yield break;
+                    }
 
-                Debug.Log("Extracted bakery-rtpreview-csharp");
+                    Debug.Log("Extracted bakery-rtpreview-csharp");
+                }
+                else
+                {
+                    Debug.LogError(Application.dataPath+"/../bakery-rtpreview-csharp.zip was not found, but the corresponding -cver.txt file exists - remove it.");
+                }
             }
         }
 

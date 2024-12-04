@@ -45,7 +45,7 @@ MonoBehaviour:
   - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX6_2X1.fbx
   - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX_2x21_NoWindows.fbx
   - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX2_2x21_NoWin.fbx
-  modifiedAssetPaddingHash: d6a958ff10d6292ff4805c3c5b0a88f4552f20140d5af193293548f5b0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493ded568076d67e2a89994552c323fd3d9333fd3d980c5d890353fd3d9353fd3d94adc894b333fd3d94adc894b333fd3d9323fd3d9333fd3d9323fd3d9353fd3d9
+  modifiedAssetPaddingHash: d6a958ff10d6292ff4805c3c5b0a88f4a6cbc15e0d5af193293548f5b0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493ded568076d67e2a89994552c323fd3d9333fd3d980c5d890353fd3d9353fd3d94adc894b333fd3d94adc894b333fd3d9323fd3d9333fd3d9323fd3d9353fd3d9
   modifiedMeshList: []
   modifiedMeshPaddingList: 
   modifiedAssets:
@@ -481,7 +481,7 @@ MonoBehaviour:
     - ggCafe_10_21_Props_low_ggCafeCup_cupCarrier_low
     - ggCafe_10_21_Props_low_ggCafe_Glass_low
     - ggCafe_10_21_Props_low_ggCafe_Straw_low
-    padding: 25000000900000003e0000005a00000088000000bd000000000100005c0000007200000030000000000100001e000000f4000000c6000000000100004f000000df000000db00000027000000790000000001000099000000b3000000be000000d0000000ea0000000001000000010000480000004f000000ad00000034000000310000003f000000ea000000
+    padding: 25000000900000003e00000071000000aa000000bd000000000100005c0000007200000030000000000100001e000000f4000000c6000000000100004f000000df000000db00000027000000790000000001000099000000b3000000be000000d0000000ea0000000001000000010000480000004f000000ad000000340000003e0000003f000000ea000000
     unwrapper: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
   - meshName:
     - ggCafe_espressoTube02
@@ -793,10 +793,94 @@ MonoBehaviour:
   - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/Cups&Mugs/papercup/papercuptop_01.obj
   - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/cheesedanish_01.obj
   - Assets/_Gabb/Cafe/Models/Gabb Global Cafe Assets - NotFinalAnymore/Cups&Mugs/plasticcup/plasticcup_02.obj
-  uvOverlapAssetList: 00000000ffffffff010100000000000001010000000000000000000000000000000000000000000000000000010100000101000000000000000000000000000000000000010100000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000001010000000000000101000000000000000000000000000000000000000000000101000000000000000000000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101000001010000000000000101000000000000000000000000000000000000000000000101000000000000000000000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000
+  - Assets/AutoHand/Examples/Mesh/rollingPin.fbx
+  - Assets/AutoHand/Examples/Mesh/ScarBullet.fbx
+  - Assets/AutoHand/Examples/Mesh/Controller.fbx
+  - Assets/AutoHand/Examples/Mesh/Arrow.fbx
+  - Assets/AutoHand/Examples/Mesh/Sword.fbx
+  - Assets/AutoHand/Examples/Mesh/diamond.fbx
+  - Assets/AutoHand/Examples/Mesh/Basketball/Basketball_dl.fbx
+  - Assets/AutoHand/Examples/Mesh/mk-2-grenade/source/Mk2grenade.FBX
+  - Assets/AutoHand/Examples/Mesh/Scar_EmptyShell.fbx
+  - Assets/AutoHand/Examples/Mesh/hoop.dae
+  - Assets/AutoHand/Examples/Mesh/Scar_Ammo.fbx
+  - Assets/AutoHand/Examples/Mesh/torus.fbx
+  - Assets/AutoHand/Examples/Mesh/key.fbx
+  - Assets/AutoHand/Examples/Mesh/Lever2.fbx
+  - Assets/AutoHand/Examples/Mesh/grenade/source/grenade.fbx
+  - Assets/AutoHand/Examples/Mesh/Table.fbx
+  - Assets/AutoHand/Examples/Mesh/Slide2.fbx
+  - Assets/AutoHand/Examples/Mesh/Wedge.fbx
+  - Assets/AutoHand/Examples/Mesh/TrainingDummy/source/Sketchfab_2017_11_01_02_40_11.fbx
+  - Assets/AutoHand/Examples/Mesh/Drawer Shelf.fbx
+  - Assets/AutoHand/Examples/Mesh/CompoundBow.fbx
+  - Assets/AutoHand/Examples/Prefabs/Demo/Flower + vent.fbx
+  - Assets/AutoHand/Examples/Mesh/SportsCar.fbx
+  - Assets/AutoHand/Examples/Mesh/cone.fbx
+  - Assets/AutoHand/Examples/Mesh/pistol.fbx
+  - Assets/AutoHand/Examples/Mesh/Table2.fbx
+  - Assets/AutoHand/Examples/Mesh/Quest2ControllerModels/controller_r.fbx
+  - Assets/AutoHand/Examples/Mesh/Briefcase.fbx
+  - Assets/AutoHand/Examples/Mesh/mushroom.fbx
+  - Assets/AutoHand/Examples/Mesh/sub.fbx
+  - Assets/AutoHand/Examples/Mesh/tomatoMesh.fbx
+  - Assets/AutoHand/Examples/Mesh/Dial.fbx
+  - Assets/AutoHand/Examples/Mesh/Robohand.fbx
+  - Assets/AutoHand/Examples/Mesh/Button.fbx
+  - Assets/AutoHand/Examples/Mesh/Chest/source/chest.fbx
+  - Assets/AutoHand/Examples/Mesh/CartoonHand.fbx
+  - Assets/AutoHand/Examples/Mesh/OculusHand_R.fbx
+  - Assets/AutoHand/Examples/Mesh/SemiSphere.fbx
+  - Assets/AutoHand/Examples/Mesh/Basketball/model.dae
+  - Assets/AutoHand/Examples/Mesh/TableA.fbx
+  - Assets/AutoHand/Examples/Mesh/Target/source/target.fbx
+  - Assets/AutoHand/Examples/Mesh/NormalCar1.fbx
+  - Assets/AutoHand/Examples/Mesh/taco.fbx
+  - Assets/AutoHand/Examples/Mesh/Gold Bar/source/gold bar.fbx
+  - Assets/AutoHand/Examples/Mesh/WoodCubes.fbx
+  - Assets/AutoHand/Examples/Mesh/SteeringWheel.fbx
+  - Assets/AutoHand/Examples/Mesh/Slide3.fbx
+  - Assets/AutoHand/Examples/Mesh/Quest2ControllerModels/controller_l.fbx
+  - Assets/AutoHand/Examples/Mesh/meatTenderizer.fbx
+  - Assets/AutoHand/Examples/Mesh/Hand.fbx
+  - Assets/AutoHand/Examples/Mesh/Table 1.fbx
+  - Assets/AutoHand/Examples/Mesh/icosphere.fbx
+  - Assets/AutoHand/Examples/Mesh/Lever1.fbx
+  - Assets/AutoHand/Examples/Mesh/sodaBottle.fbx
+  - Assets/AutoHand/Examples/Mesh/Gloves/source/Boxing Glove/Sketchfab_2017_11_01_02_40_11.fbx
+  - Assets/AutoHand/Examples/Mesh/Scar.fbx
+  - Assets/AutoHand/Examples/Mesh/barrel.fbx
+  - Assets/AutoHand/Examples/Scenes/OpenXR/Prefabs/Models/RightHand.fbx
+  - Assets/AutoHand/Examples/Scenes/OpenXR/Prefabs/Models/LeftHand.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForQuestAndRiftS/OculusTouchForQuestAndRiftS_Left.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForRift/Materials/pasted_touchPBS_MAT.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/Cone.obj
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForRift/right_touch_controller_model_skel.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForRift/left_touch_controller_model_skel.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/HandTracking/OculusHand_L.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForQuest2/OculusTouchForQuest2_Right.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/Ray.obj
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForRift/Materials/OculusTouchForRift_Material.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForQuestAndRiftS/OculusTouchForQuestAndRiftS_Right.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/HandTracking/OpenXRRightHand.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForQuestAndRiftS/Materials/OculusTouchForQuestAndRiftS_Material.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPro/MetaQuestTouchPro_Right.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPro/MetaQuestTouchPro_Left.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPlus/MetaQuestTouchPlus_Left.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForQuest2/OculusTouchForQuest2_Left.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/HandTracking/OpenXRLeftHand.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPlus/Materials/MetaQuestTouchPlusRight_Material.fbx
+  - Packages/com.meta.xr.sdk.core/Editor/BuildingBlocks/BlockData/SampleSpatialAnchorController/Meshs/AnchorModel.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/OculusTouchForQuest2/Materials/OculusTouchForQuest2_MAT.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPlus/Materials/MetaQuestTouchPlusLeft_Material.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPlus/MetaQuestTouchPlus_Right.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPro/Materials/MetaQuestProLeft_Material.fbx
+  - Packages/com.meta.xr.sdk.core/Meshes/MetaQuestTouchPro/Materials/MetaQuestProRight_Material.fbx
+  - Packages/com.unity.xr.arfoundation/Assets/Prefabs/Handles.fbx
+  uvOverlapAssetList: 00000000ffffffff0101000000000000010100000000000000000000000000000000000000000000000000000101000001010000000000000000000000000000000000000101000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000010100000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000010100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000010100000000000001010000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000000000000000000000000000000000000010100000000000000000000000000000101000001010000000000000101000001010000ffffffff000000000000000000000000010100000101000000000000ffffffff00000000000000000000000000000000ffffffff010100000101000000000000010100000000000000000000010100000000000000000000010100000101000001010000010100000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000010100000000000001010000000000000000000000000000010100000000000000000000000000000000000001010000010100000101000001010000000000000000000000000000000000000101000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001010000000000000000000000000000000000000000000001010000
   xatlasWarningShown: 1
   foundCompatibleSetup: 1
-  gpuName: NVIDIA GeForce RTX 4070 Laptop GPU
+  gpuName: NVIDIA GeForce RTX 4090
   runsNonRTX: 0
   runsOptix5: 0
   runsOptix6: 1
@@ -842,12 +926,14 @@ MonoBehaviour:
   renderSettingsUseScenePath: 0
   renderSettingsHackAOIntensity: 0
   renderSettingsHackAOSamples: 16
+  renderSettingsHackAOSofter: 0
   renderSettingsHackAORadius: 1
   renderSettingsShowAOSettings: 0
   renderSettingsShowTasks: 1
   renderSettingsShowTasks2: 0
   renderSettingsShowPaths: 1
   renderSettingsShowNet: 1
+  renderSettingsShowSettingsAsset: 1
   renderSettingsOcclusionProbes: 0
   renderSettingsTexelsPerMap: 0
   renderSettingsTexelsColor: 1
@@ -859,13 +945,16 @@ MonoBehaviour:
   renderSettingsSamplesWarning: 1
   renderSettingsSuppressPopups: 0
   renderSettingsPrefabWarning: 1
+  renderSettingsSectorWarning: 0
   renderSettingsSplitByScene: 0
-  renderSettingsSplitByTag: 0
+  renderSettingsSplitByTag: 1
   renderSettingsUVPaddingMax: 0
+  renderSettingsUVPaddingPreserveIfExisted: 0
   renderSettingsPostPacking: 1
-  renderSettingsHoleFilling: 0
+  renderSettingsHoleFilling: 1
+  renderSettingsAlphaDithering: 0
   renderSettingsBeepOnFinish: 0
-  renderSettingsExportTerrainAsHeightmap: 1
+  renderSettingsExportTerrainAsHeightmap: 0
   renderSettingsRTXMode: 1
   renderSettingsLightProbeMode: 1
   renderSettingsClientMode: 0
@@ -884,6 +973,8 @@ MonoBehaviour:
   renderSettingsRTPVHDR: 0
   renderSettingsRTPVWidth: 640
   renderSettingsRTPVHeight: 360
+  renderSettingsRTPVExposure: 1
+  renderSettingsRemoveDuplicateLightmaps: 0
   tagOverrides: []
-  modifiedMeshPaddingArray: 06000000
-  modifiedMeshUnwrapperArray: 01000000
+  modifiedMeshPaddingArray: 25000000900000003e00000071000000aa000000bd000000000100005c0000007200000030000000000100001e000000f4000000c6000000000100004f000000df000000db00000027000000790000000001000099000000b3000000be000000d0000000ea0000000001000000010000480000004f000000ad000000340000003e0000003f000000ea000000
+  modifiedMeshUnwrapperArray: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
