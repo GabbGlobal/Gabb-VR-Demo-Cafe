@@ -17,7 +17,8 @@ Material:
   - BAKERY_SHNONLINEAR
   - BAKERY_VOLUME
   - _ALPHATEST_ON
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - BAKERY_2SIDEDON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -35,6 +36,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BAKERY_2SIDED: 0
+    - _BAKERY_2SIDEDON: 1
     - _BAKERY_LMSPEC: 0
     - _BAKERY_LMSPECOCCLUSION: 0
     - _BAKERY_MONOSH: 0
@@ -45,6 +48,6 @@ Material:
     - _SrcBlend: 1
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.7605507, g: 0.8301887, b: 0.57564974, a: 1}
+    - _Color: {r: 0.39074484, g: 0.426, b: 0.29379308, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

@@ -45,7 +45,10 @@ MonoBehaviour:
   - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX6_2X1.fbx
   - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX_2x21_NoWindows.fbx
   - Assets/ReversedAssets/City Builder Urban/3D/Models/BuildEX2_2x21_NoWin.fbx
-  modifiedAssetPaddingHash: d6a958ff10d6292ff4805c3c5b0a88f4a6cbc15e0d5af193293548f5b0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493ded568076d67e2a89994552c323fd3d9333fd3d980c5d890353fd3d9353fd3d94adc894b333fd3d94adc894b333fd3d9323fd3d9333fd3d9323fd3d9353fd3d9
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Wall.fbx
+  - Assets/Asset/Model/fence.fbx
+  - Assets/ReversedAssets/City Builder Urban/3D/Models/Path_Slim.fbx
+  modifiedAssetPaddingHash: d6a958ff10d6292ff4805c3c5b0a88f4a6cbc15e0d5af193293548f5b0207af3d821484b94f0cee54b65eadb0a0c3f0bdaebaea28b3ecb09dceaecdfd96e4493ded568076d67e2a89994552c323fd3d9333fd3d980c5d890353fd3d9353fd3d94adc894b333fd3d94adc894b333fd3d9323fd3d9333fd3d9323fd3d9353fd3d9e55031ee885031ee567e9363
   modifiedMeshList: []
   modifiedMeshPaddingList: 
   modifiedAssets:
@@ -678,6 +681,18 @@ MonoBehaviour:
     - BuildEX2.003
     padding: 06000000
     unwrapper: 01000000
+  - meshName:
+    - Cube
+    padding: 11000000
+    unwrapper: 01000000
+  - meshName:
+    - Object001
+    padding: 2f000000
+    unwrapper: 01000000
+  - meshName:
+    - PathSlim
+    padding: 17000000
+    unwrapper: 01000000
   assetList:
   - Assets/Bakery/examples/content/sponza/bush.FBX
   - Assets/Bakery/examples/content/floor_lamp.FBX
@@ -976,5 +991,5 @@ MonoBehaviour:
   renderSettingsRTPVExposure: 1
   renderSettingsRemoveDuplicateLightmaps: 0
   tagOverrides: []
-  modifiedMeshPaddingArray: 25000000900000003e00000071000000aa000000bd000000000100005c0000007200000030000000000100001e000000f4000000c6000000000100004f000000df000000db00000027000000790000000001000099000000b3000000be000000d0000000ea0000000001000000010000480000004f000000ad000000340000003e0000003f000000ea000000
-  modifiedMeshUnwrapperArray: 0100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  modifiedMeshPaddingArray: 17000000
+  modifiedMeshUnwrapperArray: 01000000

@@ -29,9 +29,13 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 70, y: 70}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 546812729a0ed614181e71cc7d36f4d9, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 70, y: 70}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
@@ -40,6 +44,7 @@ Material:
     - _BAKERY_MONOSH: 0
     - _BAKERY_PROBESHNONLINEAR: 0
     - _Glossiness: 0.5
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 0.335849, g: 0.335849, b: 0.335849, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
