@@ -59,11 +59,9 @@ SPANISH_IPA = {
         'default': 'β'
     },
     'c': {
-        'default': 'k',
-        'e': 'θ',       # Spain Spanish before e/i
-        'i': 'θ',       # Spain Spanish before e/i
-        'e_latam': 's', # Latin American Spanish before e/i
-        'i_latam': 's'  # Latin American Spanish before e/i
+        'e': 'θ',  # Before 'e'
+        'i': 'θ',  # Before 'i'
+        'default': 'k'  # In other positions
     },
     'd': {
         'initial': 'd',      # word-initial or after nasal/l
@@ -164,27 +162,85 @@ SPANISH_IPA = {
         't': 'n',
         'k': 'ŋ',
         'g': 'ŋ'
-    }
+    },
+    
+    # Add these new entries for 'gu' combinations
+    'gu': {
+        'e': 'g',    # before 'e'
+        'i': 'g',    # before 'i'
+        'default': 'g'
+    },
+    'qu': {
+        'e': 'k',    # before 'e'
+        'i': 'k',    # before 'i'
+        'default': 'k'
+    },
+    'gue': 'ge',
+    'gui': 'gi',
+    'güe': 'gwe',
+    'güi': 'gwi',
+    
+    # Common Sequences
+    'que': 'ke',
+    'qui': 'ki',
+    
+    # Single letters
+    'a': 'a',
+    'b': 'b',
+    'c': {
+        'e': 'θ',  # Before 'e'
+        'i': 'θ',  # Before 'i'
+        'default': 'k'  # In other positions
+    },
+    'd': 'd',
+    'e': 'e',
+    'f': 'f',
+    'g': 'g',
+    'h': '',  # Silent in Spanish
+    'i': 'i',
+    'j': 'x',
+    'k': 'k',
+    'l': 'l',
+    'm': 'm',
+    'n': 'n',
+    'ñ': 'ɲ',
+    'o': 'o',
+    'p': 'p',
+    'q': 'k',
+    'r': {
+        'initial': 'r',
+        'default': 'ɾ'
+    },
+    's': 's',
+    't': 't',
+    'u': 'u',
+    'v': 'b',
+    'w': 'w',
+    'x': 'ks',
+    'y': 'ʝ',
+    'z': 'θ',
+    
+    # Common sequences
+    'ci': 'θi',
+    'ce': 'θe',
+    'cia': 'θia',
 }
 
 # List of prompts
 prompts = [
-    "Hola, ¿puedo ver el menú por favor?",
-    "Quiero un café con leche, por favor.",
-    "Sí, me gustaría un sándwich de huevo.",
-    "¿Qué tipo de muffin es ese?",
+    # "Hola, ¿puedo ver el menú por favor?",
+    # "Quiero un café con leche, por favor.",
+    # "Sí, me gustaría un sándwich de huevo.",
+    # "¿Qué tipo de muffin es ese?",
     "No, gracias, no hoy.",
     "¿Puedo pagar con tarjeta?",
-    "Bien, aquí está. Aquí están $6.",
-    "¡Gracias!"
+    "Bien, aquí está. Aquí están seis dólares.",
+    "Gracias"
 ]
 
 def get_spanish_phonemes(word, dialect='spain'):
     """
     Convert a Spanish word to its IPA representation with comprehensive phonetic rules
-    Args:
-        word (str): The word to convert
-        dialect (str): 'spain' or 'latam' for different regional pronunciations
     """
     phonemes = []
     i = 0
@@ -197,15 +253,22 @@ def get_spanish_phonemes(word, dialect='spain'):
     def get_next_chars(pos, count=1):
         return word[pos:pos + count] if pos + count <= len(word) else ''
     
-    def get_prev_char(pos):
-        return word[pos - 1] if pos > 0 else ''
-    
     while i < len(word):
-        # Check for three-character combinations first
+        # Check for special sequences first
         three_chars = get_next_chars(i, 3)
-        if three_chars in ['güe', 'güi']:
+        if three_chars == 'cia':
             phonemes.append({
-                'Phoneme': SPANISH_IPA[three_chars],
+                'Phoneme': 'θ' if dialect == 'spain' else 's',
+                'PronunciationAssessment': {'AccuracyScore': 100.0},
+                'Position': 'middle'
+            })
+            phonemes.append({
+                'Phoneme': 'i',
+                'PronunciationAssessment': {'AccuracyScore': 100.0},
+                'Position': 'middle'
+            })
+            phonemes.append({
+                'Phoneme': 'a',
                 'PronunciationAssessment': {'AccuracyScore': 100.0},
                 'Position': 'middle'
             })
@@ -214,71 +277,44 @@ def get_spanish_phonemes(word, dialect='spain'):
         
         # Check for two-character combinations
         two_chars = get_next_chars(i, 2)
-        if two_chars in ['ch', 'll', 'rr', 'gu', 'qu']:
-            if two_chars in ['gu', 'qu']:
-                next_char = get_next_chars(i + 2, 1)
-                if next_char in 'eéií':
-                    phoneme = 'g' if two_chars == 'gu' else 'k'
-                    phonemes.append({
-                        'Phoneme': phoneme,
-                        'PronunciationAssessment': {'AccuracyScore': 100.0},
-                        'Position': 'middle'
-                    })
-                    i += 3
-                    continue
-            
-            phoneme = SPANISH_IPA[two_chars]
-            if isinstance(phoneme, dict):
-                phoneme = phoneme[dialect] if dialect in phoneme else phoneme['default']
-            
+        if two_chars in ['ce', 'ci']:
             phonemes.append({
-                'Phoneme': phoneme,
+                'Phoneme': 'θ' if dialect == 'spain' else 's',
+                'PronunciationAssessment': {'AccuracyScore': 100.0},
+                'Position': 'middle'
+            })
+            phonemes.append({
+                'Phoneme': two_chars[1],
                 'PronunciationAssessment': {'AccuracyScore': 100.0},
                 'Position': 'middle'
             })
             i += 2
             continue
         
-        # Handle single characters with context
+        # Handle single characters
         char = word[i]
-        next_char = get_next_chars(i + 1, 1)
-        prev_char = get_prev_char(i)
-        
-        # Handle context-dependent consonants
-        if char in ['b', 'd', 'g', 'v']:
-            if i == 0 or prev_char in 'mn':  # word-initial or after nasal
-                phoneme = SPANISH_IPA[char]['initial']
-            elif prev_char and is_vowel(prev_char):  # intervocalic
-                phoneme = SPANISH_IPA[char]['intervocalic']
+        if char == 'c':
+            next_char = get_next_chars(i + 1, 1)
+            if next_char in 'ei':
+                phonemes.append({
+                    'Phoneme': 'θ' if dialect == 'spain' else 's',
+                    'PronunciationAssessment': {'AccuracyScore': 100.0},
+                    'Position': 'middle'
+                })
             else:
-                phoneme = SPANISH_IPA[char]['default']
-        
-        # Handle 'n' before velar consonants
-        elif char == 'n' and next_char in 'kg':
-            phoneme = SPANISH_IPA['n']['velar']
-        
-        # Handle 'c' with following vowel
-        elif char == 'c' and next_char in 'eéií':
-            phoneme = SPANISH_IPA['c']['e_latam' if dialect == 'latam' else 'e']
-        
-        # Handle 'r' in different positions
-        elif char == 'r':
-            if i == 0:  # word-initial
-                phoneme = SPANISH_IPA['r']['initial']
-            elif prev_char and is_vowel(prev_char) and next_char and is_vowel(next_char):  # intervocalic
-                phoneme = SPANISH_IPA['r']['intervocalic']
-            elif i == len(word) - 1:  # word-final
-                phoneme = SPANISH_IPA['r']['final']
-            else:
-                phoneme = SPANISH_IPA['r']['default']
-        
-        # Handle regular characters
-        else:
-            phoneme = SPANISH_IPA.get(char, char)
+                phonemes.append({
+                    'Phoneme': 'k',
+                    'PronunciationAssessment': {'AccuracyScore': 100.0},
+                    'Position': 'middle'
+                })
+        elif char in SPANISH_IPA:
+            phoneme = SPANISH_IPA[char]
             if isinstance(phoneme, dict):
-                phoneme = phoneme.get('default', '')
-        
-        if phoneme:  # Only add if not empty
+                if i == 0 and 'initial' in phoneme:
+                    phoneme = phoneme['initial']
+                else:
+                    phoneme = phoneme['default']
+            
             phonemes.append({
                 'Phoneme': phoneme,
                 'PronunciationAssessment': {'AccuracyScore': 100.0},
@@ -308,19 +344,113 @@ def create_speech_recognizer(reference_text):
     
     return speech_recognizer
 
+def calculate_weighted_score(reference_word_assessments, pronunciation_score, fluency_score, completeness_score):
+    """
+    Calculate a weighted custom score taking into account multiple factors
+    """
+    # Word-level analysis
+    word_scores = []
+    word_weights = []
+    
+    for word in reference_word_assessments:
+        # Calculate average phoneme score for the word
+        phoneme_scores = [p['PronunciationAssessment']['AccuracyScore'] for p in word['phonemes']]
+        avg_phoneme_score = sum(phoneme_scores) / len(phoneme_scores) if phoneme_scores else 0
+        
+        # Word length-based weight (longer words count more)
+        weight = len(word['phonemes']) / 2  # Base weight on phoneme count
+        
+        # Adjust weight based on error type
+        if word['error_type'] == 'Omission':
+            weight *= 1.5  # Penalize missing words more heavily
+        elif word['error_type'] == 'Substitution':
+            weight *= 1.2  # Penalize substitutions
+        
+        word_scores.append(avg_phoneme_score)
+        word_weights.append(weight)
+    
+    # Calculate weighted word score
+    total_weight = sum(word_weights)
+    weighted_word_score = sum(score * weight for score, weight in zip(word_scores, word_weights)) / total_weight if total_weight > 0 else 0
+
+    # Define importance weights for different components
+    weights = {
+        'word_accuracy': 0.35,      # How well individual words were pronounced
+        'pronunciation': 0.25,      # Overall pronunciation score from Azure
+        'fluency': 0.20,           # Smoothness of speech
+        'completeness': 0.20       # Whether all words were attempted
+    }
+
+    # Calculate final weighted score
+    final_score = (
+        weighted_word_score * weights['word_accuracy'] +
+        pronunciation_score * weights['pronunciation'] +
+        fluency_score * weights['fluency'] +
+        completeness_score * weights['completeness']
+    )
+
+    # Penalty factors
+    penalties = {
+        'missing_words': 0.8,      # Severe penalty for missing words
+        'low_fluency': 0.9,        # Moderate penalty for choppy speech
+        'low_completeness': 0.85   # Significant penalty for incomplete phrases
+    }
+
+    # Apply penalties if necessary
+    if any(word['error_type'] == 'Omission' for word in reference_word_assessments):
+        final_score *= penalties['missing_words']
+    if fluency_score < 70:
+        final_score *= penalties['low_fluency']
+    if completeness_score < 80:
+        final_score *= penalties['low_completeness']
+
+    return final_score, weighted_word_score
+
+def analyze_pronunciation_errors(word_assessment):
+    """
+    Analyze phoneme-level errors and provide educational feedback
+    """
+    feedback = []
+    low_score_threshold = 70  # Score below this needs improvement
+    
+    # Get problematic phonemes
+    problem_phonemes = [
+        p for p in word_assessment['phonemes'] 
+        if p['PronunciationAssessment']['AccuracyScore'] < low_score_threshold
+    ]
+    
+    if problem_phonemes:
+        feedback.append(f"\nIn the word '{word_assessment['word']}', let's work on:")
+        
+        for phoneme in problem_phonemes:
+            # Educational feedback based on specific phonemes
+            tips = {
+                'r': "Try rolling your 'r' sound more. Place your tongue near the roof of your mouth.",
+                'ɾ': "This is a soft 'r'. Quickly tap your tongue once against the roof of your mouth.",
+                'θ': "For this 'th' sound (like in 'think'), place your tongue between your teeth.",
+                'x': "For the Spanish 'j', make a sound like the 'h' in 'huge', but stronger.",
+                'ɲ': "For the 'ñ' sound, say 'ny' as in 'canyon', but as one smooth sound.",
+                'β': "For this 'b/v' sound, keep your lips relaxed and barely touching.",
+                'ð': "Make this 'd' sound with your tongue between your teeth, very gently.",
+                'ʝ': "For this 'll' sound, say 'y' as in 'yes', but with more friction.",
+                'ʎ': "Touch the roof of your mouth with your tongue, like saying 'li' in 'million'."
+            }
+            
+            feedback.append(f"  • The sound '{phoneme['Phoneme']}' (score: {phoneme['PronunciationAssessment']['AccuracyScore']:.1f})")
+            if phoneme['Phoneme'] in tips:
+                feedback.append(f"    Tip: {tips[phoneme['Phoneme']]}")
+
+    return feedback
+
 def recognize_and_assess(speech_recognizer, reference_text):
     """
     Perform speech recognition and pronunciation assessment with detailed phoneme analysis
     """
-    print(f"\nPlease say: \"{reference_text}\"")
-    print("Listening... (Will timeout after 10 seconds if no speech is detected)")
-
     done = False
     recognized_result = None
     speech_detected = False
 
     def stop_cb(evt):
-        print('CLOSING on {}'.format(evt))
         nonlocal done
         done = True
 
@@ -337,9 +467,9 @@ def recognize_and_assess(speech_recognizer, reference_text):
     # Connect callbacks
     speech_recognizer.recognizing.connect(recognizing_cb)
     speech_recognizer.recognized.connect(recognized_cb)
-    speech_recognizer.session_started.connect(lambda evt: print('SESSION STARTED: {}'.format(evt)))
-    speech_recognizer.session_stopped.connect(lambda evt: print('SESSION STOPPED {}'.format(evt)))
-    speech_recognizer.canceled.connect(lambda evt: print('CANCELED {}'.format(evt)))
+    speech_recognizer.session_started.connect(lambda evt: None)
+    speech_recognizer.session_stopped.connect(lambda evt: None)
+    speech_recognizer.canceled.connect(lambda evt: None)
     speech_recognizer.session_stopped.connect(stop_cb)
     speech_recognizer.canceled.connect(stop_cb)
 
@@ -349,56 +479,45 @@ def recognize_and_assess(speech_recognizer, reference_text):
     while not done and time.time() - start_time < 10:
         time.sleep(0.1)
 
-    if not speech_detected and not done:
-        print("\nAre you still there?")
-        while not done and time.time() - start_time < 20:
-            time.sleep(0.1)
-
     speech_recognizer.stop_continuous_recognition()
 
     if not recognized_result:
-        print("No speech recognized within the timeout period.")
-        return None
+        return {
+            "error": {
+                "type": "NoSpeech",
+                "message": "No speech recognized within the timeout period."
+            }
+        }
 
     if recognized_result.reason == speechsdk.ResultReason.RecognizedSpeech:
-        print(f"\nRecognized: {recognized_result.text}")
         try:
             assessment_results = json.loads(
                 recognized_result.properties[speechsdk.PropertyId.SpeechServiceResponse_JsonResult]
             )
             
-            # Extract pronunciation assessment scores
             pronunciation_assessment = assessment_results['NBest'][0].get('PronunciationAssessment', {})
             pronunciation_score = pronunciation_assessment.get('PronScore', 0)
             fluency_score = pronunciation_assessment.get('FluencyScore', 0)
             completeness_score = pronunciation_assessment.get('CompletenessScore', 0)
             accuracy_score = pronunciation_assessment.get('AccuracyScore', 0)
 
-            # Get Azure's recognized words
             azure_words = assessment_results['NBest'][0].get('Words', [])
-            
-            # Process reference text into words
             reference_words = reference_text.lower().replace('¿', '').replace('?', '').replace(',', '').replace('.', '').split()
             reference_word_assessments = []
 
-            # Process each reference word
             for ref_word in reference_words:
-                # Get expected IPA phonemes for reference word
                 ipa_phonemes = get_spanish_phonemes(ref_word, dialect='spain')
-                
-                # Find if this word was recognized by Azure
                 matching_word = next(
                     (w for w in azure_words if w['Word'].lower() == ref_word.lower()),
                     None
                 )
                 
                 if matching_word:
-                    # Word was pronounced - use Azure scores
                     azure_phonemes = matching_word.get('Phonemes', [])
                     combined_phonemes = []
                     
                     for i, ipa_phoneme in enumerate(ipa_phonemes):
-                        score = 0.0  # default score for unmatched phonemes
+                        score = 0.0
                         if i < len(azure_phonemes):
                             score = azure_phonemes[i].get('PronunciationAssessment', {}).get('AccuracyScore', 0.0)
                         
@@ -412,7 +531,6 @@ def recognize_and_assess(speech_recognizer, reference_text):
                     word_accuracy = matching_word['PronunciationAssessment']['AccuracyScore']
                     error_type = matching_word['PronunciationAssessment']['ErrorType']
                 else:
-                    # Word was not pronounced - zero scores
                     combined_phonemes = [{
                         'Phoneme': p['Phoneme'],
                         'PronunciationAssessment': {
@@ -422,85 +540,84 @@ def recognize_and_assess(speech_recognizer, reference_text):
                     word_accuracy = 0.0
                     error_type = 'Omission'
                 
-                word_data = {
+                reference_word_assessments.append({
                     'word': ref_word,
                     'accuracy_score': word_accuracy,
                     'error_type': error_type,
                     'phonemes': combined_phonemes
-                }
-                reference_word_assessments.append(word_data)
+                })
 
-            # Calculate custom score based on reference text
-            total_expected_phonemes = sum(len(w['phonemes']) for w in reference_word_assessments)
-            total_phoneme_score = sum(
-                p['PronunciationAssessment']['AccuracyScore']
-                for w in reference_word_assessments
-                for p in w['phonemes']
+            custom_score, weighted_word_score = calculate_weighted_score(
+                reference_word_assessments,
+                pronunciation_score,
+                fluency_score,
+                completeness_score
             )
-            custom_score = total_phoneme_score / total_expected_phonemes if total_expected_phonemes > 0 else 0
 
-            # Create result dictionary
-            result = {
-                "recognition_status": "failure",
-                "recognized_text": recognized_result.text,
-                "reference_text": reference_text,
-                "scores": {
-                    "pronunciation_score": pronunciation_score,
-                    "fluency_score": fluency_score,
-                    "completeness_score": completeness_score,
-                    "accuracy_score": accuracy_score,
-                    "custom_score": custom_score
-                },
-                "words_assessment": reference_word_assessments
+            output_json = {
+                "assessment_result": {
+                    "status": "success" if custom_score >= 85.0 else "failure",
+                    "reference_text": reference_text,
+                    "recognized_text": recognized_result.text,
+                    "scores": {
+                        "overall_score": round(custom_score, 1),
+                        "pronunciation_score": round(pronunciation_score, 1),
+                        "fluency_score": round(fluency_score, 1),
+                        "completeness_score": round(completeness_score, 1),
+                        "accuracy_score": round(accuracy_score, 1)
+                    },
+                    "words": [],
+                    "learning_feedback": []
+                }
             }
 
-            # Determine success based on threshold
-            success_threshold = 90.0
-            if custom_score >= success_threshold:
-                print("\nPronunciation Assessment Results: Success")
-                result["recognition_status"] = "success"
-            else:
-                print("\nPronunciation Assessment Results: Failure")
-                result["error"] = "Pronunciation does not match reference text closely enough"
-
-            # Print detailed results
-            print("\nDetailed Assessment Results:")
-            print("\nScores:")
-            print(f"  Pronunciation: {pronunciation_score:.1f}")
-            print(f"  Fluency: {fluency_score:.1f}")
-            print(f"  Completeness: {completeness_score:.1f}")
-            print(f"  Accuracy: {accuracy_score:.1f}")
-            print(f"  Custom Score: {custom_score:.1f}")
-            
-            print("\nWord Assessments:")
             for word_assess in reference_word_assessments:
-                print(f"\nWord: {word_assess['word']}")
-                print(f"Accuracy: {word_assess['accuracy_score']:.1f}")
-                print(f"Error Type: {word_assess['error_type']}")
-                print("Phonemes:")
-                for phoneme in word_assess['phonemes']:
-                    print(f"  {phoneme['Phoneme']} "
-                          f"(Score: {phoneme['PronunciationAssessment']['AccuracyScore']:.1f})")
+                word_json = {
+                    "word": word_assess["word"],
+                    "accuracy_score": round(word_assess["accuracy_score"], 1),
+                    "error_type": word_assess["error_type"],
+                    "phonemes": []
+                }
 
-            return result
+                for phoneme in word_assess["phonemes"]:
+                    word_json["phonemes"].append({
+                        "phoneme": phoneme["Phoneme"],
+                        "score": round(phoneme["PronunciationAssessment"]["AccuracyScore"], 1)
+                    })
 
-        except json.JSONDecodeError as e:
-            print(f"Error parsing assessment results: {e}")
-            return None
-        except KeyError as e:
-            print(f"Error accessing assessment data: {e}")
-            return None
+                output_json["assessment_result"]["words"].append(word_json)
+
+                if word_assess["accuracy_score"] < 75:
+                    feedback = analyze_pronunciation_errors(word_assess)
+                    if feedback:
+                        output_json["assessment_result"]["learning_feedback"].extend(feedback)
+
+            return output_json
+
         except Exception as e:
-            print(f"Unexpected error during assessment: {e}")
-            return None
+            return {
+                "error": {
+                    "type": type(e).__name__,
+                    "message": str(e)
+                }
+            }
 
     elif recognized_result.reason == speechsdk.ResultReason.NoMatch:
-        print("No speech could be recognized.")
+        return {
+            "error": {
+                "type": "NoMatch",
+                "message": "No speech could be recognized."
+            }
+        }
     elif recognized_result.reason == speechsdk.ResultReason.Canceled:
         cancellation_details = recognized_result.cancellation_details
-        print(f"Speech Recognition canceled: {cancellation_details.reason}")
-        if cancellation_details.reason == speechsdk.CancellationReason.Error:
-            print(f"Error details: {cancellation_details.error_details}")
+        return {
+            "error": {
+                "type": "Canceled",
+                "reason": str(cancellation_details.reason),
+                "details": str(cancellation_details.error_details) if cancellation_details.reason == speechsdk.CancellationReason.Error else None
+            }
+        }
 
     return None
 
@@ -515,7 +632,10 @@ def main_loop():
         reference_text = prompts[current_prompt_index]
 
         for attempt in range(1, 4):  # Allow 3 attempts per prompt
+            # Display prompt for every attempt
+            print(f"\nPlease say: \"{reference_text}\"")
             print(f"\nAttempt {attempt} of 3...")
+            print("Listening... (Will timeout after 10 seconds if no speech is detected)")
             
             try:
                 # Create new recognizer for each attempt
@@ -526,32 +646,56 @@ def main_loop():
                     print("Session closed due to inactivity. Starting over from prompt 1.")
                     current_prompt_index = 0
                     break
-                elif result["recognition_status"] == "failure":
-                    print("\nLet's analyze what went wrong:")
-                    print("1. Check your pronunciation of these specific words:")
-                    for word_assess in result["words_assessment"]:
-                        if word_assess["accuracy_score"] < 90:
-                            print(f"   - {word_assess['word']}: Score {word_assess['accuracy_score']:.1f}")
-                            print("     Correct phonemes:", end=" ")
-                            print(", ".join([p["Phoneme"] for p in word_assess["phonemes"]]))
-                    
-                    if attempt == 3:
-                        print(f"\nWe'll try a different prompt. Going back to prompt 1.")
-                        current_prompt_index = 0
-                        break
-                    print("\nTry again, focusing on these words.")
+                elif "error" in result:
+                    print(f"\nError: {result['error']['message']}")
+                    continue
                 else:
-                    print("\nExcellent pronunciation! Moving to the next prompt.")
-                    current_prompt_index += 1
-                    if current_prompt_index >= len(prompts):
-                        print("\n¡Felicitaciones! You've completed all prompts!")
-                        print("Your Spanish pronunciation practice session is complete.")
-                        return
-                    break
+                    assessment = result["assessment_result"]
+                    
+                    # Display full JSON results
+                    print("\nFull Assessment Results:")
+                    print(json.dumps(result, indent=2, ensure_ascii=False))
+                    
+                    # Display user-friendly summary
+                    print(f"\nSummary:")
+                    print(f"Recognized text: {assessment['recognized_text']}")
+                    print("\nScores:")
+                    for score_name, score_value in assessment['scores'].items():
+                        print(f"- {score_name}: {score_value}")
+                    
+                    print("\nWord-by-word analysis:")
+                    for word in assessment['words']:
+                        print(f"\nWord: {word['word']}")
+                        print(f"Accuracy: {word['accuracy_score']}")
+                        print("Phonemes:")
+                        for phoneme in word['phonemes']:
+                            print(f"  - {phoneme['phoneme']}: {phoneme['score']}")
+                    
+                    if assessment['learning_feedback']:
+                        print("\nLearning feedback:")
+                        for feedback in assessment['learning_feedback']:
+                            print(feedback)
+                    
+                    # Check if successful
+                    if assessment["status"] == "success":
+                        print("\nExcellent pronunciation! Moving to the next prompt.")
+                        current_prompt_index += 1
+                        if current_prompt_index >= len(prompts):
+                            print("\n¡Felicitaciones! You've completed all prompts!")
+                            return
+                        break
+                    else:
+                        if attempt < 3:  # Only show this message if not the last attempt
+                            print("\nLet's try again to improve your pronunciation.")
+                        else:
+                            print("\nMaximum attempts reached. Moving to the next prompt.")
+                            current_prompt_index += 1
+                            if current_prompt_index >= len(prompts):
+                                print("\n¡Felicitaciones! You've completed all prompts!")
+                                return
 
             except Exception as e:
                 print(f"\nError during recognition: {e}")
-                print("Let's try again.")
                 continue
 
         print("\nPress Enter to continue, or type 'exit' to quit.")
