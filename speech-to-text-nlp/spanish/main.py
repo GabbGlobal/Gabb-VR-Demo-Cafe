@@ -7,8 +7,8 @@ import locale
 locale.setlocale(locale.LC_ALL, '')
 
 # Replace with your actual subscription key and region
-subscription_key = "6762f076f08140b3afa3c1888cd3f642"
-region = "eastus"
+subscription_key = ""
+region = ""
 
 # Comprehensive Spanish IPA Dictionary
 SPANISH_IPA = {
@@ -374,51 +374,70 @@ def recognize_and_assess(speech_recognizer, reference_text):
             completeness_score = pronunciation_assessment.get('CompletenessScore', 0)
             accuracy_score = pronunciation_assessment.get('AccuracyScore', 0)
 
-            # Process words with actual phoneme scores
-            words = assessment_results['NBest'][0].get('Words', [])
-            words_assessment = []
+            # Get Azure's recognized words
+            azure_words = assessment_results['NBest'][0].get('Words', [])
+            
+            # Process reference text into words
+            reference_words = reference_text.lower().replace('¿', '').replace('?', '').replace(',', '').replace('.', '').split()
+            reference_word_assessments = []
 
-            for word in words:
-                # Get the actual phoneme assessments from Azure
-                azure_phonemes = word.get('Phonemes', [])
-                # Get our IPA phonemes
-                ipa_phonemes = get_spanish_phonemes(word['Word'], dialect='spain')
+            # Process each reference word
+            for ref_word in reference_words:
+                # Get expected IPA phonemes for reference word
+                ipa_phonemes = get_spanish_phonemes(ref_word, dialect='spain')
                 
-                # Combine Azure scores with IPA phonemes
-                combined_phonemes = []
-                for i, ipa_phoneme in enumerate(ipa_phonemes):
-                    score = 100.0  # default score
-                    if i < len(azure_phonemes):
-                        score = azure_phonemes[i].get('PronunciationAssessment', {}).get('AccuracyScore', 100.0)
+                # Find if this word was recognized by Azure
+                matching_word = next(
+                    (w for w in azure_words if w['Word'].lower() == ref_word.lower()),
+                    None
+                )
+                
+                if matching_word:
+                    # Word was pronounced - use Azure scores
+                    azure_phonemes = matching_word.get('Phonemes', [])
+                    combined_phonemes = []
                     
-                    combined_phonemes.append({
-                        'Phoneme': ipa_phoneme['Phoneme'],
+                    for i, ipa_phoneme in enumerate(ipa_phonemes):
+                        score = 0.0  # default score for unmatched phonemes
+                        if i < len(azure_phonemes):
+                            score = azure_phonemes[i].get('PronunciationAssessment', {}).get('AccuracyScore', 0.0)
+                        
+                        combined_phonemes.append({
+                            'Phoneme': ipa_phoneme['Phoneme'],
+                            'PronunciationAssessment': {
+                                'AccuracyScore': score
+                            }
+                        })
+                    
+                    word_accuracy = matching_word['PronunciationAssessment']['AccuracyScore']
+                    error_type = matching_word['PronunciationAssessment']['ErrorType']
+                else:
+                    # Word was not pronounced - zero scores
+                    combined_phonemes = [{
+                        'Phoneme': p['Phoneme'],
                         'PronunciationAssessment': {
-                            'AccuracyScore': score
+                            'AccuracyScore': 0.0
                         }
-                    })
+                    } for p in ipa_phonemes]
+                    word_accuracy = 0.0
+                    error_type = 'Omission'
                 
                 word_data = {
-                    'word': word['Word'],
-                    'accuracy_score': word['PronunciationAssessment']['AccuracyScore'],
-                    'error_type': word['PronunciationAssessment']['ErrorType'],
-                    'phonemes': combined_phonemes,
-                    'syllables': word.get('Syllables', [])
+                    'word': ref_word,
+                    'accuracy_score': word_accuracy,
+                    'error_type': error_type,
+                    'phonemes': combined_phonemes
                 }
-                words_assessment.append(word_data)
+                reference_word_assessments.append(word_data)
 
-            # Calculate custom score
-            def normalize_text(text):
-                return re.sub(r'[^\w\s]', '', text.lower())
-
-            recognized_words = normalize_text(recognized_result.text).split()
-            reference_words = normalize_text(reference_text).split()
-            
-            matched_words = sum(1 for word in recognized_words if word in reference_words)
-            word_accuracy = matched_words / len(reference_words) if reference_words else 0
-            length_ratio = min(len(recognized_words), len(reference_words)) / max(len(recognized_words), len(reference_words)) if recognized_words and reference_words else 0
-
-            custom_score = min(100, 100 * (word_accuracy * 0.7 + length_ratio * 0.3))
+            # Calculate custom score based on reference text
+            total_expected_phonemes = sum(len(w['phonemes']) for w in reference_word_assessments)
+            total_phoneme_score = sum(
+                p['PronunciationAssessment']['AccuracyScore']
+                for w in reference_word_assessments
+                for p in w['phonemes']
+            )
+            custom_score = total_phoneme_score / total_expected_phonemes if total_expected_phonemes > 0 else 0
 
             # Create result dictionary
             result = {
@@ -432,17 +451,17 @@ def recognize_and_assess(speech_recognizer, reference_text):
                     "accuracy_score": accuracy_score,
                     "custom_score": custom_score
                 },
-                "words_assessment": words_assessment
+                "words_assessment": reference_word_assessments
             }
 
             # Determine success based on threshold
-            success_threshold = 95.0
+            success_threshold = 90.0
             if custom_score >= success_threshold:
                 print("\nPronunciation Assessment Results: Success")
                 result["recognition_status"] = "success"
             else:
                 print("\nPronunciation Assessment Results: Failure")
-                result["error"] = "Recognized text does not match reference text closely enough"
+                result["error"] = "Pronunciation does not match reference text closely enough"
 
             # Print detailed results
             print("\nDetailed Assessment Results:")
@@ -454,7 +473,7 @@ def recognize_and_assess(speech_recognizer, reference_text):
             print(f"  Custom Score: {custom_score:.1f}")
             
             print("\nWord Assessments:")
-            for word_assess in words_assessment:
+            for word_assess in reference_word_assessments:
                 print(f"\nWord: {word_assess['word']}")
                 print(f"Accuracy: {word_assess['accuracy_score']:.1f}")
                 print(f"Error Type: {word_assess['error_type']}")
