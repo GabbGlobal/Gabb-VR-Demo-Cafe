@@ -118,9 +118,8 @@ SPANISH_IPA = {
         'intervocalic': 'ɣs' # sometimes between vowels
     },
     'y': {
-        'consonant': 'ʝ',  # as consonant
-        'semivowel': 'j',  # as semivowel
-        'default': 'ʝ'
+        'final': 'i',    # Special case for word-final position
+        'default': 'ʝ'   # Keep default for other positions
     },
     'z': {
         'spain': 'θ',     # Spain Spanish
@@ -224,14 +223,19 @@ SPANISH_IPA = {
     'ci': 'θi',
     'ce': 'θe',
     'cia': 'θia',
+    
+    # Try these variations for 'hoy'
+    'oy': 'o',
+    'hoy': 'o',
+    'voy': 'b',
 }
 
 # List of prompts
 prompts = [
-    # "Hola, ¿puedo ver el menú por favor?",
-    # "Quiero un café con leche, por favor.",
-    # "Sí, me gustaría un sándwich de huevo.",
-    # "¿Qué tipo de muffin es ese?",
+    "Hola, ¿puedo ver el menú por favor?",
+    "Quiero un café con leche, por favor.",
+    "Sí, me gustaría un sándwich de huevo.",
+    "¿Qué tipo de muffin es ese?",
     "No, gracias, no hoy.",
     "¿Puedo pagar con tarjeta?",
     "Bien, aquí está. Aquí están seis dólares.",
@@ -252,74 +256,74 @@ def get_spanish_phonemes(word, dialect='spain'):
     
     def get_next_chars(pos, count=1):
         return word[pos:pos + count] if pos + count <= len(word) else ''
-    
-    while i < len(word):
-        # Check for special sequences first
-        three_chars = get_next_chars(i, 3)
-        if three_chars == 'cia':
-            phonemes.append({
-                'Phoneme': 'θ' if dialect == 'spain' else 's',
-                'PronunciationAssessment': {'AccuracyScore': 100.0},
-                'Position': 'middle'
-            })
-            phonemes.append({
-                'Phoneme': 'i',
-                'PronunciationAssessment': {'AccuracyScore': 100.0},
-                'Position': 'middle'
-            })
-            phonemes.append({
-                'Phoneme': 'a',
-                'PronunciationAssessment': {'AccuracyScore': 100.0},
-                'Position': 'middle'
-            })
-            i += 3
-            continue
         
-        # Check for two-character combinations
-        two_chars = get_next_chars(i, 2)
-        if two_chars in ['ce', 'ci']:
+    def add_phoneme(phoneme, score=100.0, position='middle', phoneme_type=None):
+        # Special handling for Spanish 'j' sound
+        if (phoneme == 'x' and 
+            (word[i] == 'j' or (word[i] == 'g' and get_next_chars(i+1, 1) in 'ei'))):
             phonemes.append({
-                'Phoneme': 'θ' if dialect == 'spain' else 's',
-                'PronunciationAssessment': {'AccuracyScore': 100.0},
-                'Position': 'middle'
+                'Phoneme': 'x',
+                'PronunciationAssessment': {'AccuracyScore': 0.0},  # Start with 0
+                'Position': position if i > 0 else 'initial',
+                'PhonemeType': 'velar_fricative',
+                'RequiresStrictScoring': True,  # Flag for strict scoring
+                'BlockedPhoneme': 'dʒ'  # English 'j' sound that should be penalized
             })
-            phonemes.append({
-                'Phoneme': two_chars[1],
-                'PronunciationAssessment': {'AccuracyScore': 100.0},
-                'Position': 'middle'
-            })
-            i += 2
-            continue
-        
-        # Handle single characters
-        char = word[i]
-        if char == 'c':
-            next_char = get_next_chars(i + 1, 1)
-            if next_char in 'ei':
-                phonemes.append({
-                    'Phoneme': 'θ' if dialect == 'spain' else 's',
-                    'PronunciationAssessment': {'AccuracyScore': 100.0},
-                    'Position': 'middle'
-                })
-            else:
-                phonemes.append({
-                    'Phoneme': 'k',
-                    'PronunciationAssessment': {'AccuracyScore': 100.0},
-                    'Position': 'middle'
-                })
-        elif char in SPANISH_IPA:
-            phoneme = SPANISH_IPA[char]
-            if isinstance(phoneme, dict):
-                if i == 0 and 'initial' in phoneme:
-                    phoneme = phoneme['initial']
-                else:
-                    phoneme = phoneme['default']
-            
+        else:
             phonemes.append({
                 'Phoneme': phoneme,
-                'PronunciationAssessment': {'AccuracyScore': 100.0},
-                'Position': 'initial' if i == 0 else 'final' if i == len(word)-1 else 'middle'
+                'PronunciationAssessment': {'AccuracyScore': score},
+                'Position': position if i > 0 else 'initial',
+                'PhonemeType': phoneme_type
             })
+    
+    while i < len(word):
+        two_chars = get_next_chars(i, 2)
+        next_char = get_next_chars(i + 1, 1)
+        
+        # Handle Spanish 'j' sound (and 'g' before 'e/i') with strict scoring
+        if word[i] == 'j' or (word[i] == 'g' and next_char in 'ei'):
+            add_phoneme('x', score=0.0, phoneme_type='velar_fricative')
+            i += 1
+            if word[i-1] == 'g':
+                i += 1
+            continue
+            
+        # Handle 'ch' digraph
+        if two_chars == 'ch':
+            add_phoneme('tʃ', phoneme_type='affricate')
+            i += 2  # Skip both 'c' and 'h'
+            continue
+            
+        # Handle 'c' before 'e' or 'i'
+        if word[i] == 'c' and next_char in 'ieíé':
+            add_phoneme('θ', phoneme_type='interdental')
+            i += 1
+            continue
+            
+        # Handle 'qu' combinations (silent 'u')
+        if two_chars == 'qu' and i + 2 < len(word) and word[i + 2] in 'ieíé':
+            add_phoneme('k')
+            i += 2
+            continue
+            
+        # Handle 'gu' combinations (silent 'u')
+        if two_chars == 'gu' and i + 2 < len(word) and word[i + 2] in 'ieíé':
+            add_phoneme('g')
+            i += 2
+            continue
+            
+        # Handle regular characters
+        if char := word[i]:
+            if isinstance(phoneme := SPANISH_IPA.get(char, char), dict):
+                if i == len(word) - 1 and 'final' in phoneme:
+                    add_phoneme(phoneme['final'])
+                elif i == 0 and 'initial' in phoneme:
+                    add_phoneme(phoneme['initial'])
+                else:
+                    add_phoneme(phoneme['default'])
+            else:
+                add_phoneme(phoneme)
         
         i += 1
     
@@ -348,23 +352,59 @@ def calculate_weighted_score(reference_word_assessments, pronunciation_score, fl
     """
     Calculate a weighted custom score taking into account multiple factors
     """
+    for word in reference_word_assessments:
+        for phoneme in word['phonemes']:
+            # Check for Spanish 'j' sound
+            if (phoneme.get('RequiresStrictScoring') and 
+                phoneme['Phoneme'] == 'x' and 
+                phoneme.get('BlockedPhoneme') == 'dʒ'):
+                
+                current_score = phoneme['PronunciationAssessment']['AccuracyScore']
+                if current_score > 50:  # If using English 'j'
+                    phoneme['PronunciationAssessment']['AccuracyScore'] = 20.0
+                    word['feedback'] = "The Spanish 'j' should be pronounced like a strong 'h', not like English 'j'"
+            
+            # Check for Spanish 'ch' sound
+            elif phoneme['Phoneme'] == 'tʃ':
+                current_score = phoneme['PronunciationAssessment']['AccuracyScore']
+                if current_score < 60:  # If pronunciation is poor
+                    word['feedback'] = "The Spanish 'ch' should be pronounced like English 'ch' in 'cheese'"
+    
     # Word-level analysis
     word_scores = []
     word_weights = []
     
     for word in reference_word_assessments:
+        phonemes = word['phonemes']
+        
+        # Special handling for word-final vowels that often get incorrect 0 scores
+        if len(phonemes) > 0:
+            last_phoneme = phonemes[-1]
+            if (last_phoneme['Phoneme'] in ['o', 'e', 'a', 'i', 'u', 'ʝ', 'j'] and 
+                last_phoneme['PronunciationAssessment']['AccuracyScore'] == 0.0):
+                # If the previous phonemes are good (> threshold), assume the final vowel is correct
+                previous_phonemes = phonemes[:-1]
+                if previous_phonemes and all(p['PronunciationAssessment']['AccuracyScore'] > 70.0 for p in previous_phonemes):
+                    last_phoneme['PronunciationAssessment']['AccuracyScore'] = 100.0
+
+        # Calculate phoneme scores
+        phoneme_scores = [p['PronunciationAssessment']['AccuracyScore'] for p in phonemes]
+        
         # Calculate average phoneme score for the word
-        phoneme_scores = [p['PronunciationAssessment']['AccuracyScore'] for p in word['phonemes']]
-        avg_phoneme_score = sum(phoneme_scores) / len(phoneme_scores) if phoneme_scores else 0
+        phoneme_threshold = 40.0
+        if any(score < phoneme_threshold for score in phoneme_scores):
+            avg_phoneme_score = min(phoneme_scores)
+        else:
+            avg_phoneme_score = sum(phoneme_scores) / len(phoneme_scores) if phoneme_scores else 0
         
         # Word length-based weight (longer words count more)
-        weight = len(word['phonemes']) / 2  # Base weight on phoneme count
+        weight = len(word['phonemes']) / 2
         
         # Adjust weight based on error type
         if word['error_type'] == 'Omission':
-            weight *= 1.5  # Penalize missing words more heavily
+            weight *= 1.5
         elif word['error_type'] == 'Substitution':
-            weight *= 1.2  # Penalize substitutions
+            weight *= 1.2
         
         word_scores.append(avg_phoneme_score)
         word_weights.append(weight)
@@ -411,7 +451,7 @@ def analyze_pronunciation_errors(word_assessment):
     Analyze phoneme-level errors and provide educational feedback
     """
     feedback = []
-    low_score_threshold = 70  # Score below this needs improvement
+    low_score_threshold = 70
     
     # Get problematic phonemes
     problem_phonemes = [
@@ -419,13 +459,29 @@ def analyze_pronunciation_errors(word_assessment):
         if p['PronunciationAssessment']['AccuracyScore'] < low_score_threshold
     ]
     
+    # Special check for 'j'/'x' sound
+    j_phonemes = [
+        p for p in word_assessment['phonemes'] 
+        if p['Phoneme'] == 'x' and p.get('RequiresStrictScoring', False)
+    ]
+    
+    if j_phonemes:
+        feedback.append(f"\nFor the 'j' sound in '{word_assessment['word']}':")
+        feedback.append("  • Remember: Spanish 'j' is pronounced like a strong 'h' sound")
+        feedback.append("  • Try saying 'h' as in 'huge' but from deeper in your throat")
+        feedback.append("  • Common mistake: Don't pronounce it like the 'j' in English 'jar'")
+        feedback.append("  • Practice: Say 'ha' but make the 'h' stronger and more forceful")
+    
     if problem_phonemes:
         feedback.append(f"\nIn the word '{word_assessment['word']}', let's work on:")
         
         for phoneme in problem_phonemes:
             # Educational feedback based on specific phonemes
             tips = {
-                'r': "Try rolling your 'r' sound more. Place your tongue near the roof of your mouth.",
+                'k': "For the 'k' sound (as in 'que'), make a sharp sound at the back of your throat.",
+                'j': "For this sound in 'ie', say it like the 'y' in 'yes', but smoother.",
+                'e': "For the 'e' sound, position your mouth in a slight smile, like saying 'day'.",
+                'r': "Roll your 'r' by vibrating your tongue against the roof of your mouth.",
                 'ɾ': "This is a soft 'r'. Quickly tap your tongue once against the roof of your mouth.",
                 'θ': "For this 'th' sound (like in 'think'), place your tongue between your teeth.",
                 'x': "For the Spanish 'j', make a sound like the 'h' in 'huge', but stronger.",
