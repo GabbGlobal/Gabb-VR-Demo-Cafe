@@ -79,9 +79,9 @@ public class NpcTalking : MonoBehaviour
     }
 
     // Conversation state
-    private int lineOfDialogueIndex = 0;
-    private float xpToReward = 0;
-    private int failedAttempts = 0;
+    protected int lineOfDialogueIndex = 0;
+    protected float xpToReward = 0;
+    protected int failedAttempts = 0;
 
     async Awaitable StartConvo(CancellationToken cancellationToken)
     {
@@ -124,7 +124,7 @@ public class NpcTalking : MonoBehaviour
     }
 
     // runs for every line of dialogue in order during a conversation
-    async Awaitable HandleLineOfDialogue(int lineIndex, CancellationToken cancellationToken)
+   protected virtual async Awaitable HandleLineOfDialogue(int lineIndex, CancellationToken cancellationToken)
     {
         var line = dialogue.linesOfDialogue[lineIndex];
         Log($"Line:{line.ToString()}\nFailed Attempts:{failedAttempts}");
@@ -197,13 +197,13 @@ public class NpcTalking : MonoBehaviour
         Debug.Log("OK TIME FOR NEXT");
     }
 
-    void MoveToNextLineOfDialogue()
+    protected void MoveToNextLineOfDialogue()
     {
         lineOfDialogueIndex++; // move onto next line of dialogue
         failedAttempts = 0; // reset attempts
     }
 
-    void StopConvo()
+   protected void StopConvo()
     {
         ConversationUI.Instance.OnEndConvo();
 
