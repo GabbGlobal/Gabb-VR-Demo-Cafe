@@ -26,6 +26,9 @@ public class LineOfDialogue {
     public string text;
     public AudioClip audioClip;
     public string hintVideoPath; // partial path within StreamingAssets
+    // NEW FIELDS FOR CHALLENGE LINES
+    public bool _isChallenge = false;
+    public List<GameObject> objectsToActivateOnSuccess;
 
     public override string ToString() {
         return $"[LineOfDialogue] {speaker.ToString()}: {text}";
