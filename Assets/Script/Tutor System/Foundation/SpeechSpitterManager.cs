@@ -45,14 +45,14 @@ public class SpeechSpitterManager : MonoBehaviour
         RefreshInstruction(0);
     }
 
-    private void Update()
+   /* private void Update()
     {
         if (Input.GetKeyDown(KeyCode.M))
             wordFlow.CheckRecognizedWord("mesa");
 
         if (Input.GetKeyDown(KeyCode.L))
             wordFlow.CheckRecognizedWord("lápiz");
-    }
+    }*/
 
     public void DisplayMatchedWordAt(int index)
     {
