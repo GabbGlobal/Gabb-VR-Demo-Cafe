@@ -4,74 +4,58 @@ using UnityEngine;
 
 public class WordFlowManager : MonoBehaviour
 {
-    [Tooltip("Must match SpeechSpitterManager order")]
+    [Tooltip("Order must match SpeechSpitterManager.wordList")]
     public List<string> wordList;
 
     public int currentIndex = 0;
     public int failedAttempts = 0;
     private const int maxFails = 5;
 
-    [Header("References")]
-    public SpeechSpitterManager speechSpitter;
+    [SerializeField] private SpeechSpitterManager speechSpitter;
     [SerializeField] private WordBlockManager blockManager;
 
     void Start()
     {
-        // Default “AAAA…” sized to the first word
-        if (wordList != null && wordList.Count > 0 && blockManager != null)
-        {
-            int firstLen = Mathf.Clamp(wordList[0].Length, 0, blockManager.Blocks.Count);
-            blockManager.InitializeDefaultForWordLength(firstLen);
-            speechSpitter.RefreshInstruction(0);
-        }
+        // Round 0: placeholders only
+        if (speechSpitter != null && blockManager != null && wordList != null && wordList.Count > 0)
+            speechSpitter.PrepareRound(currentIndex, blockManager);
     }
 
     public void CheckRecognizedWord(string recognized)
     {
-        string cleaned = TextUtils.NormalizeAccents(recognized.Trim().ToLowerInvariant());
-        string target = TextUtils.NormalizeAccents(wordList[currentIndex].Trim().ToLowerInvariant());
+        string cleaned = SpeechSpitterManager.TextUtils.NormalizeAccents(recognized.Trim().ToLowerInvariant());
+        string target = SpeechSpitterManager.TextUtils.NormalizeAccents(wordList[currentIndex].Trim().ToLowerInvariant());
 
         if (cleaned == target)
         {
-            Debug.Log($"[WordFlow] Word matched: {recognized}");
+            failedAttempts = 0;
 
-            // Show the real word and activate its object
-            int idx = speechSpitter.GetIndexForWord(recognized);
-            if (idx >= 0)
-                speechSpitter.DisplayMatchedWordAt(idx);
+            // Reveal the correct word and object
+            speechSpitter.RevealCorrectWord(currentIndex, blockManager);
 
-            // Move to the next round after a short delay
             StopAllCoroutines();
-            StartCoroutine(AdvanceToNextWordDelayed(4f));
+            StartCoroutine(AdvanceToNextWordAfterDelay(4f));
         }
         else
         {
             failedAttempts++;
-            Debug.LogWarning($"[WordFlow] Incorrect: heard '{cleaned}', expected '{target}'");
-
-            // Visual feedback on the blocks
-            if (blockManager != null)
-                blockManager.DisplayComparison(wordList[currentIndex], recognized);
+            blockManager.DisplayComparison(wordList[currentIndex], recognized);
 
             if (failedAttempts >= maxFails)
             {
-                failedAttempts = 0;
-                // Optional: provide a hint or reset visuals here
+                failedAttempts = 0; // optional: add hint/reset here
             }
         }
     }
 
-    private IEnumerator AdvanceToNextWordDelayed(float delaySeconds)
+    private IEnumerator AdvanceToNextWordAfterDelay(float seconds)
     {
-        yield return new WaitForSeconds(delaySeconds);
+        yield return new WaitForSeconds(seconds);
 
         currentIndex = (currentIndex + 1) % wordList.Count;
         failedAttempts = 0;
 
-        // Prep next round as “AAAA…” with the new length; do NOT reveal the answer
-        if (blockManager != null)
-            blockManager.InitializeDefaultForWordLength(wordList[currentIndex].Length);
-
-        speechSpitter.RefreshInstruction(currentIndex);
+        // New round: placeholders only; reward object hidden
+        speechSpitter.PrepareRound(currentIndex, blockManager);
     }
 }

@@ -7,113 +7,143 @@ using UnityEngine;
 
 public class WordBlockManager : MonoBehaviour
 {
-    [Header("Blocks in order, left ? right on the table")]
+    [Header("Blocks in table order (left ? right)")]
     public List<LetterDisplay> Blocks = new List<LetterDisplay>();
 
-    [Header("Default letter to show when idle")]
-    public string DefaultLetter = "A";
+    [Header("Defaults")]
+    [SerializeField] private string defaultLetter = "a";
+
+    [Header("Debug (read-only)")]
+    [SerializeField] private int _targetWordLength;
+    [SerializeField] private int _usedBlocks;
+    [SerializeField] private int _unusedBlocks;
 
     void Awake()
     {
-        // Start hidden & clean. WordFlow will size them per first word.
-        HideAll();
+        HideAllBlocks();
     }
 
-    // ---------- Public API ----------
-
-    // Show first <count> as default (A underlined white). Hide the rest.
-    public void InitializeDefaultForWordLength(int count)
+    // ---- Round sizing API (call at start of each round) ----
+    public void SetRoundBlockCount(int length)
     {
-        count = Mathf.Clamp(count, 0, Blocks.Count);
+        _targetWordLength = Mathf.Clamp(length, 0, Blocks.Count);
+        _usedBlocks = _targetWordLength;
+        _unusedBlocks = Blocks.Count - _usedBlocks;
 
         for (int i = 0; i < Blocks.Count; i++)
         {
             var b = Blocks[i];
-            if (i < count)
+            if (i < _usedBlocks)
             {
-                b.SetLetter(DefaultLetter);
-                b.ResetLetter();   // white + underline
+                b.SetLetter(defaultLetter);
+                b.ResetLetter();      // white + underline
                 b.SetVisible(true);
             }
             else
             {
-                HideAndReset(b);
+                b.SetVisible(false);
+                b.ResetLetter();
             }
         }
     }
 
-    // Show a specific word exactly (used when the user gets it right)
-    public void DisplayWord(string word)
+    // Show exact target word (after success)
+    public void DisplayWord(string word, bool keepCasing = true)
     {
         if (string.IsNullOrEmpty(word)) return;
 
-        word = word.ToUpperInvariant();
         int count = Mathf.Min(word.Length, Blocks.Count);
+        UpdateCounters(count);
 
         for (int i = 0; i < Blocks.Count; i++)
         {
             var b = Blocks[i];
             if (i < count)
             {
-                b.SetLetter(word[i].ToString());
+                string ch = keepCasing ? word[i].ToString() : word[i].ToString().ToUpperInvariant();
+                b.SetLetter(ch);
                 b.SetVisible(true);
-                b.ShowUnderline(false);
                 b.SetColor(Color.white);
+                b.ShowUnderline(false);
             }
             else
             {
-                HideAndReset(b);
+                b.SetVisible(false);
+                b.ResetLetter();
             }
         }
     }
 
-    // Red/green feedback (no yellow yet). Keeps guessed letters visible.
+    // Show guess vs target (index-based red/green)
+    // - Shows the user's spoken letters as-is (no forced uppercase)
+    // - Unfilled positions: default letter + red + underline
     public void DisplayComparison(string target, string guess)
     {
-        if (string.IsNullOrEmpty(target)) return;
+        target ??= "";
+        guess ??= "";
 
-        string t = Normalize(target);
-        string g = Normalize(guess);
+        string nt = Normalize(target);
+        string ng = Normalize(guess);
 
-        int showCount = Mathf.Min(Mathf.Max(t.Length, g.Length), Blocks.Count);
+        int count = Mathf.Min(Mathf.Max(target.Length, guess.Length), Blocks.Count);
+        UpdateCounters(count);
 
-        for (int i = 0; i < showCount; i++)
+        for (int i = 0; i < Blocks.Count; i++)
         {
             var b = Blocks[i];
-            b.SetVisible(true);
-            b.ShowUnderline(true);
 
-            char letter = (i < g.Length) ? char.ToUpperInvariant(g[i]) : DefaultLetter[0];
-            b.SetLetter(letter.ToString());
+            if (i < count)
+            {
+                b.SetVisible(true);
 
-            if (i < t.Length && i < g.Length && g[i] == t[i])
-                b.SetColor(Color.green);
+                // letter to show
+                if (i < guess.Length) b.SetLetter(guess[i].ToString());
+                else b.SetLetter(defaultLetter);
+
+                // color
+                bool inT = i < nt.Length;
+                bool inG = i < ng.Length;
+
+                if (!inG)
+                {
+                    b.SetColor(Color.red);
+                    b.ShowUnderline(true);
+                    continue;
+                }
+
+                b.SetColor(inT && ng[i] == nt[i] ? Color.green : Color.red);
+                b.ShowUnderline(true);
+            }
             else
-                b.SetColor(Color.red);
+            {
+                b.SetVisible(false);
+                b.ResetLetter();
+            }
         }
-
-        // Hide anything beyond the needed count
-        for (int i = showCount; i < Blocks.Count; i++)
-            HideAndReset(Blocks[i]);
     }
 
-    // ---------- Helpers ----------
-
-    private void HideAll()
+    // ---- helpers ----
+    private void HideAllBlocks()
     {
-        foreach (var b in Blocks) HideAndReset(b);
+        foreach (var b in Blocks)
+        {
+            b.SetVisible(false);
+            b.ResetLetter();
+        }
+        UpdateCounters(0);
     }
 
-    private void HideAndReset(LetterDisplay b)
+    private void UpdateCounters(int used)
     {
-        b.SetVisible(false);
-        b.SetLetter(DefaultLetter);
-        b.ResetLetter(); // white + underline
+        _usedBlocks = Mathf.Clamp(used, 0, Blocks.Count);
+        _unusedBlocks = Blocks.Count - _usedBlocks;
+        _targetWordLength = _usedBlocks;
     }
 
     private static string Normalize(string s)
     {
-        return TextUtils.NormalizeAccents(s ?? "").ToLowerInvariant();
+        return new string((s ?? "").Normalize(NormalizationForm.FormD)
+            .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            .ToArray()).ToLowerInvariant();
     }
 }
-

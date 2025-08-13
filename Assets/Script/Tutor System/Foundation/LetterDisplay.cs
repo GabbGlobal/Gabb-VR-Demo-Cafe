@@ -47,7 +47,7 @@ public class LetterDisplay : MonoBehaviour
         SetLetter("a");
         SetColor(Color.white);
         ShowUnderline(true);
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
     }
 
     public void SetVisible(bool visible)
