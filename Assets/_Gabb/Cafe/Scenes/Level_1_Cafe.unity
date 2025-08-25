@@ -19764,6 +19764,26 @@ PrefabInstance:
       propertyPath: onPlayerEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6851891822245831889, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
+      propertyPath: m_Height
+      value: 3.6941483
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851891822245831889, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
+      propertyPath: m_Radius
+      value: 1.6485417
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851891822245831889, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
+      propertyPath: m_Center.x
+      value: -0.4420374
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851891822245831889, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
+      propertyPath: m_Center.y
+      value: 1.148447
+      objectReference: {fileID: 0}
+    - target: {fileID: 6851891822245831889, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
+      propertyPath: m_Center.z
+      value: 0.09057923
+      objectReference: {fileID: 0}
     - target: {fileID: 7766404937856758024, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.024
@@ -41236,6 +41256,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 291016722}
     m_Modifications:
+    - target: {fileID: 583360965658198369, guid: fcd1984b9ba0d4e4d957ee851e528aea, type: 3}
+      propertyPath: m_Size.y
+      value: 0.7231464
+      objectReference: {fileID: 0}
+    - target: {fileID: 583360965658198369, guid: fcd1984b9ba0d4e4d957ee851e528aea, type: 3}
+      propertyPath: m_Center.y
+      value: 0.1384296
+      objectReference: {fileID: 0}
     - target: {fileID: 1106294221146795355, guid: fcd1984b9ba0d4e4d957ee851e528aea, type: 3}
       propertyPath: m_LocalScale.x
       value: 2.3040202

@@ -16,29 +16,28 @@ public class AzureSpeechRecognizer : MonoBehaviour
     public string azureRegion = "eastus";
     public string languageCode = "es-ES";
 
+    [Header("Behavior")]
+    [SerializeField] private bool autoStart = true;   // <- new: keep old behavior by default
+
     [Header("Listening Indicator")]
     public GameObject listeningIndicator;
     private Material indicatorMaterial;
-    private Color listeningColor = Color.green;
-    private Color idleColor = Color.red;
+    private readonly Color listeningColor = Color.green;
+    private readonly Color idleColor = Color.red;
 
     [Header("Recognition Control")]
-    public bool canListen = false;
+    public bool canListen = false;      // your existing “gate”
+    public bool IsListening { get; private set; }  // <- new: actual engine state
 
     private string authToken;
     private SpeechRecognizer recognizer;
     private SpeechConfig speechConfig;
 
-    private ConcurrentQueue<Action> mainThreadQueue = new ConcurrentQueue<Action>();
+    private readonly ConcurrentQueue<Action> mainThreadQueue = new ConcurrentQueue<Action>();
 
     void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
     }
 
@@ -53,19 +52,20 @@ public class AzureSpeechRecognizer : MonoBehaviour
             listeningIndicator.GetComponent<Renderer>().material = indicatorMaterial;
             indicatorMaterial.color = idleColor;
         }
+
+        if (autoStart) _ = StartListening();  // keep current behavior unless you turn it off
     }
 
     private void Update()
     {
-        // Dispatch queued actions to Unity's main thread
         while (mainThreadQueue.TryDequeue(out var action))
-        {
             action.Invoke();
-        }
     }
 
     private async Task InitializeRecognizer()
     {
+        if (recognizer != null) return;
+
         await GetToken();
 
         speechConfig = SpeechConfig.FromAuthorizationToken(authToken, azureRegion);
@@ -77,68 +77,81 @@ public class AzureSpeechRecognizer : MonoBehaviour
         recognizer.Recognizing += (s, e) =>
         {
             if (!canListen) return;
-            Debug.Log("[Azure] Recognizing...");
             SetIndicatorListening();
         };
 
         recognizer.Recognized += (s, e) =>
         {
             if (!canListen) return;
-
             if (e.Result.Reason == ResultReason.RecognizedSpeech)
             {
                 string resultText = CleanRecognizedText(e.Result.Text);
-                Debug.Log("[Azure] Cleaned: " + resultText);
-
-                // Queue action to run on Unity main thread
                 mainThreadQueue.Enqueue(() =>
                 {
-                    Debug.Log("[Azure] Executing on main thread.");
                     var wordFlow = FindFirstObjectByType<WordFlowManager>();
-                    if (wordFlow != null)
-                    {
-                        wordFlow.CheckRecognizedWord(resultText);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("[Azure] WordFlowManager not found.");
-                    }
+                    if (wordFlow != null) wordFlow.CheckRecognizedWord(resultText);
+                    else Debug.LogWarning("[Azure] WordFlowManager not found.");
                 });
             }
         };
 
         recognizer.Canceled += (s, e) =>
         {
-            Debug.LogWarning("[Azure] Recognition canceled.");
+            Debug.LogWarning("[Azure] Recognition canceled: " + e.ErrorDetails);
             SetIndicatorIdle();
+            IsListening = false;
         };
 
         recognizer.SessionStopped += (s, e) =>
         {
             Debug.LogWarning("[Azure] Session stopped.");
             SetIndicatorIdle();
+            IsListening = false;
         };
+    }
+
+    // ---------- Public control API ----------
+
+    public async Task StartListening()
+    {
+        canListen = true;                       // allow callbacks
+        await InitializeRecognizer();           // ensure built
+        if (recognizer == null || IsListening) return;
 
         await recognizer.StartContinuousRecognitionAsync();
+        IsListening = true;
+        SetIndicatorListening();
         Debug.Log("[Azure] Speech recognizer started.");
     }
 
+    public async Task StopListening()
+    {
+        // Hard stop: block callbacks FIRST, then stop engine.
+        canListen = false;
+
+        if (recognizer != null && IsListening)
+        {
+            await recognizer.StopContinuousRecognitionAsync();
+            IsListening = false;
+            Debug.Log("[Azure] Speech recognizer stopped.");
+        }
+
+        SetIndicatorIdle();
+    }
+
+    // ---------------------------------------
+
     private async Task GetToken()
     {
-        UnityWebRequest request = new UnityWebRequest(apimEndpoint, "POST");
+        using var request = new UnityWebRequest(apimEndpoint, "POST");
         request.SetRequestHeader("Ocp-Apim-Subscription-Key", apimKey);
         request.downloadHandler = new DownloadHandlerBuffer();
-
         await request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
-        {
             authToken = request.downloadHandler.text;
-        }
         else
-        {
             Debug.LogError("Failed to get Azure token: " + request.error);
-        }
     }
 
     private string CleanRecognizedText(string text)
@@ -148,13 +161,18 @@ public class AzureSpeechRecognizer : MonoBehaviour
 
     public void SetIndicatorListening()
     {
-        if (indicatorMaterial != null)
-            indicatorMaterial.color = listeningColor;
+        if (indicatorMaterial != null) indicatorMaterial.color = listeningColor;
     }
 
     public void SetIndicatorIdle()
     {
-        if (indicatorMaterial != null)
-            indicatorMaterial.color = idleColor;
+        if (indicatorMaterial != null) indicatorMaterial.color = idleColor;
+    }
+
+    private async void OnDestroy()
+    {
+        try { await StopListening(); } catch { /* ignore */ }
+        recognizer?.Dispose();
+       // speechConfig?.Dispose();
     }
 }

@@ -1,61 +1,140 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WordFlowManager : MonoBehaviour
 {
-    [Tooltip("Order must match SpeechSpitterManager.wordList")]
+    [Header("Target words (must match SpeechSpitterManager order/words)")]
     public List<string> wordList;
 
-    public int currentIndex = 0;
-    public int failedAttempts = 0;
-    private const int maxFails = 5;
+    [Header("Round flow")]
+    [SerializeField] private float roundAdvanceDelay = 3.5f;
+    [SerializeField] private int maxFails = 3;
 
-    [SerializeField] private SpeechSpitterManager speechSpitter;
-    [SerializeField] private WordBlockManager blockManager;
+    [Header("Refs")]
+    public SpeechSpitterManager speechSpitter;
+    public WordBlockManager blockManager;
+    public WordRewardManager rewardManager;
 
-    void Start()
+    [Header("Feedback")]
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip correctSfx;
+    [SerializeField] private AudioClip tryAgainSfx;
+
+    [Header("XP")]
+    [SerializeField] private Player player;                         
+    [SerializeField] private float xpPerWord = 5f;
+    [SerializeField] private TextMeshProUGUI xpText;
+
+    private int currentIndex = 0;
+    private int failedAttempts = 0;
+
+    private void Start()
     {
-        // Round 0: placeholders only
-        if (speechSpitter != null && blockManager != null && wordList != null && wordList.Count > 0)
-            speechSpitter.PrepareRound(currentIndex, blockManager);
+        // Initial sized to first word
+        if (wordList != null && wordList.Count > 0 && blockManager != null)
+            blockManager.SetRoundBlockCount(wordList[0].Length);
+
+        // Optional: show instructions for first word
+        if (speechSpitter) speechSpitter.RefreshInstruction(0);
+        UpdateXPUI();
     }
 
     public void CheckRecognizedWord(string recognized)
     {
-        string cleaned = SpeechSpitterManager.TextUtils.NormalizeAccents(recognized.Trim().ToLowerInvariant());
-        string target = SpeechSpitterManager.TextUtils.NormalizeAccents(wordList[currentIndex].Trim().ToLowerInvariant());
+        if (wordList == null || wordList.Count == 0) return;
 
-        if (cleaned == target)
+        string targetRaw = wordList[currentIndex];
+        string cleanedRecognized = TextUtils.NormalizeAccents(recognized.Trim().ToLowerInvariant());
+        string cleanedTarget = TextUtils.NormalizeAccents(targetRaw.Trim().ToLowerInvariant());
+
+        if (cleanedRecognized == cleanedTarget)
         {
+            blockManager.DisplayWord(targetRaw, keepCasing: true);
+            // SFX
+            if (sfxSource != null && correctSfx != null) sfxSource.PlayOneShot(correctSfx);
+            
+            if (rewardManager) rewardManager.TriggerReward(targetRaw);
+            if (speechSpitter) speechSpitter.RevealCorrectWord(currentIndex);
+            // XP
+            if (player != null && player.XPComponent != null)
+            {
+                player.XPComponent.AddXP(xpPerWord);
+                UpdateXPUI();
+            }
+
+
             failedAttempts = 0;
-
-            // Reveal the correct word and object
-            speechSpitter.RevealCorrectWord(currentIndex, blockManager);
-
-            StopAllCoroutines();
-            StartCoroutine(AdvanceToNextWordAfterDelay(4f));
+            StartCoroutine(AdvanceAfterDelay(roundAdvanceDelay));
         }
         else
         {
             failedAttempts++;
-            blockManager.DisplayComparison(wordList[currentIndex], recognized);
+
+            // Visual feedback: show what the system heard vs target
+            blockManager.DisplayComparison(targetRaw, recognized);
 
             if (failedAttempts >= maxFails)
             {
-                failedAttempts = 0; // optional: add hint/reset here
+                failedAttempts = 0;
+                if (sfxSource != null && tryAgainSfx != null) sfxSource.PlayOneShot(tryAgainSfx);
             }
         }
     }
 
-    private IEnumerator AdvanceToNextWordAfterDelay(float seconds)
+    private IEnumerator AdvanceAfterDelay(float seconds)
     {
-        yield return new WaitForSeconds(seconds);
+        
 
-        currentIndex = (currentIndex + 1) % wordList.Count;
-        failedAttempts = 0;
+        if (rewardManager) rewardManager.OnRoundEnd();
 
-        // New round: placeholders only; reward object hidden
-        speechSpitter.PrepareRound(currentIndex, blockManager);
+        //Only advance if not at last index
+        if (currentIndex < wordList.Count - 1)
+        {
+            yield return new WaitForSeconds(seconds);
+            currentIndex++;
+
+            string next = wordList[currentIndex];
+            if (blockManager) blockManager.SetRoundBlockCount(next.Length);
+            if (speechSpitter) speechSpitter.RefreshInstruction(currentIndex);
+        }
+        else
+        {
+            if (AzureSpeechRecognizer.Instance != null)
+            {
+                _ = AzureSpeechRecognizer.Instance.StopListening();
+            }
+            Debug.Log("Last word reached — holding position.");
+        }
     }
+
+    private void UpdateXPUI()
+    {
+        if (xpText != null && player != null && player.XPComponent != null)
+        {
+            xpText.text = $"XP: {player.XPComponent.GetTotalXP()}";
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (player != null)
+        {
+            player.OnXPGained += HandleXPGained;
+            player.OnLevelUp += HandleLevelUp;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (player != null)
+        {
+            player.OnXPGained -= HandleXPGained;
+            player.OnLevelUp -= HandleLevelUp;
+        }
+    }
+
+    private void HandleXPGained(float _) => UpdateXPUI();
+    private void HandleLevelUp(int _) => UpdateXPUI();
 }

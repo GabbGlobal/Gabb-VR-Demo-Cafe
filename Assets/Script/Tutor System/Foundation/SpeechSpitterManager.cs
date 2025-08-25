@@ -1,25 +1,20 @@
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using TMPro;
 using UnityEngine;
+using System.Globalization;
+using System.Linq;
 
 [System.Serializable]
 public class WordObjectPair
 {
     public string word;
-    public GameObject sceneObject;
-    [TextArea]
-    public string instructions;
+    public GameObject sceneObject;     // Optional: object to reveal on success
+    [TextArea] public string instructions;
 }
 
 public class SpeechSpitterManager : MonoBehaviour
 {
     public static SpeechSpitterManager Instance;
-
-    [Header("Managers")]
-    public WordFlowManager wordFlow;
 
     [Header("Word & Object Sequence")]
     public List<WordObjectPair> wordList = new List<WordObjectPair>();
@@ -27,43 +22,17 @@ public class SpeechSpitterManager : MonoBehaviour
     [Header("Instruction Text UI")]
     public TMP_Text instructionText;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
 
-        // Ensure no reward object is visible at boot
-        foreach (var p in wordList)
-            if (p.sceneObject) p.sceneObject.SetActive(false);
-
-        RefreshInstruction(0);
-    }
-
-    // Called at round start – no reveal
-    public void PrepareRound(int index, WordBlockManager blockManager)
-    {
-        if (index < 0 || index >= wordList.Count || blockManager == null) return;
-
-        // Hide reward object for this round
-        var pair = wordList[index];
-        if (pair.sceneObject) pair.sceneObject.SetActive(false);
-
-        // Size placeholders: “aaaa…” of target length
-        blockManager.SetRoundBlockCount(pair.word.Length);
-
-        // Update instructions
-        RefreshInstruction(index);
-    }
-
-    // Called only after a correct answer – reveal object and show word
-    public void RevealCorrectWord(int index, WordBlockManager blockManager)
-    {
-        if (index < 0 || index >= wordList.Count || blockManager == null) return;
-
-        var pair = wordList[index];
-
-        if (pair.sceneObject) pair.sceneObject.SetActive(true);
-        blockManager.DisplayWord(pair.word, keepCasing: true);
+        // Ensure all scene objects start hidden
+        foreach (var pair in wordList)
+        {
+            if (pair.sceneObject != null)
+                pair.sceneObject.SetActive(false);
+        }
     }
 
     public void RefreshInstruction(int index)
@@ -78,15 +47,14 @@ public class SpeechSpitterManager : MonoBehaviour
         return wordList.FindIndex(p => TextUtils.NormalizeAccents(p.word) == cleaned);
     }
 
-    public static class TextUtils
+    /// <summary>
+    /// Optionally reveal the scene object tied to the correct word.
+    /// </summary>
+    public void RevealCorrectWord(int index)
     {
-        public static string NormalizeAccents(string input)
-        {
-            return new string(input
-                .Normalize(NormalizationForm.FormD)
-                .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                .ToArray())
-                .ToLowerInvariant();
-        }
+        if (index < 0 || index >= wordList.Count) return;
+        var pair = wordList[index];
+        if (pair.sceneObject != null)
+            pair.sceneObject.SetActive(true);
     }
 }
