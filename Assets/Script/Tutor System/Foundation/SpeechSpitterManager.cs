@@ -1,24 +1,20 @@
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
 using TMPro;
 using UnityEngine;
+using System.Globalization;
+using System.Linq;
 
 [System.Serializable]
 public class WordObjectPair
 {
     public string word;
-    public GameObject sceneObject;
-    [TextArea]
-    public string instructions;
+    public GameObject sceneObject;     // Optional: object to reveal on success
+    [TextArea] public string instructions;
 }
 
 public class SpeechSpitterManager : MonoBehaviour
 {
     public static SpeechSpitterManager Instance;
-    [Header("Managers")]
-    public WordFlowManager wordFlow;
 
     [Header("Word & Object Sequence")]
     public List<WordObjectPair> wordList = new List<WordObjectPair>();
@@ -28,47 +24,15 @@ public class SpeechSpitterManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
 
+        // Ensure all scene objects start hidden
         foreach (var pair in wordList)
         {
             if (pair.sceneObject != null)
                 pair.sceneObject.SetActive(false);
         }
-
-        RefreshInstruction(0);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M))
-            wordFlow.CheckRecognizedWord("mesa");
-
-        if (Input.GetKeyDown(KeyCode.L))
-            wordFlow.CheckRecognizedWord("lápiz");
-    }
-
-    public void DisplayMatchedWordAt(int index)
-    {
-        if (index < 0 || index >= wordList.Count)
-            return;
-
-        var pair = wordList[index];
-
-        if (pair.sceneObject != null)
-            pair.sceneObject.SetActive(true);
-
-        var blockManager = FindFirstObjectByType<WordBlockManager>();
-        if (blockManager != null)
-            blockManager.DisplayWord(pair.word);
-
-        RefreshInstruction(index);
     }
 
     public void RefreshInstruction(int index)
@@ -80,18 +44,17 @@ public class SpeechSpitterManager : MonoBehaviour
     public int GetIndexForWord(string word)
     {
         string cleaned = TextUtils.NormalizeAccents(word);
-        return wordList.FindIndex(pair => TextUtils.NormalizeAccents(pair.word) == cleaned);
+        return wordList.FindIndex(p => TextUtils.NormalizeAccents(p.word) == cleaned);
     }
 
-    public static class TextUtils
+    /// <summary>
+    /// Optionally reveal the scene object tied to the correct word.
+    /// </summary>
+    public void RevealCorrectWord(int index)
     {
-        public static string NormalizeAccents(string input)
-        {
-            return new string(input
-                .Normalize(NormalizationForm.FormD)
-                .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
-                .ToArray())
-                .ToLowerInvariant();
-        }
+        if (index < 0 || index >= wordList.Count) return;
+        var pair = wordList[index];
+        if (pair.sceneObject != null)
+            pair.sceneObject.SetActive(true);
     }
 }
