@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [Header("Player Configuration")]
+    [SerializeField] private GameObject defaultCameraObj;
     [SerializeField] private GameObject playerPrefab;
     [SerializeField] private Transform playerSpawnPoint;
 
@@ -42,7 +43,10 @@ public class GameManager : MonoBehaviour
         language = "english";
         //get from backend
         #endregion
+        if (defaultCameraObj != null)
+            defaultCameraObj.GetComponent<Camera>().enabled = false;
         CreateLocalPlayer();
+        
     }
 
     private void CreateLocalPlayer()
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
     private string GetLocalPlayerName()
     {
         // TODO: Load from device storage or generate
-        return "Player"; // Placeholder for now
+        return "LocalDude"; // Placeholder for now
     }
 
     private string GetPlayer(string playerId)

@@ -27,6 +27,9 @@ public class PlayerXPComponent : MonoBehaviour
         {
             Debug.LogWarning("[PlayerXPComponent] Not fully ready. Ensure Player.Initialize(id) was called and XPConfig is assigned.");
         }
+        
+        Debug.Log($"[Player {dataComponent?.Data?.playerId}] PlayerXPComponent initialized.");
+        Debug.Log(IsReady);
     }
 
     // --- NEW: use this for mini-games or any non-dialogue XP
