@@ -7,6 +7,11 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
+    public bool testMode = false;
+    public float testXPInitAmount = 10f;
+    public int testWordInitCount = 10;
+    public int testMistakeInitCount = 2;
+
     private void Awake()
     {
         // Singleton

@@ -20,7 +20,7 @@ public class LevelStatsUI : MonoBehaviour
 
     private void OnDisable()
     {
-        if(waitForManagerCoroutine != null)
+        if (waitForManagerCoroutine != null)
         {
             StopCoroutine(waitForManagerCoroutine);
             waitForManagerCoroutine = null;
@@ -31,6 +31,7 @@ public class LevelStatsUI : MonoBehaviour
             UIManager.Instance.OnPlayerStatsChange -= UpdateWordStatsUI;
         }
     }
+
 
     private void UpdateXPUI(float xp)
     {
@@ -70,9 +71,18 @@ public class LevelStatsUI : MonoBehaviour
     private IEnumerator WaitForManagerThenSubscribe()
     {
         while (UIManager.Instance == null) yield return null; // wait 1+ frames
+
         UIManager.Instance.OnXPChanged += UpdateXPUI;
         UIManager.Instance.OnPlayerStatsChange += UpdateWordStatsUI;
-        PollCurrentValues();
+        if (UIManager.Instance.testMode)
+        {
+            UpdateXPUI(UIManager.Instance.testXPInitAmount);
+            UpdateWordStatsUI(new List<int> { UIManager.Instance.testWordInitCount, UIManager.Instance.testMistakeInitCount });
+        }
+        else
+        {
+            PollCurrentValues();
+        }
     }
 
 }

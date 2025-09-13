@@ -23,7 +23,7 @@ public class WordFlowManager : MonoBehaviour
     [SerializeField] private AudioClip tryAgainSfx;
 
     [Header("XP")]
-    [SerializeField] private Player player;                         
+    [SerializeField] private Player player;
     [SerializeField] private float xpPerWord = 5f;
     [SerializeField] private TextMeshProUGUI xpText;
 
@@ -54,22 +54,34 @@ public class WordFlowManager : MonoBehaviour
             blockManager.DisplayWord(targetRaw, keepCasing: true);
             // SFX
             if (sfxSource != null && correctSfx != null) sfxSource.PlayOneShot(correctSfx);
-            
+
             if (rewardManager) rewardManager.TriggerReward(targetRaw);
             if (speechSpitter) speechSpitter.RevealCorrectWord(currentIndex);
             // XP
             if (player != null && player.XPComponent != null)
             {
-                player.XPComponent.AddXP(xpPerWord);
+                if (UIManager.Instance.testMode)
+                    UIManager.Instance.testXPInitAmount += xpPerWord;
+                else
+                    player.XPComponent.AddXP(xpPerWord);
                 UpdateXPUI();
             }
 
             // Word Stats
             if (player != null && player.DataComponent != null)
             {
-                PlayerData playerData = player.DataComponent.Data;
-                playerData.wordslearned++;
-                UpdateWordStatsUI(playerData.wordslearned, playerData.mistakesmade);
+                if (UIManager.Instance.testMode)
+                {
+                    UIManager.Instance.testWordInitCount++;
+                    UpdateWordStatsUI(UIManager.Instance.testWordInitCount, UIManager.Instance.testMistakeInitCount);
+                }
+                else
+                {
+                    PlayerData playerData = player.DataComponent.Data;
+                    playerData.wordslearned++;
+                    UpdateWordStatsUI(playerData.wordslearned, playerData.mistakesmade);
+                }
+
             }
 
 
@@ -81,9 +93,18 @@ public class WordFlowManager : MonoBehaviour
             failedAttempts++;
             if (player != null && player.DataComponent != null)
             {
-                PlayerData playerData = player.DataComponent.Data;
-                playerData.mistakesmade++;
-                UpdateWordStatsUI(playerData.wordslearned, playerData.mistakesmade);
+                if (UIManager.Instance.testMode)
+                {
+                    UIManager.Instance.testMistakeInitCount++;
+                    UpdateWordStatsUI(UIManager.Instance.testWordInitCount, UIManager.Instance.testMistakeInitCount);
+                }
+                else
+                {
+                    PlayerData playerData = player.DataComponent.Data;
+                    playerData.mistakesmade++;
+                    UpdateWordStatsUI(playerData.wordslearned, playerData.mistakesmade);
+                }
+
             }
 
             // Visual feedback: show what the system heard vs target
@@ -99,7 +120,7 @@ public class WordFlowManager : MonoBehaviour
 
     private IEnumerator AdvanceAfterDelay(float seconds)
     {
-        
+
 
         if (rewardManager) rewardManager.OnRoundEnd();
 
@@ -131,7 +152,15 @@ public class WordFlowManager : MonoBehaviour
         }
 
         // Add UIManager Invoke Event
-        UIManager.Instance.InvokeXPChanged(player.XPComponent.GetTotalXP());
+        if (UIManager.Instance.testMode)
+        {
+            UIManager.Instance.InvokeXPChanged(UIManager.Instance.testXPInitAmount);
+        }
+        else
+        {
+            UIManager.Instance.InvokeXPChanged(player.XPComponent.GetTotalXP());
+        }
+
     }
 
     private void UpdateWordStatsUI(int wordsLearned, int mistakesMade)
