@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Brain, BarChart2, Home, Settings, Zap } from 'lucide-react'
+import { Brain, BarChart2, Home, Zap, Trophy } from 'lucide-react'
 import { useUserStore, selectActiveProgress } from '../../store/userStore'
 import { useBiosensorStore } from '../../store/biosensorStore'
 import { XpBar } from '../ui/Progress'
@@ -17,9 +17,10 @@ export default function Header() {
   const lang = LANGUAGES.find(l => l.code === profile?.activeLanguage)
 
   const navItems = [
-    { to: '/dashboard', icon: Home, label: 'Home' },
-    { to: '/progress',  icon: BarChart2, label: 'Progress' },
-    { to: '/subscribe', icon: Zap, label: 'Upgrade' },
+    { to: '/dashboard',    icon: Home,     label: 'Home' },
+    { to: '/leaderboard',  icon: Trophy,   label: 'Leaderboard' },
+    { to: '/progress',     icon: BarChart2, label: 'Progress' },
+    { to: '/subscribe',    icon: Zap,      label: 'Upgrade' },
   ]
 
   return (

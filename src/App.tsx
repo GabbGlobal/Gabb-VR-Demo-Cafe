@@ -12,6 +12,7 @@ import DashboardPage from './pages/Dashboard'
 import LessonPage from './pages/Lesson'
 import ProgressPage from './pages/Progress'
 import SubscriptionPage from './pages/Subscription'
+import LeaderboardPage from './pages/Leaderboard'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const isOnboarded = useUserStore(s => s.isOnboarded)
@@ -38,7 +39,8 @@ export default function App() {
         {/* App */}
         <Route path="/dashboard" element={<RequireAuth><DashboardPage /></RequireAuth>} />
         <Route path="/lesson/:category" element={<RequireAuth><LessonPage /></RequireAuth>} />
-        <Route path="/progress" element={<RequireAuth><ProgressPage /></RequireAuth>} />
+        <Route path="/progress"     element={<RequireAuth><ProgressPage /></RequireAuth>} />
+        <Route path="/leaderboard"  element={<RequireAuth><LeaderboardPage /></RequireAuth>} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />

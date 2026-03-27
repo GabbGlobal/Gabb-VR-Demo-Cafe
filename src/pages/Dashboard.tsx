@@ -3,6 +3,8 @@ import { motion } from 'framer-motion'
 import { Play, Trophy, BookOpen, Brain, Zap, Mic, Headset, Heart, ChevronRight, Apple } from 'lucide-react'
 import Header from '../components/layout/Header'
 import BiosensorPanel from '../components/biosensor/BiosensorPanel'
+import TutorSchedule from '../components/tutor/TutorSchedule'
+import Gabby from '../components/mascot/Gabby'
 import { Button } from '../components/ui/Button'
 import { Card } from '../components/ui/Card'
 import { ProgressBar, XpBar } from '../components/ui/Progress'
@@ -232,6 +234,7 @@ export default function DashboardPage() {
                 </p>
               </div>
               <BiosensorPanel />
+              <TutorSchedule />
             </div>
 
             {/* VR Practice Mode teaser */}
@@ -275,6 +278,7 @@ export default function DashboardPage() {
           </div>
         </div>
       </main>
+      <Gabby />
     </div>
   )
 }

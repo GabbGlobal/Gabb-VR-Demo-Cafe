@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { X, Brain, CheckCircle2, XCircle, ChevronRight, Volume2 } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { ProgressBar } from '../components/ui/Progress'
+import MnemonicPopup from '../components/lesson/MnemonicPopup'
+import Gabby, { useGabby } from '../components/mascot/Gabby'
 import { useUserStore } from '../store/userStore'
 import { useBiosensorStore } from '../store/biosensorStore'
 import { useAdaptiveLearning } from '../hooks/useAdaptiveLearning'
@@ -30,7 +32,9 @@ export default function LessonPage() {
   const [score, setScore] = useState(0)
   const [done, setDone] = useState(false)
   const [fillInput, setFillInput] = useState('')
+  const [showMnemonic, setShowMnemonic] = useState(false)
   const startTimeRef = useRef<number>(Date.now())
+  const { message: gabbyMsg, celebrate, encourage } = useGabby()
 
   useEffect(() => {
     if (!profile) return
@@ -57,7 +61,12 @@ export default function LessonPage() {
 
     setAnswer(userAnswer)
     setIsCorrect(correct)
-    if (correct) setScore(s => s + 1)
+    if (correct) {
+      setScore(s => s + 1)
+      if (score > 0 && score % 3 === 0) celebrate()
+    } else {
+      encourage()
+    }
 
     // Update stores
     updatePerformance(correct, responseTime)
@@ -71,6 +80,7 @@ export default function LessonPage() {
     setAnswer(null)
     setIsCorrect(null)
     setFillInput('')
+    setShowMnemonic(false)
     if (index + 1 >= cards.length) {
       const lessonId = `lesson-${category}-${Date.now()}`
       const xpEarned = Math.round(score * 12 + (score === cards.length ? 20 : 0))
@@ -186,6 +196,23 @@ export default function LessonPage() {
             </motion.div>
           </AnimatePresence>
 
+          {/* Mnemonic popup — show after wrong answer */}
+          {answer !== null && !isCorrect && !showMnemonic && (
+            <div className="mt-3">
+              <button
+                onClick={() => setShowMnemonic(true)}
+                className="text-xs text-amber-400 hover:text-amber-300 underline underline-offset-2 transition-colors"
+              >
+                💡 Show memory hook for "{current.word.native}"
+              </button>
+            </div>
+          )}
+          {showMnemonic && current && (
+            <div className="mt-3">
+              <MnemonicPopup word={current.word} onDismiss={() => setShowMnemonic(false)} />
+            </div>
+          )}
+
           {/* Answer feedback + Next */}
           <AnimatePresence>
             {answer !== null && (
@@ -218,6 +245,7 @@ export default function LessonPage() {
           </AnimatePresence>
         </div>
       </div>
+    <Gabby message={gabbyMsg} />
     </div>
   )
 }
