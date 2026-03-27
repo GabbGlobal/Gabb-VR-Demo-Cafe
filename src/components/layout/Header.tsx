@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Brain, BarChart2, Home, Zap, Trophy } from 'lucide-react'
 import { useUserStore, selectActiveProgress } from '../../store/userStore'
+import { useState } from 'react'
 import { useBiosensorStore } from '../../store/biosensorStore'
 import { XpBar } from '../ui/Progress'
 import { LANGUAGES } from '../../data/languages'
@@ -11,6 +12,8 @@ export default function Header() {
   const location = useLocation()
   const profile = useUserStore(s => s.profile)
   const progress = useUserStore(selectActiveProgress)
+  const coins = useUserStore(s => s.coins)
+  const [logoLoaded, setLogoLoaded] = useState(true)
   const adaptiveState = useBiosensorStore(s => s.adaptiveState)
   const connectedDevices = useBiosensorStore(s => s.devices.filter(d => d.status === 'connected'))
 
@@ -26,12 +29,25 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full glass border-b border-white/10">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        {/* Logo */}
-        <Link to="/dashboard" className="flex items-center gap-2.5 shrink-0">
-          <div className="w-8 h-8 rounded-xl gabb-gradient flex items-center justify-center">
-            <span className="text-white font-bold text-sm">G</span>
-          </div>
-          <span className="font-display font-bold text-white hidden sm:block">Gabb Languages</span>
+        {/* Logo — drop your logo at /public/gabb-logo.png to replace this */}
+        <Link to="/dashboard" className="flex items-center gap-2 shrink-0">
+          {logoLoaded ? (
+            <img
+              src="/gabb-logo.png"
+              alt="Gabb Global"
+              className="h-8 object-contain"
+              onError={() => setLogoLoaded(false)}
+            />
+          ) : (
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-xl gabb-gradient flex items-center justify-center shrink-0">
+                <span className="text-white font-bold text-sm">G</span>
+              </div>
+              <span className="font-display font-bold text-white hidden sm:block tracking-tight">
+                Gabb<span className="text-gabb-400"> Global</span>
+              </span>
+            </div>
+          )}
         </Link>
 
         {/* XP bar (centre) */}
@@ -53,6 +69,14 @@ export default function Header() {
               <Brain size={12} className="opacity-80" />
               <span>{cognitiveStateLabel(adaptiveState.cognitiveState)}</span>
             </motion.div>
+          )}
+
+          {/* GGC coins */}
+          {coins > 0 && (
+            <div className="flex items-center gap-1 text-amber-400 text-sm font-semibold" title="Gabb Gold Coins">
+              <span>🪙</span>
+              <span>{coins}</span>
+            </div>
           )}
 
           {/* Streak */}

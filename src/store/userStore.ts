@@ -6,11 +6,13 @@ interface UserState {
   profile: UserProfile | null
   progress: Record<LanguageCode, LanguageProgress>
   isOnboarded: boolean
+  coins: number  // Gabb Gold Coins (GGC) — cross-language currency
 
   // actions
   setProfile: (profile: UserProfile) => void
   updateProfile: (partial: Partial<UserProfile>) => void
   addXp: (lang: LanguageCode, xp: number) => void
+  addCoins: (amount: number) => void
   markWordLearned: (lang: LanguageCode, wordId: string) => void
   markWordMissed: (lang: LanguageCode, wordId: string) => void
   markLessonCompleted: (lang: LanguageCode, lessonId: string) => void
@@ -42,6 +44,7 @@ export const useUserStore = create<UserState>()(
       profile: null,
       progress: {} as Record<LanguageCode, LanguageProgress>,
       isOnboarded: false,
+      coins: 0,
 
       setProfile: (profile) =>
         set({
@@ -55,6 +58,8 @@ export const useUserStore = create<UserState>()(
 
       updateProfile: (partial) =>
         set((s) => ({ profile: s.profile ? { ...s.profile, ...partial } : null })),
+
+      addCoins: (amount) => set(s => ({ coins: s.coins + amount })),
 
       addXp: (lang, xp) =>
         set((s) => {
@@ -119,7 +124,7 @@ export const useUserStore = create<UserState>()(
       setActiveLanguage: (lang) =>
         set((s) => ({ profile: s.profile ? { ...s.profile, activeLanguage: lang } : null })),
 
-      reset: () => set({ profile: null, progress: {} as Record<LanguageCode, LanguageProgress>, isOnboarded: false }),
+      reset: () => set({ profile: null, progress: {} as Record<LanguageCode, LanguageProgress>, isOnboarded: false, coins: 0 }),
     }),
     { name: 'gabb-user' },
   ),

@@ -10,6 +10,7 @@ import { Card } from '../components/ui/Card'
 import { ProgressBar, XpBar } from '../components/ui/Progress'
 import { Badge } from '../components/ui/Badge'
 import { useUserStore, selectActiveProgress } from '../store/userStore'
+import { playFanfare } from '../utils/fanfare'
 import { useBiosensorStore } from '../store/biosensorStore'
 import { LANGUAGES, INTEREST_CATEGORIES } from '../data/languages'
 import { cognitiveStateLabel, cognitiveStateBg } from '../utils/neuroadaptive'
@@ -31,6 +32,7 @@ export default function DashboardPage() {
   const navigate = useNavigate()
   const profile = useUserStore(s => s.profile)
   const progress = useUserStore(selectActiveProgress)
+  const coins = useUserStore(s => s.coins)
   const setActiveLanguage = useUserStore(s => s.setActiveLanguage)
   const adaptiveState = useBiosensorStore(s => s.adaptiveState)
   const connectedDevices = useBiosensorStore(s => s.devices.filter(d => d.status === 'connected'))
@@ -44,7 +46,13 @@ export default function DashboardPage() {
   const categories = INTEREST_CATEGORIES.filter(c => profile.interests.includes(c.id as any))
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-950 relative overflow-x-hidden">
+      {/* Decorative color splashes */}
+      <div className="pointer-events-none fixed inset-0 overflow-hidden">
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-gabb-600/8 blur-3xl" />
+        <div className="absolute top-1/3 -right-32 w-[400px] h-[400px] rounded-full bg-purple-600/6 blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 w-[350px] h-[350px] rounded-full bg-gabb-500/5 blur-3xl" />
+      </div>
       <Header />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
@@ -100,10 +108,19 @@ export default function DashboardPage() {
 
                 {progress && <XpBar xp={progress.xp} xpToNextLevel={progress.xpToNextLevel} level={progress.level} />}
 
-                <div className="grid grid-cols-3 gap-4 mt-4">
-                  <Stat label="Words Learned" value={learnedWords} icon="📚" />
-                  <Stat label="Accuracy"       value={`${progress?.accuracy ?? 0}%`} icon="🎯" />
-                  <Stat label="Streak"          value={`${progress?.streak ?? 0}d`}  icon="🔥" />
+                <div className="grid grid-cols-4 gap-3 mt-4">
+                  <Stat label="Words"    value={learnedWords}                   icon="📚" />
+                  <Stat label="Accuracy" value={`${progress?.accuracy ?? 0}%`} icon="🎯" />
+                  <Stat label="Streak"   value={`${progress?.streak ?? 0}d`}   icon="🔥" />
+                  <button
+                    onClick={() => playFanfare('ding')}
+                    className="text-center p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl hover:bg-amber-500/20 transition-colors group"
+                    title="Gabb Gold Coins — earn by practising!"
+                  >
+                    <p className="text-xl mb-1">🪙</p>
+                    <p className="font-bold text-lg text-amber-400 group-hover:scale-110 transition-transform">{coins}</p>
+                    <p className="text-xs text-amber-400/60">GGC</p>
+                  </button>
                 </div>
               </Card>
             </motion.div>
@@ -217,6 +234,9 @@ export default function DashboardPage() {
               <ProgressBar value={learnedWords} max={totalWords} label={`${learnedWords} / ${totalWords} words`} showValue color="gradient" />
             </Card>
 
+            {/* Neural Brain Paradigm */}
+            <NeuralBrainCard learnedWords={learnedWords} totalWords={totalWords} coins={coins} />
+
             {/* Coming Soon — Biosensors */}
             <div className="glass rounded-2xl p-5 border border-dashed border-gabb-500/30 space-y-3">
               <div className="flex items-center gap-2">
@@ -280,6 +300,77 @@ export default function DashboardPage() {
       </main>
       <Gabby />
     </div>
+  )
+}
+
+// ─── Neural Brain Paradigm ────────────────────────────────────────────────────
+
+function NeuralBrainCard({ learnedWords, totalWords, coins }: { learnedWords: number; totalWords: number; coins: number }) {
+  const DOT_COUNT = 40
+  const activeDots = Math.round((learnedWords / Math.max(totalWords, 1)) * DOT_COUNT)
+  const pct = Math.round((learnedWords / Math.max(totalWords, 1)) * 100)
+
+  return (
+    <Card>
+      <div className="flex items-start gap-3 mb-4">
+        <div className="relative shrink-0">
+          {/* Glow rings */}
+          {[0, 1, 2].map(i => (
+            <motion.div
+              key={i}
+              className="absolute inset-0 rounded-full border border-gabb-500/25"
+              animate={{ scale: [1, 1.6 + i * 0.25], opacity: [0.6, 0] }}
+              transition={{ duration: 2.5, delay: i * 0.5, repeat: Infinity, ease: 'easeOut' }}
+            />
+          ))}
+          <motion.div
+            animate={{ scale: [1, 1.04, 1] }}
+            transition={{ duration: 3, repeat: Infinity }}
+            className="relative w-14 h-14 rounded-full bg-gabb-500/15 border border-gabb-500/30 flex items-center justify-center"
+          >
+            <Brain size={26} className="text-gabb-400" />
+          </motion.div>
+        </div>
+        <div className="flex-1 min-w-0">
+          <h3 className="font-display font-bold text-white text-sm">Your Neural Map</h3>
+          <p className="text-xs text-white/40 mb-1">{learnedWords} / {totalWords} pathways encoded · {pct}%</p>
+          <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-gabb-600 to-gabb-400"
+              initial={{ width: 0 }}
+              animate={{ width: `${pct}%` }}
+              transition={{ duration: 1, ease: 'easeOut' }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Neural node grid */}
+      <div className="grid grid-cols-10 gap-1 mb-3">
+        {Array.from({ length: DOT_COUNT }).map((_, i) => (
+          <motion.div
+            key={i}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: i * 0.015, duration: 0.3 }}
+            className={`h-2.5 rounded-full ${
+              i < activeDots
+                ? 'bg-gabb-500 shadow-sm shadow-gabb-500/70'
+                : 'bg-white/8'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* GGC balance */}
+      <div className="flex items-center justify-between pt-3 border-t border-white/5">
+        <span className="text-xs text-white/30">Gabb Gold Coins</span>
+        <div className="flex items-center gap-1.5">
+          <span className="text-lg">🪙</span>
+          <span className="font-bold text-amber-400">{coins} GGC</span>
+        </div>
+      </div>
+    </Card>
   )
 }
 

@@ -1,7 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Brain, CheckCircle2, XCircle, ChevronRight, Volume2, Turtle, RotateCcw, Mic } from 'lucide-react'
+import { X, Brain, CheckCircle2, XCircle, ChevronRight, Volume2, Turtle, RotateCcw, Mic, Coins } from 'lucide-react'
+import { playFanfare } from '../utils/fanfare'
 import { Button } from '../components/ui/Button'
 import { ProgressBar } from '../components/ui/Progress'
 import MnemonicPopup from '../components/lesson/MnemonicPopup'
@@ -39,7 +40,7 @@ export default function LessonPage() {
   const { category } = useParams<{ category: string }>()
   const navigate = useNavigate()
   const profile = useUserStore(s => s.profile)
-  const { addXp, markWordLearned, markWordMissed, markLessonCompleted, updateAccuracy, updateStreak } = useUserStore()
+  const { addXp, addCoins, markWordLearned, markWordMissed, markLessonCompleted, updateAccuracy, updateStreak } = useUserStore()
   const { updatePerformance } = useBiosensorStore()
   const adaptiveState = useBiosensorStore(s => s.adaptiveState)
   const connectedDevices = useBiosensorStore(s => s.devices.filter(d => d.status === 'connected'))
@@ -50,6 +51,7 @@ export default function LessonPage() {
   const [answer, setAnswer] = useState<string | null>(null)
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
   const [score, setScore] = useState(0)
+  const [coinsEarnedThisLesson, setCoinsEarnedThisLesson] = useState(0)
   const [done, setDone] = useState(false)
   const [fillInput, setFillInput] = useState('')
   const [showMnemonic, setShowMnemonic] = useState(false)
@@ -107,6 +109,8 @@ export default function LessonPage() {
     setAnswer(userAnswer)
     setIsCorrect(correct)
     if (correct) {
+      addCoins(5)
+      setCoinsEarnedThisLesson(c => c + 5)
       setScore(s => {
         const next = s + 1
         if (next % 3 === 0) celebrate(randomFrom(CELEBRATE_MSGS))
@@ -132,9 +136,14 @@ export default function LessonPage() {
     if (index + 1 >= cards.length) {
       const lessonId = `lesson-${category}-${Date.now()}`
       const xpEarned = Math.round(score * 12 + (score === cards.length ? 20 : 0))
+      const isPerfect = score === cards.length
+      const bonusCoins = isPerfect ? 50 : 20
       addXp(profile!.activeLanguage, xpEarned)
+      addCoins(bonusCoins)
+      setCoinsEarnedThisLesson(c => c + bonusCoins)
       markLessonCompleted(profile!.activeLanguage, lessonId)
       updateStreak(profile!.activeLanguage)
+      playFanfare(isPerfect ? 'perfect' : 'complete')
       setDone(true)
     } else {
       setIndex(i => i + 1)
@@ -177,14 +186,18 @@ export default function LessonPage() {
             {score} / {cards.length} correct · {pct}% accuracy
           </p>
 
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          <div className="grid grid-cols-3 gap-3 mb-6">
             <div className="bg-white/5 rounded-xl p-4">
               <p className="text-2xl font-bold text-gabb-400">+{xpEarned}</p>
-              <p className="text-xs text-white/50">XP Earned</p>
+              <p className="text-xs text-white/50">XP</p>
             </div>
             <div className="bg-white/5 rounded-xl p-4">
               <p className="text-2xl font-bold text-emerald-400">{score}</p>
-              <p className="text-xs text-white/50">Words Correct</p>
+              <p className="text-xs text-white/50">Correct</p>
+            </div>
+            <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4">
+              <p className="text-2xl font-bold text-amber-400">+{coinsEarnedThisLesson}</p>
+              <p className="text-xs text-amber-400/60">🪙 GGC</p>
             </div>
           </div>
 
