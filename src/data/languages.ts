@@ -1,0 +1,105 @@
+import type { Language, PricingTier } from '../types'
+
+export const LANGUAGES: Language[] = [
+  {
+    code: 'it',
+    name: 'Italian',
+    nativeName: 'Italiano',
+    flag: '🇮🇹',
+    priceMonthly: 9.99,
+    description: 'The language of art, food, fashion, and romance. Perfect for travel to Italy and Switzerland.',
+    difficulty: 'beginner-friendly',
+    speakers: '85 million',
+  },
+  {
+    code: 'es',
+    name: 'Spanish',
+    nativeName: 'Español',
+    flag: '🇪🇸',
+    priceMonthly: 9.99,
+    description: 'The world\'s second most spoken native language. Opens doors across 20+ countries.',
+    difficulty: 'beginner-friendly',
+    speakers: '500 million',
+  },
+  {
+    code: 'fr',
+    name: 'French',
+    nativeName: 'Français',
+    flag: '🇫🇷',
+    priceMonthly: 9.99,
+    description: 'The language of diplomacy, cuisine, and culture. Spoken on 5 continents.',
+    difficulty: 'moderate',
+    speakers: '280 million',
+  },
+  {
+    code: 'pt',
+    name: 'Portuguese',
+    nativeName: 'Português',
+    flag: '🇧🇷',
+    priceMonthly: 9.99,
+    description: 'From Lisbon to Rio — a warm, musical language with global reach.',
+    difficulty: 'beginner-friendly',
+    speakers: '250 million',
+  },
+]
+
+export const PRICING_TIERS: PricingTier[] = [
+  {
+    id: 'free',
+    name: 'Free',
+    priceMonthly: 0,
+    priceAnnual: 0,
+    features: [
+      'One language (limited)',
+      '50 core vocabulary words',
+      '5 lessons per month',
+      'Basic progress tracking',
+    ],
+    highlighted: false,
+  },
+  {
+    id: 'language',
+    name: 'One Language',
+    priceMonthly: 9.99,
+    priceAnnual: 79.99,
+    features: [
+      'Full 1,000-word vocabulary',
+      'Unlimited lessons',
+      'All interest categories',
+      'Biosensor integration',
+      'Neuroadaptive pacing',
+      'Pronunciation coach',
+      'Offline mode',
+    ],
+    highlighted: false,
+  },
+  {
+    id: 'allaccess',
+    name: 'All Languages',
+    priceMonthly: 14.99,
+    priceAnnual: 119.99,
+    features: [
+      'Everything in One Language',
+      'All 4 languages (more coming)',
+      'Cross-language learning paths',
+      'Advanced biosensor analytics',
+      'Priority support',
+      'Early access to new features',
+      'Family sharing (up to 3)',
+    ],
+    highlighted: true,
+  },
+]
+
+export const INTEREST_CATEGORIES = [
+  { id: 'travel',    label: 'Travel & Tourism',      icon: '✈️',  description: 'Airports, hotels, transport, directions' },
+  { id: 'food',      label: 'Food & Dining',          icon: '🍝',  description: 'Restaurants, recipes, ordering, tastes' },
+  { id: 'social',    label: 'Social & Chat',          icon: '💬',  description: 'Greetings, feelings, small talk, opinions' },
+  { id: 'romance',   label: 'Romance & Dating',       icon: '❤️',  description: 'Relationships, compliments, dating phrases' },
+  { id: 'lgbtq',     label: 'LGBTQ+ Community',       icon: '🏳️‍🌈', description: 'Inclusive vocab, queer culture, safe spaces' },
+  { id: 'culture',   label: 'Culture & Arts',         icon: '🎭',  description: 'Music, art, cinema, history, nightlife' },
+  { id: 'shopping',  label: 'Shopping & Money',       icon: '🛍️',  description: 'Prices, bargaining, clothes, markets' },
+  { id: 'health',    label: 'Health & Body',          icon: '🏥',  description: 'Medical phrases, fitness, wellbeing' },
+  { id: 'business',  label: 'Work & Business',        icon: '💼',  description: 'Professional language, meetings, emails' },
+  { id: 'essentials', label: 'Essentials',            icon: '⭐',  description: 'Core 100 words every learner needs first' },
+] as const
