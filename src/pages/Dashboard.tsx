@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Play, Trophy, BookOpen, Brain, Zap, Mic, Headset, Heart, ChevronRight, Apple } from 'lucide-react'
+import { Play, Trophy, BookOpen, Brain, Zap, Mic, Headset, Heart, ChevronRight, Apple, Gamepad2, MessageCircle } from 'lucide-react'
 import Header from '../components/layout/Header'
 import BiosensorPanel from '../components/biosensor/BiosensorPanel'
 import TutorSchedule from '../components/tutor/TutorSchedule'
@@ -121,6 +121,36 @@ export default function DashboardPage() {
                     <p className="font-bold text-lg text-amber-400 group-hover:scale-110 transition-transform">{coins}</p>
                     <p className="text-xs text-amber-400/60">GGC</p>
                   </button>
+                </div>
+              </Card>
+            </motion.div>
+
+            {/* Daily Training — 3 games */}
+            <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
+              <Card>
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="font-display font-bold text-xl text-white">Daily Training</h2>
+                  <span className="text-xs text-[#4CC8E8] font-semibold">🪙 Earn GGC</span>
+                </div>
+                <div className="grid grid-cols-3 gap-3">
+                  {[
+                    { icon: '☕', label: 'Café Italiano', desc: '3-min mind snack', path: '/games/cafe-italiano', color: 'border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10', badge: '700 words' },
+                    { icon: '🔠', label: 'Word Match',    desc: 'Tap to pair words', path: '/games/word-match',    color: 'border-[#4CC8E8]/20 bg-[#4CC8E8]/5 hover:bg-[#4CC8E8]/10', badge: 'Speed' },
+                    { icon: '🤖', label: 'Talk to Gabby', desc: 'Live voice tutor',  path: '/tutor',               color: 'border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10', badge: 'AI' },
+                  ].map(g => (
+                    <motion.button
+                      key={g.path}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.97 }}
+                      onClick={() => navigate(g.path)}
+                      className={`rounded-xl border p-3 text-left transition-all ${g.color}`}
+                    >
+                      <span className="text-2xl block mb-1">{g.icon}</span>
+                      <p className="font-semibold text-white text-xs">{g.label}</p>
+                      <p className="text-white/40 text-[10px] mt-0.5">{g.desc}</p>
+                      <span className="inline-block mt-1.5 text-[9px] bg-white/10 text-white/50 px-1.5 py-0.5 rounded-full">{g.badge}</span>
+                    </motion.button>
+                  ))}
                 </div>
               </Card>
             </motion.div>

@@ -87,6 +87,11 @@ export interface UserProfile {
   activeLanguage: LanguageCode
   subscription: SubscriptionPlan
   createdAt: string
+  // Onboarding extras
+  password?: string
+  goal?: 'travel' | 'business' | 'academic' | 'family' | 'culture' | 'fluency'
+  dailyMinutes?: 5 | 15 | 30 | 60
+  placementLevel?: 1 | 2 | 3  // 1=beginner, 2=intermediate, 3=advanced
 }
 
 export interface LanguageProgress {

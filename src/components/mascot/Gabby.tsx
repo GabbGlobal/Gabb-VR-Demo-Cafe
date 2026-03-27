@@ -128,18 +128,27 @@ export default function Gabby({ message, autoMessages, autoInterval = 12000, pos
           />
         )}
 
-        {/* Globe body */}
-        <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${MOOD_COLOR[mood]} flex items-center justify-center shadow-xl border-2 border-white/20`}>
-          {/* Globe grid lines */}
-          <svg viewBox="0 0 64 64" className="absolute inset-0 w-full h-full opacity-20" fill="none">
-            <circle cx="32" cy="32" r="30" stroke="white" strokeWidth="1" />
-            <ellipse cx="32" cy="32" rx="16" ry="30" stroke="white" strokeWidth="1" />
-            <line x1="2" y1="32" x2="62" y2="32" stroke="white" strokeWidth="1" />
-            <path d="M 2 20 Q 32 14 62 20" stroke="white" strokeWidth="0.8" />
-            <path d="M 2 44 Q 32 50 62 44" stroke="white" strokeWidth="0.8" />
+        {/* Gabb Globe avatar — brand colors */}
+        <div className="relative w-16 h-16 rounded-full shadow-xl overflow-hidden">
+          <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
+            <rect width="100" height="100" rx="50" fill="#DCF0F9"/>
+            <defs>
+              <mask id="gm">
+                <rect width="100" height="100" fill="white"/>
+                <circle cx="50" cy="50" r="26" fill="black"/>
+                <polygon points="50,50 62,6 96,6 96,52" fill="black"/>
+              </mask>
+            </defs>
+            <circle cx="50" cy="50" r="46" fill="#4CC8E8" mask="url(#gm)"/>
+            <rect x="56" y="43" width="38" height="14" rx="5" fill="#4CC8E8"/>
+            <path d="M 34 12 C 46 8 60 12 62 20 C 64 26 56 28 48 26 C 42 24 34 20 34 16 Z" fill="#4A9660"/>
+            <path d="M 74 36 L 86 42 L 84 54 L 72 50 Z" fill="#4A9660"/>
+            <path d="M 70 60 C 78 60 84 66 82 74 C 80 80 70 82 64 76 C 60 72 62 64 68 62 Z" fill="#4A9660"/>
           </svg>
-          {/* Face */}
-          <span className="relative text-2xl select-none">{MOOD_FACE[mood]}</span>
+          {/* Face overlay */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-2xl select-none drop-shadow-sm">{MOOD_FACE[mood]}</span>
+          </div>
         </div>
 
         {/* Name tag */}

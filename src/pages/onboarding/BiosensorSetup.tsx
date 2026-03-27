@@ -2,11 +2,10 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Brain, Heart, Zap, ChevronRight, SkipForward } from 'lucide-react'
 import { Button } from '../../components/ui/Button'
-import { StepDots, useOnboardingState } from './Welcome'
+import { StepDots } from './Welcome'
 import { useBiosensor } from '../../hooks/useBiosensor'
 import { useBiosensorStore } from '../../store/biosensorStore'
-import { useUserStore } from '../../store/userStore'
-import type { BiosensorType, UserProfile, LanguageCode, VocabCategory, Gender, Orientation } from '../../types'
+import type { BiosensorType } from '../../types'
 
 const SENSORS: { type: BiosensorType; icon: typeof Heart; label: string; tagline: string; badge: string }[] = [
   { type: 'hrm',     icon: Heart,  label: 'Heart Rate Monitor', tagline: 'Adapts via HRV stress detection', badge: 'Most Compatible' },
@@ -16,10 +15,8 @@ const SENSORS: { type: BiosensorType; icon: typeof Heart; label: string; tagline
 
 export default function BiosensorSetupPage() {
   const navigate = useNavigate()
-  const { load } = useOnboardingState()
   const { connectDevice, isSupported } = useBiosensor()
   const devices = useBiosensorStore(s => s.devices)
-  const { setProfile } = useUserStore()
 
   async function handleConnect(type: BiosensorType) {
     try {
@@ -29,23 +26,9 @@ export default function BiosensorSetupPage() {
     }
   }
 
-  function finishOnboarding() {
-    const data = load()
-    const languages = (data.languages ?? ['it']) as LanguageCode[]
-    const profile: UserProfile = {
-      id: crypto.randomUUID(),
-      name: data.name ?? 'Learner',
-      email: data.email ?? '',
-      gender: (data.gender ?? 'prefer-not') as Gender,
-      orientation: (data.orientation ?? 'prefer-not') as Orientation,
-      interests: (data.interests ?? ['essentials']) as VocabCategory[],
-      selectedLanguages: languages,
-      activeLanguage: languages[0],
-      subscription: 'free',
-      createdAt: new Date().toISOString(),
-    }
-    setProfile(profile)
-    navigate('/dashboard')
+  function proceedToGoal() {
+    // Profile is created in CourseLoading — just move to Goal screen
+    navigate('/onboarding/goal')
   }
 
   const connectedCount = devices.filter(d => d.status === 'connected').length
@@ -67,7 +50,7 @@ export default function BiosensorSetupPage() {
           </p>
         </div>
 
-        <StepDots current={4} total={5} />
+        <StepDots current={4} total={9} />
 
         {!isSupported && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-6 p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl text-sm text-amber-400">
@@ -120,11 +103,11 @@ export default function BiosensorSetupPage() {
           <Button variant="ghost" size="lg" onClick={() => navigate('/onboarding/personalize')} className="gap-1">
             Back
           </Button>
-          <Button variant="gradient" fullWidth size="lg" onClick={finishOnboarding}>
+          <Button variant="gradient" fullWidth size="lg" onClick={proceedToGoal}>
             {connectedCount > 0 ? (
-              <><Brain size={18} /> Start Learning</>
+              <><Brain size={18} /> Continue →</>
             ) : (
-              <><SkipForward size={18} /> Skip & Start</>
+              <><SkipForward size={18} /> Skip & Continue</>
             )}
           </Button>
         </div>
