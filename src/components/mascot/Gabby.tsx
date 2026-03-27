@@ -14,15 +14,17 @@ interface GabbyProps {
   position?: 'bottom-right' | 'bottom-left'
 }
 
-const MOOD_FACE: Record<GabbyMessage['mood'], string> = {
-  happy:     '😊',
-  excited:   '🤩',
-  thinking:  '🤔',
-  celebrate: '🎉',
-  encourage: '💪',
+/** SVG path for Gabby's smile — curves based on mood */
+const SMILE_PATH: Record<GabbyMessage['mood'], string> = {
+  happy:     'M 36 63 Q 50 74 64 63',
+  excited:   'M 32 61 Q 50 78 68 61',
+  celebrate: 'M 30 60 Q 50 80 70 60',
+  thinking:  'M 40 66 Q 50 68 60 66',
+  encourage: 'M 37 63 Q 50 72 63 63',
 }
 
-const MOOD_COLOR: Record<GabbyMessage['mood'], string> = {
+/** Glow ring color behind Gabby avatar per mood */
+const MOOD_GLOW: Record<GabbyMessage['mood'], string> = {
   happy:     'from-gabb-500 to-blue-500',
   excited:   'from-purple-500 to-pink-500',
   thinking:  'from-amber-500 to-orange-500',
@@ -37,7 +39,6 @@ export const DEFAULT_MESSAGES: GabbyMessage[] = [
   { text: "Fun fact: Italian and English share 60% of their vocabulary roots!", mood: 'excited' },
   { text: "VR practice mode is coming — you'll walk into a real Roman café! 🍕", mood: 'excited' },
   { text: "Try connecting a heart rate monitor — I'll adapt your lessons live!", mood: 'thinking' },
-  // Buddy Hackett style — warm, self-deprecating, comedic
   { text: "I've been pronouncing 'bruschetta' wrong for 20 years. YOU can do better! 🤌", mood: 'happy' },
   { text: "Hey — even Marco Polo got lost. That's no reason to quit Italian! 🗺️", mood: 'encourage' },
   { text: "Words you miss come back around. That's not a bug — that's how your brain works! 🧠", mood: 'thinking' },
@@ -122,33 +123,57 @@ export default function Gabby({ message, autoMessages, autoInterval = 12000, pos
         {/* Glow ring when has message */}
         {visible && (
           <motion.div
-            className={`absolute inset-0 rounded-full bg-gradient-to-br ${MOOD_COLOR[mood]} blur-md opacity-60`}
+            className={`absolute inset-0 rounded-full bg-gradient-to-br ${MOOD_GLOW[mood]} blur-md opacity-60`}
             animate={{ scale: [1, 1.2, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
         )}
 
-        {/* Gabb Globe avatar — brand colors */}
+        {/* Gabby Globe — full sphere with face */}
         <div className="relative w-16 h-16 rounded-full shadow-xl overflow-hidden">
           <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
-            <rect width="100" height="100" rx="50" fill="#DCF0F9"/>
             <defs>
-              <mask id="gm">
-                <rect width="100" height="100" fill="white"/>
-                <circle cx="50" cy="50" r="26" fill="black"/>
-                <polygon points="50,50 62,6 96,6 96,52" fill="black"/>
-              </mask>
+              {/* Sphere gradient: lighter top-left → sky blue → deeper bottom-right */}
+              <radialGradient id="gabby-sphere" cx="38%" cy="32%" r="65%">
+                <stop offset="0%"   stopColor="#B8ECF8" />
+                <stop offset="55%"  stopColor="#4CC8E8" />
+                <stop offset="100%" stopColor="#1A90B8" />
+              </radialGradient>
             </defs>
-            <circle cx="50" cy="50" r="46" fill="#4CC8E8" mask="url(#gm)"/>
-            <rect x="56" y="43" width="38" height="14" rx="5" fill="#4CC8E8"/>
-            <path d="M 34 12 C 46 8 60 12 62 20 C 64 26 56 28 48 26 C 42 24 34 20 34 16 Z" fill="#4A9660"/>
-            <path d="M 74 36 L 86 42 L 84 54 L 72 50 Z" fill="#4A9660"/>
-            <path d="M 70 60 C 78 60 84 66 82 74 C 80 80 70 82 64 76 C 60 72 62 64 68 62 Z" fill="#4A9660"/>
+
+            {/* Sphere body */}
+            <circle cx="50" cy="50" r="49" fill="url(#gabby-sphere)" />
+
+            {/* Latitude lines — subtle globe feel */}
+            <ellipse cx="50" cy="50" rx="49" ry="16" fill="none" stroke="white" strokeWidth="0.8" opacity="0.15" />
+            <ellipse cx="50" cy="50" rx="49" ry="33" fill="none" stroke="white" strokeWidth="0.7" opacity="0.10" />
+
+            {/* Continental blobs */}
+            <ellipse cx="27" cy="34" rx="14" ry="9"   fill="#4A9660" opacity="0.88" transform="rotate(-20 27 34)" />
+            <ellipse cx="58" cy="27" rx="10" ry="6"   fill="#4A9660" opacity="0.82" transform="rotate(12 58 27)" />
+            <ellipse cx="73" cy="50" rx="8"  ry="6.5" fill="#5AA870" opacity="0.78" transform="rotate(20 73 50)" />
+            <ellipse cx="34" cy="68" rx="10" ry="6"   fill="#4A9660" opacity="0.80" transform="rotate(-12 34 68)" />
+
+            {/* Eyes — white sclera, dark pupils, shine dot */}
+            <circle cx="37" cy="52" r="5.5" fill="white" />
+            <circle cx="63" cy="52" r="5.5" fill="white" />
+            <circle cx="38.8" cy="53.5" r="2.9" fill="#18293E" />
+            <circle cx="64.8" cy="53.5" r="2.9" fill="#18293E" />
+            <circle cx="40"   cy="51.8" r="1.1" fill="white" />
+            <circle cx="66"   cy="51.8" r="1.1" fill="white" />
+
+            {/* Smile — mood aware */}
+            <path
+              d={SMILE_PATH[mood]}
+              stroke="white"
+              strokeWidth="3.2"
+              fill="none"
+              strokeLinecap="round"
+            />
+
+            {/* Sphere highlight — top-left shine */}
+            <ellipse cx="32" cy="25" rx="11" ry="7" fill="white" opacity="0.18" transform="rotate(-30 32 25)" />
           </svg>
-          {/* Face overlay */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-2xl select-none drop-shadow-sm">{MOOD_FACE[mood]}</span>
-          </div>
         </div>
 
         {/* Name tag */}

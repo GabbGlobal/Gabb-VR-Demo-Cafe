@@ -287,19 +287,144 @@ export default function DashboardPage() {
               <TutorSchedule />
             </div>
 
-            {/* VR Practice Mode teaser */}
-            <div className="glass rounded-2xl p-5 border border-dashed border-purple-500/30 space-y-3">
-              <div className="flex items-center gap-2">
-                <Headset size={16} className="text-purple-400" />
-                <span className="text-sm font-semibold text-white">VR Practice Mode</span>
-                <Badge color="purple">Coming</Badge>
+            {/* VR Practice Mode — visual preview + how to interact */}
+            <div className="glass rounded-2xl overflow-hidden border border-purple-500/30">
+
+              {/* VR headset mockup visual */}
+              <div className="relative h-48 bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 overflow-hidden flex items-center justify-center">
+                {/* Background star-field dots */}
+                {[...Array(18)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute rounded-full bg-white/20"
+                    style={{
+                      width: i % 3 === 0 ? 3 : 2,
+                      height: i % 3 === 0 ? 3 : 2,
+                      left: `${(i * 37 + 11) % 95}%`,
+                      top:  `${(i * 53 + 7)  % 90}%`,
+                    }}
+                  />
+                ))}
+
+                <svg viewBox="0 0 320 160" className="w-full h-full" preserveAspectRatio="xMidYMid meet">
+                  <defs>
+                    {/* Left lens clip */}
+                    <clipPath id="lens-l"><ellipse cx="98" cy="80" rx="82" ry="62" /></clipPath>
+                    {/* Right lens clip */}
+                    <clipPath id="lens-r"><ellipse cx="222" cy="80" rx="82" ry="62" /></clipPath>
+                    <radialGradient id="scene-sky" cx="50%" cy="30%" r="70%">
+                      <stop offset="0%" stopColor="#3B1F7A" />
+                      <stop offset="100%" stopColor="#150D3A" />
+                    </radialGradient>
+                  </defs>
+
+                  {/* ── Left lens: café interior ── */}
+                  <g clipPath="url(#lens-l)">
+                    <rect width="320" height="160" fill="url(#scene-sky)" />
+                    {/* Ceiling arch */}
+                    <path d="M 16 80 Q 98 10 180 80" fill="none" stroke="#9333ea" strokeWidth="1.5" opacity="0.5" />
+                    {/* Floor */}
+                    <rect y="108" width="320" height="52" fill="#3B1A06" />
+                    {/* Floor tiles */}
+                    {[0,1,2,3].map(i => (
+                      <line key={i} x1={16 + i * 42} y1="108" x2={30 + i * 42} y2="160" stroke="#5a2e0a" strokeWidth="1" opacity="0.6" />
+                    ))}
+                    {/* Table */}
+                    <rect x="42" y="94" width="112" height="7" rx="2" fill="#7C4A1A" />
+                    <rect x="88"  y="101" width="6" height="18" fill="#6A3A0A" />
+                    {/* Espresso cups */}
+                    <ellipse cx="62"  cy="95" rx="9" ry="4" fill="#2C1408" />
+                    <ellipse cx="62"  cy="93" rx="7" ry="2.5" fill="#4A2010" />
+                    <ellipse cx="115" cy="95" rx="9" ry="4" fill="#2C1408" />
+                    <ellipse cx="115" cy="93" rx="7" ry="2.5" fill="#4A2010" />
+                    {/* Café sign */}
+                    <rect x="44" y="28" width="108" height="22" rx="5" fill="#1A0A3A" stroke="#9333ea" strokeWidth="1" opacity="0.9" />
+                    <text x="98" y="43" textAnchor="middle" fill="#F0C060" fontSize="11" fontWeight="bold" fontFamily="Georgia, serif">CAFFÈ ROMA</text>
+                    {/* Speech bubble from waiter */}
+                    <rect x="22" y="58" width="90" height="20" rx="7" fill="white" opacity="0.92" />
+                    <polygon points="45,78 52,78 48,85" fill="white" opacity="0.92" />
+                    <text x="67" y="72" textAnchor="middle" fill="#1a0a2e" fontSize="8.5" fontFamily="sans-serif">Un caffè, per favore?</text>
+                  </g>
+
+                  {/* ── Right lens: vocabulary overlay ── */}
+                  <g clipPath="url(#lens-r)">
+                    <rect width="320" height="160" fill="url(#scene-sky)" />
+                    {/* Same café but with AR labels */}
+                    <rect y="108" width="320" height="52" fill="#3B1A06" />
+                    <rect x="166" y="94" width="112" height="7" rx="2" fill="#7C4A1A" />
+                    <rect x="212"  y="101" width="6" height="18" fill="#6A3A0A" />
+                    <ellipse cx="190" cy="95" rx="9" ry="4" fill="#2C1408" />
+                    <ellipse cx="190" cy="93" rx="7" ry="2.5" fill="#4A2010" />
+                    {/* AR label — cup */}
+                    <rect x="178" y="72" width="48" height="16" rx="4" fill="#4CC8E8" opacity="0.9" />
+                    <line x1="202" y1="88" x2="192" y2="94" stroke="#4CC8E8" strokeWidth="1.5" opacity="0.8" />
+                    <text x="202" y="83" textAnchor="middle" fill="white" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">il caffè</text>
+                    {/* AR label — table */}
+                    <rect x="196" y="104" width="48" height="16" rx="4" fill="#4A9660" opacity="0.9" />
+                    <text x="220" y="115" textAnchor="middle" fill="white" fontSize="8.5" fontWeight="bold" fontFamily="sans-serif">il tavolo</text>
+                    {/* Gaze target circle */}
+                    <circle cx="222" cy="55" r="14" fill="none" stroke="#FFD700" strokeWidth="1.5" opacity="0.7" strokeDasharray="4 3" />
+                    <circle cx="222" cy="55" r="3"  fill="#FFD700" opacity="0.8" />
+                    <text x="222" y="40" textAnchor="middle" fill="#FFD700" fontSize="8" fontFamily="sans-serif" opacity="0.9">la finestra</text>
+                  </g>
+
+                  {/* ── VR headset frame ── */}
+                  {/* Top strap */}
+                  <rect x="28" y="8" width="264" height="12" rx="6" fill="#7C3AED" />
+                  {/* Left lens rim */}
+                  <ellipse cx="98"  cy="80" rx="82" ry="62" fill="none" stroke="#9333ea" strokeWidth="5" />
+                  {/* Right lens rim */}
+                  <ellipse cx="222" cy="80" rx="82" ry="62" fill="none" stroke="#9333ea" strokeWidth="5" />
+                  {/* Bridge */}
+                  <rect x="126" y="68" width="68" height="24" rx="6" fill="#150D3A" stroke="#7C3AED" strokeWidth="2.5" />
+                  {/* Lens glare */}
+                  <ellipse cx="72"  cy="50" rx="18" ry="10" fill="white" opacity="0.06" transform="rotate(-20 72 50)" />
+                  <ellipse cx="196" cy="50" rx="18" ry="10" fill="white" opacity="0.06" transform="rotate(-20 196 50)" />
+                </svg>
+
+                {/* Live badge */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/50 backdrop-blur rounded-full px-3 py-1">
+                  <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
+                  <span className="text-[11px] text-purple-200 font-medium tracking-wide">Gabb VR — Caffè Roma · Preview</span>
+                </div>
               </div>
-              <p className="text-xs text-white/40 leading-relaxed">
-                Step inside a virtual Rome café, hotel lobby, or market. Practice full conversations in immersive 3D — powered by the Gabb VR engine.
-              </p>
-              <Button variant="secondary" fullWidth size="sm" disabled>
-                <Headset size={14} /> Launch VR (Coming Soon)
-              </Button>
+
+              {/* Info + how-to */}
+              <div className="p-4 space-y-3">
+                <div className="flex items-center gap-2">
+                  <Headset size={16} className="text-purple-400" />
+                  <span className="text-sm font-semibold text-white">VR Immersive Practice</span>
+                  <Badge color="purple">Beta Soon</Badge>
+                </div>
+
+                <p className="text-xs text-white/55 leading-relaxed">
+                  Slip on your headset and step inside a virtual Roman café, hotel lobby, or street market.
+                  AI locals talk back, AR labels float over every object, and your biosensor shapes the difficulty in real time.
+                </p>
+
+                {/* How to interact guide */}
+                <div className="space-y-2 pt-1">
+                  <p className="text-[10px] font-semibold text-purple-300 uppercase tracking-widest">How to interact</p>
+                  {[
+                    { icon: '👀', step: 'Look at objects',   desc: 'Gaze at anything to see its Italian name pop up as an AR label' },
+                    { icon: '🗣️', step: 'Speak naturally',   desc: 'Talk to AI baristas and shopkeepers — they understand Italian (and forgive mistakes!)' },
+                    { icon: '✋', step: 'Reach & grab',      desc: 'Pick up the espresso cup, hand over euros, point at the menu' },
+                    { icon: '🧠', step: 'Brain-adaptive AI', desc: 'Your live biosensor data adjusts scene difficulty so you stay in the flow zone' },
+                  ].map(item => (
+                    <div key={item.step} className="flex items-start gap-2.5">
+                      <span className="text-base leading-none mt-0.5 shrink-0">{item.icon}</span>
+                      <div>
+                        <span className="text-xs font-semibold text-white">{item.step}: </span>
+                        <span className="text-xs text-white/45">{item.desc}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <Button variant="secondary" fullWidth size="sm" disabled>
+                  <Headset size={14} /> Join VR Waitlist (Beta Soon)
+                </Button>
+              </div>
             </div>
 
             {/* Speech recognition teaser */}

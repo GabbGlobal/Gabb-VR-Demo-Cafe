@@ -1,7 +1,12 @@
 /**
- * Gabb Global Globe "G" logo — SVG component matching the brand asset.
- * Sky blue globe ring (#4CC8E8) with green continental shapes (#4A9660),
- * shaped as the letter G with the opening in the upper-right.
+ * Gabb Global logo — clean SVG globe-G.
+ * A circular ring shaped as the letter G (gap + crossbar on the right),
+ * with green continental shapes, on a light sky-blue rounded-square background.
+ *
+ * Geometry:
+ *   Center (50,50), outer radius 44, inner radius 28.
+ *   Gap spans ±50° from the 3-o'clock position (right side).
+ *   Crossbar fills the gap horizontally at mid-height.
  */
 interface GabbLogoProps {
   size?: number
@@ -20,40 +25,35 @@ export default function GabbLogo({ size = 36, className = '', showWordmark = fal
         xmlns="http://www.w3.org/2000/svg"
         aria-label="Gabb Global logo"
       >
-        {/* Light sky-blue background */}
+        {/* Rounded-square background */}
         <rect width="100" height="100" rx="22" fill="#DCF0F9" />
 
-        {/* Globe ring shaped as G — using mask to cut the donut + G notch */}
-        <defs>
-          <mask id="g-globe-mask">
-            {/* Start with full white (visible) */}
-            <rect width="100" height="100" fill="white" />
-            {/* Cut the inner hole of the ring */}
-            <circle cx="50" cy="50" r="26" fill="black" />
-            {/* Cut the G notch — upper-right wedge from ~12 o'clock to ~2 o'clock */}
-            <polygon points="50,50 62,6 96,6 96,52" fill="black" />
-          </mask>
-        </defs>
+        {/*
+          G-ring: outer C-arc (CCW, large) from upper-right notch to lower-right notch,
+          connected via inner C-arc (CW, large) back up — forming a donut-C shape.
 
-        {/* Sky-blue ring body */}
-        <circle cx="50" cy="50" r="46" fill="#4CC8E8" mask="url(#g-globe-mask)" />
-
-        {/* G crossbar — horizontal bar extending right at mid-height */}
-        <rect x="56" y="43" width="38" height="14" rx="5" fill="#4CC8E8" />
-
-        {/* Continental shapes in forest green */}
-        {/* Upper-left continent (North America-ish) */}
+          Outer circle R=44, notch at ±50° from horizontal right:
+            Upper: (78.3, 16.3)   Lower: (78.3, 83.7)
+          Inner circle r=28, same angles:
+            Upper: (68.0, 28.6)   Lower: (68.0, 71.4)
+        */}
         <path
-          d="M 34 12 C 46 8 60 12 62 20 C 64 26 56 28 48 26 C 42 24 34 20 34 16 Z"
-          fill="#4A9660"
+          d="M 78.3 16.3 A 44 44 0 1 0 78.3 83.7 L 68 71.4 A 28 28 0 1 1 68 28.6 Z"
+          fill="#4CC8E8"
         />
-        {/* Right mid continent */}
-        <path d="M 74 36 L 86 42 L 84 54 L 72 50 Z" fill="#4A9660" />
-        {/* Lower-right continent (South America-ish) */}
-        <path
-          d="M 70 60 C 78 60 84 66 82 74 C 80 80 70 82 64 76 C 60 72 62 64 68 62 Z"
-          fill="#4A9660"
-        />
+
+        {/* G crossbar — fills the right-side gap, mid-height */}
+        <rect x="64" y="41" width="30" height="18" rx="3.5" fill="#4CC8E8" />
+
+        {/* Continental shapes — clipped to ring region visually */}
+        {/* Upper-left (North America) */}
+        <ellipse cx="31" cy="33" rx="13" ry="8"  fill="#4A9660" transform="rotate(-22 31 33)" />
+        {/* Upper-center (Europe) */}
+        <ellipse cx="52" cy="22" rx="7"  ry="4.5" fill="#4A9660" transform="rotate(8 52 22)" />
+        {/* Left-middle (Africa top) */}
+        <ellipse cx="22" cy="55" rx="8"  ry="5.5" fill="#4A9660" transform="rotate(5 22 55)" />
+        {/* Lower-left (South America) */}
+        <ellipse cx="33" cy="72" rx="9"  ry="5.5" fill="#4A9660" transform="rotate(12 33 72)" />
       </svg>
 
       {showWordmark && (
