@@ -1,14 +1,22 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Brain, Zap, Globe, Heart, ChevronRight, Star } from 'lucide-react'
+import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { LANGUAGES, PRICING_TIERS } from '../data/languages'
 
 const features = [
-  { icon: Brain, title: 'Neuroadaptive AI', description: 'Real-time biosensor data adjusts lesson difficulty, pacing, and content to match your brain\'s state.' },
-  { icon: Heart, title: 'Biosensor Integration', description: 'Connect heart rate monitors, EEG headbands, and GSR sensors via Web Bluetooth for live cognitive feedback.' },
-  { icon: Globe, title: 'Personalised Vocabulary', description: '1,000+ words curated for your interests — travel, romance, LGBTQ+ community, culture, food, and more.' },
-  { icon: Zap, title: 'Flow State Learning', description: 'When you\'re in the zone, we push harder. When you\'re stressed, we ease off. Science-backed pacing.' },
+  { icon: Brain, title: 'Neuroadaptive AI', description: 'Real-time biosensor data adjusts lesson difficulty, pacing, and content to match your brain\'s state — automatically.' },
+  { icon: Mic,   title: 'Pronunciation Coach', description: 'Speak a word and see colour-coded phoneme feedback. Hear native speakers. Practice until it sticks.' },
+  { icon: Globe, title: 'Vocabulary for Real Life', description: '1,000+ words curated for your interests — travel, romance, LGBTQ+ community, culture, food, and more.' },
+  { icon: Headset, title: 'VR Immersion (Coming Soon)', description: 'Step inside a virtual Rome café or Tokyo market. Full conversational practice in 3D — no headset required to start.' },
+]
+
+const vsItems = [
+  { duolingo: 'Streaks & cartoon XP',        gabb: 'Real conversation outcomes' },
+  { duolingo: 'Generic word lists',           gabb: 'Vocabulary for your actual trip' },
+  { duolingo: 'Same lesson for everyone',     gabb: 'Adapts to your stress, focus & fatigue' },
+  { duolingo: 'No voice recognition',         gabb: 'Phoneme-level pronunciation scoring' },
+  { duolingo: 'No biosensor support',         gabb: 'HRM, EEG & GSR integration' },
 ]
 
 const testimonials = [
@@ -60,17 +68,23 @@ export default function LandingPage() {
           </div>
 
           <h1 className="font-display text-5xl md:text-7xl font-extrabold text-white leading-tight mb-6">
-            Learn Languages
+            Not Duolingo.
             <br />
             <span className="bg-clip-text text-transparent gabb-gradient">
-              at Brain Speed
+              Your Brain in Charge.
             </span>
           </h1>
 
-          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-10 text-balance">
-            The only language app that connects to your biosensors and adapts every lesson
-            to your real-time cognitive state. Like Duolingo, but your brain is in charge.
+          <p className="text-xl text-white/60 max-w-2xl mx-auto mb-6 text-balance">
+            Gabb adapts every lesson to your real-time cognitive state — stress, focus, fatigue.
+            Italian, Spanish, French, Portuguese. Built for your next trip, not cartoon streaks.
           </p>
+
+          <div className="flex flex-wrap justify-center gap-3 mb-10 text-sm">
+            {['🧠 Neuroadaptive pacing', '🎙️ Pronunciation scoring', '🌍 Trip-ready vocab', '📡 Biosensor-ready'].map(tag => (
+              <span key={tag} className="px-3 py-1.5 glass rounded-full text-white/70 border border-white/10">{tag}</span>
+            ))}
+          </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button variant="gradient" size="xl" onClick={() => navigate('/onboarding/welcome')}>
@@ -137,6 +151,34 @@ export default function LandingPage() {
                   <p className="text-sm text-white/50">{f.description}</p>
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Gabb vs Duolingo */}
+      <section className="py-16 px-4">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="font-display text-3xl font-bold text-center text-white mb-3">Gabb vs Duolingo</h2>
+          <p className="text-center text-white/50 mb-10">We're not competing on streaks. We're competing on results.</p>
+          <div className="glass rounded-2xl overflow-hidden">
+            <div className="grid grid-cols-3 text-xs font-semibold text-white/50 uppercase tracking-wider px-6 py-3 border-b border-white/10">
+              <span></span>
+              <span className="text-center text-red-400">Duolingo</span>
+              <span className="text-center text-gabb-400">Gabb</span>
+            </div>
+            {vsItems.map((item, i) => (
+              <div key={i} className={`grid grid-cols-3 px-6 py-4 items-center ${i % 2 === 0 ? 'bg-white/2' : ''}`}>
+                <span className="text-sm text-white/60">{item.gabb.split(' ').slice(0,3).join(' ')}</span>
+                <div className="flex items-center justify-center gap-2">
+                  <X size={14} className="text-red-400 shrink-0" />
+                  <span className="text-xs text-white/40 text-center">{item.duolingo}</span>
+                </div>
+                <div className="flex items-center justify-center gap-2">
+                  <Check size={14} className="text-emerald-400 shrink-0" />
+                  <span className="text-xs text-white text-center">{item.gabb}</span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
