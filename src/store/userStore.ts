@@ -12,6 +12,7 @@ interface UserState {
   updateProfile: (partial: Partial<UserProfile>) => void
   addXp: (lang: LanguageCode, xp: number) => void
   markWordLearned: (lang: LanguageCode, wordId: string) => void
+  markWordMissed: (lang: LanguageCode, wordId: string) => void
   markLessonCompleted: (lang: LanguageCode, lessonId: string) => void
   updateAccuracy: (lang: LanguageCode, correct: boolean) => void
   updateStreak: (lang: LanguageCode) => void
@@ -28,6 +29,7 @@ const defaultProgress = (lang: LanguageCode): LanguageProgress => ({
   streak: 0,
   lastStudied: '',
   wordsLearned: [],
+  missedWords: [],
   lessonsCompleted: [],
   accuracy: 100,
 })
@@ -71,7 +73,17 @@ export const useUserStore = create<UserState>()(
         set((s) => {
           const prev = s.progress[lang] ?? defaultProgress(lang)
           if (prev.wordsLearned.includes(wordId)) return s
-          return { progress: { ...s.progress, [lang]: { ...prev, wordsLearned: [...prev.wordsLearned, wordId] } } }
+          // Also remove from missedWords once correctly answered
+          const missedWords = (prev.missedWords ?? []).filter(id => id !== wordId)
+          return { progress: { ...s.progress, [lang]: { ...prev, wordsLearned: [...prev.wordsLearned, wordId], missedWords } } }
+        }),
+
+      markWordMissed: (lang, wordId) =>
+        set((s) => {
+          const prev = s.progress[lang] ?? defaultProgress(lang)
+          const missed = prev.missedWords ?? []
+          if (missed.includes(wordId)) return s
+          return { progress: { ...s.progress, [lang]: { ...prev, missedWords: [...missed, wordId] } } }
         }),
 
       markLessonCompleted: (lang, lessonId) =>

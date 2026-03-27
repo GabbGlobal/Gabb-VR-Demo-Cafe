@@ -37,6 +37,13 @@ export const DEFAULT_MESSAGES: GabbyMessage[] = [
   { text: "Fun fact: Italian and English share 60% of their vocabulary roots!", mood: 'excited' },
   { text: "VR practice mode is coming — you'll walk into a real Roman café! 🍕", mood: 'excited' },
   { text: "Try connecting a heart rate monitor — I'll adapt your lessons live!", mood: 'thinking' },
+  // Buddy Hackett style — warm, self-deprecating, comedic
+  { text: "I've been pronouncing 'bruschetta' wrong for 20 years. YOU can do better! 🤌", mood: 'happy' },
+  { text: "Hey — even Marco Polo got lost. That's no reason to quit Italian! 🗺️", mood: 'encourage' },
+  { text: "Words you miss come back around. That's not a bug — that's how your brain works! 🧠", mood: 'thinking' },
+  { text: "In Italy, saying ANYTHING in Italian with confidence will get you a free dessert. Probably. 🍮", mood: 'excited' },
+  { text: "The timer is just keeping you honest. Italians talk FAST — might as well practice! ⏱️", mood: 'happy' },
+  { text: "Hit 'Slow' on any word to hear it broken down. Even Romans needed practice! 🏛️", mood: 'thinking' },
 ]
 
 export default function Gabby({ message, autoMessages, autoInterval = 12000, position = 'bottom-right' }: GabbyProps) {

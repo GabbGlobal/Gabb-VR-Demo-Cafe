@@ -19,21 +19,31 @@ export function useAdaptiveLearning() {
     const { recommendedDifficulty, recommendedPace, cognitiveState } = adaptiveState
     const lang = profile?.activeLanguage ?? 'it'
     const learned = progress[lang]?.wordsLearned ?? []
+    const missed  = progress[lang]?.missedWords  ?? []
 
     // Filter by difficulty
     let eligible = wordPool.filter(w => w.difficulty <= recommendedDifficulty)
     if (eligible.length < count) eligible = wordPool // fallback to full pool
 
-    // Mix review (known) vs new based on cognitive state
-    const reviewRatio = cognitiveState === 'overloaded' || cognitiveState === 'fatigued' ? 0.6 : 0.2
-    const reviewWords  = eligible.filter(w => learned.includes(w.id))
-    const newWords     = eligible.filter(w => !learned.includes(w.id))
+    // ── STM resurface: words the user has previously missed come back first ──
+    // These act as Short-Term Memory reinforcement regardless of cognitive state
+    const stmPool = eligible.filter(w => missed.includes(w.id))
+    // stmSlots: 2 slots reserved for STM words (more when overloaded/fatigued)
+    const stmSlots = cognitiveState === 'overloaded' || cognitiveState === 'fatigued' ? 3 : 2
+    const stmWords = shuffle(stmPool).slice(0, Math.min(stmSlots, stmPool.length))
 
-    const reviewCount = Math.min(Math.round(count * reviewRatio), reviewWords.length)
-    const newCount    = Math.min(count - reviewCount, newWords.length)
+    // ── LTM resurface: known words resurfaced at a lower ratio ──
+    const reviewRatio = cognitiveState === 'overloaded' || cognitiveState === 'fatigued' ? 0.5 : 0.15
+    const ltmPool  = eligible.filter(w => learned.includes(w.id) && !missed.includes(w.id))
+    const newWords = eligible.filter(w => !learned.includes(w.id) && !missed.includes(w.id))
+
+    const ltmCount = Math.min(Math.round(count * reviewRatio), ltmPool.length)
+    const stmCount = stmWords.length
+    const newCount = Math.min(count - ltmCount - stmCount, newWords.length)
 
     const selected = [
-      ...shuffle(reviewWords).slice(0, reviewCount),
+      ...stmWords,
+      ...shuffle(ltmPool).slice(0, ltmCount),
       ...shuffle(newWords).slice(0, newCount),
     ]
     if (selected.length < count) {

@@ -97,6 +97,7 @@ export interface LanguageProgress {
   streak: number
   lastStudied: string
   wordsLearned: string[]  // word IDs
+  missedWords: string[]   // word IDs answered wrong — used for STM resurface
   lessonsCompleted: string[]
   accuracy: number
 }
