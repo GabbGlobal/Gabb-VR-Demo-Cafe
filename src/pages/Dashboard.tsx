@@ -132,11 +132,12 @@ export default function DashboardPage() {
                   <h2 className="font-display font-bold text-xl text-white">Daily Training</h2>
                   <span className="text-xs text-[#4CC8E8] font-semibold">🪙 Earn GGC</span>
                 </div>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
-                    { icon: '☕', label: 'Café Italiano', desc: '3-min mind snack', path: '/games/cafe-italiano', color: 'border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10', badge: '700 words' },
-                    { icon: '🔠', label: 'Word Match',    desc: 'Tap to pair words', path: '/games/word-match',    color: 'border-[#4CC8E8]/20 bg-[#4CC8E8]/5 hover:bg-[#4CC8E8]/10', badge: 'Speed' },
-                    { icon: '🤖', label: 'Talk to Gabby', desc: 'Live voice tutor',  path: '/tutor',               color: 'border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10', badge: 'AI' },
+                    { icon: '🎙️', label: 'Caffè Roma',    desc: '20-phrase voice game', path: '/games/caffe-roma',   color: 'border-yellow-700/30 bg-yellow-900/10 hover:bg-yellow-800/20', badge: 'NEW' },
+                    { icon: '☕', label: 'Café Italiano', desc: '3-min mind snack',     path: '/games/cafe-italiano', color: 'border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10', badge: '700 words' },
+                    { icon: '🔠', label: 'Word Match',    desc: 'Tap to pair words',    path: '/games/word-match',    color: 'border-[#4CC8E8]/20 bg-[#4CC8E8]/5 hover:bg-[#4CC8E8]/10', badge: 'Speed' },
+                    { icon: '🤖', label: 'Talk to Gabby', desc: 'Live voice tutor',     path: '/tutor',               color: 'border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10', badge: 'AI' },
                   ].map(g => (
                     <motion.button
                       key={g.path}
