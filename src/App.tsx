@@ -23,6 +23,7 @@ import AITutorPage from './pages/AITutor'
 import RichPlaylistPage from './pages/RichPlaylist'
 import VRPracticePage from './pages/VRPractice'
 import CaffeRomaPage from './pages/games/CaffeRoma'
+import CafeScenePage from './pages/games/CafeScene'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const isLoggedIn = useUserStore(s => s.isLoggedIn)
@@ -67,6 +68,7 @@ export default function App() {
         <Route path="/games/word-match"    element={<RequireAuth><WordMatchPage /></RequireAuth>} />
         <Route path="/games/cafe-italiano" element={<RequireAuth><CafeItalianoPage /></RequireAuth>} />
         <Route path="/games/caffe-roma"    element={<RequireAuth><CaffeRomaPage /></RequireAuth>} />
+        <Route path="/games/cafe-scene"    element={<RequireAuth><CafeScenePage /></RequireAuth>} />
         <Route path="/rich"                element={<RequireAuth><RichPlaylistPage /></RequireAuth>} />
         <Route path="/vr-practice"         element={<RequireAuth><VRPracticePage /></RequireAuth>} />
 
