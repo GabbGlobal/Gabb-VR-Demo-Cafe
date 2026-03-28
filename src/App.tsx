@@ -24,24 +24,24 @@ import RichPlaylistPage from './pages/RichPlaylist'
 import VRPracticePage from './pages/VRPractice'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
-  const isOnboarded = useUserStore(s => s.isOnboarded)
-  return isOnboarded ? <>{children}</> : <Navigate to="/" replace />
+  const isLoggedIn = useUserStore(s => s.isLoggedIn)
+  return isLoggedIn ? <>{children}</> : <Navigate to="/" replace />
 }
 
-/** Prevents already-onboarded users from re-entering onboarding */
+/** Prevents already-logged-in users from re-entering onboarding */
 function RequireNotAuth({ children }: { children: React.ReactNode }) {
-  const isOnboarded = useUserStore(s => s.isOnboarded)
-  return isOnboarded ? <Navigate to="/dashboard" replace /> : <>{children}</>
+  const isLoggedIn = useUserStore(s => s.isLoggedIn)
+  return isLoggedIn ? <Navigate to="/dashboard" replace /> : <>{children}</>
 }
 
 export default function App() {
-  const isOnboarded = useUserStore(s => s.isOnboarded)
+  const isLoggedIn = useUserStore(s => s.isLoggedIn)
 
   return (
     <BrowserRouter>
       <Routes>
         {/* Public */}
-        <Route path="/" element={isOnboarded ? <Navigate to="/dashboard" replace /> : <LandingPage />} />
+        <Route path="/" element={isLoggedIn ? <Navigate to="/dashboard" replace /> : <LandingPage />} />
         <Route path="/subscribe" element={<SubscriptionPage />} />
 
         {/* Onboarding — locked out once onboarded (go to Settings to re-do) */}

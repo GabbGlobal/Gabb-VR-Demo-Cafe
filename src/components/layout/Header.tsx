@@ -1,6 +1,6 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Brain, BarChart2, Home, Zap, Trophy } from 'lucide-react'
+import { Brain, BarChart2, Home, Zap, Trophy, LogOut } from 'lucide-react'
 import { useUserStore, selectActiveProgress } from '../../store/userStore'
 import { useBiosensorStore } from '../../store/biosensorStore'
 import { XpBar } from '../ui/Progress'
@@ -10,9 +10,11 @@ import { cognitiveStateBg, cognitiveStateLabel } from '../../utils/neuroadaptive
 
 export default function Header() {
   const location = useLocation()
+  const navigate = useNavigate()
   const profile = useUserStore(s => s.profile)
   const progress = useUserStore(selectActiveProgress)
   const coins = useUserStore(s => s.coins)
+  const signOut = useUserStore(s => s.signOut)
   const adaptiveState = useBiosensorStore(s => s.adaptiveState)
   const connectedDevices = useBiosensorStore(s => s.devices.filter(d => d.status === 'connected'))
 
@@ -92,6 +94,13 @@ export default function Header() {
                 <Icon size={18} />
               </Link>
             ))}
+            <button
+              onClick={() => { signOut(); navigate('/') }}
+              className="p-2 rounded-lg text-white/30 hover:text-red-400 hover:bg-red-500/10 transition-colors"
+              title="Sign out — your progress is saved"
+            >
+              <LogOut size={18} />
+            </button>
           </nav>
         </div>
       </div>

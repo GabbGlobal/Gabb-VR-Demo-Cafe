@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check } from 'lucide-react'
+import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check, Flame } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { LANGUAGES, PRICING_TIERS } from '../data/languages'
+import { useUserStore } from '../store/userStore'
 
 const features = [
   { icon: Brain, title: 'Neuroadaptive AI', description: 'Real-time biosensor data adjusts lesson difficulty, pacing, and content to match your brain\'s state — automatically.' },
@@ -27,6 +28,82 @@ const testimonials = [
 
 export default function LandingPage() {
   const navigate = useNavigate()
+  const profile = useUserStore(s => s.profile)
+  const signIn = useUserStore(s => s.signIn)
+  const progress = useUserStore(s => s.progress)
+
+  // Returning user — show welcome back screen instead of full landing
+  if (profile) {
+    const lang = LANGUAGES.find(l => l.code === profile.activeLanguage)
+    const streak = Object.values(progress).reduce((max, p) => Math.max(max, p.streak), 0)
+    const totalWords = Object.values(progress).reduce((sum, p) => sum + p.wordsLearned.length, 0)
+    return (
+      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center p-4 relative overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#4CC8E8]/8 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-purple-500/8 rounded-full blur-3xl" />
+        </div>
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}
+          className="relative w-full max-w-sm text-center space-y-6">
+          {/* Globe avatar */}
+          <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 3, repeat: Infinity }}
+            className="mx-auto w-20 h-20">
+            <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_18px_rgba(76,200,232,0.4)]">
+              <defs>
+                <radialGradient id="wb-globe" cx="38%" cy="32%" r="65%">
+                  <stop offset="0%" stopColor="#B8ECF8" /><stop offset="55%" stopColor="#4CC8E8" /><stop offset="100%" stopColor="#1A90B8" />
+                </radialGradient>
+              </defs>
+              <circle cx="50" cy="50" r="49" fill="url(#wb-globe)" />
+              <ellipse cx="27" cy="34" rx="14" ry="9" fill="#4A9660" opacity="0.88" transform="rotate(-20 27 34)" />
+              <ellipse cx="58" cy="27" rx="10" ry="6" fill="#4A9660" opacity="0.82" transform="rotate(12 58 27)" />
+              <ellipse cx="73" cy="50" rx="8" ry="6.5" fill="#5AA870" opacity="0.78" transform="rotate(20 73 50)" />
+              <ellipse cx="34" cy="68" rx="10" ry="6" fill="#4A9660" opacity="0.80" transform="rotate(-12 34 68)" />
+              <circle cx="37" cy="50" r="5.5" fill="white" /><circle cx="63" cy="50" r="5.5" fill="white" />
+              <circle cx="38.8" cy="51.5" r="2.8" fill="#18293E" /><circle cx="64.8" cy="51.5" r="2.8" fill="#18293E" />
+              <path d="M 36 63 Q 50 74 64 63" stroke="white" strokeWidth="3" fill="none" strokeLinecap="round" />
+            </svg>
+          </motion.div>
+          <div>
+            <p className="text-white/50 text-sm">Welcome back!</p>
+            <h1 className="font-display text-4xl font-extrabold text-white mt-1">
+              {profile.name} {lang?.flag}
+            </h1>
+          </div>
+          {/* Stats */}
+          <div className="grid grid-cols-2 gap-3">
+            {streak > 0 && (
+              <div className="bg-orange-500/10 border border-orange-500/20 rounded-2xl p-4">
+                <div className="flex items-center justify-center gap-1.5 mb-1">
+                  <Flame size={16} className="text-orange-400" />
+                  <span className="font-bold text-2xl text-white">{streak}</span>
+                </div>
+                <p className="text-xs text-orange-300">Day streak 🔥</p>
+              </div>
+            )}
+            <div className={`bg-[#4CC8E8]/10 border border-[#4CC8E8]/20 rounded-2xl p-4 ${streak === 0 ? 'col-span-2' : ''}`}>
+              <p className="font-bold text-2xl text-white mb-1">{totalWords}</p>
+              <p className="text-xs text-[#4CC8E8]/80">Words learned 📚</p>
+            </div>
+          </div>
+          <motion.button
+            whileTap={{ scale: 0.97 }}
+            onClick={() => { signIn(); navigate('/dashboard') }}
+            className="w-full py-4 rounded-2xl font-bold text-lg text-slate-900 gabb-gradient shadow-lg shadow-[#4CC8E8]/20 hover:shadow-[#4CC8E8]/40 transition-shadow"
+          >
+            Continue Learning →
+          </motion.button>
+          <p className="text-xs text-white/30">
+            Not {profile.name}?{' '}
+            <button onClick={() => { useUserStore.getState().reset(); navigate('/') }}
+              className="text-white/50 hover:text-white underline transition-colors">
+              Start fresh
+            </button>
+          </p>
+        </motion.div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-slate-950 overflow-x-hidden">

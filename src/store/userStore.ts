@@ -6,11 +6,14 @@ interface UserState {
   profile: UserProfile | null
   progress: Record<LanguageCode, LanguageProgress>
   isOnboarded: boolean
+  isLoggedIn: boolean
   coins: number  // Gabb Gold Coins (GGC) — cross-language currency
 
   // actions
   setProfile: (profile: UserProfile) => void
   updateProfile: (partial: Partial<UserProfile>) => void
+  signIn: () => void
+  signOut: () => void
   addXp: (lang: LanguageCode, xp: number) => void
   addCoins: (amount: number) => void
   markWordLearned: (lang: LanguageCode, wordId: string) => void
@@ -44,12 +47,17 @@ export const useUserStore = create<UserState>()(
       profile: null,
       progress: {} as Record<LanguageCode, LanguageProgress>,
       isOnboarded: false,
+      isLoggedIn: false,
       coins: 0,
+
+      signIn: () => set({ isLoggedIn: true }),
+      signOut: () => set({ isLoggedIn: false }),
 
       setProfile: (profile) =>
         set({
           profile,
           isOnboarded: true,
+          isLoggedIn: true,
           progress: profile.selectedLanguages.reduce(
             (acc, lang) => ({ ...acc, [lang]: defaultProgress(lang) }),
             {} as Record<LanguageCode, LanguageProgress>,
@@ -124,9 +132,17 @@ export const useUserStore = create<UserState>()(
       setActiveLanguage: (lang) =>
         set((s) => ({ profile: s.profile ? { ...s.profile, activeLanguage: lang } : null })),
 
-      reset: () => set({ profile: null, progress: {} as Record<LanguageCode, LanguageProgress>, isOnboarded: false, coins: 0 }),
+      reset: () => set({ profile: null, progress: {} as Record<LanguageCode, LanguageProgress>, isOnboarded: false, isLoggedIn: false, coins: 0 }),
     }),
-    { name: 'gabb-user' },
+    {
+      name: 'gabb-user',
+      version: 2,
+      // Migrate existing users: anyone already onboarded is treated as logged in
+      migrate: (persisted: any) => ({
+        ...persisted,
+        isLoggedIn: persisted.isLoggedIn ?? persisted.isOnboarded ?? false,
+      }),
+    },
   ),
 )
 
