@@ -17,6 +17,11 @@ import type { LessonCard, VocabCategory } from '../types'
 const CARDS_PER_LESSON = 10
 const CARD_TIMER_SECONDS = 10
 
+// BCP-47 language codes for SpeechSynthesis / SpeechRecognition
+const LANG_BCP47: Record<string, string> = {
+  it: 'it-IT', es: 'es-ES', fr: 'fr-FR', pt: 'pt-BR',
+}
+
 // ─── Buddy Hackett celebrate messages ─────────────────────────────────────────
 const CELEBRATE_MSGS = [
   "You got it! Even I can't remember where I parked my car, but YOU nailed that word! 🔥",
@@ -57,6 +62,7 @@ export default function LessonPage() {
   const [showMnemonic, setShowMnemonic] = useState(false)
   const [timerSeconds, setTimerSeconds] = useState(CARD_TIMER_SECONDS)
   const startTimeRef = useRef<number>(Date.now())
+  const nextRef = useRef<() => void>(() => {})
   const { message: gabbyMsg, celebrate, encourage } = useGabby()
 
   useEffect(() => {
@@ -128,6 +134,16 @@ export default function LessonPage() {
     startTimeRef.current = Date.now()
   }, [answer, current, updatePerformance, updateAccuracy, markWordLearned, markWordMissed, profile, celebrate, encourage])
 
+  // Keep nextRef current so the auto-advance timer always calls the latest version
+  useEffect(() => { nextRef.current = next })
+
+  // Auto-advance 5 seconds after answering — user can still click Next early
+  useEffect(() => {
+    if (answer === null) return
+    const t = setTimeout(() => nextRef.current(), 5000)
+    return () => clearTimeout(t)
+  }, [answer])
+
   function next() {
     setAnswer(null)
     setIsCorrect(null)
@@ -151,12 +167,18 @@ export default function LessonPage() {
   }
 
   function speak(text: string, lang: string, rate = 0.85) {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel()
-      const utt = new SpeechSynthesisUtterance(text)
-      utt.lang = lang
-      utt.rate = rate
-      window.speechSynthesis.speak(utt)
+    if (!('speechSynthesis' in window)) return
+    window.speechSynthesis.cancel()
+    const utt = new SpeechSynthesisUtterance(text)
+    utt.lang = LANG_BCP47[lang] ?? lang
+    utt.rate = rate
+    utt.volume = 1
+    const doSpeak = () => window.speechSynthesis.speak(utt)
+    // Voices may not be loaded yet on first call
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.addEventListener('voiceschanged', doSpeak, { once: true })
+    } else {
+      doSpeak()
     }
   }
 
@@ -352,59 +374,81 @@ function TimerRing({ seconds, total }: { seconds: number; total: number }) {
 
 function PronunciationPanel({ word, lang, onSpeak }: { word: { native: string; pronunciation: string }; lang: string; onSpeak: (text: string, lang: string, rate?: number) => void }) {
   const [listening, setListening] = useState(false)
+  const [heard, setHeard] = useState('')
+  const [match, setMatch] = useState<boolean | null>(null)
+
+  // Render the pronunciation phoneme-by-phoneme, splitting on hyphens
+  const phonemes = word.pronunciation.split('-')
 
   function tryMic() {
-    // Web Speech Recognition — hint only (full scoring requires native app)
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-    if (!SR) return
+    if (!SR) { alert('Use Chrome or Edge for voice practice.'); return }
     const rec = new SR()
-    rec.lang = lang
-    rec.interimResults = false
-    rec.maxAlternatives = 1
+    rec.lang = LANG_BCP47[lang] ?? lang
+    rec.continuous = false
+    rec.interimResults = true
+    rec.maxAlternatives = 3
     setListening(true)
+    setHeard('')
+    setMatch(null)
+
+    rec.onresult = (e: any) => {
+      const interim = Array.from(e.results as any[])
+        .map((r: any) => r[0].transcript).join('')
+      setHeard(interim)
+      if ((e.results as any)[0].isFinal) {
+        const said = interim.toLowerCase().replace(/[^a-z\u00C0-\u024F ]/g, '')
+        const target = word.native.toLowerCase().replace(/[^a-z\u00C0-\u024F ]/g, '')
+        setMatch(said.includes(target) || target.includes(said.split(' ')[0]))
+      }
+    }
     rec.onend = () => setListening(false)
-    rec.onerror = () => setListening(false)
-    rec.start()
+    rec.onerror = () => { setListening(false); setHeard('') }
+    try { rec.start() } catch { setListening(false) }
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mt-3 flex items-center justify-center gap-2 flex-wrap"
-    >
-      <button
-        onClick={() => onSpeak(word.native, lang, 0.85)}
-        className="flex items-center gap-1.5 text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-white/60 hover:text-white transition-all"
-        title="Play at normal speed"
-      >
-        <Volume2 size={12} /> Normal
-      </button>
-      <button
-        onClick={() => onSpeak(word.native, lang, 0.45)}
-        className="flex items-center gap-1.5 text-xs bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 rounded-lg px-3 py-1.5 text-amber-300 hover:text-amber-200 transition-all"
-        title="Play slowly"
-      >
-        <Turtle size={12} /> Slow
-      </button>
-      <button
-        onClick={() => onSpeak(word.native, lang, 0.85)}
-        className="flex items-center gap-1.5 text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-white/60 hover:text-white transition-all"
-        title="Repeat"
-      >
-        <RotateCcw size={12} /> Repeat
-      </button>
-      <button
-        onClick={tryMic}
-        className={`flex items-center gap-1.5 text-xs border rounded-lg px-3 py-1.5 transition-all ${
-          listening
-            ? 'bg-red-500/20 border-red-500/40 text-red-300 animate-pulse'
-            : 'bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/20 text-emerald-300 hover:text-emerald-200'
-        }`}
-        title="Say it out loud"
-      >
-        <Mic size={12} /> {listening ? 'Listening…' : 'Say it'}
-      </button>
+    <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-3 space-y-2">
+      {/* Phoneme breakdown */}
+      <div className="flex items-center justify-center gap-1 flex-wrap">
+        {phonemes.map((p, i) => (
+          <span key={i} className="px-2 py-0.5 bg-white/8 rounded text-xs font-mono text-gabb-300 border border-white/10">
+            {p}
+          </span>
+        ))}
+      </div>
+
+      {/* Controls row */}
+      <div className="flex items-center justify-center gap-2 flex-wrap">
+        <button onClick={() => { setHeard(''); setMatch(null); onSpeak(word.native, lang, 0.85) }}
+          className="flex items-center gap-1.5 text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-white/60 hover:text-white transition-all">
+          <Volume2 size={12} /> Normal
+        </button>
+        <button onClick={() => { setHeard(''); setMatch(null); onSpeak(word.native, lang, 0.42) }}
+          className="flex items-center gap-1.5 text-xs bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/20 rounded-lg px-3 py-1.5 text-amber-300 hover:text-amber-200 transition-all">
+          <Turtle size={12} /> Slow
+        </button>
+        <button onClick={() => { setHeard(''); setMatch(null); onSpeak(word.native, lang, 0.85) }}
+          className="flex items-center gap-1.5 text-xs bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg px-3 py-1.5 text-white/60 hover:text-white transition-all">
+          <RotateCcw size={12} /> Repeat
+        </button>
+        <button onClick={listening ? undefined : tryMic}
+          className={`flex items-center gap-1.5 text-xs border rounded-lg px-3 py-1.5 transition-all ${
+            listening ? 'bg-red-500/20 border-red-500/40 text-red-300 animate-pulse'
+              : 'bg-emerald-500/10 hover:bg-emerald-500/20 border-emerald-500/20 text-emerald-300 hover:text-emerald-200'}`}>
+          <Mic size={12} /> {listening ? 'Listening…' : 'Say it'}
+        </button>
+      </div>
+
+      {/* Mic feedback */}
+      {heard && (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+          className={`text-center text-xs py-1.5 px-3 rounded-lg ${
+            match === true ? 'bg-emerald-500/15 text-emerald-300' :
+            match === false ? 'bg-red-500/15 text-red-300' : 'text-white/50'}`}>
+          {match === true ? '✓ Sounding good!' : match === false ? `Heard: "${heard}" — try again` : `"${heard}"`}
+        </motion.div>
+      )}
     </motion.div>
   )
 }
