@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Play, Trophy, BookOpen, Brain, Zap, Mic, Headset, Heart, ChevronRight, Apple, Gamepad2, MessageCircle } from 'lucide-react'
@@ -443,17 +444,8 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            {/* Speech recognition teaser */}
-            <div className="glass rounded-2xl p-5 border border-dashed border-emerald-500/30 space-y-3">
-              <div className="flex items-center gap-2">
-                <Mic size={16} className="text-emerald-400" />
-                <span className="text-sm font-semibold text-white">Pronunciation Coach</span>
-                <Badge color="green">Soon</Badge>
-              </div>
-              <p className="text-xs text-white/40 leading-relaxed">
-                Speak a word and see colour-coded phoneme feedback — red where you're off, green where you nailed it. Native speaker audio on every word.
-              </p>
-            </div>
+            {/* Neuroadaptive Waitlist CTA */}
+            <DashboardWaitlistCard />
 
             {/* Upgrade CTA */}
             {profile.subscription === 'free' && (
@@ -551,6 +543,58 @@ function Stat({ label, value, icon }: { label: string; value: string | number; i
       <p className="text-xl mb-1">{icon}</p>
       <p className="font-bold text-lg text-white">{value}</p>
       <p className="text-xs text-white/40">{label}</p>
+    </div>
+  )
+}
+
+function DashboardWaitlistCard() {
+  const [email,  setEmail]  = useState('')
+  const [status, setStatus] = useState<'idle' | 'sending' | 'done'>('idle')
+
+  async function submit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!email.trim()) return
+    setStatus('sending')
+    try {
+      const body = new URLSearchParams({ 'form-name': 'neuroadaptive-waitlist', 'bot-field': '', email: email.trim(), use_case: 'dashboard' })
+      await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+    } catch { /* ok in dev */ }
+    setStatus('done')
+  }
+
+  if (status === 'done') {
+    return (
+      <div className="glass rounded-2xl p-5 border border-[#4CC8E8]/30 bg-[#4CC8E8]/5 text-center space-y-1">
+        <p className="text-2xl">🧠</p>
+        <p className="text-sm font-semibold text-white">You're on the list!</p>
+        <p className="text-xs text-white/40">We'll hit you when biosensor AI ships.</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="glass rounded-2xl p-5 border border-[#4CC8E8]/20 space-y-3">
+      <div className="flex items-center gap-2">
+        <Brain size={16} className="text-[#4CC8E8]" />
+        <span className="text-sm font-semibold text-white">Biosensor Waitlist</span>
+        <Badge color="blue">Early Access</Badge>
+      </div>
+      <p className="text-xs text-white/40 leading-relaxed">
+        Real-time EEG, HRM & GSR integration — Gabb adapts every lesson to your brain state.
+        Nothing else does this. Be first.
+      </p>
+      <form onSubmit={submit} className="flex gap-2">
+        <input
+          type="email" required placeholder="your@email.com" value={email}
+          onChange={e => setEmail(e.target.value)}
+          className="flex-1 min-w-0 bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white placeholder-white/25 text-xs outline-none focus:border-[#4CC8E8]/50 transition"
+        />
+        <button type="submit" disabled={!email.trim() || status === 'sending'}
+          className="px-3 py-2 rounded-xl text-xs font-semibold text-slate-900 transition-all disabled:opacity-50 shrink-0"
+          style={{ background: 'linear-gradient(135deg, #4CC8E8, #9333ea)' }}>
+          {status === 'sending' ? '...' : 'Join →'}
+        </button>
+      </form>
     </div>
   )
 }

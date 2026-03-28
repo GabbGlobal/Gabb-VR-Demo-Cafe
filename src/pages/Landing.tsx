@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check, Flame } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check, Flame, Activity, Cpu, Waves } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import { LANGUAGES, PRICING_TIERS } from '../data/languages'
 import { useUserStore } from '../store/userStore'
@@ -329,10 +330,160 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ── NEUROADAPTIVE WAITLIST ── */}
+      <WaitlistSection />
+
       {/* Footer */}
       <footer className="border-t border-white/10 py-8 px-4 text-center text-sm text-white/30">
         <p>© 2026 Gabb Global · <a href="https://www.gabbglobal.com" className="hover:text-white transition-colors">gabbglobal.com</a></p>
       </footer>
     </div>
+  )
+}
+
+// ─── Neuroadaptive Waitlist Section ─────────────────────────────────────────
+
+const NEURO_PERKS = [
+  { icon: Activity, label: 'Heart Rate Monitor',  desc: 'Polar H10, Apple Watch, Garmin — lesson difficulty adjusts to your stress level in real time.' },
+  { icon: Waves,    label: 'EEG Headband',        desc: "Muse S reads your focus & fatigue. Gabb slows down when your brain is fried, speeds up when you're locked in." },
+  { icon: Cpu,      label: 'GSR Skin Response',   desc: 'Shimmer3 detects anxiety spikes. Hard words get easier when you\'re stressed — not harder.' },
+  { icon: Brain,    label: 'Adaptive AI Engine',  desc: 'No other language app on earth does this. Not Duolingo. Not Babbel. Not Rosetta Stone.' },
+]
+
+function WaitlistSection() {
+  const [name,    setName]    = useState('')
+  const [email,   setEmail]   = useState('')
+  const [useCase, setUseCase] = useState('')
+  const [status,  setStatus]  = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!email.trim()) return
+    setStatus('sending')
+    try {
+      const body = new URLSearchParams({
+        'form-name': 'neuroadaptive-waitlist',
+        'bot-field': '',
+        name:        name.trim(),
+        email:       email.trim(),
+        use_case:    useCase.trim(),
+      })
+      const res = await fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() })
+      setStatus(res.ok ? 'done' : 'error')
+    } catch {
+      // In dev, Netlify forms aren't active — show success anyway
+      setStatus('done')
+    }
+  }
+
+  return (
+    <section className="py-24 px-4 relative overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#4CC8E8]/30 to-transparent" />
+        <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse 70% 50% at 50% 100%, rgba(76,200,232,0.06) 0%, transparent 70%)' }} />
+      </div>
+
+      <div className="relative max-w-4xl mx-auto">
+
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#4CC8E8]/30 bg-[#4CC8E8]/8 text-[#4CC8E8] text-xs font-semibold tracking-widest uppercase mb-5">
+            <Brain size={12} /> Exclusive Early Access
+          </div>
+          <h2 className="font-display text-4xl md:text-5xl font-extrabold text-white leading-tight mb-4">
+            The language app that reads<br />
+            <span className="text-transparent bg-clip-text" style={{ backgroundImage: 'linear-gradient(135deg, #4CC8E8, #9333ea)' }}>
+              your brain in real time
+            </span>
+          </h2>
+          <p className="text-white/50 text-lg max-w-xl mx-auto leading-relaxed">
+            Biosensor-adaptive lessons that know when you're stressed, focused, or fatigued — and adjust automatically.
+            Nothing like this exists anywhere. We're shipping it first to the waitlist.
+          </p>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 gap-4 mb-14">
+          {NEURO_PERKS.map((perk, i) => (
+            <motion.div key={perk.label}
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              transition={{ delay: i * 0.08 }}
+              className="flex gap-4 p-5 rounded-2xl border border-white/8 bg-white/3 hover:bg-white/5 hover:border-[#4CC8E8]/20 transition-all group">
+              <div className="shrink-0 w-10 h-10 rounded-xl bg-[#4CC8E8]/10 border border-[#4CC8E8]/20 flex items-center justify-center group-hover:bg-[#4CC8E8]/20 transition-colors">
+                <perk.icon size={18} className="text-[#4CC8E8]" />
+              </div>
+              <div>
+                <p className="font-semibold text-white text-sm mb-1">{perk.label}</p>
+                <p className="text-white/40 text-xs leading-relaxed">{perk.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+          className="max-w-lg mx-auto">
+          <AnimatePresence mode="wait">
+            {status === 'done' ? (
+              <motion.div key="success"
+                initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+                className="text-center p-10 rounded-3xl border border-emerald-500/25 bg-emerald-500/8 space-y-4">
+                <motion.div animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.2, 1] }} transition={{ duration: 0.6 }}
+                  className="text-6xl">🧠</motion.div>
+                <h3 className="font-display text-2xl font-bold text-white">You're on the list!</h3>
+                <p className="text-white/50 text-sm leading-relaxed">
+                  We'll reach out before anyone else when biosensor-adaptive mode ships.
+                  In the meantime — start practicing. The base app is free.
+                </p>
+                <div className="inline-flex items-center gap-2 text-emerald-400 text-sm font-semibold">
+                  <Check size={16} /> Confirmed
+                </div>
+              </motion.div>
+            ) : (
+              <motion.form key="form" onSubmit={handleSubmit}
+                className="p-8 rounded-3xl border border-white/10 bg-white/3 space-y-4"
+                style={{ boxShadow: '0 0 60px rgba(76,200,232,0.06)' }}>
+                <div className="text-center mb-2">
+                  <p className="font-display font-bold text-white text-xl">Join the Neuroadaptive Waitlist</p>
+                  <p className="text-white/40 text-sm mt-1">Be first. Limited spots.</p>
+                </div>
+                <input type="text" name="bot-field" className="hidden" aria-hidden="true" readOnly />
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <input type="text" placeholder="First name" value={name} onChange={e => setName(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/25 text-sm outline-none focus:border-[#4CC8E8]/60 focus:ring-1 focus:ring-[#4CC8E8]/30 transition" />
+                  <input type="email" required placeholder="Email address *" value={email} onChange={e => setEmail(e.target.value)}
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/25 text-sm outline-none focus:border-[#4CC8E8]/60 focus:ring-1 focus:ring-[#4CC8E8]/30 transition" />
+                </div>
+                <select value={useCase} onChange={e => setUseCase(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#4CC8E8]/60 focus:ring-1 focus:ring-[#4CC8E8]/30 transition"
+                  style={{ color: useCase ? '#fff' : 'rgba(255,255,255,0.25)' }}>
+                  <option value="" disabled>What biosensor do you use? (optional)</option>
+                  <option value="apple_watch">Apple Watch / HealthKit</option>
+                  <option value="polar">Polar H10 / Chest HRM</option>
+                  <option value="muse">Muse EEG Headband</option>
+                  <option value="garmin">Garmin / Whoop / Oura</option>
+                  <option value="shimmer">Shimmer GSR</option>
+                  <option value="none_yet">Don't have one yet — want a recommendation</option>
+                  <option value="other">Other</option>
+                </select>
+                <motion.button type="submit" disabled={!email.trim() || status === 'sending'}
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                  className="w-full py-4 rounded-2xl font-bold text-slate-900 text-base transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ background: 'linear-gradient(135deg, #4CC8E8, #9333ea)' }}>
+                  {status === 'sending' ? 'Securing your spot...' : 'Claim My Early Access →'}
+                </motion.button>
+                {status === 'error' && (
+                  <p className="text-center text-xs text-red-400">Something went wrong — email us at hello@gabbglobal.com</p>
+                )}
+                <p className="text-center text-xs text-white/25">No spam. No selling your data. Just a heads-up when it ships.</p>
+              </motion.form>
+            )}
+          </AnimatePresence>
+          <div className="flex flex-wrap items-center justify-center gap-5 mt-6 text-xs text-white/25">
+            <span>✓ Free base app — no credit card</span>
+            <span>✓ Cancel anytime</span>
+            <span>✓ First access to biosensor AI</span>
+          </div>
+        </motion.div>
+      </div>
+    </section>
   )
 }
