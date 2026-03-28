@@ -20,6 +20,8 @@ import LeaderboardPage from './pages/Leaderboard'
 import WordMatchPage from './pages/games/WordMatch'
 import CafeItalianoPage from './pages/games/CafeItaliano'
 import AITutorPage from './pages/AITutor'
+import RichPlaylistPage from './pages/RichPlaylist'
+import VRPracticePage from './pages/VRPractice'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const isOnboarded = useUserStore(s => s.isOnboarded)
@@ -63,6 +65,8 @@ export default function App() {
         {/* Games */}
         <Route path="/games/word-match"    element={<RequireAuth><WordMatchPage /></RequireAuth>} />
         <Route path="/games/cafe-italiano" element={<RequireAuth><CafeItalianoPage /></RequireAuth>} />
+        <Route path="/rich"                element={<RequireAuth><RichPlaylistPage /></RequireAuth>} />
+        <Route path="/vr-practice"         element={<RequireAuth><VRPracticePage /></RequireAuth>} />
 
         {/* Fallback */}
         <Route path="*" element={<Navigate to="/" replace />} />

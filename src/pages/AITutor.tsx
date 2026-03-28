@@ -56,7 +56,12 @@ function speak(text: string) {
   utt.lang = 'it-IT'
   utt.rate = 0.8
   utt.pitch = 1.1
-  window.speechSynthesis.speak(utt)
+  const doSpeak = () => window.speechSynthesis.speak(utt)
+  if (window.speechSynthesis.getVoices().length === 0) {
+    window.speechSynthesis.addEventListener('voiceschanged', doSpeak, { once: true })
+  } else {
+    doSpeak()
+  }
 }
 
 export default function AITutorPage() {
@@ -69,8 +74,11 @@ export default function AITutorPage() {
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [micOn, setMicOn] = useState(false)
   const [listening, setListening] = useState(false)
+  const [interimText, setInterimText] = useState('')
   const [callActive, setCallActive] = useState(true)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const recRef = useRef<any>(null)
+  const listeningRef = useRef(false)
 
   const convo = CONVERSATIONS[convoIdx]
   const exchange = convo.exchanges[exchangeIdx]
@@ -109,20 +117,70 @@ export default function AITutorPage() {
   }
 
   function startMic() {
+    // Toggle off if already listening
+    if (listeningRef.current) {
+      listeningRef.current = false
+      recRef.current?.stop()
+      setListening(false)
+      setInterimText('')
+      return
+    }
+
     const SR = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition
-    if (!SR) { alert('Speech recognition not supported in this browser. Use Chrome or Edge.'); return }
+    if (!SR) { alert('Voice needs Chrome or Edge — or tap the phrase button below.'); return }
+
     const rec = new SR()
     rec.lang = 'it-IT'
-    rec.interimResults = false
+    rec.continuous = true
+    rec.interimResults = true
+    recRef.current = rec
+    listeningRef.current = true
     setListening(true)
+
+    let silenceTimer: ReturnType<typeof setTimeout> | null = null
+    let finalText = ''
+
     rec.onresult = (e: any) => {
-      const transcript = e.results[0][0].transcript
-      setListening(false)
-      userSays(transcript)
+      const results = Array.from(e.results as any[])
+      const transcript = results.map((r: any) => r[0].transcript).join('')
+      setInterimText(transcript)
+
+      // Once we have a final result, wait 1.2s of silence then submit
+      if ((e.results as any)[e.results.length - 1].isFinal) {
+        finalText = transcript
+        if (silenceTimer) clearTimeout(silenceTimer)
+        silenceTimer = setTimeout(() => {
+          if (!finalText.trim()) return
+          listeningRef.current = false
+          rec.stop()
+          setListening(false)
+          setInterimText('')
+          userSays(finalText)
+          finalText = ''
+        }, 1200)
+      }
     }
-    rec.onerror = () => setListening(false)
-    rec.onend = () => setListening(false)
-    rec.start()
+
+    // Auto-restart on end so it never times out mid-conversation
+    rec.onend = () => {
+      if (listeningRef.current) {
+        try { rec.start() } catch { /* already restarting */ }
+      } else {
+        setListening(false)
+      }
+    }
+
+    rec.onerror = (e: any) => {
+      if (e.error === 'aborted') return
+      if (listeningRef.current) {
+        try { rec.start() } catch {}
+      } else {
+        setListening(false)
+        setInterimText('')
+      }
+    }
+
+    try { rec.start() } catch { setListening(false); listeningRef.current = false }
   }
 
   function endCall() {
@@ -142,7 +200,7 @@ export default function AITutorPage() {
           <div className="flex items-center gap-3 flex-1">
             <GabbLogo size={32} />
             <div>
-              <p className="font-display font-bold text-white text-sm">Gabby Gabb · AI Tutor</p>
+              <p className="font-display font-bold text-white text-sm">Gabby · AI Tutor</p>
               <p className="text-xs text-emerald-400">{callActive ? '● Live Session' : 'Ended'}</p>
             </div>
           </div>
@@ -179,32 +237,75 @@ export default function AITutorPage() {
             ))}
           </div>
 
-          {/* Globe avatar */}
+          {/* Gabby Globe avatar — full face, animated */}
           <div className="relative flex flex-col items-center gap-3">
             <motion.div
+              className="relative w-32 h-32"
               animate={isSpeaking
-                ? { scale: [1, 1.05, 0.98, 1.04, 1], rotate: [0, 2, -2, 1, 0] }
-                : { scale: [1, 1.02, 1] }
+                ? { scale: [1, 1.04, 0.98, 1.03, 1], rotate: [0, 1.5, -1.5, 1, 0] }
+                : { scale: [1, 1.015, 1] }
               }
-              transition={{ duration: isSpeaking ? 0.6 : 3, repeat: Infinity }}
+              transition={{ duration: isSpeaking ? 0.55 : 4, repeat: Infinity }}
             >
-              <GabbLogo size={120} />
+              <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-[0_0_18px_rgba(76,200,232,0.45)]">
+                <defs>
+                  <radialGradient id="tutor-globe" cx="38%" cy="32%" r="65%">
+                    <stop offset="0%" stopColor="#B8ECF8" />
+                    <stop offset="55%" stopColor="#4CC8E8" />
+                    <stop offset="100%" stopColor="#1A90B8" />
+                  </radialGradient>
+                </defs>
+                <circle cx="50" cy="50" r="49" fill="url(#tutor-globe)" />
+                <ellipse cx="50" cy="50" rx="49" ry="16" fill="none" stroke="white" strokeWidth="0.8" opacity="0.15" />
+                <ellipse cx="50" cy="50" rx="49" ry="33" fill="none" stroke="white" strokeWidth="0.7" opacity="0.10" />
+                <ellipse cx="27" cy="34" rx="14" ry="9" fill="#4A9660" opacity="0.88" transform="rotate(-20 27 34)" />
+                <ellipse cx="58" cy="27" rx="10" ry="6" fill="#4A9660" opacity="0.82" transform="rotate(12 58 27)" />
+                <ellipse cx="73" cy="50" rx="8" ry="6.5" fill="#5AA870" opacity="0.78" transform="rotate(20 73 50)" />
+                <ellipse cx="34" cy="68" rx="10" ry="6" fill="#4A9660" opacity="0.80" transform="rotate(-12 34 68)" />
+                {/* Eyes */}
+                <circle cx="37" cy="50" r="6" fill="white" />
+                <circle cx="63" cy="50" r="6" fill="white" />
+                <circle cx="38.8" cy="51.5" r="3.2" fill="#18293E" />
+                <circle cx="64.8" cy="51.5" r="3.2" fill="#18293E" />
+                <circle cx="40.2" cy="49.5" r="1.3" fill="white" />
+                <circle cx="66.2" cy="49.5" r="1.3" fill="white" />
+                {/* Mouth: open oval when speaking, smile when not */}
+                {isSpeaking
+                  ? <ellipse cx="50" cy="67" rx="9" ry="7" fill="white" opacity="0.92" />
+                  : <path d="M 35 63 Q 50 75 65 63" stroke="white" strokeWidth="3.5" fill="none" strokeLinecap="round" />
+                }
+                {/* Cheek blush when speaking */}
+                {isSpeaking && <>
+                  <ellipse cx="26" cy="58" rx="6" ry="4" fill="#FF9999" opacity="0.25" />
+                  <ellipse cx="74" cy="58" rx="6" ry="4" fill="#FF9999" opacity="0.25" />
+                </>}
+                <ellipse cx="32" cy="25" rx="11" ry="7" fill="white" opacity="0.18" transform="rotate(-30 32 25)" />
+              </svg>
+
+              {/* Blinking eyelids */}
+              <BlinkingEyes />
             </motion.div>
 
-            {/* Speaking indicator */}
+            {/* Speaking waveform */}
             {isSpeaking && (
               <div className="flex gap-1 items-center">
                 {[0,1,2,3,4].map(i => (
-                  <motion.div
-                    key={i}
-                    className="w-1 rounded-full bg-[#4CC8E8]"
-                    animate={{ height: ['4px', '16px', '4px'] }}
-                    transition={{ duration: 0.5, delay: i * 0.1, repeat: Infinity }}
-                  />
+                  <motion.div key={i} className="w-1 rounded-full bg-[#4CC8E8]"
+                    animate={{ height: ['4px', '18px', '4px'] }}
+                    transition={{ duration: 0.45, delay: i * 0.09, repeat: Infinity }} />
                 ))}
               </div>
             )}
-            <p className="text-white/60 text-sm font-medium">Gabby Gabb</p>
+
+            {/* Interim speech text */}
+            {listening && interimText && (
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                className="bg-white/10 backdrop-blur rounded-xl px-3 py-1 text-xs text-white/80 max-w-[200px] text-center">
+                "{interimText}"
+              </motion.div>
+            )}
+
+            <p className="text-white/60 text-sm font-medium tracking-wide">Gabby</p>
           </div>
 
           {/* Your video tile (corner) */}
@@ -283,6 +384,44 @@ export default function AITutorPage() {
           </motion.button>
         </div>
       </div>
+    </div>
+  )
+}
+
+/** Animated eyelids that blink over the globe's eyes every ~4 seconds */
+function BlinkingEyes() {
+  return (
+    <div className="absolute inset-0 pointer-events-none" aria-hidden>
+      {/* Left eyelid */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{
+          background: '#4CC8E8',
+          left: '24%',
+          top: '40%',
+          width: '13%',
+          height: '13%',
+          transformOrigin: 'center top',
+        }}
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: [0, 1, 0] }}
+        transition={{ duration: 0.14, repeat: Infinity, repeatDelay: 4.2 }}
+      />
+      {/* Right eyelid */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{
+          background: '#4CC8E8',
+          left: '56%',
+          top: '40%',
+          width: '13%',
+          height: '13%',
+          transformOrigin: 'center top',
+        }}
+        initial={{ scaleY: 0 }}
+        animate={{ scaleY: [0, 1, 0] }}
+        transition={{ duration: 0.14, repeat: Infinity, repeatDelay: 4.2 }}
+      />
     </div>
   )
 }

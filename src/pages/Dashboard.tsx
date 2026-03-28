@@ -152,6 +152,22 @@ export default function DashboardPage() {
                     </motion.button>
                   ))}
                 </div>
+
+                {/* Rich's Playlist CTA */}
+                <motion.button
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => navigate('/rich')}
+                  className="w-full mt-3 flex items-center gap-4 p-3.5 rounded-xl border border-amber-500/25 bg-amber-500/5 hover:bg-amber-500/10 transition-all group text-left"
+                >
+                  <span className="text-2xl">🎬</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-white text-xs">Rich's Playlist</p>
+                    <p className="text-white/40 text-[10px] mt-0.5">Godfather · Queens · Nonna's kitchen · 15 min</p>
+                  </div>
+                  <span className="text-[9px] bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-full border border-amber-500/30">Personalized</span>
+                  <ChevronRight size={14} className="text-white/30 group-hover:text-amber-400 shrink-0 transition-colors" />
+                </motion.button>
               </Card>
             </motion.div>
 
@@ -421,8 +437,8 @@ export default function DashboardPage() {
                   ))}
                 </div>
 
-                <Button variant="secondary" fullWidth size="sm" disabled>
-                  <Headset size={14} /> Join VR Waitlist (Beta Soon)
+                <Button variant="secondary" fullWidth size="sm" onClick={() => navigate('/vr-practice')}>
+                  <Headset size={14} /> Try VR Practice (2D Preview)
                 </Button>
               </div>
             </div>
