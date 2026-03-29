@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check, Flame, Activity, Cpu, Waves } from 'lucide-react'
 import { Button } from '../components/ui/Button'
+import GabbLogo from '../components/ui/GabbLogo'
 import { LANGUAGES, PRICING_TIERS } from '../data/languages'
 import { useUserStore } from '../store/userStore'
 
@@ -112,10 +113,7 @@ export default function LandingPage() {
       <nav className="sticky top-0 z-50 glass border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl gabb-gradient flex items-center justify-center">
-              <span className="text-white font-bold text-sm">G</span>
-            </div>
-            <span className="font-display font-bold text-white">Gabb Languages</span>
+            <GabbLogo size={34} showWordmark />
           </div>
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" onClick={() => navigate('/subscribe')}>Pricing</Button>

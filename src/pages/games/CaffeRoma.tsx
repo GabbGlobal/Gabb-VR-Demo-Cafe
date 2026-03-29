@@ -316,7 +316,7 @@ export default function CaffeRomaPage() {
           className="p-2 rounded-xl hover:bg-white/10 transition-colors shrink-0" style={{ color: '#7a5c3e' }}>
           <X size={20} />
         </button>
-        <p className="font-serif italic shrink-0 text-sm" style={{ color: '#e8b86d' }}>Caffè Roma</p>
+        <p className="font-serif italic shrink-0 text-sm" style={{ color: '#e8b86d' }}>Gabb Voice</p>
         {/* Progress bar */}
         <div className="flex-1 h-1.5 rounded-full overflow-hidden" style={{ background: '#3d2b1a' }}>
           <motion.div className="h-full rounded-full"

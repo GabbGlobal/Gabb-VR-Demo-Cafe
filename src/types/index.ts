@@ -1,6 +1,6 @@
 // ─── Language & Vocabulary ───────────────────────────────────────────────────
 
-export type LanguageCode = 'it' | 'es' | 'fr' | 'pt'
+export type LanguageCode = 'it' | 'es' | 'fr' | 'pt' | 'en'
 
 export interface Language {
   code: LanguageCode
@@ -11,6 +11,8 @@ export interface Language {
   description: string
   difficulty: 'beginner-friendly' | 'moderate' | 'challenging'
   speakers: string
+  /** BCP-47 code of the learner's native language (for ESL paths) */
+  nativeLanguage?: string
 }
 
 export type VocabCategory =

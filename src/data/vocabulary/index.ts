@@ -9,6 +9,8 @@ export const vocabularyByLanguage: Record<LanguageCode, VocabWord[]> = {
   es: spanishVocabulary,
   fr: frenchVocabulary,
   pt: portugueseVocabulary,
+  // English (ESL path for Spanish speakers) — reuses Spanish vocab data as base
+  en: spanishVocabulary,
 }
 
 export function getVocabByCategory(lang: LanguageCode, category: VocabCategory): VocabWord[] {

@@ -41,6 +41,17 @@ export const LANGUAGES: Language[] = [
     difficulty: 'beginner-friendly',
     speakers: '250 million',
   },
+  {
+    code: 'en',
+    name: 'English (ESL)',
+    nativeName: 'English',
+    flag: '🇺🇸',
+    priceMonthly: 9.99,
+    description: 'Para hablantes de español — aprende inglés para trabajo, viajes y vida diaria. Vocabulario real, pronunciación, confianza.',
+    difficulty: 'beginner-friendly',
+    speakers: '1.5 billion',
+    nativeLanguage: 'es',
+  },
 ]
 
 export const PRICING_TIERS: PricingTier[] = [

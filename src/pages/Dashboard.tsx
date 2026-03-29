@@ -133,11 +133,12 @@ export default function DashboardPage() {
                   <h2 className="font-display font-bold text-xl text-white">Daily Training</h2>
                   <span className="text-xs text-[#4CC8E8] font-semibold">🪙 Earn GGC</span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
                     { icon: '🏛️', label: 'Café Scene',    desc: '2D cinematic café',   path: '/games/cafe-scene',    color: 'border-yellow-700/30 bg-yellow-900/10 hover:bg-yellow-800/20', badge: 'NEW' },
-                    { icon: '🎙️', label: 'Caffè Roma',    desc: '20-phrase drill',      path: '/games/caffe-roma',    color: 'border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10', badge: 'Voice' },
+                    { icon: '🎙️', label: 'Gabb Voice',    desc: '20-phrase drill',      path: '/games/caffe-roma',    color: 'border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10', badge: 'Voice' },
                     { icon: '🤖', label: 'Talk to Gabby', desc: 'Live voice tutor',     path: '/tutor',               color: 'border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10', badge: 'AI' },
+                    { icon: '🧩', label: 'Word Recall',   desc: 'Gentle memory game',   path: '/games/word-recall',   color: 'border-teal-500/20 bg-teal-500/5 hover:bg-teal-500/10', badge: 'Accessible' },
                   ].map(g => (
                     <motion.button
                       key={g.path}
@@ -402,7 +403,7 @@ export default function DashboardPage() {
                 {/* Live badge */}
                 <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-black/50 backdrop-blur rounded-full px-3 py-1">
                   <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse" />
-                  <span className="text-[11px] text-purple-200 font-medium tracking-wide">Gabb VR — Caffè Roma · Preview</span>
+                  <span className="text-[11px] text-purple-200 font-medium tracking-wide">Gabb VR — Café Experience · Preview</span>
                 </div>
               </div>
 

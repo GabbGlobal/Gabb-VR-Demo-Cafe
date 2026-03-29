@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Brain, CheckCircle2, XCircle, ChevronRight, Volume2, Turtle, RotateCcw, Mic, Coins } from 'lucide-react'
+import { X, Brain, CheckCircle2, XCircle, ChevronRight, Volume2, Turtle, RotateCcw, Mic, Coins, Lightbulb } from 'lucide-react'
 import { playFanfare } from '../utils/fanfare'
 import { Button } from '../components/ui/Button'
 import { ProgressBar } from '../components/ui/Progress'
@@ -61,6 +61,7 @@ export default function LessonPage() {
   const [fillInput, setFillInput] = useState('')
   const [showMnemonic, setShowMnemonic] = useState(false)
   const [timerSeconds, setTimerSeconds] = useState(CARD_TIMER_SECONDS)
+  const [showTOT, setShowTOT] = useState(false)  // tip-of-the-tongue panel
   const startTimeRef = useRef<number>(Date.now())
   const nextRef = useRef<() => void>(() => {})
   const { message: gabbyMsg, celebrate, encourage } = useGabby()
@@ -149,6 +150,7 @@ export default function LessonPage() {
     setIsCorrect(null)
     setFillInput('')
     setShowMnemonic(false)
+    setShowTOT(false)
     if (index + 1 >= cards.length) {
       const lessonId = `lesson-${category}-${Date.now()}`
       const xpEarned = Math.round(score * 12 + (score === cards.length ? 20 : 0))
@@ -284,6 +286,44 @@ export default function LessonPage() {
               )}
             </motion.div>
           </AnimatePresence>
+
+          {/* Tip-of-the-tongue panel — subtle help before answering */}
+          {answer === null && current && (
+            <div className="mt-3">
+              <button
+                onClick={() => setShowTOT(v => !v)}
+                className="flex items-center gap-1.5 text-xs text-yellow-400/70 hover:text-yellow-300 transition-colors"
+              >
+                <Lightbulb size={13} />
+                {showTOT ? 'Hide hint' : "Tip of the tongue?"}
+              </button>
+              <AnimatePresence>
+                {showTOT && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="mt-2 p-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 flex flex-wrap items-center gap-3">
+                      <span className="text-yellow-200 text-sm">
+                        Starts with <strong className="text-yellow-100 text-base">{current.correctAnswer[0].toUpperCase()}</strong>
+                      </span>
+                      <span className="text-yellow-200/50 text-xs">·</span>
+                      <span className="text-yellow-200/60 text-xs italic">{current.word.example}</span>
+                      <button
+                        onClick={() => speak(current.word.native, profile.activeLanguage, 0.65)}
+                        className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-yellow-500/15 text-yellow-300 hover:bg-yellow-500/25 transition-colors text-xs"
+                      >
+                        <Volume2 size={13} />
+                        Hear slowly
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
 
           {/* Mnemonic popup — show after wrong answer */}
           {answer !== null && !isCorrect && !showMnemonic && (

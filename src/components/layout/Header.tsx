@@ -73,9 +73,9 @@ export default function Header() {
             </div>
           )}
 
-          {/* Active language */}
+          {/* Active language flag */}
           {lang && (
-            <span className="text-lg hidden sm:block" title={lang.name}>{lang.flag}</span>
+            <span className="text-xl" title={lang.name}>{lang.flag}</span>
           )}
 
           {/* Nav */}
