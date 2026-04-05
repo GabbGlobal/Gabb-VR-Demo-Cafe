@@ -1,0 +1,21 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# SPA routing — send all paths to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Enable Netlify Identity
+[template.environment]
+  STRIPE_SECRET_KEY     = "your_stripe_secret_key_here"
+  STRIPE_PRICE_LANGUAGE = "your_stripe_price_id_for_one_language"
+  STRIPE_PRICE_ALLACCESS = "your_stripe_price_id_for_all_access"
+  STRIPE_WEBHOOK_SECRET = "your_stripe_webhook_secret_here"
+  URL                   = "https://gabbitalian.netlify.app"

@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check, Flame, Activity, Cpu, Waves } from 'lucide-react'
+import { Brain, Zap, Globe, Heart, ChevronRight, Star, Mic, Headset, X, Check, Flame, Activity, Cpu, Waves, LogIn } from 'lucide-react'
 import { Button } from '../components/ui/Button'
 import GabbLogo from '../components/ui/GabbLogo'
 import { LANGUAGES, PRICING_TIERS } from '../data/languages'
 import { useUserStore } from '../store/userStore'
+import { openLogin, openSignup } from '../lib/identity'
 
 const features = [
   { icon: Brain, title: 'Neuroadaptive AI', description: 'Real-time biosensor data adjusts lesson difficulty, pacing, and content to match your brain\'s state — automatically.' },
@@ -117,7 +118,10 @@ export default function LandingPage() {
           </div>
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" onClick={() => navigate('/subscribe')}>Pricing</Button>
-            <Button variant="primary" size="sm" onClick={() => navigate('/onboarding/welcome')}>
+            <Button variant="ghost" size="sm" onClick={openLogin}>
+              <LogIn size={15} /> Sign In
+            </Button>
+            <Button variant="primary" size="sm" onClick={openSignup}>
               Start Free
             </Button>
           </div>

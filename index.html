@@ -11,11 +11,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <!-- Hidden form for Netlify form detection at build time -->
+    <!-- Netlify Identity Widget — powers real email auth -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    <!-- Hidden Netlify forms for build-time detection -->
     <form name="neuroadaptive-waitlist" netlify netlify-honeypot="bot-field" hidden>
       <input type="text" name="name" />
       <input type="email" name="email" />
       <input type="text" name="use_case" />
+    </form>
+    <form name="language-notify" netlify netlify-honeypot="bot-field" hidden>
+      <input type="email" name="email" />
+      <input type="text" name="language" />
     </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>

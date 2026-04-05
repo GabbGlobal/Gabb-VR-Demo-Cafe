@@ -16,6 +16,7 @@ import { useBiosensorStore } from '../store/biosensorStore'
 import { LANGUAGES, INTEREST_CATEGORIES } from '../data/languages'
 import { cognitiveStateLabel, cognitiveStateBg } from '../utils/neuroadaptive'
 import { vocabularyByLanguage } from '../data/vocabulary'
+import { getEmail, getSubscription } from '../lib/identity'
 
 const TODAY_SESSION = [
   { id: 'food',     icon: '☕', title: 'Café in Rome',         desc: 'Order coffee, pastries & ask for the bill',   category: 'food' },
@@ -57,6 +58,25 @@ export default function DashboardPage() {
       <Header />
 
       <main className="max-w-6xl mx-auto px-4 py-8">
+
+        {/* Account + subscription status */}
+        {(() => {
+          const email = getEmail()
+          const sub = getSubscription()
+          if (!email) return null
+          if (sub === 'allaccess' || sub === 'language') return (
+            <div className="mb-4 flex items-center justify-between px-4 py-2.5 rounded-xl bg-emerald-500/8 border border-emerald-500/15 text-sm">
+              <span className="text-emerald-400">✓ {sub === 'allaccess' ? 'All Languages' : 'One Language'} · {email}</span>
+              <button onClick={() => navigate('/subscribe')} className="text-emerald-400/60 hover:text-emerald-400 text-xs transition-colors">Manage</button>
+            </div>
+          )
+          return (
+            <div className="mb-4 flex items-center justify-between px-4 py-2.5 rounded-xl bg-amber-500/8 border border-amber-500/15 text-sm">
+              <span className="text-amber-400/80">Free plan · {email}</span>
+              <button onClick={() => navigate('/subscribe')} className="text-amber-400 font-semibold hover:text-amber-300 text-xs transition-colors">Upgrade →</button>
+            </div>
+          )
+        })()}
 
         {/* Hero greeting */}
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="mb-8">

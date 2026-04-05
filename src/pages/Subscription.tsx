@@ -6,6 +6,7 @@ import { Button } from '../components/ui/Button'
 import GabbLogo from '../components/ui/GabbLogo'
 import { PRICING_TIERS, LANGUAGES } from '../data/languages'
 import { useUserStore } from '../store/userStore'
+import { getEmail, openSignup, currentUser } from '../lib/identity'
 import type { SubscriptionPlan } from '../types'
 
 const PERKS = [
@@ -49,13 +50,20 @@ export default function SubscriptionPage() {
     setLoading(true)
     setError(null)
 
+    // Require login before payment
+    if (!currentUser()) {
+      openSignup()
+      setLoading(false)
+      return
+    }
+
     try {
       const res = await fetch('/.netlify/functions/create-checkout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           plan: selected,
-          email: profile?.name ? undefined : undefined, // pass email if collected
+          email: getEmail(),
           annual: billing === 'annual',
         }),
       })
