@@ -126,27 +126,52 @@ export default function DashboardPage() {
               </Card>
             </motion.div>
 
-            {/* Daily Training — 3 games */}
+            {/* Daily Training */}
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.08 }}>
               <Card>
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="font-display font-bold text-xl text-white">Daily Training</h2>
                   <span className="text-xs text-[#4CC8E8] font-semibold">🪙 Earn GGC</span>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+
+                {/* Voice Drill — changes by active language */}
+                {(() => {
+                  const drillMap: Record<string, { icon: string; label: string; desc: string; path: string; color: string }> = {
+                    it: { icon: '☕', label: 'Bar Roma',    desc: 'Italian espresso bar',   path: '/games/caffe-roma',  color: 'border-amber-700/40 bg-amber-900/15 hover:bg-amber-800/25' },
+                    es: { icon: '🥘', label: 'El Mercado', desc: 'Spanish open-air market', path: '/games/el-mercado',  color: 'border-orange-600/40 bg-orange-900/15 hover:bg-orange-800/25' },
+                    fr: { icon: '🥐', label: 'Le Bistrot', desc: 'Parisian sidewalk bistrot',path: '/games/le-bistrot',  color: 'border-red-800/40 bg-red-900/15 hover:bg-red-800/25' },
+                    pt: { icon: '🍺', label: 'O Boteco',   desc: 'Brazilian neighborhood bar',path: '/games/o-boteco',   color: 'border-green-700/40 bg-green-900/15 hover:bg-green-800/25' },
+                  }
+                  const drill = drillMap[profile.activeLanguage] ?? drillMap.it
+                  return (
+                    <motion.button
+                      whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.98 }}
+                      onClick={() => navigate(drill.path)}
+                      className={`w-full rounded-xl border p-4 text-left mb-3 transition-all flex items-center gap-4 ${drill.color}`}>
+                      <span className="text-4xl">{drill.icon}</span>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <p className="font-display font-bold text-white">{drill.label}</p>
+                          <span className="text-[9px] bg-white/10 text-white/50 px-1.5 py-0.5 rounded-full">20 PHRASES</span>
+                        </div>
+                        <p className="text-white/40 text-xs">{drill.desc} · Speak every line · Score every word</p>
+                      </div>
+                      <span className="text-white/20 text-lg">›</span>
+                    </motion.button>
+                  )
+                })()}
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {[
-                    { icon: '🏛️', label: 'Café Scene',    desc: '2D cinematic café',   path: '/games/cafe-scene',    color: 'border-yellow-700/30 bg-yellow-900/10 hover:bg-yellow-800/20', badge: 'NEW' },
-                    { icon: '🎙️', label: 'Gabb Voice',    desc: '20-phrase drill',      path: '/games/caffe-roma',    color: 'border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/10', badge: 'Voice' },
-                    { icon: '🤖', label: 'Talk to Gabby', desc: 'Live voice tutor',     path: '/tutor',               color: 'border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10', badge: 'AI' },
-                    { icon: '🧩', label: 'Word Recall',   desc: 'Gentle memory game',   path: '/games/word-recall',   color: 'border-teal-500/20 bg-teal-500/5 hover:bg-teal-500/10', badge: 'Accessible' },
+                    { icon: '🏛️', label: 'Café Scene',    desc: '2D cinematic café',  path: '/games/cafe-scene',  color: 'border-yellow-700/30 bg-yellow-900/10 hover:bg-yellow-800/20', badge: 'Scene' },
+                    { icon: '🤖', label: 'Talk to Gabby', desc: 'Live voice tutor',    path: '/tutor',             color: 'border-emerald-500/20 bg-emerald-500/5 hover:bg-emerald-500/10', badge: 'AI' },
+                    { icon: '🧩', label: 'Word Recall',   desc: 'Gentle memory game',  path: '/games/word-recall', color: 'border-teal-500/20 bg-teal-500/5 hover:bg-teal-500/10', badge: 'Calm' },
                   ].map(g => (
                     <motion.button
                       key={g.path}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.97 }}
+                      whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                       onClick={() => navigate(g.path)}
-                      className={`rounded-xl border p-3 text-left transition-all ${g.color}`}
-                    >
+                      className={`rounded-xl border p-3 text-left transition-all ${g.color}`}>
                       <span className="text-2xl block mb-1">{g.icon}</span>
                       <p className="font-semibold text-white text-xs">{g.label}</p>
                       <p className="text-white/40 text-[10px] mt-0.5">{g.desc}</p>

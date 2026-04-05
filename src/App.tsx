@@ -23,6 +23,9 @@ import AITutorPage from './pages/AITutor'
 import RichPlaylistPage from './pages/RichPlaylist'
 import VRPracticePage from './pages/VRPractice'
 import CaffeRomaPage from './pages/games/CaffeRoma'
+import ElMercadoPage from './pages/games/ElMercado'
+import LeBistrotPage from './pages/games/LeBistrot'
+import OBotecaPage   from './pages/games/OBoteco'
 import CafeScenePage from './pages/games/CafeScene'
 import WordRecallPage from './pages/games/WordRecall'
 import CoursesPage from './pages/Courses'
@@ -73,6 +76,9 @@ export default function App() {
         <Route path="/games/word-match"    element={<RequireAuth><WordMatchPage /></RequireAuth>} />
         <Route path="/games/cafe-italiano" element={<RequireAuth><CafeItalianoPage /></RequireAuth>} />
         <Route path="/games/caffe-roma"    element={<RequireAuth><CaffeRomaPage /></RequireAuth>} />
+        <Route path="/games/el-mercado"   element={<RequireAuth><ElMercadoPage /></RequireAuth>} />
+        <Route path="/games/le-bistrot"   element={<RequireAuth><LeBistrotPage /></RequireAuth>} />
+        <Route path="/games/o-boteco"     element={<RequireAuth><OBotecaPage  /></RequireAuth>} />
         <Route path="/games/cafe-scene"    element={<RequireAuth><CafeScenePage /></RequireAuth>} />
         <Route path="/games/word-recall"   element={<RequireAuth><WordRecallPage /></RequireAuth>} />
         <Route path="/rich"                element={<RequireAuth><RichPlaylistPage /></RequireAuth>} />
