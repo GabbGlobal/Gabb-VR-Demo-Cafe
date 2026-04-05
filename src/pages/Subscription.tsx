@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Check, Zap, Globe, Brain, ArrowLeft, CreditCard } from 'lucide-react'
+import { Check, Zap, Globe, Brain, ArrowLeft, CreditCard, AlertCircle } from 'lucide-react'
 import { Button } from '../components/ui/Button'
+import GabbLogo from '../components/ui/GabbLogo'
 import { PRICING_TIERS, LANGUAGES } from '../data/languages'
 import { useUserStore } from '../store/userStore'
 import type { SubscriptionPlan } from '../types'
@@ -20,6 +21,7 @@ export default function SubscriptionPage() {
   const [billing, setBilling] = useState<'monthly' | 'annual'>('monthly')
   const [selected, setSelected] = useState<SubscriptionPlan>('allaccess')
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   function getPrice(tier: typeof PRICING_TIERS[0]) {
     if (tier.priceMonthly === 0) return 'Free'
@@ -33,20 +35,50 @@ export default function SubscriptionPage() {
   function getBillingNote(tier: typeof PRICING_TIERS[0]) {
     if (tier.priceMonthly === 0) return null
     if (billing === 'annual') return `Billed $${tier.priceAnnual}/year · Save ${Math.round((1 - tier.priceAnnual / (tier.priceMonthly * 12)) * 100)}%`
-    return 'Billed monthly · Cancel anytime'
+    return '7-day free trial · Cancel anytime'
   }
 
   async function handleSubscribe() {
-    setLoading(true)
-    // In a real app, this would go to Stripe/Paddle checkout
-    // For now, simulate and update local state
-    await new Promise(r => setTimeout(r, 1500))
-    if (profile) {
-      setSubscription(selected)
+    if (selected === 'free') {
+      // Free plan — no payment needed
+      if (profile) setSubscription('free')
+      navigate(profile ? '/dashboard' : '/onboarding/welcome')
+      return
     }
-    setLoading(false)
-    alert(`🎉 Thank you! ${selected === 'allaccess' ? 'All Languages' : selected === 'language' ? 'One Language' : 'Free'} plan activated.\n\nIn production this connects to your payment provider.`)
-    navigate(profile ? '/dashboard' : '/onboarding/welcome')
+
+    setLoading(true)
+    setError(null)
+
+    try {
+      const res = await fetch('/.netlify/functions/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          plan: selected,
+          email: profile?.name ? undefined : undefined, // pass email if collected
+          annual: billing === 'annual',
+        }),
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error ?? 'Could not start checkout')
+      }
+
+      const { url } = await res.json()
+
+      if (url) {
+        // Redirect to Stripe hosted checkout
+        window.location.href = url
+      } else {
+        throw new Error('No checkout URL returned')
+      }
+    } catch (err: any) {
+      // Stripe not configured yet — activate locally and show setup note
+      if (profile) setSubscription(selected)
+      setError('Stripe not connected yet — plan activated locally. See setup instructions below.')
+      setLoading(false)
+    }
   }
 
   return (
@@ -61,12 +93,7 @@ export default function SubscriptionPage() {
         <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm">
           <ArrowLeft size={16} /> Back
         </button>
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg gabb-gradient flex items-center justify-center">
-            <span className="text-white font-bold text-xs">G</span>
-          </div>
-          <span className="font-display font-bold text-white text-sm">Gabb Languages</span>
-        </div>
+        <GabbLogo size={30} showWordmark />
         <div className="w-16" />
       </nav>
 
@@ -180,6 +207,12 @@ export default function SubscriptionPage() {
 
         {/* CTA */}
         <div className="max-w-md mx-auto text-center">
+          {error && (
+            <div className="mb-4 flex items-start gap-2 text-sm text-amber-300 bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-3 text-left">
+              <AlertCircle size={16} className="shrink-0 mt-0.5" />
+              <span>{error}</span>
+            </div>
+          )}
           <Button
             variant="gradient"
             size="xl"
@@ -193,7 +226,7 @@ export default function SubscriptionPage() {
               : `Subscribe — ${getPrice(PRICING_TIERS.find(t => t.id === selected)!)}`}
           </Button>
           <p className="text-xs text-white/30 mt-3">
-            Secure payment · Cancel anytime · 7-day money-back guarantee
+            Stripe-secured · 7-day free trial · Cancel anytime
           </p>
 
           {/* Trust badges */}

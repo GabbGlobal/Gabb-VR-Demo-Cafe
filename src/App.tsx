@@ -25,6 +25,8 @@ import VRPracticePage from './pages/VRPractice'
 import CaffeRomaPage from './pages/games/CaffeRoma'
 import CafeScenePage from './pages/games/CafeScene'
 import WordRecallPage from './pages/games/WordRecall'
+import CoursesPage from './pages/Courses'
+import LearnLanguagePage from './pages/LearnLanguage'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const isLoggedIn = useUserStore(s => s.isLoggedIn)
@@ -45,7 +47,9 @@ export default function App() {
       <Routes>
         {/* Public */}
         <Route path="/" element={isLoggedIn ? <Navigate to="/dashboard" replace /> : <LandingPage />} />
-        <Route path="/subscribe" element={<SubscriptionPage />} />
+        <Route path="/subscribe"       element={<SubscriptionPage />} />
+        <Route path="/courses"         element={<CoursesPage />} />
+        <Route path="/learn/:slug"     element={<LearnLanguagePage />} />
 
         {/* Onboarding — locked out once onboarded (go to Settings to re-do) */}
         <Route path="/onboarding/welcome"      element={<RequireNotAuth><WelcomePage /></RequireNotAuth>} />
