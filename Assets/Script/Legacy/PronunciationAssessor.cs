@@ -48,6 +48,8 @@ public class PronunciationAssessor : MonoBehaviour
 
     async void Start()
     {
+        audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+        Log("Microphone initialized once at startup.");
         await RefreshSpeechSDKConfig();
     }
 
@@ -57,7 +59,7 @@ public class PronunciationAssessor : MonoBehaviour
         {
             Log("Need a new token from APIM, getting one now...");
             await GetTokenFromAPIM();
-            ConfigureSpeechSDK();
+            RefreshSpeechConfig();
         }
     }
 
@@ -93,23 +95,22 @@ public class PronunciationAssessor : MonoBehaviour
             System.DateTime.UtcNow < tokenExpirationTime.Value.AddSeconds(-TOKEN_EXPIRATION_BUFFER_SECCONDS);
     }
 
-    void ConfigureSpeechSDK()
+    void RefreshSpeechConfig()
     {
-        Log("Configuring Speech SDK...");
-        // Configuer speech sdk
-        speechConfig = SpeechConfig.FromAuthorizationToken(
-            tokenFromAPIM,
-            AZURE_REGION);
-        speechConfig.SpeechRecognitionLanguage = languageCode;  // Apply language setting
-
-        // Use US English for testing if enabled
-        if (Debug.isDebugBuild && englishTestingMode)
+        Log("Refreshing SpeechConfig with new token...");
+        if (speechConfig != null)
         {
-            speechConfig.SpeechRecognitionLanguage = "en-US"; // use US english for testing only
+            speechConfig.AuthorizationToken = tokenFromAPIM;
         }
-
-        audioConfig = AudioConfig.FromDefaultMicrophoneInput();
-        Log("Configuring Speech SDK done.");
+        else
+        {
+            speechConfig = SpeechConfig.FromAuthorizationToken(
+                tokenFromAPIM,
+                AZURE_REGION);
+            speechConfig.SpeechRecognitionLanguage =
+                (Debug.isDebugBuild && englishTestingMode) ? "en-US" : languageCode;
+        }
+        Log("SpeechConfig refreshed.");
     }
 
     public async Awaitable<AssessmentResult> AssessPronunciation(string referenceText)

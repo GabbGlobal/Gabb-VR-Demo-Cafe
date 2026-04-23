@@ -23,12 +23,19 @@ public class WordFlowManager : MonoBehaviour
     [SerializeField] private AudioClip tryAgainSfx;
 
     [Header("XP")]
-    [SerializeField] private Player player;                         
+    [SerializeField] private Player player;
     [SerializeField] private float xpPerWord = 5f;
+    [SerializeField] private float xpSoftPassMultiplier = 0.5f;
     [SerializeField] private TextMeshProUGUI xpText;
+
+    [Header("Pronunciation Scoring")]
+    [SerializeField] private AudioClip softPassSfx;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private bool usePronunciationScoring = true;
 
     private int currentIndex = 0;
     private int failedAttempts = 0;
+    private bool isAssessing = false;
 
     private void Start()
     {
@@ -41,38 +48,18 @@ public class WordFlowManager : MonoBehaviour
         UpdateXPUI();
     }
 
-    public void CheckRecognizedWord(string recognized)
+    public async void CheckRecognizedWord(string recognized)
     {
         if (wordList == null || wordList.Count == 0) return;
+        if (isAssessing) return;
 
         string targetRaw = wordList[currentIndex];
         string cleanedRecognized = TextUtils.NormalizeAccents(recognized.Trim().ToLowerInvariant());
         string cleanedTarget = TextUtils.NormalizeAccents(targetRaw.Trim().ToLowerInvariant());
 
-        if (cleanedRecognized == cleanedTarget)
-        {
-            blockManager.DisplayWord(targetRaw, keepCasing: true);
-            // SFX
-            if (sfxSource != null && correctSfx != null) sfxSource.PlayOneShot(correctSfx);
-            
-            if (rewardManager) rewardManager.TriggerReward(targetRaw);
-            if (speechSpitter) speechSpitter.RevealCorrectWord(currentIndex);
-            // XP
-            if (player != null && player.XPComponent != null)
-            {
-                player.XPComponent.AddXP(xpPerWord);
-                UpdateXPUI();
-            }
-
-
-            failedAttempts = 0;
-            StartCoroutine(AdvanceAfterDelay(roundAdvanceDelay));
-        }
-        else
+        if (cleanedRecognized != cleanedTarget)
         {
             failedAttempts++;
-
-            // Visual feedback: show what the system heard vs target
             blockManager.DisplayComparison(targetRaw, recognized);
 
             if (failedAttempts >= maxFails)
@@ -80,7 +67,110 @@ public class WordFlowManager : MonoBehaviour
                 failedAttempts = 0;
                 if (sfxSource != null && tryAgainSfx != null) sfxSource.PlayOneShot(tryAgainSfx);
             }
+            UpdateScoreUI(null);
+            return;
         }
+
+        if (usePronunciationScoring && AzureSpeechRecognizer.Instance != null)
+        {
+            isAssessing = true;
+            var result = await AzureSpeechRecognizer.Instance.AssessPronunciation(targetRaw);
+            isAssessing = false;
+
+            if (result == null)
+            {
+                HandlePass(targetRaw, xpPerWord);
+                UpdateScoreUI(null);
+                return;
+            }
+
+            UpdateScoreUI(result);
+
+            switch (result.Grade)
+            {
+                case PronunciationGrade.Pass:
+                    HandlePass(targetRaw, xpPerWord);
+                    break;
+                case PronunciationGrade.SoftPass:
+                    HandleSoftPass(targetRaw, xpPerWord * xpSoftPassMultiplier);
+                    break;
+                case PronunciationGrade.Fail:
+                    HandleScoredFail(targetRaw, recognized);
+                    return;
+            }
+        }
+        else
+        {
+            HandlePass(targetRaw, xpPerWord);
+            UpdateScoreUI(null);
+        }
+    }
+
+    private void HandlePass(string targetRaw, float xp)
+    {
+        blockManager.DisplayWord(targetRaw, keepCasing: true);
+        if (sfxSource != null && correctSfx != null) sfxSource.PlayOneShot(correctSfx);
+        if (rewardManager) rewardManager.TriggerReward(targetRaw);
+        if (speechSpitter) speechSpitter.RevealCorrectWord(currentIndex);
+
+        if (player != null && player.XPComponent != null)
+        {
+            player.XPComponent.AddXP(xp);
+            UpdateXPUI();
+        }
+
+        failedAttempts = 0;
+        StartCoroutine(AdvanceAfterDelay(roundAdvanceDelay));
+    }
+
+    private void HandleSoftPass(string targetRaw, float xp)
+    {
+        blockManager.DisplayWord(targetRaw, keepCasing: true);
+        if (sfxSource != null && softPassSfx != null) sfxSource.PlayOneShot(softPassSfx);
+        else if (sfxSource != null && correctSfx != null) sfxSource.PlayOneShot(correctSfx);
+        if (speechSpitter) speechSpitter.RevealCorrectWord(currentIndex);
+
+        if (player != null && player.XPComponent != null)
+        {
+            player.XPComponent.AddXP(xp);
+            UpdateXPUI();
+        }
+
+        failedAttempts = 0;
+        StartCoroutine(AdvanceAfterDelay(roundAdvanceDelay));
+    }
+
+    private void HandleScoredFail(string targetRaw, string recognized)
+    {
+        failedAttempts++;
+        blockManager.DisplayComparison(targetRaw, recognized);
+
+        if (failedAttempts >= maxFails)
+        {
+            failedAttempts = 0;
+            if (sfxSource != null && tryAgainSfx != null) sfxSource.PlayOneShot(tryAgainSfx);
+        }
+    }
+
+    private void UpdateScoreUI(PronunciationResult result)
+    {
+        if (scoreText == null) return;
+        if (result == null)
+        {
+            scoreText.text = "";
+            return;
+        }
+
+        string color = result.Grade switch
+        {
+            PronunciationGrade.Pass => "#4CAF50",
+            PronunciationGrade.SoftPass => "#FFC107",
+            PronunciationGrade.Fail => "#F44336",
+            _ => "#FFFFFF"
+        };
+
+        scoreText.text = $"<color={color}>{result.pronunciationScore:F0}%</color>\n" +
+                         $"<size=60%>Acc:{result.accuracyScore:F0} Flu:{result.fluencyScore:F0} Comp:{result.completenessScore:F0}</size>";
     }
 
     private IEnumerator AdvanceAfterDelay(float seconds)
@@ -105,7 +195,7 @@ public class WordFlowManager : MonoBehaviour
             {
                 _ = AzureSpeechRecognizer.Instance.StopListening();
             }
-            Debug.Log("Last word reached — holding position.");
+            Debug.Log("Last word reached ï¿½ holding position.");
         }
     }
 

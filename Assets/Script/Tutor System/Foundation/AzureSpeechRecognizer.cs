@@ -1,7 +1,9 @@
 using UnityEngine;
 using Microsoft.CognitiveServices.Speech;
 using Microsoft.CognitiveServices.Speech.Audio;
+using Microsoft.CognitiveServices.Speech.PronunciationAssessment;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine.Networking;
 using System;
@@ -17,7 +19,15 @@ public class AzureSpeechRecognizer : MonoBehaviour
     public string languageCode = "es-ES";
 
     [Header("Behavior")]
-    [SerializeField] private bool autoStart = true;   // <- new: keep old behavior by default
+    [SerializeField] private bool autoStart = true;
+
+    [Header("Debug / Testing")]
+    public bool debugMode = false;
+    public bool englishTestingMode = false;
+    [Range(0, 100)] public float debugPronunciationScore = 85f;
+    [Range(0, 100)] public float debugAccuracyScore = 90f;
+    [Range(0, 100)] public float debugFluencyScore = 80f;
+    [Range(0, 100)] public float debugCompletenessScore = 100f;
 
     [Header("Listening Indicator")]
     public GameObject listeningIndicator;
@@ -26,12 +36,15 @@ public class AzureSpeechRecognizer : MonoBehaviour
     private readonly Color idleColor = Color.red;
 
     [Header("Recognition Control")]
-    public bool canListen = false;      // your existing “gate”
+    public bool canListen = false;      // your existing ï¿½gateï¿½
     public bool IsListening { get; private set; }  // <- new: actual engine state
+
+    public static event Action<PronunciationResult> OnPronunciationScored;
 
     private string authToken;
     private SpeechRecognizer recognizer;
     private SpeechConfig speechConfig;
+    private bool wasListeningBeforeAssessment = false;
 
     private readonly ConcurrentQueue<Action> mainThreadQueue = new ConcurrentQueue<Action>();
 
@@ -110,6 +123,140 @@ public class AzureSpeechRecognizer : MonoBehaviour
         };
     }
 
+    // ---------- Pronunciation Assessment API ----------
+
+    public async Task<PronunciationResult> AssessPronunciation(string referenceText)
+    {
+        if (!canListen)
+        {
+            Debug.Log("[Azure] AssessPronunciation blocked â€” canListen is false.");
+            return null;
+        }
+
+        if (debugMode)
+            return BuildDebugResult(referenceText);
+
+        string assessText = (Debug.isDebugBuild && englishTestingMode) ? "Test" : referenceText;
+        string assessLang = (Debug.isDebugBuild && englishTestingMode) ? "en-US" : languageCode;
+
+        wasListeningBeforeAssessment = IsListening;
+        if (IsListening)
+        {
+            await recognizer.StopContinuousRecognitionAsync();
+            IsListening = false;
+            Debug.Log("[Azure] Paused continuous recognition for assessment.");
+        }
+
+        var startTime = DateTime.UtcNow;
+
+        try
+        {
+            await GetToken();
+
+            var assessConfig = SpeechConfig.FromAuthorizationToken(authToken, azureRegion);
+            assessConfig.SpeechRecognitionLanguage = assessLang;
+
+            var pronConfig = new PronunciationAssessmentConfig(
+                assessText,
+                GradingSystem.HundredMark,
+                Granularity.Phoneme,
+                true
+            );
+
+            using var audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+            using var assessRecognizer = new SpeechRecognizer(assessConfig, audioConfig);
+            pronConfig.ApplyTo(assessRecognizer);
+
+            var tcs = new TaskCompletionSource<SpeechRecognitionResult>();
+
+            assessRecognizer.Recognized += (s, e) =>
+            {
+                if (e.Result.Reason == ResultReason.RecognizedSpeech)
+                    tcs.TrySetResult(e.Result);
+            };
+
+            assessRecognizer.Canceled += (s, e) =>
+            {
+                Debug.LogWarning("[Azure] Assessment canceled: " + e.ErrorDetails);
+                tcs.TrySetCanceled();
+            };
+
+            await assessRecognizer.StartContinuousRecognitionAsync();
+
+            var timeoutTask = Task.Delay(10000);
+            var completedTask = await Task.WhenAny(tcs.Task, timeoutTask);
+
+            await assessRecognizer.StopContinuousRecognitionAsync();
+
+            if (completedTask == timeoutTask)
+            {
+                Debug.Log("[Azure] Assessment timed out â€” no speech detected.");
+                return null;
+            }
+
+            if (tcs.Task.IsCanceled)
+                return null;
+
+            var speechResult = await tcs.Task;
+            var jsonResult = speechResult.Properties.GetProperty(PropertyId.SpeechServiceResponse_JsonResult);
+            var parsed = JsonUtility.FromJson<PronunciationAssessmentJsonResult>(jsonResult);
+            var scores = parsed.NBest[0].PronunciationAssessment;
+
+            float latency = (float)(DateTime.UtcNow - startTime).TotalMilliseconds;
+
+            var result = new PronunciationResult
+            {
+                recognizedText = CleanRecognizedText(speechResult.Text),
+                referenceText = referenceText,
+                pronunciationScore = scores.PronScore,
+                accuracyScore = scores.AccuracyScore,
+                fluencyScore = scores.FluencyScore,
+                completenessScore = scores.CompletenessScore,
+                passed = scores.PronScore >= 80f,
+                latencyMs = latency
+            };
+
+            Debug.Log($"[Azure] Assessment: {result.pronunciationScore}/100 " +
+                      $"(Acc:{result.accuracyScore} Flu:{result.fluencyScore} Comp:{result.completenessScore}) " +
+                      $"in {latency:F0}ms");
+
+            mainThreadQueue.Enqueue(() => OnPronunciationScored?.Invoke(result));
+            return result;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError("[Azure] Assessment failed: " + ex.Message);
+            return null;
+        }
+        finally
+        {
+            if (wasListeningBeforeAssessment)
+            {
+                await recognizer.StartContinuousRecognitionAsync();
+                IsListening = true;
+                Debug.Log("[Azure] Resumed continuous recognition after assessment.");
+            }
+        }
+    }
+
+    private PronunciationResult BuildDebugResult(string referenceText)
+    {
+        var result = new PronunciationResult
+        {
+            recognizedText = referenceText,
+            referenceText = referenceText,
+            pronunciationScore = debugPronunciationScore,
+            accuracyScore = debugAccuracyScore,
+            fluencyScore = debugFluencyScore,
+            completenessScore = debugCompletenessScore,
+            passed = debugPronunciationScore >= 80f,
+            latencyMs = 0f
+        };
+        Debug.Log($"[Azure][DEBUG] Mock assessment: {result.pronunciationScore}/100");
+        mainThreadQueue.Enqueue(() => OnPronunciationScored?.Invoke(result));
+        return result;
+    }
+
     // ---------- Public control API ----------
 
     public async Task StartListening()
@@ -173,6 +320,28 @@ public class AzureSpeechRecognizer : MonoBehaviour
     {
         try { await StopListening(); } catch { /* ignore */ }
         recognizer?.Dispose();
-       // speechConfig?.Dispose();
+    }
+
+    // ---------- JSON parsing for Azure pronunciation response ----------
+
+    [Serializable]
+    private class PronunciationAssessmentJsonResult
+    {
+        public List<NBestResult> NBest;
+    }
+
+    [Serializable]
+    private class NBestResult
+    {
+        public PronunciationAssessmentScores PronunciationAssessment;
+    }
+
+    [Serializable]
+    private class PronunciationAssessmentScores
+    {
+        public float PronScore;
+        public float AccuracyScore;
+        public float FluencyScore;
+        public float CompletenessScore;
     }
 }
