@@ -23,11 +23,11 @@ public class Player : MonoBehaviour
         ProgressionComponent = GetComponent<PlayerProgressionComponent>() ?? gameObject.AddComponent<PlayerProgressionComponent>();
     }
 
-    public void Initialize(string id)
+    public void Initialize(string id, string name = "")
     {
         playerId = id;
 
-        DataComponent.Initialize(playerId);
+        DataComponent.Initialize(playerId, name);
         XPComponent.Initialize(this);
         ProgressionComponent.Initialize(this);
     }

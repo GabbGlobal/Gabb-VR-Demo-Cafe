@@ -4,10 +4,10 @@ public class PlayerDataComponent : MonoBehaviour
 {
     public PlayerData Data { get; private set; }
 
-    public void Initialize(string playerId)
+    public void Initialize(string playerId, string playerName = "")
     {
         // In the future, load from backend/storage
-        Data = LoadPlayerData(playerId) ?? new PlayerData(playerId);
+        Data = LoadPlayerData(playerId) ?? new PlayerData(playerId, playerName);
     }
 
     private PlayerData LoadPlayerData(string playerId)

@@ -11,9 +11,10 @@ public class PlayerData
     public int currentLevel;
     public HashSet<string> completedDialogues = new HashSet<string>();
 
-    public PlayerData(string id)
+    public PlayerData(string id, string name = "")
     {
         playerId = id;
+        playerName = name;
         currentXP = 0;
         currentLevel = 1;
     }
