@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Text;
 
 public static class PhraseGrader
 {
@@ -23,21 +25,21 @@ public static class PhraseGrader
         if (string.IsNullOrEmpty(reference))
             return new GradeResult { words = Array.Empty<WordResult>(), passed = true, accuracy = 1f };
 
-        string[] refWords = reference.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        string[] refWords = reference.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         string[] recWords = string.IsNullOrEmpty(recognized)
             ? Array.Empty<string>()
-            : recognized.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            : recognized.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
         var recNormSet = new HashSet<string>();
         foreach (string w in recWords)
-            recNormSet.Add(TextUtils.NormalizeAccents(w.Trim().TrimEnd('.')));
+            recNormSet.Add(Normalize(w.Trim().TrimEnd('.')));
 
         var words = new WordResult[refWords.Length];
         int matched = 0;
 
         for (int i = 0; i < refWords.Length; i++)
         {
-            string refNorm = TextUtils.NormalizeAccents(refWords[i]);
+            string refNorm = Normalize(refWords[i]);
             bool hit = recNormSet.Contains(refNorm);
             if (hit) matched++;
             words[i] = new WordResult { referenceWord = refWords[i], matched = hit };
@@ -57,7 +59,7 @@ public static class PhraseGrader
 
     public static string ToColoredRichText(GradeResult result)
     {
-        var sb = new System.Text.StringBuilder();
+        var sb = new StringBuilder();
         for (int i = 0; i < result.words.Length; i++)
         {
             var w = result.words[i];
@@ -67,5 +69,18 @@ public static class PhraseGrader
             if (i < result.words.Length - 1) sb.Append(' ');
         }
         return sb.ToString();
+    }
+
+    public static string Normalize(string input)
+    {
+        if (string.IsNullOrEmpty(input)) return string.Empty;
+        string decomposed = input.Normalize(NormalizationForm.FormD);
+        var sb = new StringBuilder();
+        foreach (char c in decomposed)
+        {
+            if (CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+                sb.Append(c);
+        }
+        return sb.ToString().Normalize(NormalizationForm.FormC).ToLowerInvariant();
     }
 }

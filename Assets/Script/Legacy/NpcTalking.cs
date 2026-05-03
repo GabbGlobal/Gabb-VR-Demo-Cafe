@@ -219,139 +219,104 @@ public class NpcTalking : MonoBehaviour
 
     private async Awaitable HandlePlayerLineWithDictation(LineOfDialogue line, CancellationToken cancellationToken)
     {
-        string finalResult = null;
-        bool recognitionDone = false;
+        var mic = FindFirstObjectByType<MicRecorder>();
+        if (mic == null)
+        {
+            var go = new GameObject("MicRecorder");
+            mic = go.AddComponent<MicRecorder>();
+            Log("Auto-created MicRecorder.");
+        }
 
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-        DictationRecognizer dictation = null;
-        try
-        {
-            dictation = new DictationRecognizer();
-            dictation.DictationHypothesis += (text) =>
-            {
-                Debug.Log($"[NpcTalking] Partial: \"{text}\"");
-                ConversationUI.Instance.ShowPartialPhrase(line.text, text);
-            };
-            dictation.DictationResult += (text, confidence) =>
-            {
-                Debug.Log($"[NpcTalking] Final: \"{text}\" ({confidence})");
-                finalResult = text;
-                recognitionDone = true;
-            };
-            dictation.DictationError += (err, hr) =>
-            {
-                Debug.LogWarning($"[NpcTalking] Dictation error: {err} (0x{hr:X})");
-                recognitionDone = true;
-            };
-            dictation.Start();
-            Debug.Log("[NpcTalking] Dictation started for player line");
-        }
-        catch (Exception ex)
-        {
-            Debug.LogWarning($"[NpcTalking] DictationRecognizer failed to start: {ex.Message}");
-        }
-#endif
+        string[] refWords = line.text.Split(' ');
+        float estimatedPhraseDuration = refWords.Length * 0.25f;
+        const float speakingThreshold = 0.015f;
+        const float settleDelay = 0.5f;
+
+        ConversationUI.Instance.ShowListening();
+        await Awaitable.WaitForSecondsAsync(settleDelay, cancellationToken);
+        if (cancellationToken.IsCancellationRequested) return;
+
+        bool recordingDone = false;
+        bool debugDone = false;
+        string debugResult = null;
+        float speechTime = 0f;
+        int lastWordIdx = -1;
+
+        Action<byte[]> onMicDone = (_) => { recordingDone = true; };
+        mic.OnComplete += onMicDone;
 
         Action<string> debugHandler = (text) =>
         {
-            Debug.Log($"[NpcTalking] Debug input: \"{text}\"");
-            finalResult = text;
-            recognitionDone = true;
+            debugResult = text;
+            debugDone = true;
         };
         onDebugSpeechInput += debugHandler;
 
-        float timeout = 15f;
-        float elapsed = 0f;
-        while (!recognitionDone && elapsed < timeout)
+        mic.StartRecording();
+        Log($"Recording for: \"{line.text}\" ({refWords.Length} words, ~{estimatedPhraseDuration:F1}s)");
+
+        while (!recordingDone && !debugDone)
         {
             if (cancellationToken.IsCancellationRequested)
             {
+                mic.OnComplete -= onMicDone;
                 onDebugSpeechInput -= debugHandler;
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-                DisposeDictation(dictation);
-#endif
+                if (mic.IsRecording) mic.StopRecording();
                 return;
             }
-            elapsed += Time.deltaTime;
+
+            if (mic.IsRecording && mic.CurrentVolume >= speakingThreshold)
+            {
+                speechTime += Time.deltaTime;
+                float progress = Mathf.Clamp01(speechTime / estimatedPhraseDuration);
+                int wordIdx = Mathf.Min((int)(progress * refWords.Length), refWords.Length - 1);
+                if (wordIdx != lastWordIdx)
+                {
+                    lastWordIdx = wordIdx;
+                    HighlightWordsUpTo(refWords, wordIdx);
+                }
+            }
+
             await Awaitable.NextFrameAsync();
         }
 
+        mic.OnComplete -= onMicDone;
         onDebugSpeechInput -= debugHandler;
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-        DisposeDictation(dictation);
-#endif
+        if (mic.IsRecording) mic.StopRecording();
 
-        if (string.IsNullOrEmpty(finalResult))
+        HighlightWordsUpTo(refWords, refWords.Length - 1);
+
+        float refDuration = (line.audioClip != null) ? line.audioClip.length : estimatedPhraseDuration;
+        var engagement = WordProgressEstimator.GradeEngagement(speechTime, refDuration, refWords.Length);
+        Log($"Score: speech={speechTime:F1}s engagement={engagement.overallScore:P0}");
+
+        if (debugDone && !string.IsNullOrEmpty(debugResult))
         {
-            failedAttempts++;
-            Log($"No speech detected (timeout). Failed attempts: {failedAttempts}");
-            ConversationUI.Instance.ShowFail(Mathf.Min(failedAttempts, 3));
-            if (failedAttempts >= 3)
-            {
-                await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
-                if (cancellationToken.IsCancellationRequested) return;
-                StopConvo();
-            }
-            return;
+            var grade = PhraseGrader.Grade(debugResult, line.text);
+            ConversationUI.Instance.ShowGradeResult(grade);
         }
 
-        if (PhraseMatches(finalResult, line.text))
-        {
-            ConversationUI.Instance.ShowSuccess();
-            xpToReward += 3f - failedAttempts;
-            await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
-            if (cancellationToken.IsCancellationRequested) return;
-            MoveToNextLineOfDialogue();
-        }
-        else
-        {
-            failedAttempts++;
-            ConversationUI.Instance.ShowFail(Mathf.Min(failedAttempts, 3));
-            ConversationUI.Instance.ShowPartialPhrase(line.text, finalResult);
-            Log($"{failedAttempts} failed attempts.");
-            if (failedAttempts >= 3)
-            {
-                await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
-                if (cancellationToken.IsCancellationRequested) return;
-                StopConvo();
-            }
-        }
+        // Always advance — show brief success feedback then move on
+        ConversationUI.Instance.ShowSuccess();
+        xpToReward += Mathf.Max(0f, 3f - failedAttempts);
+        failedAttempts = 0;
+        await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
+        if (cancellationToken.IsCancellationRequested) return;
+        MoveToNextLineOfDialogue();
     }
 
-    private static bool PhraseMatches(string recognized, string reference)
+    private void HighlightWordsUpTo(string[] refWords, int upToIndex)
     {
-        string recNorm = TextUtils.NormalizeAccents(recognized.Trim().TrimEnd('.'));
-        string refNorm = TextUtils.NormalizeAccents(reference.Trim());
-        if (recNorm == refNorm) return true;
-
-        string[] recWords = recNorm.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        string[] refWords = refNorm.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-        if (refWords.Length == 0) return false;
-
-        int matched = 0;
-        foreach (string rw in refWords)
+        var sb = new System.Text.StringBuilder();
+        for (int i = 0; i < refWords.Length; i++)
         {
-            foreach (string rr in recWords)
-            {
-                if (rw == rr) { matched++; break; }
-            }
+            sb.Append(i <= upToIndex
+                ? $"<color=green>{refWords[i]}</color>"
+                : refWords[i]);
+            if (i < refWords.Length - 1) sb.Append(' ');
         }
-        return (float)matched / refWords.Length >= 0.7f;
+        ConversationUI.Instance.playerDialogueText.text = sb.ToString();
     }
-
-#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
-    private static void DisposeDictation(DictationRecognizer dictation)
-    {
-        if (dictation == null) return;
-        try
-        {
-            if (dictation.Status == SpeechSystemStatus.Running)
-                dictation.Stop();
-            dictation.Dispose();
-        }
-        catch { }
-    }
-#endif
 #endif
 
    protected void StopConvo()

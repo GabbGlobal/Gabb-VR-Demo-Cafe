@@ -1,22 +1,39 @@
 using System;
 using System.IO;
 using UnityEngine;
+#if UNITY_ANDROID && !UNITY_EDITOR
+using UnityEngine.Android;
+#endif
 
 public class MicRecorder : MonoBehaviour
 {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static void RequestMicPermissionOnStart()
+    {
+#if UNITY_ANDROID && !UNITY_EDITOR
+        if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
+            Permission.RequestUserPermission(Permission.Microphone);
+#endif
+    }
+
     [Header("Recording Settings")]
     [SerializeField] private float silenceThreshold = 0.02f;
-    [SerializeField] private float silenceDuration = 1.5f;
+    [SerializeField] private float silenceDuration = 2.0f;
     [SerializeField] private float maxDuration = 15f;
     [SerializeField] private int sampleRate = 16000;
 
     private AudioClip clip;
     private string device;
     private bool recording;
+    private bool hasSpoken;
     private float silenceTimer;
     private float elapsed;
+    private float currentVolume;
 
     public bool IsRecording => recording;
+    public bool HasSpoken => hasSpoken;
+    public float CurrentVolume => currentVolume;
+    public float Elapsed => elapsed;
     public event Action OnStarted;
     public event Action<float> OnVolume;
     public event Action<byte[]> OnComplete;
@@ -34,8 +51,10 @@ public class MicRecorder : MonoBehaviour
 
         clip = Microphone.Start(device, false, Mathf.CeilToInt(maxDuration) + 1, sampleRate);
         recording = true;
+        hasSpoken = false;
         silenceTimer = 0f;
         elapsed = 0f;
+        currentVolume = 0f;
         Debug.Log($"[MicRecorder] Recording started on '{device}' at {sampleRate}Hz");
         OnStarted?.Invoke();
     }
@@ -57,7 +76,7 @@ public class MicRecorder : MonoBehaviour
         float[] samples = new float[position * clip.channels];
         clip.GetData(samples, 0);
         byte[] wav = EncodeWav(samples, clip.channels, sampleRate);
-        Debug.Log($"[MicRecorder] Recording stopped. {position} samples, {wav.Length} bytes WAV");
+        Debug.Log($"[MicRecorder] Recording stopped. {elapsed:F1}s, {position} samples, hasSpoken={hasSpoken}");
         OnComplete?.Invoke(wav);
     }
 
@@ -72,18 +91,19 @@ public class MicRecorder : MonoBehaviour
             return;
         }
 
-        float vol = GetVolume();
-        OnVolume?.Invoke(vol);
+        currentVolume = GetVolume();
+        OnVolume?.Invoke(currentVolume);
 
-        if (vol < silenceThreshold)
+        if (currentVolume >= silenceThreshold)
+        {
+            hasSpoken = true;
+            silenceTimer = 0f;
+        }
+        else if (hasSpoken)
         {
             silenceTimer += Time.deltaTime;
-            if (silenceTimer >= silenceDuration && elapsed > 1f)
+            if (silenceTimer >= silenceDuration)
                 StopRecording();
-        }
-        else
-        {
-            silenceTimer = 0f;
         }
     }
 
