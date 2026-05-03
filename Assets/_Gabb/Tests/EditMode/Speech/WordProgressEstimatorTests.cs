@@ -137,4 +137,56 @@ public class WordProgressEstimatorTests
             speechDuration: 1.5f, referenceDuration: 3f, totalWords: 6);
         Assert.AreEqual(3, result.estimatedWordIndex); // halfway = word 3 of 6
     }
+
+    // --- Accuracy formula ---
+
+    [Test]
+    public void Accuracy_FastAndPassed_100Percent()
+    {
+        float acc = WordProgressEstimator.CalculateAccuracy(speechTime: 1f, refDuration: 2f, passed: true);
+        Assert.AreEqual(100f, acc);
+    }
+
+    [Test]
+    public void Accuracy_ExactSpeedAndPassed_100Percent()
+    {
+        float acc = WordProgressEstimator.CalculateAccuracy(speechTime: 2f, refDuration: 2f, passed: true);
+        Assert.AreEqual(100f, acc);
+    }
+
+    [Test]
+    public void Accuracy_SlowishAndPassed_HighScore()
+    {
+        // 1.5x speed: 100 - 0.5 * 17.5 = 91.25
+        float acc = WordProgressEstimator.CalculateAccuracy(speechTime: 3f, refDuration: 2f, passed: true);
+        Assert.That(acc, Is.EqualTo(91.25f).Within(1f));
+    }
+
+    [Test]
+    public void Accuracy_VerySlowAndPassed_Floors65()
+    {
+        float acc = WordProgressEstimator.CalculateAccuracy(speechTime: 10f, refDuration: 2f, passed: true);
+        Assert.AreEqual(65f, acc);
+    }
+
+    [Test]
+    public void Accuracy_FailedNoSpeech_Zero()
+    {
+        float acc = WordProgressEstimator.CalculateAccuracy(speechTime: 0.1f, refDuration: 2f, passed: false);
+        Assert.AreEqual(0f, acc);
+    }
+
+    [Test]
+    public void Accuracy_FailedWithEffort_Proportional()
+    {
+        float acc = WordProgressEstimator.CalculateAccuracy(speechTime: 1f, refDuration: 2f, passed: false);
+        Assert.That(acc, Is.EqualTo(12.5f).Within(1f)); // 0.5 effort * 25
+    }
+
+    [Test]
+    public void Accuracy_FailedFullEffort_Max25()
+    {
+        float acc = WordProgressEstimator.CalculateAccuracy(speechTime: 2f, refDuration: 2f, passed: false);
+        Assert.That(acc, Is.EqualTo(25f).Within(0.1f));
+    }
 }

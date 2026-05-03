@@ -14,9 +14,11 @@ public class SessionData
     public float Xp;
     public int TotalAttempts;
     public int CorrectAttempts;
+    private float accuracyScoreSum;
 
     public int WordsLearned => uniqueWordsLearned.Count;
-    public float Accuracy => TotalAttempts > 0 ? (float)CorrectAttempts / TotalAttempts * 100f : 0f;
+    public int WordsSpoken;
+    public float Accuracy => TotalAttempts > 0 ? accuracyScoreSum / TotalAttempts : 0f;
 
     private readonly HashSet<string> uniqueWordsLearned = new HashSet<string>();
 
@@ -32,13 +34,34 @@ public class SessionData
 
     public void RecordAttempt(bool passed)
     {
+        RecordAttemptWithScore(passed ? 100f : 0f);
+    }
+
+    public void RecordAttemptWithScore(float score)
+    {
         TotalAttempts++;
-        if (passed) CorrectAttempts++;
+        float clamped = System.Math.Max(0f, System.Math.Min(score, 100f));
+        accuracyScoreSum += clamped;
+        if (clamped >= 50f) CorrectAttempts++;
     }
 
     public bool RecordWordLearned(string word)
     {
         return uniqueWordsLearned.Add(word);
+    }
+
+    public void RecordWordsFromPhrase(string phrase)
+    {
+        if (string.IsNullOrEmpty(phrase)) return;
+        foreach (var w in phrase.Split(' '))
+        {
+            var trimmed = w.Trim();
+            if (trimmed.Length > 0)
+            {
+                uniqueWordsLearned.Add(trimmed.ToLowerInvariant());
+                WordsSpoken++;
+            }
+        }
     }
 
     public SessionEventRequest ToRequest(string currentScene)
@@ -51,9 +74,9 @@ public class SessionData
             JoinCode = string.IsNullOrEmpty(JoinCode) ? null : JoinCode,
             Language = Language,
             CurrentScene = currentScene,
-            Xp = Xp,
-            Accuracy = Accuracy,
-            WordsLearned = WordsLearned,
+            Xp = (int)Xp,
+            Accuracy = (int)System.Math.Round(Accuracy),
+            WordsLearned = WordsSpoken,
             Summary = null,
             StartedAt = HasSentFirstEvent ? null : StartedAt.ToString("o")
         };

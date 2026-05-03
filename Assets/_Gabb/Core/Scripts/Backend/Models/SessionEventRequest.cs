@@ -9,8 +9,8 @@ public class SessionEventRequest
     [JsonProperty("join_code")]     public string JoinCode;
     [JsonProperty("language")]      public string Language;
     [JsonProperty("current_scene")] public string CurrentScene;
-    [JsonProperty("xp")]            public float Xp;
-    [JsonProperty("accuracy")]      public float Accuracy;
+    [JsonProperty("xp")]            public int Xp;
+    [JsonProperty("accuracy")]      public int Accuracy;
     [JsonProperty("words_learned")] public int WordsLearned;
     [JsonProperty("summary")]       public string Summary;
     [JsonProperty("started_at")]    public string StartedAt;

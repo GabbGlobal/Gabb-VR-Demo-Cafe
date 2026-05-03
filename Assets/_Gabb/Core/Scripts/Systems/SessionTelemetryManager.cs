@@ -53,6 +53,7 @@ public class SessionTelemetryManager : MonoBehaviour
         }
 
         AzureSpeechRecognizer.OnPronunciationScored += HandlePronunciationScored;
+        NpcTalking.OnSpeechAttemptScored += HandleSpeechAttemptScored;
 
         heartbeatCts = new CancellationTokenSource();
         RunHeartbeat(heartbeatCts.Token);
@@ -96,10 +97,19 @@ public class SessionTelemetryManager : MonoBehaviour
     private void HandlePronunciationScored(PronunciationResult result)
     {
         bool passed = result.Grade == PronunciationGrade.Pass || result.Grade == PronunciationGrade.SoftPass;
-        CurrentSession.RecordAttempt(passed);
+        CurrentSession.RecordAttemptWithScore(passed ? result.pronunciationScore : 0f);
 
         if (passed && !string.IsNullOrEmpty(result.referenceText))
-            CurrentSession.RecordWordLearned(result.referenceText);
+            CurrentSession.RecordWordsFromPhrase(result.referenceText);
+    }
+
+    private void HandleSpeechAttemptScored(float accuracy, string referenceText)
+    {
+        CurrentSession.RecordAttemptWithScore(accuracy);
+        CurrentSession.Xp += 3f;
+
+        if (accuracy >= 50f && !string.IsNullOrEmpty(referenceText))
+            CurrentSession.RecordWordsFromPhrase(referenceText);
     }
 
     private async void OnApplicationQuit()
@@ -127,6 +137,7 @@ public class SessionTelemetryManager : MonoBehaviour
             player.OnDialogueCompleted -= HandleDialogueCompleted;
         }
         AzureSpeechRecognizer.OnPronunciationScored -= HandlePronunciationScored;
+        NpcTalking.OnSpeechAttemptScored -= HandleSpeechAttemptScored;
 
         try
         {
