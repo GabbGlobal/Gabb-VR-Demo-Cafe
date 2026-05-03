@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
             return null;
         }
 
-        player.Initialize(playerId);
+        player.Initialize(playerId, playerName);
         //activePlayers[playerId] = player;
 
         if(isLocalPlayer)

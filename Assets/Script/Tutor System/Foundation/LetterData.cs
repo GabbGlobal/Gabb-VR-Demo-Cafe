@@ -17,6 +17,5 @@ public class LetterData : ScriptableObject
     // List of characters that are commonly confused with this one (e.g., 'b' with 'v', 'n' with 'ñ')
     public List<char> commonlyConfusedWith;
 
-    // public AudioClip pronunciationAudio;
-    // public Sprite imageRepresentation; // If you have visual aids
+    public AudioClip pronunciationAudio;
 }

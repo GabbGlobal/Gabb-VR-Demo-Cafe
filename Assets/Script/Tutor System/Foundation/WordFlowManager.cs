@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+#if !USE_AZURE && (UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN)
+using UnityEngine.Windows.Speech;
+#endif
 
 public class WordFlowManager : MonoBehaviour
 {
@@ -33,22 +36,109 @@ public class WordFlowManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private bool usePronunciationScoring = true;
 
+    [Header("Word Pronunciation Audio")]
+    [SerializeField] private WordDatabase wordDatabase;
+    [SerializeField] private bool playPronunciationOnNewWord = true;
+
     private int currentIndex = 0;
     private int failedAttempts = 0;
     private bool isAssessing = false;
 
-    private void Start()
+    public int CurrentIndex => currentIndex;
+    public int FailedAttempts => failedAttempts;
+    public bool IsAssessing => isAssessing;
+    public string CurrentWord => (wordList != null && currentIndex < wordList.Count) ? wordList[currentIndex] : null;
+    public int TotalWords => wordList?.Count ?? 0;
+
+#if !USE_AZURE && (UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN)
+    private DictationRecognizer dictation;
+    public bool DictationRunning => dictation != null && dictation.Status == SpeechSystemStatus.Running;
+#endif
+
+    private
+#if USE_AZURE
+    async
+#endif
+    void Start()
     {
-        // Initial sized to first word
         if (wordList != null && wordList.Count > 0 && blockManager != null)
             blockManager.SetRoundBlockCount(wordList[0].Length);
 
-        // Optional: show instructions for first word
         if (speechSpitter) speechSpitter.RefreshInstruction(0);
         UpdateXPUI();
+        PlayWordPronunciation(0);
+
+#if USE_AZURE
+        if (AzureSpeechRecognizer.Instance != null)
+            await AzureSpeechRecognizer.Instance.StartListening();
+#else
+        StartDictation();
+#endif
     }
 
-    public async void CheckRecognizedWord(string recognized)
+#if !USE_AZURE
+    private void StartDictation()
+    {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+        dictation = new DictationRecognizer();
+        dictation.DictationResult += OnDictationResult;
+        dictation.DictationHypothesis += OnDictationHypothesis;
+        dictation.DictationError += (err, hr) =>
+            Debug.LogWarning($"[WordFlow] Dictation error: {err} (0x{hr:X})");
+        dictation.Start();
+        Debug.Log("[WordFlow] DictationRecognizer started (non-Azure fallback)");
+#else
+        Debug.LogWarning("[WordFlow] No speech backend available — define USE_AZURE or run on Windows");
+#endif
+    }
+
+    private void StopDictation()
+    {
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+        if (dictation != null)
+        {
+            if (dictation.Status == SpeechSystemStatus.Running)
+                dictation.Stop();
+            dictation.DictationResult -= OnDictationResult;
+            dictation.DictationHypothesis -= OnDictationHypothesis;
+            dictation.Dispose();
+            dictation = null;
+            Debug.Log("[WordFlow] DictationRecognizer stopped");
+        }
+#endif
+    }
+
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+    private void OnDictationResult(string text, ConfidenceLevel confidence)
+    {
+        string cleaned = text.Trim().TrimEnd('.').ToLowerInvariant();
+        Debug.Log($"[WordFlow] Dictation heard: \"{cleaned}\" ({confidence})");
+        CheckRecognizedWord(cleaned);
+    }
+
+    private void OnDictationHypothesis(string text)
+    {
+        Debug.Log($"[WordFlow] Dictation partial: \"{text}\"");
+        ShowPartialRecognition(text);
+    }
+#endif
+#endif
+
+    public void ShowPartialRecognition(string partial)
+    {
+        if (wordList == null || wordList.Count == 0) return;
+        if (isAssessing) return;
+        string targetRaw = wordList[currentIndex];
+        string cleaned = partial.Trim().TrimEnd('.').ToLowerInvariant();
+        if (blockManager != null && !string.IsNullOrEmpty(cleaned))
+            blockManager.DisplayComparison(targetRaw, cleaned);
+    }
+
+    public
+#if USE_AZURE
+    async
+#endif
+    void CheckRecognizedWord(string recognized)
     {
         if (wordList == null || wordList.Count == 0) return;
         if (isAssessing) return;
@@ -71,6 +161,7 @@ public class WordFlowManager : MonoBehaviour
             return;
         }
 
+#if USE_AZURE
         if (usePronunciationScoring && AzureSpeechRecognizer.Instance != null)
         {
             isAssessing = true;
@@ -104,6 +195,10 @@ public class WordFlowManager : MonoBehaviour
             HandlePass(targetRaw, xpPerWord);
             UpdateScoreUI(null);
         }
+#else
+        HandlePass(targetRaw, xpPerWord);
+        UpdateScoreUI(null);
+#endif
     }
 
     private void HandlePass(string targetRaw, float xp)
@@ -155,6 +250,7 @@ public class WordFlowManager : MonoBehaviour
     private void UpdateScoreUI(PronunciationResult result)
     {
         if (scoreText == null) return;
+#if USE_AZURE
         if (result == null)
         {
             scoreText.text = "";
@@ -171,15 +267,15 @@ public class WordFlowManager : MonoBehaviour
 
         scoreText.text = $"<color={color}>{result.pronunciationScore:F0}%</color>\n" +
                          $"<size=60%>Acc:{result.accuracyScore:F0} Flu:{result.fluencyScore:F0} Comp:{result.completenessScore:F0}</size>";
+#else
+        scoreText.text = "";
+#endif
     }
 
     private IEnumerator AdvanceAfterDelay(float seconds)
     {
-        
-
         if (rewardManager) rewardManager.OnRoundEnd();
 
-        //Only advance if not at last index
         if (currentIndex < wordList.Count - 1)
         {
             yield return new WaitForSeconds(seconds);
@@ -188,14 +284,17 @@ public class WordFlowManager : MonoBehaviour
             string next = wordList[currentIndex];
             if (blockManager) blockManager.SetRoundBlockCount(next.Length);
             if (speechSpitter) speechSpitter.RefreshInstruction(currentIndex);
+            PlayWordPronunciation(currentIndex);
         }
         else
         {
+#if USE_AZURE
             if (AzureSpeechRecognizer.Instance != null)
-            {
                 _ = AzureSpeechRecognizer.Instance.StopListening();
-            }
-            Debug.Log("Last word reached � holding position.");
+#else
+            StopDictation();
+#endif
+            Debug.Log("Last word reached — holding position.");
         }
     }
 
@@ -216,13 +315,34 @@ public class WordFlowManager : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private
+#if USE_AZURE
+    async
+#endif
+    void OnDisable()
     {
         if (player != null)
         {
             player.OnXPGained -= HandleXPGained;
             player.OnLevelUp -= HandleLevelUp;
         }
+
+#if USE_AZURE
+        if (AzureSpeechRecognizer.Instance != null)
+            await AzureSpeechRecognizer.Instance.StopListening();
+#else
+        StopDictation();
+#endif
+    }
+
+    private void PlayWordPronunciation(int index)
+    {
+        if (!playPronunciationOnNewWord || wordDatabase == null || sfxSource == null) return;
+        if (index < 0 || index >= wordList.Count) return;
+
+        var wordData = wordDatabase.GetWord(wordList[index]);
+        if (wordData != null && wordData.PronunciationAudio != null)
+            sfxSource.PlayOneShot(wordData.PronunciationAudio);
     }
 
     private void HandleXPGained(float _) => UpdateXPUI();

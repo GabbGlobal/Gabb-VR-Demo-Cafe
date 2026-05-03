@@ -169,6 +169,51 @@ public class ConversationUI : MonoBehaviour
         audioSource.PlayOneShot(failSound);
     }
 
+    public void ShowPartialPhrase(string referenceText, string recognized)
+    {
+        if (playerDialogueText == null) return;
+        string[] refWords = referenceText.Split(' ');
+        string[] recWords = TextUtils.NormalizeAccents(recognized.Trim().TrimEnd('.')).Split(' ');
+
+        var sb = new System.Text.StringBuilder();
+        for (int i = 0; i < refWords.Length; i++)
+        {
+            string refNorm = TextUtils.NormalizeAccents(refWords[i]);
+            if (i < recWords.Length && !string.IsNullOrEmpty(recWords[i]))
+            {
+                sb.Append(refNorm == recWords[i]
+                    ? $"<color=green>{refWords[i]}</color>"
+                    : $"<color=red>{refWords[i]}</color>");
+            }
+            else
+            {
+                sb.Append(refWords[i]);
+            }
+            if (i < refWords.Length - 1) sb.Append(' ');
+        }
+        playerDialogueText.text = sb.ToString();
+    }
+
+    public void ShowListening()
+    {
+        advisorText.text = "<color=#60a5fa>Listening... speak now</color>";
+        playerDialogueText.color = playerTextStartColor;
+    }
+
+    public void ShowProcessing()
+    {
+        advisorText.text = "<color=#FFC107>Processing...</color>";
+    }
+
+    public void ShowGradeResult(PhraseGrader.GradeResult result)
+    {
+        playerDialogueText.text = PhraseGrader.ToColoredRichText(result);
+        playerDialogueText.color = Color.white;
+        int pct = Mathf.RoundToInt(result.accuracy * 100f);
+        string color = result.passed ? "#4CAF50" : "#F44336";
+        advisorText.text = $"<color={color}>{result.matchedCount}/{result.totalWords} words ({pct}%)</color>";
+    }
+
     public void ResetText()
     {
         npcDialogueText.text = "";

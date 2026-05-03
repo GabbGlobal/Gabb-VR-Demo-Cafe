@@ -162,34 +162,41 @@ public class NpcTalking : MonoBehaviour
             // if this line is spoken by the Player
             case DialogueSpeaker.Player:
                 {
-                    // begin pronunciation assessment
+#if USE_AZURE
+                    if (PronunciationAssessor.Instance == null)
+                    {
+                        Debug.LogError("[NpcTalking] PronunciationAssessor not in scene — skipping player line.");
+                        MoveToNextLineOfDialogue();
+                        break;
+                    }
                     PronunciationAssessor.AssessmentResult assessmentTask = await PronunciationAssessor.Instance.AssessPronunciation(line.text);
-                    if (cancellationToken.IsCancellationRequested) { return; } // end early
+                    if (cancellationToken.IsCancellationRequested) { return; }
                     if (assessmentTask?.recognition_status == "success")
                     {
-                        ConversationUI.Instance.ShowSuccess(); // let the player know they succeeded
-                        xpToReward += 3f - failedAttempts; // keep track of xp to reward. Up to 3 points, -1 for every failed attempt.
+                        ConversationUI.Instance.ShowSuccess();
+                        xpToReward += 3f - failedAttempts;
                         await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
                         MoveToNextLineOfDialogue();
                     }
                     else
                     {
-                        failedAttempts++; // count the failed attempt
-                        ConversationUI.Instance.ShowFail(failedAttempts); // let the player know they fucked up
+                        failedAttempts++;
+                        ConversationUI.Instance.ShowFail(failedAttempts);
                         if (failedAttempts >= 3)
                         {
                             Log($"{failedAttempts} failed attempts, stopping convo.");
                             await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
-                            if (cancellationToken.IsCancellationRequested) { return; } // end early
-                            StopConvo(); // to many failed attempts, stop the convo. it should then automatically restart.
+                            if (cancellationToken.IsCancellationRequested) { return; }
+                            StopConvo();
                         }
                         else
                         {
                             Log($"{failedAttempts} failed attempts, trying again.");
-                            //await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
-                            // we'll try this line again
                         }
                     }
+#else
+                    await HandlePlayerLineWithDictation(line, cancellationToken);
+#endif
                     break;
                 }
         }
@@ -202,6 +209,150 @@ public class NpcTalking : MonoBehaviour
         lineOfDialogueIndex++; // move onto next line of dialogue
         failedAttempts = 0; // reset attempts
     }
+
+#if !USE_AZURE
+    private static Action<string> onDebugSpeechInput;
+    public static void InjectDebugSpeech(string text)
+    {
+        onDebugSpeechInput?.Invoke(text);
+    }
+
+    private async Awaitable HandlePlayerLineWithDictation(LineOfDialogue line, CancellationToken cancellationToken)
+    {
+        string finalResult = null;
+        bool recognitionDone = false;
+
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+        DictationRecognizer dictation = null;
+        try
+        {
+            dictation = new DictationRecognizer();
+            dictation.DictationHypothesis += (text) =>
+            {
+                Debug.Log($"[NpcTalking] Partial: \"{text}\"");
+                ConversationUI.Instance.ShowPartialPhrase(line.text, text);
+            };
+            dictation.DictationResult += (text, confidence) =>
+            {
+                Debug.Log($"[NpcTalking] Final: \"{text}\" ({confidence})");
+                finalResult = text;
+                recognitionDone = true;
+            };
+            dictation.DictationError += (err, hr) =>
+            {
+                Debug.LogWarning($"[NpcTalking] Dictation error: {err} (0x{hr:X})");
+                recognitionDone = true;
+            };
+            dictation.Start();
+            Debug.Log("[NpcTalking] Dictation started for player line");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"[NpcTalking] DictationRecognizer failed to start: {ex.Message}");
+        }
+#endif
+
+        Action<string> debugHandler = (text) =>
+        {
+            Debug.Log($"[NpcTalking] Debug input: \"{text}\"");
+            finalResult = text;
+            recognitionDone = true;
+        };
+        onDebugSpeechInput += debugHandler;
+
+        float timeout = 15f;
+        float elapsed = 0f;
+        while (!recognitionDone && elapsed < timeout)
+        {
+            if (cancellationToken.IsCancellationRequested)
+            {
+                onDebugSpeechInput -= debugHandler;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+                DisposeDictation(dictation);
+#endif
+                return;
+            }
+            elapsed += Time.deltaTime;
+            await Awaitable.NextFrameAsync();
+        }
+
+        onDebugSpeechInput -= debugHandler;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+        DisposeDictation(dictation);
+#endif
+
+        if (string.IsNullOrEmpty(finalResult))
+        {
+            failedAttempts++;
+            Log($"No speech detected (timeout). Failed attempts: {failedAttempts}");
+            ConversationUI.Instance.ShowFail(Mathf.Min(failedAttempts, 3));
+            if (failedAttempts >= 3)
+            {
+                await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
+                if (cancellationToken.IsCancellationRequested) return;
+                StopConvo();
+            }
+            return;
+        }
+
+        if (PhraseMatches(finalResult, line.text))
+        {
+            ConversationUI.Instance.ShowSuccess();
+            xpToReward += 3f - failedAttempts;
+            await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
+            if (cancellationToken.IsCancellationRequested) return;
+            MoveToNextLineOfDialogue();
+        }
+        else
+        {
+            failedAttempts++;
+            ConversationUI.Instance.ShowFail(Mathf.Min(failedAttempts, 3));
+            ConversationUI.Instance.ShowPartialPhrase(line.text, finalResult);
+            Log($"{failedAttempts} failed attempts.");
+            if (failedAttempts >= 3)
+            {
+                await Awaitable.WaitForSecondsAsync(3f, cancellationToken);
+                if (cancellationToken.IsCancellationRequested) return;
+                StopConvo();
+            }
+        }
+    }
+
+    private static bool PhraseMatches(string recognized, string reference)
+    {
+        string recNorm = TextUtils.NormalizeAccents(recognized.Trim().TrimEnd('.'));
+        string refNorm = TextUtils.NormalizeAccents(reference.Trim());
+        if (recNorm == refNorm) return true;
+
+        string[] recWords = recNorm.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        string[] refWords = refNorm.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        if (refWords.Length == 0) return false;
+
+        int matched = 0;
+        foreach (string rw in refWords)
+        {
+            foreach (string rr in recWords)
+            {
+                if (rw == rr) { matched++; break; }
+            }
+        }
+        return (float)matched / refWords.Length >= 0.7f;
+    }
+
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
+    private static void DisposeDictation(DictationRecognizer dictation)
+    {
+        if (dictation == null) return;
+        try
+        {
+            if (dictation.Status == SpeechSystemStatus.Running)
+                dictation.Stop();
+            dictation.Dispose();
+        }
+        catch { }
+    }
+#endif
+#endif
 
    protected void StopConvo()
     {

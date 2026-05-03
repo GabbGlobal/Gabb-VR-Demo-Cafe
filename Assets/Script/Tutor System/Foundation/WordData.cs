@@ -7,9 +7,11 @@ public class WordData : ScriptableObject
 {
     [SerializeField] private string word;
     [SerializeField] private GrammaticalGender gender;
+    [SerializeField] private AudioClip pronunciationAudio;
 
     public string Word => word;
     public GrammaticalGender Gender => gender;
+    public AudioClip PronunciationAudio => pronunciationAudio;
 
     public string GetDefiniteArticle()
     {

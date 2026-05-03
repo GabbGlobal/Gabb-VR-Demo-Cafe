@@ -52,6 +52,7 @@ public class AzureSpeechRecognizer : MonoBehaviour
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private async void Start()
@@ -91,6 +92,15 @@ public class AzureSpeechRecognizer : MonoBehaviour
         {
             if (!canListen) return;
             SetIndicatorListening();
+            if (e.Result.Reason == ResultReason.RecognizingSpeech)
+            {
+                string partialText = CleanRecognizedText(e.Result.Text);
+                mainThreadQueue.Enqueue(() =>
+                {
+                    var wordFlow = FindFirstObjectByType<WordFlowManager>();
+                    if (wordFlow != null) wordFlow.ShowPartialRecognition(partialText);
+                });
+            }
         };
 
         recognizer.Recognized += (s, e) =>
