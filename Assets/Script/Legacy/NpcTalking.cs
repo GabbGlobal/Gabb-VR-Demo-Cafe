@@ -24,6 +24,7 @@ public class NpcTalking : MonoBehaviour
     public AudioSource speechAudioSource;
     public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
     public static NpcTalking previousNpcTalking = null;
+    public static event System.Action<float, string> OnSpeechAttemptScored;
     bool hasFinishedDialogueAndNotLeftAreaYet = false;
     public static LineOfDialogue GetCurrentLineOfDialogueGlobal()
     {
@@ -238,11 +239,12 @@ public class NpcTalking : MonoBehaviour
 
         bool recordingDone = false;
         bool debugDone = false;
+        bool hintPlaying = false;
         string debugResult = null;
         float speechTime = 0f;
         int lastWordIdx = -1;
 
-        Action<byte[]> onMicDone = (_) => { recordingDone = true; };
+        Action<byte[]> onMicDone = (_) => { if (!hintPlaying) recordingDone = true; };
         mic.OnComplete += onMicDone;
 
         Action<string> debugHandler = (text) =>
@@ -251,6 +253,20 @@ public class NpcTalking : MonoBehaviour
             debugDone = true;
         };
         onDebugSpeechInput += debugHandler;
+
+        Action onHintStart = () =>
+        {
+            hintPlaying = true;
+            if (mic.IsRecording) mic.StopRecording();
+        };
+        Action onHintEnd = () =>
+        {
+            hintPlaying = false;
+            recordingDone = false;
+            mic.StartRecording();
+        };
+        ConversationUI.OnHintStarted += onHintStart;
+        ConversationUI.OnHintEnded += onHintEnd;
 
         mic.StartRecording();
         Log($"Recording for: \"{line.text}\" ({refWords.Length} words, ~{estimatedPhraseDuration:F1}s)");
@@ -261,11 +277,13 @@ public class NpcTalking : MonoBehaviour
             {
                 mic.OnComplete -= onMicDone;
                 onDebugSpeechInput -= debugHandler;
+                ConversationUI.OnHintStarted -= onHintStart;
+                ConversationUI.OnHintEnded -= onHintEnd;
                 if (mic.IsRecording) mic.StopRecording();
                 return;
             }
 
-            if (mic.IsRecording && mic.CurrentVolume >= speakingThreshold)
+            if (!hintPlaying && mic.IsRecording && mic.CurrentVolume >= speakingThreshold)
             {
                 speechTime += Time.deltaTime;
                 float progress = Mathf.Clamp01(speechTime / estimatedPhraseDuration);
@@ -282,24 +300,35 @@ public class NpcTalking : MonoBehaviour
 
         mic.OnComplete -= onMicDone;
         onDebugSpeechInput -= debugHandler;
+        ConversationUI.OnHintStarted -= onHintStart;
+        ConversationUI.OnHintEnded -= onHintEnd;
         if (mic.IsRecording) mic.StopRecording();
 
         HighlightWordsUpTo(refWords, refWords.Length - 1);
 
         float refDuration = (line.audioClip != null) ? line.audioClip.length : estimatedPhraseDuration;
         var engagement = WordProgressEstimator.GradeEngagement(speechTime, refDuration, refWords.Length);
-        Log($"Score: speech={speechTime:F1}s engagement={engagement.overallScore:P0}");
+        float accuracy = WordProgressEstimator.CalculateAccuracy(speechTime, refDuration, engagement.passed);
+        Log($"Score: speech={speechTime:F1}s engagement={engagement.overallScore:P0} accuracy={accuracy:F0}%");
 
         if (debugDone && !string.IsNullOrEmpty(debugResult))
         {
             var grade = PhraseGrader.Grade(debugResult, line.text);
             ConversationUI.Instance.ShowGradeResult(grade);
+            accuracy = grade.accuracy * 100f;
         }
 
-        // Always advance — show brief success feedback then move on
-        ConversationUI.Instance.ShowSuccess();
-        xpToReward += Mathf.Max(0f, 3f - failedAttempts);
+        OnSpeechAttemptScored?.Invoke(accuracy, line.text);
+
+        // Feed XP into Player system (modern) alongside legacy ExperienceUI
+        float lineXP = Mathf.Max(0f, 3f - failedAttempts);
+        xpToReward += lineXP;
+        var localPlayer = GameManager.Instance?.LocalPlayer;
+        if (localPlayer != null && localPlayer.XPComponent != null)
+            localPlayer.XPComponent.AddXP(lineXP);
+
         failedAttempts = 0;
+        ConversationUI.Instance.ShowSuccess();
         await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
         if (cancellationToken.IsCancellationRequested) return;
         MoveToNextLineOfDialogue();

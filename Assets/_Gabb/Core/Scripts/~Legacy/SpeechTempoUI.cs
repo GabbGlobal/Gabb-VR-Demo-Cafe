@@ -30,9 +30,8 @@ public class SpeechTempoUI : MonoBehaviour
 
 
     void UpdateAudioMixer() {
-        // AudioSource.pitch affects both tempo and pitch,
-        // but we only want to increase speech tempo,
-        // so we counter-shift the pitch via Audio Mixer
-        speechMixerGroup.audioMixer.SetFloat(AUDIOMIXER_PITCH_FLOAT_KEY, 1f / SpeechTempoMultiplier);
+        // Unity's built-in Pitch Shifter sounds robotic. Disable it —
+        // slightly deeper voice at slower tempo sounds more natural.
+        speechMixerGroup.audioMixer.SetFloat(AUDIOMIXER_PITCH_FLOAT_KEY, 1f);
     }
 }

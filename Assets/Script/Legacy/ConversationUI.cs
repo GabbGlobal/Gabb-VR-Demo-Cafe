@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Video;
+using System;
 using System.Threading;
 
 public class ConversationUI : MonoBehaviour
 {
+    public static event Action OnHintStarted;
+    public static event Action OnHintEnded;
     [SerializeField] private float yOffset;
     public TMP_Text npcDialogueText;
     public TMP_Text playerDialogueText;
@@ -132,6 +135,7 @@ public class ConversationUI : MonoBehaviour
         }
 
         videoCancellation = new CancellationTokenSource();
+        OnHintStarted?.Invoke();
         ResetVideo();
         videoPlayer.gameObject.SetActive(true);
 
@@ -139,7 +143,7 @@ public class ConversationUI : MonoBehaviour
         videoPlayer.Prepare();
         while (!videoPlayer.isPrepared)
         {
-            if (videoCancellation.IsCancellationRequested) { return; }
+            if (videoCancellation.IsCancellationRequested) { OnHintEnded?.Invoke(); return; }
             await Awaitable.NextFrameAsync();
         }
         videoSurface.enabled = true;
@@ -147,10 +151,11 @@ public class ConversationUI : MonoBehaviour
         // wait for video to finish
         while (videoPlayer.isPlaying)
         {
-            if (videoCancellation.IsCancellationRequested) { return; }
+            if (videoCancellation.IsCancellationRequested) { OnHintEnded?.Invoke(); return; }
             await Awaitable.NextFrameAsync();
         }
         ResetVideo(); // hide video player again
+        OnHintEnded?.Invoke();
     }
 
 

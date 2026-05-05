@@ -19,7 +19,14 @@ public class SessionTelemetryManager : MonoBehaviour
     private Player player;
     private bool sessionEnded;
 
-    private async void Start()
+    public static SessionTelemetryManager Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void Start()
     {
         if (apiClient == null || config == null)
         {
@@ -29,7 +36,11 @@ public class SessionTelemetryManager : MonoBehaviour
         }
 
         sessionApi = new SessionApiService(apiClient);
-        await apiClient.WarmUpAsync();
+    }
+
+    public void StartSession()
+    {
+        if (CurrentSession != null) return;
         BeginSession();
     }
 
@@ -106,7 +117,7 @@ public class SessionTelemetryManager : MonoBehaviour
     private void HandleSpeechAttemptScored(float accuracy, string referenceText)
     {
         CurrentSession.RecordAttemptWithScore(accuracy);
-        CurrentSession.Xp += 3f;
+        CurrentSession.Xp += 3f * (accuracy / 100f);
 
         if (accuracy >= 50f && !string.IsNullOrEmpty(referenceText))
             CurrentSession.RecordWordsFromPhrase(referenceText);

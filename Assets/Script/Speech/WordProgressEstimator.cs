@@ -44,4 +44,21 @@ public static class WordProgressEstimator
             passed = overall >= passThreshold
         };
     }
+
+    // fast + pass = 100%, fastish + pass ~75%, slow + pass = 50%, fail = 0-25%
+    public static float CalculateAccuracy(float speechTime, float refDuration, bool passed)
+    {
+        if (!passed)
+        {
+            if (speechTime <= 0.3f) return 0f;
+            float effort = refDuration > 0f ? Math.Min(speechTime / refDuration, 1f) : 0f;
+            return effort * 25f;
+        }
+
+        if (refDuration <= 0f) return 100f;
+        float timeRatio = speechTime / refDuration;
+        if (timeRatio <= 1f) return 100f;
+        if (timeRatio >= 3f) return 65f;
+        return 100f - (timeRatio - 1f) * 17.5f;
+    }
 }

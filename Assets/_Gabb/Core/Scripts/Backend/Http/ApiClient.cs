@@ -11,11 +11,11 @@ public class ApiClient : MonoBehaviour
 
     public bool IsConnected { get; private set; }
 
-    public async Task<bool> WarmUpAsync()
+    public async Task<bool> WarmUpAsync(float timeoutOverride = 0f)
     {
         string url = BuildUrl(config.apiBaseUrl, "/health");
         using var request = UnityWebRequest.Get(url);
-        request.timeout = Mathf.CeilToInt(config.requestTimeoutSeconds);
+        request.timeout = Mathf.CeilToInt(timeoutOverride > 0f ? timeoutOverride : config.requestTimeoutSeconds);
 
         try
         {
@@ -34,7 +34,7 @@ public class ApiClient : MonoBehaviour
         }
     }
 
-    public async Task<TRes> PostAsync<TReq, TRes>(string endpoint, TReq body)
+    public async Task<TRes> PostAsync<TReq, TRes>(string endpoint, TReq body, float timeoutOverride = 0f)
         where TRes : class
     {
         string url = BuildUrl(config.apiBaseUrl, endpoint);
@@ -47,7 +47,7 @@ public class ApiClient : MonoBehaviour
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(jsonBody));
         request.downloadHandler = new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        request.timeout = Mathf.CeilToInt(config.requestTimeoutSeconds);
+        request.timeout = Mathf.CeilToInt(timeoutOverride > 0f ? timeoutOverride : config.requestTimeoutSeconds);
 
         try
         {
