@@ -87,7 +87,7 @@ public class SpeechAceClient : MonoBehaviour
 
         var result = new SpeechAceResult
         {
-            overallScore = ts.quality_score,
+            overallScore = ts.speechace_score != null ? ts.speechace_score.pronunciation : ts.quality_score,
             referenceText = referenceText
         };
 
@@ -119,6 +119,12 @@ public class SpeechAceClient : MonoBehaviour
     {
         public float quality_score;
         public WordScore[] word_score_list;
+        public SpeechAceScore speechace_score;
+    }
+
+    [Serializable] private class SpeechAceScore
+    {
+        public float pronunciation;
     }
 
     [Serializable] private class WordScore

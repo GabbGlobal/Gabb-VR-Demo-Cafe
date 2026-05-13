@@ -330,8 +330,10 @@ public class NpcTalking : MonoBehaviour
             {
                 var gradeResult = SpeechAceToGrade(scoreResult);
                 ConversationUI.Instance.ShowGradeResult(gradeResult);
-                accuracy = scoreResult.overallScore;
-                Log($"[Phase2] SpeechAce: {accuracy:F0}% ({gradeResult.matchedCount}/{gradeResult.totalWords} words passed)");
+                accuracy = scoreResult.overallScore > 0f
+                    ? scoreResult.overallScore
+                    : gradeResult.accuracy * 100f;
+                Log($"[Phase2] SpeechAce: {accuracy:F0}% ({gradeResult.matchedCount}/{gradeResult.totalWords} words) [raw={scoreResult.overallScore:F0}]");
                 await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
                 if (cancellationToken.IsCancellationRequested) return;
             }
