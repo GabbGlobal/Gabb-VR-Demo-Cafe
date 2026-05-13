@@ -29,6 +29,12 @@ public class JoinView : MonoBehaviour
 
         vrKeyboard.MaxLength = 8;
         vrKeyboard.OnTextChanged += OnTextChanged;
+
+#if !VR_BUILD
+        vrKeyboard.gameObject.SetActive(false);
+        foreach (char c in "GMW7CB9S")
+            vrKeyboard.TypeChar(c);
+#endif
     }
 
     private void OnDestroy()

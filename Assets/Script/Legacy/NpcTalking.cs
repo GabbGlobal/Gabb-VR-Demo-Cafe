@@ -202,7 +202,6 @@ public class NpcTalking : MonoBehaviour
                 }
         }
         if (cancellationToken.IsCancellationRequested) { return; } // end early
-        Debug.Log("OK TIME FOR NEXT");
     }
 
     protected void MoveToNextLineOfDialogue()
