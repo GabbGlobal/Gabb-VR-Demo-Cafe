@@ -31,6 +31,12 @@ public class JoinView : MonoBehaviour
         vrKeyboard.OnTextChanged += OnTextChanged;
     }
 
+    private void OnDestroy()
+    {
+        if (vrKeyboard != null)
+            vrKeyboard.OnTextChanged -= OnTextChanged;
+    }
+
     private void OnTextChanged(string raw)
     {
         codeDisplayText.text = FormatCode(raw);

@@ -243,8 +243,9 @@ public class NpcTalking : MonoBehaviour
         string debugResult = null;
         float speechTime = 0f;
         int lastWordIdx = -1;
+        byte[] capturedWav = null;
 
-        Action<byte[]> onMicDone = (_) => { if (!hintPlaying) recordingDone = true; };
+        Action<byte[]> onMicDone = (wav) => { capturedWav = wav; if (!hintPlaying) recordingDone = true; };
         mic.OnComplete += onMicDone;
 
         Action<string> debugHandler = (text) =>
@@ -306,10 +307,11 @@ public class NpcTalking : MonoBehaviour
 
         HighlightWordsUpTo(refWords, refWords.Length - 1);
 
+        // Phase 1: Immediate cadence-based score
         float refDuration = (line.audioClip != null) ? line.audioClip.length : estimatedPhraseDuration;
         var engagement = WordProgressEstimator.GradeEngagement(speechTime, refDuration, refWords.Length);
         float accuracy = WordProgressEstimator.CalculateAccuracy(speechTime, refDuration, engagement.passed);
-        Log($"Score: speech={speechTime:F1}s engagement={engagement.overallScore:P0} accuracy={accuracy:F0}%");
+        Log($"[Phase1] Cadence: speech={speechTime:F1}s engagement={engagement.overallScore:P0} accuracy={accuracy:F0}%");
 
         if (debugDone && !string.IsNullOrEmpty(debugResult))
         {
@@ -318,9 +320,30 @@ public class NpcTalking : MonoBehaviour
             accuracy = grade.accuracy * 100f;
         }
 
+        // Phase 2: SpeechAce pronunciation scoring (async refinement)
+        var speechAce = SpeechAceClient.Instance;
+        if (speechAce != null && speechAce.IsAvailable && capturedWav != null && capturedWav.Length > 0)
+        {
+            Log("[Phase2] Sending audio to SpeechAce...");
+            var scoreResult = await speechAce.ScoreAsync(capturedWav, line.text);
+
+            if (scoreResult != null && scoreResult.words != null)
+            {
+                var gradeResult = SpeechAceToGrade(scoreResult);
+                ConversationUI.Instance.ShowGradeResult(gradeResult);
+                accuracy = scoreResult.overallScore;
+                Log($"[Phase2] SpeechAce: {accuracy:F0}% ({gradeResult.matchedCount}/{gradeResult.totalWords} words passed)");
+                await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
+                if (cancellationToken.IsCancellationRequested) return;
+            }
+            else
+            {
+                Log("[Phase2] SpeechAce returned null — staying on cadence score.");
+            }
+        }
+
         OnSpeechAttemptScored?.Invoke(accuracy, line.text);
 
-        // Feed XP into Player system (modern) alongside legacy ExperienceUI
         float lineXP = Mathf.Max(0f, 3f - failedAttempts);
         xpToReward += lineXP;
         var localPlayer = GameManager.Instance?.LocalPlayer;
@@ -345,6 +368,32 @@ public class NpcTalking : MonoBehaviour
             if (i < refWords.Length - 1) sb.Append(' ');
         }
         ConversationUI.Instance.playerDialogueText.text = sb.ToString();
+    }
+
+    private static PhraseGrader.GradeResult SpeechAceToGrade(SpeechAceResult result)
+    {
+        const float passThreshold = 50f;
+        var words = new PhraseGrader.WordResult[result.words.Length];
+        int matched = 0;
+        for (int i = 0; i < result.words.Length; i++)
+        {
+            bool passed = result.words[i].qualityScore >= passThreshold;
+            if (passed) matched++;
+            words[i] = new PhraseGrader.WordResult
+            {
+                referenceWord = result.words[i].word,
+                matched = passed
+            };
+        }
+        float acc = result.words.Length > 0 ? (float)matched / result.words.Length : 0f;
+        return new PhraseGrader.GradeResult
+        {
+            words = words,
+            matchedCount = matched,
+            totalWords = result.words.Length,
+            accuracy = acc,
+            passed = result.overallScore >= 50f
+        };
     }
 #endif
 

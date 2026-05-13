@@ -12,4 +12,5 @@ public class BackendConfig : ScriptableObject
     public string joinCode = "";
     public string defaultLanguage = "Spanish";
     public float heartbeatIntervalSeconds = 15f;
+
 }

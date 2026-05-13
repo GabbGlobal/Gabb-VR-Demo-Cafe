@@ -65,7 +65,7 @@ public static class PhraseGrader
             var w = result.words[i];
             sb.Append(w.matched
                 ? $"<color=green>{w.referenceWord}</color>"
-                : $"<color=red>{w.referenceWord}</color>");
+                : w.referenceWord);
             if (i < result.words.Length - 1) sb.Append(' ');
         }
         return sb.ToString();

@@ -14,11 +14,15 @@ public class CloudSpeechRecognizer : MonoBehaviour
     [SerializeField] private string language = "es";
     [SerializeField] private string model = "whisper-1";
 
+    [Header("Settings")]
+    [Tooltip("Enable to send recordings to Whisper for word-level grading after cadence check")]
+    public bool useWhisper = true;
+
     [Header("Custom Endpoint (leave blank to use Whisper directly)")]
     [Tooltip("If set, audio is POSTed here instead. Expects JSON { text: '...' } response.")]
     [SerializeField] private string customEndpoint;
 
-    public bool HasApiKey => !string.IsNullOrEmpty(apiKey);
+    public bool IsAvailable => useWhisper && !string.IsNullOrEmpty(apiKey);
 
     void Awake()
     {

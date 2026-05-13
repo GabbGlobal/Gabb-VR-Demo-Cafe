@@ -188,7 +188,7 @@ public class ConversationUI : MonoBehaviour
             {
                 sb.Append(refNorm == recWords[i]
                     ? $"<color=green>{refWords[i]}</color>"
-                    : $"<color=red>{refWords[i]}</color>");
+                    : refWords[i]);
             }
             else
             {
@@ -215,8 +215,7 @@ public class ConversationUI : MonoBehaviour
         playerDialogueText.text = PhraseGrader.ToColoredRichText(result);
         playerDialogueText.color = Color.white;
         int pct = Mathf.RoundToInt(result.accuracy * 100f);
-        string color = result.passed ? "#4CAF50" : "#F44336";
-        advisorText.text = $"<color={color}>{result.matchedCount}/{result.totalWords} words ({pct}%)</color>";
+        advisorText.text = $"{result.matchedCount}/{result.totalWords} words ({pct}%)";
     }
 
     public void ResetText()
