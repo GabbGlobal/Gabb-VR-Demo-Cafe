@@ -161,10 +161,10 @@ public class ConversationUI : MonoBehaviour
 
     public void ShowSuccess()
     {
-        playerDialogueText.color = successColor;
+        playerDialogueText.color = Color.white;
         advisorText.text = "Well done! Let's hear what they have to say next.";
         audioSource.PlayOneShot(successSound);
-        tutorialDone = true; // finish tutorial after succeeding at 1 line of dialogue
+        tutorialDone = true;
     }
 
     public void ShowFail(int failedAttempts)

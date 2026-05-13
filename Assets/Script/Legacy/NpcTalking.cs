@@ -333,6 +333,10 @@ public class NpcTalking : MonoBehaviour
                 accuracy = scoreResult.overallScore > 0f
                     ? scoreResult.overallScore
                     : gradeResult.accuracy * 100f;
+                var wordLog = new System.Text.StringBuilder("[Phase2] Per-word: ");
+                foreach (var w in scoreResult.words)
+                    wordLog.Append($"{w.word}={w.qualityScore:F0} ");
+                Log(wordLog.ToString());
                 Log($"[Phase2] SpeechAce: {accuracy:F0}% ({gradeResult.matchedCount}/{gradeResult.totalWords} words) [raw={scoreResult.overallScore:F0}]");
                 await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
                 if (cancellationToken.IsCancellationRequested) return;
@@ -364,7 +368,7 @@ public class NpcTalking : MonoBehaviour
         for (int i = 0; i < refWords.Length; i++)
         {
             sb.Append(i <= upToIndex
-                ? $"<color=green>{refWords[i]}</color>"
+                ? $"<color=#60a5fa>{refWords[i]}</color>"
                 : refWords[i]);
             if (i < refWords.Length - 1) sb.Append(' ');
         }
@@ -373,7 +377,7 @@ public class NpcTalking : MonoBehaviour
 
     private static PhraseGrader.GradeResult SpeechAceToGrade(SpeechAceResult result)
     {
-        const float passThreshold = 50f;
+        const float passThreshold = 80f;
         var words = new PhraseGrader.WordResult[result.words.Length];
         int matched = 0;
         for (int i = 0; i < result.words.Length; i++)
