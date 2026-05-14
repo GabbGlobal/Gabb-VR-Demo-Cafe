@@ -109,6 +109,7 @@ public class SessionTelemetryManager : MonoBehaviour
     {
         bool passed = result.Grade == PronunciationGrade.Pass || result.Grade == PronunciationGrade.SoftPass;
         CurrentSession.RecordAttemptWithScore(passed ? result.pronunciationScore : 0f);
+        CurrentSession.RecordPronunciationScore(result.pronunciationScore);
 
         if (passed && !string.IsNullOrEmpty(result.referenceText))
             CurrentSession.RecordWordsFromPhrase(result.referenceText);
@@ -117,6 +118,7 @@ public class SessionTelemetryManager : MonoBehaviour
     private void HandleSpeechAttemptScored(float accuracy, string referenceText)
     {
         CurrentSession.RecordAttemptWithScore(accuracy);
+        CurrentSession.RecordPronunciationScore(accuracy);
         CurrentSession.Xp += 3f * (accuracy / 100f);
 
         if (accuracy >= 50f && !string.IsNullOrEmpty(referenceText))
