@@ -50,6 +50,31 @@ public class NpcTalking : MonoBehaviour
         playerTriggerZone.onPlayerExit.AddListener(() => { hasFinishedDialogueAndNotLeftAreaYet = false; }); // reset convo block once the player leaves the trigger area.
     }
 
+    void OnEnable()
+    {
+        AdaptationBus.OnAdaptationReceived += HandleDifficultyAdaptation;
+    }
+
+    void OnDisable()
+    {
+        AdaptationBus.OnAdaptationReceived -= HandleDifficultyAdaptation;
+    }
+
+    static void HandleDifficultyAdaptation(SessionEventResponse response)
+    {
+        var dir = response.Adaptations?.Difficulty;
+        if (string.IsNullOrEmpty(dir) || dir == "maintain") return;
+
+        var prev = CurrentDifficulty;
+        if (dir == "increase" && CurrentDifficulty < DialogueDifficulty.Expert)
+            CurrentDifficulty++;
+        else if (dir == "decrease" && CurrentDifficulty > DialogueDifficulty.Easy)
+            CurrentDifficulty--;
+
+        if (CurrentDifficulty != prev)
+            Debug.Log($"[NpcTalking] Difficulty {prev} -> {CurrentDifficulty}");
+    }
+
     CancellationTokenSource convoCancellation;
     void Update()
     {
