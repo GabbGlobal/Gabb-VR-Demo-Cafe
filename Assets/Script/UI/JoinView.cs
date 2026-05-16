@@ -17,6 +17,18 @@ public class JoinView : MonoBehaviour
     private bool isSubmitting;
     private AutoHandPlayer handPlayer;
 
+    public bool testSubmit;
+
+    private void Update()
+    {
+        if (testSubmit)
+        {
+            testSubmit = false;
+            Debug.LogError("Submitting");
+            OnSubmit("GMW7CB9S");
+        }
+    }
+
     private void Start()
     {
         handPlayer = FindFirstObjectByType<AutoHandPlayer>();
@@ -32,8 +44,6 @@ public class JoinView : MonoBehaviour
 
 #if !VR_BUILD
         vrKeyboard.gameObject.SetActive(false);
-        foreach (char c in "GMW7CB9S")
-            vrKeyboard.TypeChar(c);
 #endif
     }
 
@@ -62,7 +72,7 @@ public class JoinView : MonoBehaviour
 
         isSubmitting = true;
         vrKeyboard.gameObject.SetActive(false);
-        loadingObject?.SetActive(true);
+        if(loadingObject) loadingObject?.SetActive(true);
         infoText.text = "Connecting...";
         codeDisplayText.text = FormatCode(code);
 
@@ -89,7 +99,7 @@ public class JoinView : MonoBehaviour
         if (response != null)
         {
             infoText.text = "Joined!";
-            loadingObject?.SetActive(false);
+            if(loadingObject) loadingObject?.SetActive(false);
             SessionTelemetryManager.Instance?.StartSession();
             Dismiss();
         }
@@ -102,7 +112,7 @@ public class JoinView : MonoBehaviour
     private void ShowError(string message)
     {
         isSubmitting = false;
-        loadingObject?.SetActive(false);
+        if(loadingObject) loadingObject?.SetActive(false);
         infoText.text = message;
         vrKeyboard.gameObject.SetActive(true);
         vrKeyboard.Clear();
