@@ -25,6 +25,7 @@ public class NpcTalking : MonoBehaviour
     public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
     public static NpcTalking previousNpcTalking = null;
     public static event System.Action<float, string> OnSpeechAttemptScored;
+    public static DialogueDifficulty CurrentDifficulty = DialogueDifficulty.Medium;
     bool hasFinishedDialogueAndNotLeftAreaYet = false;
     public static LineOfDialogue GetCurrentLineOfDialogueGlobal()
     {
@@ -128,8 +129,10 @@ public class NpcTalking : MonoBehaviour
    protected virtual async Awaitable HandleLineOfDialogue(int lineIndex, CancellationToken cancellationToken)
     {
         var line = dialogue.linesOfDialogue[lineIndex];
+        var lineText = line.GetText(CurrentDifficulty);
+        var lineAudio = line.GetAudioClip(CurrentDifficulty);
         Log($"Line:{line.ToString()}\nFailed Attempts:{failedAttempts}");
-        ConversationUI.Instance.DisplayLineOfDialogue(line); // show current line of dialogue on the UI
+        ConversationUI.Instance.DisplayLineOfDialogue(line, CurrentDifficulty);
 
         switch (line.speaker)
         {
@@ -138,7 +141,7 @@ public class NpcTalking : MonoBehaviour
                 {
                     // play npc talking animation
                     animator.SetTrigger("Talk");
-                    if (line.audioClip == null)
+                    if (lineAudio == null)
                     {
                         Debug.LogWarning($"Missing audio clip for NPC dialogue at line {line} on {gameObject.name}", gameObject);
                     }
@@ -146,7 +149,7 @@ public class NpcTalking : MonoBehaviour
                     {
                         // play speech audio
                         speechAudioSource.Stop();
-                        speechAudioSource.clip = line.audioClip;
+                        speechAudioSource.clip = lineAudio;
                         speechAudioSource.Play();
                         // wait for the NPC to finish speaking in a way that handles tempo changes
                         while (speechAudioSource.isPlaying)
@@ -170,7 +173,7 @@ public class NpcTalking : MonoBehaviour
                         MoveToNextLineOfDialogue();
                         break;
                     }
-                    PronunciationAssessor.AssessmentResult assessmentTask = await PronunciationAssessor.Instance.AssessPronunciation(line.text);
+                    PronunciationAssessor.AssessmentResult assessmentTask = await PronunciationAssessor.Instance.AssessPronunciation(lineText);
                     if (cancellationToken.IsCancellationRequested) { return; }
                     if (assessmentTask?.recognition_status == "success")
                     {
@@ -219,6 +222,9 @@ public class NpcTalking : MonoBehaviour
 
     private async Awaitable HandlePlayerLineWithDictation(LineOfDialogue line, CancellationToken cancellationToken)
     {
+        var lineText = line.GetText(CurrentDifficulty);
+        var lineAudio = line.GetAudioClip(CurrentDifficulty);
+
         var mic = FindFirstObjectByType<MicRecorder>();
         if (mic == null)
         {
@@ -227,7 +233,7 @@ public class NpcTalking : MonoBehaviour
             Log("Auto-created MicRecorder.");
         }
 
-        string[] refWords = line.text.Split(' ');
+        string[] refWords = lineText.Split(' ');
         float estimatedPhraseDuration = refWords.Length * 0.25f;
         const float speakingThreshold = 0.015f;
         const float settleDelay = 0.5f;
@@ -269,7 +275,7 @@ public class NpcTalking : MonoBehaviour
         ConversationUI.OnHintEnded += onHintEnd;
 
         mic.StartRecording();
-        Log($"Recording for: \"{line.text}\" ({refWords.Length} words, ~{estimatedPhraseDuration:F1}s)");
+        Log($"Recording for: \"{lineText}\" ({refWords.Length} words, ~{estimatedPhraseDuration:F1}s)");
 
         while (!recordingDone && !debugDone)
         {
@@ -307,14 +313,14 @@ public class NpcTalking : MonoBehaviour
         HighlightWordsUpTo(refWords, refWords.Length - 1);
 
         // Phase 1: Immediate cadence-based score
-        float refDuration = (line.audioClip != null) ? line.audioClip.length : estimatedPhraseDuration;
+        float refDuration = (lineAudio != null) ? lineAudio.length : estimatedPhraseDuration;
         var engagement = WordProgressEstimator.GradeEngagement(speechTime, refDuration, refWords.Length);
         float accuracy = WordProgressEstimator.CalculateAccuracy(speechTime, refDuration, engagement.passed);
         Log($"[Phase1] Cadence: speech={speechTime:F1}s engagement={engagement.overallScore:P0} accuracy={accuracy:F0}%");
 
         if (debugDone && !string.IsNullOrEmpty(debugResult))
         {
-            var grade = PhraseGrader.Grade(debugResult, line.text);
+            var grade = PhraseGrader.Grade(debugResult, lineText);
             ConversationUI.Instance.ShowGradeResult(grade);
             accuracy = grade.accuracy * 100f;
         }
@@ -324,7 +330,7 @@ public class NpcTalking : MonoBehaviour
         if (speechAce != null && speechAce.IsAvailable && capturedWav != null && capturedWav.Length > 0)
         {
             Log("[Phase2] Sending audio to SpeechAce...");
-            var scoreResult = await speechAce.ScoreAsync(capturedWav, line.text);
+            var scoreResult = await speechAce.ScoreAsync(capturedWav, lineText);
 
             if (scoreResult != null && scoreResult.words != null)
             {
@@ -347,7 +353,7 @@ public class NpcTalking : MonoBehaviour
             }
         }
 
-        OnSpeechAttemptScored?.Invoke(accuracy, line.text);
+        OnSpeechAttemptScored?.Invoke(accuracy, lineText);
 
         float lineXP = Mathf.Max(0f, 3f - failedAttempts);
         xpToReward += lineXP;

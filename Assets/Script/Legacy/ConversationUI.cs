@@ -73,8 +73,9 @@ public class ConversationUI : MonoBehaviour
         transform.SetParent(null);
     }
 
-    public void DisplayLineOfDialogue(LineOfDialogue lineOfDialogue)
+    public void DisplayLineOfDialogue(LineOfDialogue lineOfDialogue, DialogueDifficulty difficulty)
     {
+        var displayText = lineOfDialogue.GetText(difficulty);
         tutorialNpcText.gameObject.SetActive(false);
         tutorialPlayerText.gameObject.SetActive(false);
         switch (lineOfDialogue.speaker)
@@ -85,7 +86,7 @@ public class ConversationUI : MonoBehaviour
                     hintButton.gameObject.SetActive(false); // hide hint button
                     ResetVideo();
                     ResetText(); // when speaking npc dialogue, clear the previous dialogue
-                    npcDialogueText.text = lineOfDialogue.text;
+                    npcDialogueText.text = displayText;
                     // tutorial
                     if (!tutorialDone) {
                         tutorialNpcText.gameObject.SetActive(true);
@@ -98,7 +99,7 @@ public class ConversationUI : MonoBehaviour
                 {
                     Debug.Log("PLAYER");
                     hintButton.gameObject.SetActive(true); // show hint button
-                    playerDialogueText.text = lineOfDialogue.text;
+                    playerDialogueText.text = displayText;
                     // tutorial
                     if (!tutorialDone) {
                         tutorialNpcText.gameObject.SetActive(false);
