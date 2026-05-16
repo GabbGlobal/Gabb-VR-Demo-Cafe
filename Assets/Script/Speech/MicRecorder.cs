@@ -17,8 +17,8 @@ public class MicRecorder : MonoBehaviour
     }
 
     [Header("Recording Settings")]
-    [SerializeField] private float silenceThreshold = 0.02f;
-    [SerializeField] private float silenceDuration = 2.0f;
+    [SerializeField] private float silenceThreshold = 0.01f;
+    [SerializeField] private float silenceDuration = 3.0f;
     [SerializeField] private float maxDuration = 15f;
     [SerializeField] private int sampleRate = 16000;
 

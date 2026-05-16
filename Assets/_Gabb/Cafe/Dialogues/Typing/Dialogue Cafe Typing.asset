@@ -17,40 +17,180 @@ MonoBehaviour:
     text: "Buenos d\xEDas. \xBFC\xF3mo est\xE1 hoy?"
     audioClip: {fileID: 8300000, guid: b259df3e975fc4a2db3124c77dc6c473, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Hola. \xBFC\xF3mo est\xE1?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Buenos d\xEDas. \xBFC\xF3mo est\xE1 hoy?"
+      audioClip: {fileID: 8300000, guid: b259df3e975fc4a2db3124c77dc6c473, type: 3}
+    - difficulty: 2
+      text: "Buenos d\xEDas. \xBFC\xF3mo le va el d\xEDa de hoy?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Buenos d\xEDas. \xBFQu\xE9 tal le est\xE1 yendo hoy por aqu\xED?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "Bien gracias, \xBFy t\xFA?"
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint1.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Bien, \xBFy t\xFA?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bien gracias, \xBFy t\xFA?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Muy bien, gracias. \xBFY t\xFA qu\xE9 tal?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "De maravilla, gracias por preguntar. \xBFY t\xFA c\xF3mo andas?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Lo estoy haciendo bien. \xBFSabes d\xF3nde est\xE1 la estaci\xF3n de autobuses?"
     audioClip: {fileID: 8300000, guid: 1939caf83b08f451b8664abafdbf2df5, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Estoy bien. \xBFD\xF3nde est\xE1 la estaci\xF3n de autobuses?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Lo estoy haciendo bien. \xBFSabes d\xF3nde est\xE1 la estaci\xF3n de autobuses?"
+      audioClip: {fileID: 8300000, guid: 1939caf83b08f451b8664abafdbf2df5, type: 3}
+    - difficulty: 2
+      text: "Me va bastante bien. \xBFDe casualidad sabes d\xF3nde queda la estaci\xF3n
+        de autobuses?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Aqu\xED andamos, no me quejo. Oye, \xBFde casualidad sabr\xE1s d\xF3nde
+        queda la estaci\xF3n de autobuses?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "S\xED, est\xE1 cerca. Est\xE1 al otro lado de la calle"
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint2.mp4
+    textVariants:
+    - difficulty: 0
+      text: "S\xED, est\xE1 cerca. Cruza la calle."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "S\xED, est\xE1 cerca. Est\xE1 al otro lado de la calle"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "S\xED, queda muy cerca de aqu\xED. Est\xE1 justo al otro lado de la calle."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "S\xED, claro, queda aqu\xED cerquita. Nom\xE1s cruzas la calle y ah\xED
+        la encuentras."
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Oh, eso no est\xE1 lejos. \xBFSon caros los billetes de autob\xFAs?"
     audioClip: {fileID: 8300000, guid: c8d35ef83463d46a797fb9b7422fa08e, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Oh, est\xE1 cerca. \xBFSon caros los billetes?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oh, eso no est\xE1 lejos. \xBFSon caros los billetes de autob\xFAs?"
+      audioClip: {fileID: 8300000, guid: c8d35ef83463d46a797fb9b7422fa08e, type: 3}
+    - difficulty: 2
+      text: "Ah, qu\xE9 bien, no queda nada lejos. \xBFY los billetes de autob\xFAs
+        son caros?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Ah, pues qu\xE9 conveniente que quede tan cerca. \xBFY qu\xE9 tal los
+        precios de los billetes, salen caros?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "No, son econ\xF3micos. Un billete cuesta dos d\xF3lares con veinticinco
       centavos."
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint3.mp4
+    textVariants:
+    - difficulty: 0
+      text: "No, son baratos. Cuestan dos d\xF3lares."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "No, son econ\xF3micos. Un billete cuesta dos d\xF3lares con veinticinco
+      centavos."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "No, para nada. Son bastante econ\xF3micos. Un billete cuesta dos d\xF3lares
+        con veinticinco centavos."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Qu\xE9 va, son bastante accesibles. Un billete te sale en apenas dos
+        d\xF3lares con veinticinco centavos."
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "No esta mal. \xBFC\xF3mo te mueves por la ciudad?"
     audioClip: {fileID: 8300000, guid: ae6241d8c15ee4ac29f8f25c9c3df7b7, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Est\xE1 bien. \xBFC\xF3mo vas por la ciudad?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "No esta mal. \xBFC\xF3mo te mueves por la ciudad?"
+      audioClip: {fileID: 8300000, guid: ae6241d8c15ee4ac29f8f25c9c3df7b7, type: 3}
+    - difficulty: 2
+      text: "No est\xE1 nada mal. \xBFY t\xFA c\xF3mo sueles moverte por la ciudad?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Vaya, eso no est\xE1 nada mal. \xBFY t\xFA c\xF3mo te las arreglas para
+        moverte por la ciudad?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: Conduzco mi bici.
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint4.mp4
+    textVariants:
+    - difficulty: 0
+      text: Uso mi bici.
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Conduzco mi bici.
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: Me muevo en bicicleta.
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: Suelo desplazarme en bicicleta.
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "\xA1Fresco!"
     audioClip: {fileID: 8300000, guid: b2ab2802eb601432eb451a1bbe3aa64c, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "\xA1Fresco!"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xA1Fresco!"
+      audioClip: {fileID: 8300000, guid: b2ab2802eb601432eb451a1bbe3aa64c, type: 3}
+    - difficulty: 2
+      text: "\xA1Qu\xE9 bien!"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xA1Qu\xE9 genial, me parece estupendo!"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "S\xED, es divertido y un buen ejercicio."
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint5.mp4
+    textVariants:
+    - difficulty: 0
+      text: "S\xED, es divertido y buen ejercicio."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "S\xED, es divertido y un buen ejercicio."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "S\xED, es bastante divertido y adem\xE1s es buen ejercicio."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "S\xED, la verdad es que resulta muy divertido y encima te mantienes en
+        forma."
+      audioClip: {fileID: 0}

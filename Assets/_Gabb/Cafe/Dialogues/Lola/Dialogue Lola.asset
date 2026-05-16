@@ -17,44 +17,192 @@ MonoBehaviour:
     text: "\xA1Hola! \xBFC\xF3mo est\xE1 usted hoy?"
     audioClip: {fileID: 8300000, guid: c0607e4bb759f423686c12aed971ad62, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "\xA1Hola! \xBFC\xF3mo est\xE1?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xA1Hola! \xBFC\xF3mo est\xE1 usted hoy?"
+      audioClip: {fileID: 8300000, guid: c0607e4bb759f423686c12aed971ad62, type: 3}
+    - difficulty: 2
+      text: "\xA1Hola, buenas tardes! \xBFC\xF3mo se encuentra usted hoy?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xA1Hola, qu\xE9 gusto verle! \xBFC\xF3mo se encuentra usted en este d\xEDa tan bonito?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "Bien gracias, \xBFy usted?"
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint1.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Bien, \xBFy usted?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bien gracias, \xBFy usted?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Muy bien, gracias por preguntar, \xBFy usted?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "De maravilla, gracias. \xBFY usted c\xF3mo anda?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "\xA1Estoy genial! Ma\xF1ana viajo a casa de mi hermana."
     audioClip: {fileID: 8300000, guid: 5bcf6eaf9af504f9f979bf3e445dfb14, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "\xA1Muy bien! Ma\xF1ana voy a ver a mi hermana."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xA1Estoy genial! Ma\xF1ana viajo a casa de mi hermana."
+      audioClip: {fileID: 8300000, guid: 5bcf6eaf9af504f9f979bf3e445dfb14, type: 3}
+    - difficulty: 2
+      text: "\xA1Estoy de maravilla! Ma\xF1ana salgo de viaje para visitar a mi hermana."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xA1Fenomenal! Ma\xF1ana me voy de viaje a visitar a mi hermana, que ya ten\xEDa
+        ganas."
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "\xA1Eso es genial! \xBFD\xF3nde vive?"
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint2.mp4
+    textVariants:
+    - difficulty: 0
+      text: "\xA1Qu\xE9 bien! \xBFD\xF3nde vive?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xA1Eso es genial! \xBFD\xF3nde vive?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "\xA1Qu\xE9 emocionante! \xBFEn d\xF3nde vive su hermana?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xA1Qu\xE9 maravilla! \xBFY en qu\xE9 ciudad vive su hermana, si no es indiscreci\xF3n?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: Ella vive en Boston.
     audioClip: {fileID: 8300000, guid: b8c9dc81d0bde46c8825b099d3f4b073, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: Ella vive en Boston.
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Ella vive en Boston.
+      audioClip: {fileID: 8300000, guid: b8c9dc81d0bde46c8825b099d3f4b073, type: 3}
+    - difficulty: 2
+      text: Mi hermana vive en Boston.
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Vive all\xE1 en Boston, lleva ya varios a\xF1os."
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "\xBFC\xF3mo te gusta viajar?"
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint3.mp4
+    textVariants:
+    - difficulty: 0
+      text: "\xBFC\xF3mo viaja usted?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xBFC\xF3mo te gusta viajar?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "\xBFY c\xF3mo prefiere usted viajar?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xBFY qu\xE9 medio de transporte prefiere para hacer ese viaje?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Me gusta viajar en avi\xF3n. Es r\xE1pido y f\xE1cil."
     audioClip: {fileID: 8300000, guid: c03d8a4457045446bb192a217903e27c, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Me gusta el avi\xF3n. Es r\xE1pido."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Me gusta viajar en avi\xF3n. Es r\xE1pido y f\xE1cil."
+      audioClip: {fileID: 8300000, guid: c03d8a4457045446bb192a217903e27c, type: 3}
+    - difficulty: 2
+      text: "Prefiero viajar en avi\xF3n porque es bastante r\xE1pido y c\xF3modo."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "La verdad es que prefiero el avi\xF3n, sobre todo porque es r\xE1pido y no
+        me complica la vida."
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "S\xED, pero es caro."
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint4.mp4
+    textVariants:
+    - difficulty: 0
+      text: "S\xED, pero es caro."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "S\xED, pero es caro."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "S\xED, eso s\xED, aunque puede ser bastante caro."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "S\xED, sin duda, aunque hay que reconocer que sale bastante caro."
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Eso es cierto. \xBFC\xF3mo te gusta viajar?"
     audioClip: {fileID: 8300000, guid: f445de88ee9db4c6b8c60e3ace41db69, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "S\xED. \xBFY usted?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Eso es cierto. \xBFC\xF3mo te gusta viajar?"
+      audioClip: {fileID: 8300000, guid: f445de88ee9db4c6b8c60e3ace41db69, type: 3}
+    - difficulty: 2
+      text: "Tiene usted raz\xF3n. \xBFY a usted c\xF3mo le gusta viajar?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "No le falta raz\xF3n. \xBFY usted, qu\xE9 prefiere a la hora de viajar?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "Me gusta tomar el autob\xFAs. Es econ\xF3mico."
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint5.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Me gusta el autob\xFAs. Es barato."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Me gusta tomar el autob\xFAs. Es econ\xF3mico."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Prefiero tomar el autob\xFAs porque es m\xE1s econ\xF3mico."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Yo suelo ir en autob\xFAs, la verdad, porque sale mucho m\xE1s econ\xF3mico."
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "\xA1Oh, deber\xEDas ir a decirle a Lola d\xF3nde est\xE1 la estaci\xF3n
       de autobuses!"
     audioClip: {fileID: 8300000, guid: cc32689769be84699bc1f847001a0e59, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "\xA1Ve a decirle a Lola d\xF3nde est\xE1 la estaci\xF3n!"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xA1Oh, deber\xEDas ir a decirle a Lola d\xF3nde est\xE1 la estaci\xF3n
+      de autobuses!"
+      audioClip: {fileID: 8300000, guid: cc32689769be84699bc1f847001a0e59, type: 3}
+    - difficulty: 2
+      text: "\xA1Entonces deber\xEDas ir a decirle a Lola d\xF3nde queda la estaci\xF3n
+        de autobuses!"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xA1Pues no dejes de ir a decirle a Lola d\xF3nde queda la estaci\xF3n
+        de autobuses, que le va a hacer falta!"
+      audioClip: {fileID: 0}

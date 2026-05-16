@@ -19,63 +19,206 @@ MonoBehaviour:
     hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Practica fonemas conmigo, \xBFQuieres?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Practica fonemas conmigo, \xBFQuieres?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Practica fonemas conmigo, \xBFQuieres?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Practica fonemas conmigo, \xBFQuieres?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "S\xED, est\xE1 bien."
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "S\xED, est\xE1 bien."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "S\xED, est\xE1 bien."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "S\xED, est\xE1 bien."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "S\xED, est\xE1 bien."
+      audioClip: {fileID: 0}
   - speaker: 0
     text: 'Repite conmigo: Casa'
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: 'Repite conmigo: Sol'
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: 'Repite conmigo: Casa'
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: 'Repite conmigo: Biblioteca'
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: 'Repite conmigo: Trabalenguas'
+      audioClip: {fileID: 0}
   - speaker: 1
     text: Casa
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Sol
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Casa
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: Biblioteca
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: Trabalenguas
+      audioClip: {fileID: 0}
   - speaker: 0
     text: 'Muy bien, ahora: interior'
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: 'Muy bien, ahora: Pan'
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: 'Muy bien, ahora: interior'
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: 'Muy bien, ahora: Refrigerador'
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Muy bien, ahora: Electrodom\xE9stico"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: interior
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Pan
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: interior
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: Refrigerador
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Electrodom\xE9stico"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: 'No esta mal. ahora: Estudiante'
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: 'No esta mal. ahora: Luz'
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: 'No esta mal. ahora: Estudiante'
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: 'No esta mal. ahora: Desarrollo'
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: 'No esta mal. ahora: Extraordinario'
+      audioClip: {fileID: 0}
   - speaker: 1
     text: Estudiante
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Luz
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Estudiante
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: Desarrollo
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: Extraordinario
+      audioClip: {fileID: 0}
   - speaker: 0
     text: 'No esta mal. ahora: Nariz'
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: 'No esta mal. ahora: Gato'
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: 'No esta mal. ahora: Nariz'
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: 'No esta mal. ahora: Ferrocarril'
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "No esta mal. ahora: Murci\xE9lago"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: Nariz
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Gato
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Nariz
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: Ferrocarril
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Murci\xE9lago"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: Muy buen trabajo
     audioClip: {fileID: 0}
     hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Muy buen trabajo
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Muy buen trabajo
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: Muy buen trabajo
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: Muy buen trabajo
+      audioClip: {fileID: 0}

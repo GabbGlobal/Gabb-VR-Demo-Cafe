@@ -17,56 +17,239 @@ MonoBehaviour:
     text: "Hola, \xBFqu\xE9 te gustar\xEDa tomar hoy?"
     audioClip: {fileID: 8300000, guid: e603a3fa12ca446a88d6596cc75c8519, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Hola, \xBFqu\xE9 quieres tomar?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Hola, \xBFqu\xE9 te gustar\xEDa tomar hoy?"
+      audioClip: {fileID: 8300000, guid: e603a3fa12ca446a88d6596cc75c8519, type: 3}
+    - difficulty: 2
+      text: "Buen d\xEDa, \xBFqu\xE9 te apetecer\xEDa tomar el d\xEDa de hoy?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Buenas, \xBFqu\xE9 te puedo ofrecer para tomar en esta ma\xF1ana tan bonita?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "\xBFQu\xE9 tipos de t\xE9 tienes?"
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint1.mp4
+    textVariants:
+    - difficulty: 0
+      text: "\xBFQu\xE9 t\xE9 tienes?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xBFQu\xE9 tipos de t\xE9 tienes?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "\xBFQu\xE9 variedades de t\xE9 manejan?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xBFMe podr\xEDas decir qu\xE9 opciones de t\xE9 tienen disponibles?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Nosotros tenemos t\xE9 negro y t\xE9 verde."
     audioClip: {fileID: 8300000, guid: cc38d09f8f7d343549ec2f2b81365381, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Tenemos t\xE9 negro y t\xE9 verde."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Nosotros tenemos t\xE9 negro y t\xE9 verde."
+      audioClip: {fileID: 8300000, guid: cc38d09f8f7d343549ec2f2b81365381, type: 3}
+    - difficulty: 2
+      text: "Contamos con t\xE9 negro y t\xE9 verde."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Mira, lo que manejamos ahorita es t\xE9 negro y t\xE9 verde."
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "\xBFPodr\xEDa darme un t\xE9 negro, por favor"
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint2.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Un t\xE9 negro, por favor."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xBFPodr\xEDa darme un t\xE9 negro, por favor"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "\xBFSer\xEDa posible que me diera un t\xE9 negro, por favor?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xBFMe har\xEDas el favor de prepararme un t\xE9 negro?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Claro, \xBFalgo para comer con eso? \xBFQuieres una galleta o un muffin?"
     audioClip: {fileID: 8300000, guid: 0c0d92f48c0b4403692593f24f459fd0, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "\xBFS\xED! \xBFQuieres comer algo? Tenemos galletas y muffins."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Claro, \xBFalgo para comer con eso? \xBFQuieres una galleta o un muffin?"
+      audioClip: {fileID: 8300000, guid: 0c0d92f48c0b4403692593f24f459fd0, type: 3}
+    - difficulty: 2
+      text: "Por supuesto, \xBFte gustar\xEDa acompa\xF1arlo con algo de comer? Tenemos galletas y muffins."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xA1Claro que s\xED! \xBFNo se te antoja algo para acompa\xF1ar el t\xE9? Te puedo ofrecer una galleta o un muffin."
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "\xBFQu\xE9 tipo de galletas tienes?"
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint3.mp4
+    textVariants:
+    - difficulty: 0
+      text: "\xBFQu\xE9 galletas tienes?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xBFQu\xE9 tipo de galletas tienes?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "\xBFQu\xE9 tipos de galletas manejan?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xBFMe podr\xEDas decir qu\xE9 galletas tienen disponibles?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Nosotros tenemos galletas de mantequilla de man\xED."
     audioClip: {fileID: 8300000, guid: 9b69c931cbc2a44d9bc926cf084e9c73, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Tenemos galletas de mantequilla de man\xED."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Nosotros tenemos galletas de mantequilla de man\xED."
+      audioClip: {fileID: 8300000, guid: 9b69c931cbc2a44d9bc926cf084e9c73, type: 3}
+    - difficulty: 2
+      text: "Contamos con galletas de mantequilla de man\xED."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Lo que manejamos ahorita son galletas de mantequilla de man\xED."
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "Quiero una galleta de mantequilla de man\xED, por favor."
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint4.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Una galleta de man\xED, por favor."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Quiero una galleta de mantequilla de man\xED, por favor."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Me gustar\xEDa una galleta de mantequilla de man\xED, por favor."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Entonces me voy a llevar una galleta de mantequilla de man\xED, si no es mucha molestia."
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "\xBFEso ser\xEDa todo?"
     audioClip: {fileID: 8300000, guid: 9416c98306209483ab0fee2dbd28c0ad, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "\xBFAlgo m\xE1s?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xBFEso ser\xEDa todo?"
+      audioClip: {fileID: 8300000, guid: 9416c98306209483ab0fee2dbd28c0ad, type: 3}
+    - difficulty: 2
+      text: "\xBFEso ser\xEDa todo por hoy?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xBFTe puedo ofrecer algo m\xE1s o ser\xEDa todo?"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "Si, eso es. Cu\xE1nto cuesta."
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint5.mp4
+    textVariants:
+    - difficulty: 0
+      text: "S\xED. \xBFCu\xE1nto es?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Si, eso es. Cu\xE1nto cuesta."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "S\xED, eso es todo. \xBFCu\xE1nto le debo?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "No, eso ser\xEDa todo. \xBFCu\xE1nto te debo en total?"
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Ser\xE1n cuatro d\xF3lares y sesenta centavos."
     audioClip: {fileID: 8300000, guid: 956d6cfb9fcc04c9d8910af66439b5c1, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Son cuatro d\xF3lares con sesenta."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Ser\xE1n cuatro d\xF3lares y sesenta centavos."
+      audioClip: {fileID: 8300000, guid: 956d6cfb9fcc04c9d8910af66439b5c1, type: 3}
+    - difficulty: 2
+      text: "El total ser\xEDa cuatro d\xF3lares con sesenta centavos."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Te sale en cuatro d\xF3lares con sesenta centavos el total."
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "Aqu\xED tienes."
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint6.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Aqu\xED tienes."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Aqu\xED tienes."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Aqu\xED tienes."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Aqu\xED tienes, qu\xE9date con el cambio."
+      audioClip: {fileID: 0}
   - speaker: 0
     text: "Gracias. Aqu\xED tienes: tu t\xE9 y tu galleta. \xA1Que tenga un buen
       d\xEDa!"
     audioClip: {fileID: 8300000, guid: 1062618bd381f4c54b3b43ae810a1554, type: 3}
     hintVideoPath: 
+    textVariants:
+    - difficulty: 0
+      text: "Gracias. Tu t\xE9 y tu galleta. \xA1Buen d\xEDa!"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Gracias. Aqu\xED tienes: tu t\xE9 y tu galleta. \xA1Que tenga un buen
+      d\xEDa!"
+      audioClip: {fileID: 8300000, guid: 1062618bd381f4c54b3b43ae810a1554, type: 3}
+    - difficulty: 2
+      text: "Muchas gracias. Aqu\xED tienes tu t\xE9 y tu galleta. \xA1Que tenga un excelente d\xEDa!"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xA1Muchas gracias! Aqu\xED te dejo tu tecito y tu galleta. \xA1Que te vaya muy bien el d\xEDa de hoy!"
+      audioClip: {fileID: 0}
   - speaker: 1
     text: "T\xFA tambi\xE9n. adi\xF3s"
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint7.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Adi\xF3s."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "T\xFA tambi\xE9n. adi\xF3s"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Igualmente. \xA1Hasta luego!"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Igualmente, que te vaya bonito. \xA1Nos vemos!"
+      audioClip: {fileID: 0}

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -21,6 +22,14 @@ public class Dialogue : ScriptableObject
 }
 
 [System.Serializable]
+public class TextWithDifficulty
+{
+    public DialogueDifficulty difficulty;
+    public string text;
+    public AudioClip audioClip;
+}
+
+[System.Serializable]
 public class LineOfDialogue {
     public DialogueSpeaker speaker;
     public string text;
@@ -29,6 +38,20 @@ public class LineOfDialogue {
     // NEW FIELDS FOR CHALLENGE LINES
     public bool _isChallenge = false;
     public List<GameObject> objectsToActivateOnSuccess;
+
+    public List<TextWithDifficulty> textVariants;
+
+    public string GetText(DialogueDifficulty difficulty)
+    {
+        var variant = textVariants?.FirstOrDefault(v => v.difficulty == difficulty);
+        return variant != null ? variant.text : text;
+    }
+
+    public AudioClip GetAudioClip(DialogueDifficulty difficulty)
+    {
+        var variant = textVariants?.FirstOrDefault(v => v.difficulty == difficulty);
+        return variant != null ? variant.audioClip : audioClip;
+    }
 
     public override string ToString() {
         return $"[LineOfDialogue] {speaker.ToString()}: {text}";
