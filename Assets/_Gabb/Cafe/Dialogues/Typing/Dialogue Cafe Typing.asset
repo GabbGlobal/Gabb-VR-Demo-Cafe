@@ -20,16 +20,16 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "Hola. \xBFC\xF3mo est\xE1?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 2fe2cf2a046141cba3c5d72d54da4f81, type: 3}
     - difficulty: 1
       text: "Buenos d\xEDas. \xBFC\xF3mo est\xE1 hoy?"
-      audioClip: {fileID: 8300000, guid: b259df3e975fc4a2db3124c77dc6c473, type: 3}
+      audioClip: {fileID: 8300000, guid: 1d3ae46ba2e94705a434c0a52bee58ee, type: 3}
     - difficulty: 2
       text: "Buenos d\xEDas. \xBFC\xF3mo le va el d\xEDa de hoy?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 18a718ea360340069e5abc1aeefc01b0, type: 3}
     - difficulty: 3
       text: "Buenos d\xEDas. \xBFQu\xE9 tal le est\xE1 yendo hoy por aqu\xED?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 78fca47f9da040f69e4351a0f1b967be, type: 3}
   - speaker: 1
     text: "Bien gracias, \xBFy t\xFA?"
     audioClip: {fileID: 0}
@@ -37,16 +37,16 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "Bien, \xBFy t\xFA?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: f80f5e3697234d52865f721eeafb810d, type: 3}
     - difficulty: 1
       text: "Bien gracias, \xBFy t\xFA?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 29d4f3384d4347c7a0761ff0b31207b0, type: 3}
     - difficulty: 2
       text: "Muy bien, gracias. \xBFY t\xFA qu\xE9 tal?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a72ac6b4b467443bbb538b7b839356b8, type: 3}
     - difficulty: 3
       text: "De maravilla, gracias por preguntar. \xBFY t\xFA c\xF3mo andas?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 426042d70c62479387620b2397432cd3, type: 3}
   - speaker: 0
     text: "Lo estoy haciendo bien. \xBFSabes d\xF3nde est\xE1 la estaci\xF3n de autobuses?"
     audioClip: {fileID: 8300000, guid: 1939caf83b08f451b8664abafdbf2df5, type: 3}
@@ -54,18 +54,18 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "Estoy bien. \xBFD\xF3nde est\xE1 la estaci\xF3n de autobuses?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 4cfbd2c1d41f4841b621600898c0ae2c, type: 3}
     - difficulty: 1
       text: "Lo estoy haciendo bien. \xBFSabes d\xF3nde est\xE1 la estaci\xF3n de autobuses?"
-      audioClip: {fileID: 8300000, guid: 1939caf83b08f451b8664abafdbf2df5, type: 3}
+      audioClip: {fileID: 8300000, guid: 647e16f9200049c780e01a8e3b4a5d09, type: 3}
     - difficulty: 2
       text: "Me va bastante bien. \xBFDe casualidad sabes d\xF3nde queda la estaci\xF3n
         de autobuses?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 78391d7e8e5b4f3a9507c95d58fa2d57, type: 3}
     - difficulty: 3
       text: "Aqu\xED andamos, no me quejo. Oye, \xBFde casualidad sabr\xE1s d\xF3nde
         queda la estaci\xF3n de autobuses?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 006c1cc25ce84a79ad534fdf59d393aa, type: 3}
   - speaker: 1
     text: "S\xED, est\xE1 cerca. Est\xE1 al otro lado de la calle"
     audioClip: {fileID: 0}
@@ -73,17 +73,17 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "S\xED, est\xE1 cerca. Cruza la calle."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: ab8be82275484a1eb91122b2736127e3, type: 3}
     - difficulty: 1
       text: "S\xED, est\xE1 cerca. Est\xE1 al otro lado de la calle"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 22eb07c8eb2143cfabe62e178b9aa713, type: 3}
     - difficulty: 2
       text: "S\xED, queda muy cerca de aqu\xED. Est\xE1 justo al otro lado de la calle."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: e514b91bb96b4333b07ea6fe259d95cd, type: 3}
     - difficulty: 3
       text: "S\xED, claro, queda aqu\xED cerquita. Nom\xE1s cruzas la calle y ah\xED
         la encuentras."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: f1cadfb7200b42cb907b06aba690ca03, type: 3}
   - speaker: 0
     text: "Oh, eso no est\xE1 lejos. \xBFSon caros los billetes de autob\xFAs?"
     audioClip: {fileID: 8300000, guid: c8d35ef83463d46a797fb9b7422fa08e, type: 3}
@@ -91,18 +91,18 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "Oh, est\xE1 cerca. \xBFSon caros los billetes?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 437ba5b0841a45e2a23482ab3de5dcdc, type: 3}
     - difficulty: 1
       text: "Oh, eso no est\xE1 lejos. \xBFSon caros los billetes de autob\xFAs?"
-      audioClip: {fileID: 8300000, guid: c8d35ef83463d46a797fb9b7422fa08e, type: 3}
+      audioClip: {fileID: 8300000, guid: 75ebd5150b21438eb7b0de0fcedd6f54, type: 3}
     - difficulty: 2
       text: "Ah, qu\xE9 bien, no queda nada lejos. \xBFY los billetes de autob\xFAs
         son caros?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 8c0a0104c18142f6acd0446237832d10, type: 3}
     - difficulty: 3
       text: "Ah, pues qu\xE9 conveniente que quede tan cerca. \xBFY qu\xE9 tal los
         precios de los billetes, salen caros?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 074520ff958c48ba940005907a6e10a4, type: 3}
   - speaker: 1
     text: "No, son econ\xF3micos. Un billete cuesta dos d\xF3lares con veinticinco
       centavos."
@@ -111,19 +111,19 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "No, son baratos. Cuestan dos d\xF3lares."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 391f89c4e7344da88ce050bb580f521a, type: 3}
     - difficulty: 1
       text: "No, son econ\xF3micos. Un billete cuesta dos d\xF3lares con veinticinco
       centavos."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a4aef784c8b144918f060d632b2f7ff8, type: 3}
     - difficulty: 2
       text: "No, para nada. Son bastante econ\xF3micos. Un billete cuesta dos d\xF3lares
         con veinticinco centavos."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 5c5691040ce344dcbf8605cbadfcb0c1, type: 3}
     - difficulty: 3
       text: "Qu\xE9 va, son bastante accesibles. Un billete te sale en apenas dos
         d\xF3lares con veinticinco centavos."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 55d94345f78f4a95863254904f38be9f, type: 3}
   - speaker: 0
     text: "No esta mal. \xBFC\xF3mo te mueves por la ciudad?"
     audioClip: {fileID: 8300000, guid: ae6241d8c15ee4ac29f8f25c9c3df7b7, type: 3}
@@ -131,17 +131,17 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "Est\xE1 bien. \xBFC\xF3mo vas por la ciudad?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 791e9df2958a4d30a9763e2caf126f8f, type: 3}
     - difficulty: 1
       text: "No esta mal. \xBFC\xF3mo te mueves por la ciudad?"
-      audioClip: {fileID: 8300000, guid: ae6241d8c15ee4ac29f8f25c9c3df7b7, type: 3}
+      audioClip: {fileID: 8300000, guid: 5440b52d09c94f159380971cfe8cd029, type: 3}
     - difficulty: 2
       text: "No est\xE1 nada mal. \xBFY t\xFA c\xF3mo sueles moverte por la ciudad?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 0bc98f334e9a4c2d9860ecb745852120, type: 3}
     - difficulty: 3
       text: "Vaya, eso no est\xE1 nada mal. \xBFY t\xFA c\xF3mo te las arreglas para
         moverte por la ciudad?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: b8d9b0644fec4a55b19789f9c83621cd, type: 3}
   - speaker: 1
     text: Conduzco mi bici.
     audioClip: {fileID: 0}
@@ -149,16 +149,16 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: Uso mi bici.
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 958095f030fa405f8f89d4dc009b29d6, type: 3}
     - difficulty: 1
       text: Conduzco mi bici.
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a967e9f62c9642a8bbc68de1b94d08a1, type: 3}
     - difficulty: 2
       text: Me muevo en bicicleta.
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 5e3e10dbaa004e2fa6071f2a583e88c0, type: 3}
     - difficulty: 3
       text: Suelo desplazarme en bicicleta.
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a4c13cbc1c3540859a5953cc3a551722, type: 3}
   - speaker: 0
     text: "\xA1Fresco!"
     audioClip: {fileID: 8300000, guid: b2ab2802eb601432eb451a1bbe3aa64c, type: 3}
@@ -166,16 +166,16 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "\xA1Fresco!"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: fe31bd26f0074c4d92f753cedee4bacc, type: 3}
     - difficulty: 1
       text: "\xA1Fresco!"
-      audioClip: {fileID: 8300000, guid: b2ab2802eb601432eb451a1bbe3aa64c, type: 3}
+      audioClip: {fileID: 8300000, guid: 9884324e720145848f6911ccdc404d86, type: 3}
     - difficulty: 2
       text: "\xA1Qu\xE9 bien!"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 83567f91c4f1441bbfa92e5ce2601a40, type: 3}
     - difficulty: 3
       text: "\xA1Qu\xE9 genial, me parece estupendo!"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 618fa8023abe4ed19d514b4af8b5845b, type: 3}
   - speaker: 1
     text: "S\xED, es divertido y un buen ejercicio."
     audioClip: {fileID: 0}
@@ -183,14 +183,14 @@ MonoBehaviour:
     textVariants:
     - difficulty: 0
       text: "S\xED, es divertido y buen ejercicio."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: eeb0013a7fcc4fe9bbdf8ac3bd8f7775, type: 3}
     - difficulty: 1
       text: "S\xED, es divertido y un buen ejercicio."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 1e1254e792cb484b9ad9388a3d823341, type: 3}
     - difficulty: 2
       text: "S\xED, es bastante divertido y adem\xE1s es buen ejercicio."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 762a33c692ea41369e6768a7c4856889, type: 3}
     - difficulty: 3
       text: "S\xED, la verdad es que resulta muy divertido y encima te mantienes en
         forma."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 837d8936adab4b8395d0cc9498a18263, type: 3}
