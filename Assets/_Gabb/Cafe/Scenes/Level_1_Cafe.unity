@@ -13842,6 +13842,7 @@ MonoBehaviour:
   loadingObject: {fileID: 0}
   config: {fileID: 11400000, guid: 14913429f70d60e4a99cd97a3299b3cc, type: 2}
   apiClient: {fileID: 44505578}
+  testSubmit: 0
 --- !u!114 &1013636746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26617,7 +26618,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1971873406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30534,7 +30535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2406065880066964399, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2406065880092138156, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30566,7 +30567,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2406065880741202496, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2406065881079208411, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30747,6 +30748,18 @@ PrefabInstance:
     - target: {fileID: 8513742817290398578, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828221229216435455, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828221229216435455, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8828221229216435455, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9151510359974402107, guid: 220f206511a4c4440bd1fef276eaaa40, type: 3}
       propertyPath: m_Enabled

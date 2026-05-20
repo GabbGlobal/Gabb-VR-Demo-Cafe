@@ -43,6 +43,8 @@ public class ApiClient : MonoBehaviour
             NullValueHandling = NullValueHandling.Ignore
         });
 
+        Debug.Log($"[ApiClient] POST {url} request:\n{jsonBody}");
+
         using var request = new UnityWebRequest(url, "POST");
         request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(jsonBody));
         request.downloadHandler = new DownloadHandlerBuffer();
