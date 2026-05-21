@@ -1,0 +1,224 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Cafe Tapping French
+  m_EditorClassIdentifier:
+  linesOfDialogue:
+  - speaker: 0
+    text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Oui, d\x27accord."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Oui, d\x27accord."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oui, d\x27accord."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Oui, d\x27accord."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Oui, d\x27accord."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "R\xE9p\xE8te apr\xE8s moi : Maison"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "R\xE9p\xE8te apr\xE8s moi : Soleil"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "R\xE9p\xE8te apr\xE8s moi : Maison"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "R\xE9p\xE8te apr\xE8s moi : Biblioth\xE8que"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "R\xE9p\xE8te apr\xE8s moi : Virelangue"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: Maison
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 1
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Soleil
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Maison
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Biblioth\xE8que"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: Virelangue
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Tr\xE8s bien, maintenant : int\xE9rieur"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Tr\xE8s bien, maintenant : Pain"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Tr\xE8s bien, maintenant : int\xE9rieur"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Tr\xE8s bien, maintenant : R\xE9frig\xE9rateur"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Tr\xE8s bien, maintenant : \xC9lectrom\xE9nager"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "int\xE9rieur"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 1
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Pain
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "int\xE9rieur"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "R\xE9frig\xE9rateur"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xC9lectrom\xE9nager"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Pas mal. Maintenant : \xC9tudiant"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Pas mal. Maintenant : Lumi\xE8re"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Pas mal. Maintenant : \xC9tudiant"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Pas mal. Maintenant : D\xE9veloppement"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Pas mal. Maintenant : Extraordinaire"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "\xC9tudiant"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 1
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Lumi\xE8re"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xC9tudiant"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "D\xE9veloppement"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: Extraordinaire
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Pas mal. Maintenant : Nez"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Pas mal. Maintenant : Chat"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Pas mal. Maintenant : Nez"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Pas mal. Maintenant : Chemin de fer"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Pas mal. Maintenant : Chauve-souris"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: Nez
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 1
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: Chat
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: Nez
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: Chemin de fer
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: Chauve-souris
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Tr\xE8s bon travail"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
+    textVariants:
+    - difficulty: 0
+      text: "Tr\xE8s bon travail"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Tr\xE8s bon travail"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Tr\xE8s bon travail"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Tr\xE8s bon travail"
+      audioClip: {fileID: 0}

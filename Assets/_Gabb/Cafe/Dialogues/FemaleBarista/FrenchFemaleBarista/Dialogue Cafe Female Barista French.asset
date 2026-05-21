@@ -1,0 +1,287 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Cafe Female Barista French
+  m_EditorClassIdentifier:
+  linesOfDialogue:
+  - speaker: 0
+    text: "Bonjour. Est-ce que je peux vous aider ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Bonjour. Je vous aide ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bonjour. Est-ce que je peux vous aider ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Bonjour. En quoi puis-je vous \xEAtre utile ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Tr\xE8s bonne journ\xE9e. Qu\x27est-ce que je peux faire pour vous aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Bonjour, est-ce que je peux voir le menu s\x27il vous pla\xEEt ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint1.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Bonjour. Le menu, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bonjour, est-ce que je peux voir le menu s\x27il vous pla\xEEt ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Bonjour, serait-il possible de voir le menu ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Bonjour. Pourriez-vous me montrer le menu, s\x27il vous pla\xEEt ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Oui, voici."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Oui, le voil\xE0."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oui, voici."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Bien s\xFBr, le voici."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Bien s\xFBr, je vous le laisse pour que vous puissiez y jeter un coup d\x27œil."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Je voudrais un caf\xE9 au lait, s\x27il vous pla\xEEt."
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint2.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Un caf\xE9 au lait, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Je voudrais un caf\xE9 au lait, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "J\x27aimerais commander un caf\xE9 au lait, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Je souhaiterais commander un caf\xE9 au lait, si vous \xEAtes si aimable."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Quelque chose \xE0 manger avec \xE7a ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Vous voulez manger quelque chose ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Quelque chose \xE0 manger avec \xE7a ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Souhaiteriez-vous ajouter quelque chose \xE0 manger ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "D\xE9sireriez-vous accompagner votre caf\xE9 avec quelque chose \xE0 grignoter ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Oui, je voudrais un sandwich aux œufs."
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint3.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Oui, un sandwich aux œufs."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oui, je voudrais un sandwich aux œufs."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Oui, s\x27il vous pla\xEEt, mettez-moi un sandwich aux œufs."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Oui, j\x27adorerais que vous me pr\xE9pariez un sandwich aux œufs, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Autre chose ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Autre chose ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Autre chose ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "D\xE9sirez-vous autre chose ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Y a-t-il autre chose que je puisse vous proposer ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "C\x27est quoi comme petit pain, celui-l\xE0 ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint4.mp4
+    textVariants:
+    - difficulty: 0
+      text: "C\x27est quoi \xE7a ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "C\x27est quoi comme petit pain, celui-l\xE0 ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Pourriez-vous me dire quel type de petit pain c\x27est ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Excusez-moi, est-ce que cela vous d\xE9rangerait de me dire quel genre de petit pain vous avez l\xE0-bas ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "C\x27est un muffin aux myrtilles. Vous en voulez un ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "C\x27est un muffin. Vous en voulez un ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "C\x27est un muffin aux myrtilles. Vous en voulez un ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "C\x27est un muffin aux myrtilles. Aimeriez-vous en go\xFBter un ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "C\x27est un muffin aux myrtilles tout frais. Est-ce qu\x27il vous tente ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Non merci, pas aujourd\x27hui."
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint5.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Non merci."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Non merci, pas aujourd\x27hui."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Non, merci beaucoup, pas aujourd\x27hui."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "C\x27est tr\xE8s gentil, mais aujourd\x27hui \xE7a ne me dit rien."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "D\x27accord, \xE7a fera cinq dollars et quarante-sept centimes."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "\xC7a fait cinq dollars et quarante-sept centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "D\x27accord, \xE7a fera cinq dollars et quarante-sept centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Tr\xE8s bien, le total sera de cinq dollars et quarante-sept centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Parfait, alors le total vous reviendra \xE0 cinq dollars et quarante-sept centimes."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Est-ce que je peux payer par carte ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint6.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Par carte ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Est-ce que je peux payer par carte ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Est-il possible de payer par carte de cr\xE9dit ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Auriez-vous la possibilit\xE9 de me faire payer par carte ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Non, nous acceptons uniquement les esp\xE8ces."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Non, seulement en esp\xE8ces."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Non, nous acceptons uniquement les esp\xE8ces."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Je suis d\xE9sol\xE9e, nous acceptons uniquement les paiements en esp\xE8ces."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Excusez-moi, malheureusement pour le moment nous ne prenons que les paiements en esp\xE8ces."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Bien, voici. Voici six dollars."
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint7.mp4
+    textVariants:
+    - difficulty: 0
+      text: "D\x27accord. Voici six dollars."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bien, voici. Voici six dollars."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "D\x27accord, voici. Je vous donne six dollars."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Pas de probl\xE8me, voici. Je vous donne six dollars tout rond."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Voici votre monnaie, cinquante-trois centimes."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Votre monnaie : cinquante-trois centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Voici votre monnaie, cinquante-trois centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Voici votre monnaie, ce sont cinquante-trois centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Je vous rends la monnaie, \xE7a fait cinquante-trois centimes."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Merci !"
+    audioClip: {fileID: 0}
+    hintVideoPath: FemaleBaristaHints/conversation8_version1_hint8.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Merci !"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Merci !"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Merci !"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Merci !"
+      audioClip: {fileID: 0}

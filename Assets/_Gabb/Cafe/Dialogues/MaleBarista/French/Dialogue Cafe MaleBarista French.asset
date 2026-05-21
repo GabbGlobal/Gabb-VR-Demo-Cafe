@@ -1,0 +1,253 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Cafe MaleBarista French
+  m_EditorClassIdentifier:
+  linesOfDialogue:
+  - speaker: 0
+    text: "Bonjour, qu\x27est-ce que tu voudrais boire aujourd\x27hui ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Bonjour, tu veux boire quoi ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bonjour, qu\x27est-ce que tu voudrais boire aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Bonjour, qu\x27est-ce qui te ferait plaisir \xE0 boire aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Bonjour, qu\x27est-ce que je peux te proposer \xE0 boire en cette belle matin\xE9e ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Quels types de th\xE9 avez-vous ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint1.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Quel th\xE9 avez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Quels types de th\xE9 avez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Quelles vari\xE9t\xE9s de th\xE9 proposez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Pourriez-vous me dire quels th\xE9s vous avez de disponibles ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Nous avons du th\xE9 noir et du th\xE9 vert."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "On a du th\xE9 noir et du th\xE9 vert."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Nous avons du th\xE9 noir et du th\xE9 vert."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Nous disposons de th\xE9 noir et de th\xE9 vert."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Alors, ce que nous avons en ce moment, c\x27est du th\xE9 noir et du th\xE9 vert."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Pourriez-vous me donner un th\xE9 noir, s\x27il vous pla\xEEt ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint2.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Un th\xE9 noir, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Pourriez-vous me donner un th\xE9 noir, s\x27il vous pla\xEEt ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Serait-il possible de me servir un th\xE9 noir, s\x27il vous pla\xEEt ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Est-ce que tu pourrais me pr\xE9parer un th\xE9 noir, s\x27il te pla\xEEt ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Bien s\xFBr, quelque chose \xE0 manger avec \xE7a ? Tu veux un biscuit ou un muffin ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Oui ! Tu veux manger quelque chose ? On a des biscuits et des muffins."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bien s\xFBr, quelque chose \xE0 manger avec \xE7a ? Tu veux un biscuit ou un muffin ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Bien s\xFBr, tu voudrais l\x27accompagner de quelque chose \xE0 manger ? Nous avons des biscuits et des muffins."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Bien s\xFBr ! Tu n\x27as pas envie de quelque chose pour accompagner le th\xE9 ? Je peux te proposer un biscuit ou un muffin."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Quels types de biscuits avez-vous ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint3.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Quels biscuits avez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Quels types de biscuits avez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Quels types de biscuits proposez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Pourriez-vous me dire quels biscuits vous avez de disponibles ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Nous avons des biscuits au beurre de cacahu\xE8te."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "On a des biscuits au beurre de cacahu\xE8te."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Nous avons des biscuits au beurre de cacahu\xE8te."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Nous disposons de biscuits au beurre de cacahu\xE8te."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Ce que nous avons en ce moment, ce sont des biscuits au beurre de cacahu\xE8te."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Je voudrais un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint4.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Je voudrais un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "J\x27aimerais un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Alors je vais prendre un biscuit au beurre de cacahu\xE8te, si \xE7a ne vous d\xE9range pas."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Ce sera tout ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Autre chose ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Ce sera tout ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Ce sera tout pour aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Je peux te proposer autre chose ou ce sera tout ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Oui, c\x27est tout. Combien \xE7a co\xFBte ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint5.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Oui. C\x27est combien ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oui, c\x27est tout. Combien \xE7a co\xFBte ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Oui, c\x27est tout. Combien je vous dois ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Non, ce sera tout. Combien je te dois au total ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "\xC7a fera quatre dollars et soixante centimes."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "\xC7a fait quatre dollars soixante."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xC7a fera quatre dollars et soixante centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Le total serait de quatre dollars et soixante centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xC7a te revient \xE0 quatre dollars et soixante centimes au total."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Voici."
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint6.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Voici."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Voici."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Voici."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Voici, gardez la monnaie."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Merci. Voici ton th\xE9 et ton biscuit. Bonne journ\xE9e !"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Merci. Ton th\xE9 et ton biscuit. Bonne journ\xE9e !"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Merci. Voici ton th\xE9 et ton biscuit. Bonne journ\xE9e !"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Merci beaucoup. Voici ton th\xE9 et ton biscuit. Excellente journ\xE9e !"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Merci beaucoup ! Voil\xE0 ton petit th\xE9 et ton biscuit. Passe une tr\xE8s bonne journ\xE9e !"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Toi aussi. Au revoir."
+    audioClip: {fileID: 0}
+    hintVideoPath: MaleBaristaHints/conversation8_version2_hint7.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Au revoir."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Toi aussi. Au revoir."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "De m\xEAme. \xC0 bient\xF4t !"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Pareillement, bonne journ\xE9e \xE0 toi aussi. \xC0 la prochaine !"
+      audioClip: {fileID: 0}

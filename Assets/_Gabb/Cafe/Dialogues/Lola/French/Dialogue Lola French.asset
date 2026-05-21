@@ -1,0 +1,202 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Lola French
+  m_EditorClassIdentifier:
+  linesOfDialogue:
+  - speaker: 0
+    text: "Bonjour ! Comment allez-vous aujourd\x27hui ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Bonjour ! Comment allez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bonjour ! Comment allez-vous aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Bonjour, bon apr\xE8s-midi ! Comment vous portez-vous aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Bonjour, quel plaisir de vous voir ! Comment vous portez-vous en cette belle journ\xE9e ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Bien merci, et vous ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint1.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Bien, et vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bien merci, et vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Tr\xE8s bien, merci de demander, et vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xC0 merveille, merci. Et vous, comment allez-vous ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Je vais tr\xE8s bien ! Demain je voyage chez ma sœur."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Tr\xE8s bien ! Demain je vais voir ma sœur."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Je vais tr\xE8s bien ! Demain je voyage chez ma sœur."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Je suis en pleine forme ! Demain je pars en voyage rendre visite \xE0 ma sœur."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Formidable ! Demain je pars en voyage rendre visite \xE0 ma sœur, j\x27avais vraiment h\xE2te."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "C\x27est g\xE9nial ! O\xF9 habite-t-elle ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint2.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Super ! O\xF9 habite-t-elle ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "C\x27est g\xE9nial ! O\xF9 habite-t-elle ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Comme c\x27est excitant ! O\xF9 habite votre sœur ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Quelle merveille ! Et dans quelle ville habite votre sœur, si ce n\x27est pas indiscret ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Elle habite \xE0 Boston."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Elle habite \xE0 Boston."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Elle habite \xE0 Boston."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Ma sœur habite \xE0 Boston."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Elle habite l\xE0-bas \xE0 Boston, \xE7a fait d\xE9j\xE0 plusieurs ann\xE9es."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Comment aimez-vous voyager ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint3.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Comment voyagez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Comment aimez-vous voyager ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Et comment pr\xE9f\xE9rez-vous voyager ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Et quel moyen de transport pr\xE9f\xE9rez-vous pour faire ce voyage ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "J\x27aime voyager en avion. C\x27est rapide et facile."
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "J\x27aime l\x27avion. C\x27est rapide."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "J\x27aime voyager en avion. C\x27est rapide et facile."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Je pr\xE9f\xE8re voyager en avion parce que c\x27est assez rapide et confortable."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "En fait, je pr\xE9f\xE8re l\x27avion, surtout parce que c\x27est rapide et que \xE7a ne me complique pas la vie."
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Oui, mais c\x27est cher."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint4.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Oui, mais c\x27est cher."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oui, mais c\x27est cher."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Oui, c\x27est vrai, mais \xE7a peut \xEAtre assez cher."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Oui, sans aucun doute, mais il faut reconna\xEEtre que \xE7a co\xFBte assez cher."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "C\x27est vrai. Comment aimez-vous voyager ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Oui. Et vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "C\x27est vrai. Comment aimez-vous voyager ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Vous avez raison. Et vous, comment aimez-vous voyager ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Vous n\x27avez pas tort. Et vous, que pr\xE9f\xE9rez-vous pour voyager ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "J\x27aime prendre le bus. C\x27est \xE9conomique."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeLolaHints/conversation7_version1_hint5.mp4
+    textVariants:
+    - difficulty: 0
+      text: "J\x27aime le bus. C\x27est pas cher."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "J\x27aime prendre le bus. C\x27est \xE9conomique."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Je pr\xE9f\xE8re prendre le bus parce que c\x27est plus \xE9conomique."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Moi, j\x27ai l\x27habitude de prendre le bus, en fait, parce que \xE7a revient beaucoup moins cher."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Oh, tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re !"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Va dire \xE0 Lola o\xF9 est la gare routi\xE8re !"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oh, tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re !"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Alors tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re !"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "N\x27oublie surtout pas d\x27aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re, \xE7a va lui \xEAtre bien utile !"
+      audioClip: {fileID: 0}

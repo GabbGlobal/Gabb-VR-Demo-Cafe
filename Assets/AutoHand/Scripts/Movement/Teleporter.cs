@@ -126,6 +126,8 @@ namespace Autohand{
         }
 
         public void StartTeleport(){
+            if(playerBody != null && !playerBody.useMovement)
+                return;
             aiming = true;
             OnStartTeleport?.Invoke();
         }
@@ -139,6 +141,11 @@ namespace Autohand{
         }
 
         public void Teleport(){
+            if(playerBody != null && !playerBody.useMovement)
+            {
+                CancelTeleport();
+                return;
+            }
             Queue<Vector3> fromPos = new Queue<Vector3>();
             foreach(var guard in teleportGuards) {
                 if(guard.gameObject.activeInHierarchy)

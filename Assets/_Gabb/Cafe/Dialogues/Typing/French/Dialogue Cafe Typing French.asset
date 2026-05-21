@@ -1,0 +1,185 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
+  m_Name: Dialogue Cafe Typing French
+  m_EditorClassIdentifier:
+  linesOfDialogue:
+  - speaker: 0
+    text: "Bonjour. Comment allez-vous aujourd\x27hui ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Bonjour. Comment allez-vous ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bonjour. Comment allez-vous aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Bonjour. Comment se passe votre journ\xE9e ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Bonjour. Comment \xE7a se passe pour vous par ici aujourd\x27hui ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Bien merci, et toi ?"
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint1.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Bien, et toi ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Bien merci, et toi ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Tr\xE8s bien, merci. Et toi, \xE7a va ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "\xC0 merveille, merci de demander. Et toi, comment tu vas ?"
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "\xC7a va bien. Tu sais o\xF9 est la gare routi\xE8re ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "\xC7a va. O\xF9 est la gare routi\xE8re ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "\xC7a va bien. Tu sais o\xF9 est la gare routi\xE8re ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "\xC7a va plut\xF4t bien. Par hasard, tu sais o\xF9 se trouve la gare routi\xE8re ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "On fait aller, je ne me plains pas. Dis, par hasard tu saurais o\xF9 se trouve la gare routi\xE8re ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Oui, c\x27est tout pr\xE8s. C\x27est de l\x27autre c\xF4t\xE9 de la rue."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint2.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Oui, c\x27est pr\xE8s. Traverse la rue."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oui, c\x27est tout pr\xE8s. C\x27est de l\x27autre c\xF4t\xE9 de la rue."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Oui, c\x27est tr\xE8s pr\xE8s d\x27ici. C\x27est juste de l\x27autre c\xF4t\xE9 de la rue."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Oui, bien s\xFBr, c\x27est tout pr\xE8s d\x27ici. Tu traverses la rue et tu la trouves juste l\xE0."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Oh, ce n\x27est pas loin. Les billets de bus sont chers ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Oh, c\x27est proche. Les billets sont chers ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oh, ce n\x27est pas loin. Les billets de bus sont chers ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Ah, tr\xE8s bien, ce n\x27est pas loin du tout. Et les billets de bus sont chers ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Ah, c\x27est bien pratique que ce soit si pr\xE8s. Et au niveau des prix des billets, c\x27est cher ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Non, ils sont \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq centimes."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint3.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Non, c\x27est pas cher. \xC7a co\xFBte deux dollars."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Non, ils sont \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Non, pas du tout. Ils sont assez \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq centimes."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Oh non, ils sont tr\xE8s abordables. Un billet ne co\xFBte que deux dollars vingt-cinq centimes."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Pas mal. Comment tu te d\xE9places en ville ?"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "D\x27accord. Comment tu te d\xE9places en ville ?"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Pas mal. Comment tu te d\xE9places en ville ?"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Pas mal du tout. Et toi, comment tu te d\xE9places habituellement en ville ?"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Eh bien, c\x27est pas mal du tout. Et toi, comment tu te d\xE9brouilles pour te d\xE9placer en ville ?"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Je fais du v\xE9lo."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint4.mp4
+    textVariants:
+    - difficulty: 0
+      text: "J\x27utilise mon v\xE9lo."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Je fais du v\xE9lo."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Je me d\xE9place \xE0 v\xE9lo."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "J\x27ai l\x27habitude de me d\xE9placer \xE0 v\xE9lo."
+      audioClip: {fileID: 0}
+  - speaker: 0
+    text: "Cool !"
+    audioClip: {fileID: 0}
+    hintVideoPath:
+    textVariants:
+    - difficulty: 0
+      text: "Cool !"
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Cool !"
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "C\x27est bien !"
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "C\x27est g\xE9nial, je trouve \xE7a formidable !"
+      audioClip: {fileID: 0}
+  - speaker: 1
+    text: "Oui, c\x27est amusant et c\x27est un bon exercice."
+    audioClip: {fileID: 0}
+    hintVideoPath: CafeTypingHints/conversation7_version2_hint5.mp4
+    textVariants:
+    - difficulty: 0
+      text: "Oui, c\x27est amusant et bon exercice."
+      audioClip: {fileID: 0}
+    - difficulty: 1
+      text: "Oui, c\x27est amusant et c\x27est un bon exercice."
+      audioClip: {fileID: 0}
+    - difficulty: 2
+      text: "Oui, c\x27est assez amusant et en plus c\x27est un bon exercice."
+      audioClip: {fileID: 0}
+    - difficulty: 3
+      text: "Oui, en fait c\x27est vraiment tr\xE8s amusant et en plus \xE7a permet de rester en forme."
+      audioClip: {fileID: 0}
