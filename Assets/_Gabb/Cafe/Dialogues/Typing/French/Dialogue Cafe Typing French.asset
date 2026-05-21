@@ -11,175 +11,208 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
   m_Name: Dialogue Cafe Typing French
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   linesOfDialogue:
   - speaker: 0
-    text: "Bonjour. Comment allez-vous aujourd\x27hui ?"
+    text: Bonjour. Comment allez-vous aujourd'hui ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Bonjour. Comment allez-vous ?"
-      audioClip: {fileID: 0}
+      text: Bonjour. Comment allez-vous ?
+      audioClip: {fileID: 8300000, guid: 41f7120de0cce4141a67bc8664941297, type: 3}
     - difficulty: 1
-      text: "Bonjour. Comment allez-vous aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: Bonjour. Comment allez-vous aujourd'hui ?
+      audioClip: {fileID: 8300000, guid: ff92191149cb0d84083964babdfd994f, type: 3}
     - difficulty: 2
       text: "Bonjour. Comment se passe votre journ\xE9e ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: f5b2bd500aa523c47b6d2d93f82534cc, type: 3}
     - difficulty: 3
-      text: "Bonjour. Comment \xE7a se passe pour vous par ici aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: "Bonjour. Comment \xE7a se passe pour vous par ici aujourd'hui ?"
+      audioClip: {fileID: 8300000, guid: f653a79316c2d70498e02efdfe539256, type: 3}
   - speaker: 1
-    text: "Bien merci, et toi ?"
+    text: Bien merci, et toi ?
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint1.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Bien, et toi ?"
-      audioClip: {fileID: 0}
+      text: Bien, et toi ?
+      audioClip: {fileID: 8300000, guid: 581e6314608d33c49b9e3a0902f8ccc4, type: 3}
     - difficulty: 1
-      text: "Bien merci, et toi ?"
-      audioClip: {fileID: 0}
+      text: Bien merci, et toi ?
+      audioClip: {fileID: 8300000, guid: 6655c459e6cbba94c8ad59609f82c626, type: 3}
     - difficulty: 2
       text: "Tr\xE8s bien, merci. Et toi, \xE7a va ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 5dd7db2658f14bd4cadba11439de085c, type: 3}
     - difficulty: 3
       text: "\xC0 merveille, merci de demander. Et toi, comment tu vas ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: c5a79c11122816c44b9e68cd95b63625, type: 3}
   - speaker: 0
     text: "\xC7a va bien. Tu sais o\xF9 est la gare routi\xE8re ?"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "\xC7a va. O\xF9 est la gare routi\xE8re ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: f84ec2b7404b3e541b19e04c139552b0, type: 3}
     - difficulty: 1
       text: "\xC7a va bien. Tu sais o\xF9 est la gare routi\xE8re ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 0af8d9a1324f91c40a0392ea059ca4df, type: 3}
     - difficulty: 2
-      text: "\xC7a va plut\xF4t bien. Par hasard, tu sais o\xF9 se trouve la gare routi\xE8re ?"
-      audioClip: {fileID: 0}
+      text: "\xC7a va plut\xF4t bien. Par hasard, tu sais o\xF9 se trouve la gare
+        routi\xE8re ?"
+      audioClip: {fileID: 8300000, guid: ce7554d1eae19e34eb50f1878e11bfee, type: 3}
     - difficulty: 3
-      text: "On fait aller, je ne me plains pas. Dis, par hasard tu saurais o\xF9 se trouve la gare routi\xE8re ?"
-      audioClip: {fileID: 0}
+      text: "On fait aller, je ne me plains pas. Dis, par hasard tu saurais o\xF9
+        se trouve la gare routi\xE8re ?"
+      audioClip: {fileID: 8300000, guid: 25d7ececb336f6f41b8aa752b2c5c217, type: 3}
   - speaker: 1
-    text: "Oui, c\x27est tout pr\xE8s. C\x27est de l\x27autre c\xF4t\xE9 de la rue."
+    text: "Oui, c'est tout pr\xE8s. C'est de l'autre c\xF4t\xE9 de la rue."
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint2.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui, c\x27est pr\xE8s. Traverse la rue."
-      audioClip: {fileID: 0}
+      text: "Oui, c'est pr\xE8s. Traverse la rue."
+      audioClip: {fileID: 8300000, guid: f9ca730c12d667449919b1e9412c0a36, type: 3}
     - difficulty: 1
-      text: "Oui, c\x27est tout pr\xE8s. C\x27est de l\x27autre c\xF4t\xE9 de la rue."
-      audioClip: {fileID: 0}
+      text: "Oui, c'est tout pr\xE8s. C'est de l'autre c\xF4t\xE9 de la rue."
+      audioClip: {fileID: 8300000, guid: 41575f9164d4c004f9d58388fd47f65f, type: 3}
     - difficulty: 2
-      text: "Oui, c\x27est tr\xE8s pr\xE8s d\x27ici. C\x27est juste de l\x27autre c\xF4t\xE9 de la rue."
-      audioClip: {fileID: 0}
+      text: "Oui, c'est tr\xE8s pr\xE8s d'ici. C'est juste de l'autre c\xF4t\xE9
+        de la rue."
+      audioClip: {fileID: 8300000, guid: 2a53e89c7ca5da94fb4534719cd0d3f1, type: 3}
     - difficulty: 3
-      text: "Oui, bien s\xFBr, c\x27est tout pr\xE8s d\x27ici. Tu traverses la rue et tu la trouves juste l\xE0."
-      audioClip: {fileID: 0}
+      text: "Oui, bien s\xFBr, c'est tout pr\xE8s d'ici. Tu traverses la rue et tu
+        la trouves juste l\xE0."
+      audioClip: {fileID: 8300000, guid: d3e97c36dabbf8e4888d4a0c7e0ae424, type: 3}
   - speaker: 0
-    text: "Oh, ce n\x27est pas loin. Les billets de bus sont chers ?"
+    text: Oh, ce n'est pas loin. Les billets de bus sont chers ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oh, c\x27est proche. Les billets sont chers ?"
-      audioClip: {fileID: 0}
+      text: Oh, c'est proche. Les billets sont chers ?
+      audioClip: {fileID: 8300000, guid: f0a130de2d94bba4891a4981b6b2769b, type: 3}
     - difficulty: 1
-      text: "Oh, ce n\x27est pas loin. Les billets de bus sont chers ?"
-      audioClip: {fileID: 0}
+      text: Oh, ce n'est pas loin. Les billets de bus sont chers ?
+      audioClip: {fileID: 8300000, guid: c47ce9425894364469a054e44f830a63, type: 3}
     - difficulty: 2
-      text: "Ah, tr\xE8s bien, ce n\x27est pas loin du tout. Et les billets de bus sont chers ?"
-      audioClip: {fileID: 0}
+      text: "Ah, tr\xE8s bien, ce n'est pas loin du tout. Et les billets de bus sont
+        chers ?"
+      audioClip: {fileID: 8300000, guid: 4a2ee82f6abb1e747ad565571481659b, type: 3}
     - difficulty: 3
-      text: "Ah, c\x27est bien pratique que ce soit si pr\xE8s. Et au niveau des prix des billets, c\x27est cher ?"
-      audioClip: {fileID: 0}
+      text: "Ah, c'est bien pratique que ce soit si pr\xE8s. Et au niveau des prix
+        des billets, c'est cher ?"
+      audioClip: {fileID: 8300000, guid: b3ed33854d93bd14499bc7b385fd2396, type: 3}
   - speaker: 1
-    text: "Non, ils sont \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq centimes."
+    text: "Non, ils sont \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq
+      centimes."
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint3.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Non, c\x27est pas cher. \xC7a co\xFBte deux dollars."
-      audioClip: {fileID: 0}
+      text: "Non, c'est pas cher. \xC7a co\xFBte deux dollars."
+      audioClip: {fileID: 8300000, guid: 8ce54c9660b3bf743988a21dfaba9cd7, type: 3}
     - difficulty: 1
-      text: "Non, ils sont \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq centimes."
-      audioClip: {fileID: 0}
+      text: "Non, ils sont \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq
+        centimes."
+      audioClip: {fileID: 8300000, guid: d08855850f4441e428ec3077b1c83251, type: 3}
     - difficulty: 2
-      text: "Non, pas du tout. Ils sont assez \xE9conomiques. Un billet co\xFBte deux dollars vingt-cinq centimes."
-      audioClip: {fileID: 0}
+      text: "Non, pas du tout. Ils sont assez \xE9conomiques. Un billet co\xFBte
+        deux dollars vingt-cinq centimes."
+      audioClip: {fileID: 8300000, guid: dadd4f8e07f6d484bbdf8876a9767184, type: 3}
     - difficulty: 3
-      text: "Oh non, ils sont tr\xE8s abordables. Un billet ne co\xFBte que deux dollars vingt-cinq centimes."
-      audioClip: {fileID: 0}
+      text: "Oh non, ils sont tr\xE8s abordables. Un billet ne co\xFBte que deux
+        dollars vingt-cinq centimes."
+      audioClip: {fileID: 8300000, guid: 75bc138e1d71d1a4cb2c5d94591332aa, type: 3}
   - speaker: 0
     text: "Pas mal. Comment tu te d\xE9places en ville ?"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "D\x27accord. Comment tu te d\xE9places en ville ?"
-      audioClip: {fileID: 0}
+      text: "D'accord. Comment tu te d\xE9places en ville ?"
+      audioClip: {fileID: 8300000, guid: a07207e4d13e16448b8a9d45296e95c3, type: 3}
     - difficulty: 1
       text: "Pas mal. Comment tu te d\xE9places en ville ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 008e04690a66cb540a072579a27a4c87, type: 3}
     - difficulty: 2
-      text: "Pas mal du tout. Et toi, comment tu te d\xE9places habituellement en ville ?"
-      audioClip: {fileID: 0}
+      text: "Pas mal du tout. Et toi, comment tu te d\xE9places habituellement en
+        ville ?"
+      audioClip: {fileID: 8300000, guid: 4de9f9f16c4308a47ad6eaaa08b321ac, type: 3}
     - difficulty: 3
-      text: "Eh bien, c\x27est pas mal du tout. Et toi, comment tu te d\xE9brouilles pour te d\xE9placer en ville ?"
-      audioClip: {fileID: 0}
+      text: "Eh bien, c'est pas mal du tout. Et toi, comment tu te d\xE9brouilles
+        pour te d\xE9placer en ville ?"
+      audioClip: {fileID: 8300000, guid: 9f730f7a9dfa3c74b948f46fa972d279, type: 3}
   - speaker: 1
     text: "Je fais du v\xE9lo."
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint4.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "J\x27utilise mon v\xE9lo."
-      audioClip: {fileID: 0}
+      text: "J'utilise mon v\xE9lo."
+      audioClip: {fileID: 8300000, guid: 3ae37e628e174784591c4f410e0e1779, type: 3}
     - difficulty: 1
       text: "Je fais du v\xE9lo."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a673932ca15933947bed9f5f87088b7f, type: 3}
     - difficulty: 2
       text: "Je me d\xE9place \xE0 v\xE9lo."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 76bf36c8c5ce7e24faf0699b9fa151f7, type: 3}
     - difficulty: 3
-      text: "J\x27ai l\x27habitude de me d\xE9placer \xE0 v\xE9lo."
-      audioClip: {fileID: 0}
+      text: "J'ai l'habitude de me d\xE9placer \xE0 v\xE9lo."
+      audioClip: {fileID: 8300000, guid: 1cc9d0dde6beb0a44abc992dfa6ae104, type: 3}
   - speaker: 0
-    text: "Cool !"
+    text: Cool !
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Cool !"
-      audioClip: {fileID: 0}
+      text: Cool !
+      audioClip: {fileID: 8300000, guid: 01968c48ed9f9414e9f397a080d4db76, type: 3}
     - difficulty: 1
-      text: "Cool !"
-      audioClip: {fileID: 0}
+      text: Cool !
+      audioClip: {fileID: 8300000, guid: 01dd6cf8e8529b940ad18a08a2f16578, type: 3}
     - difficulty: 2
-      text: "C\x27est bien !"
-      audioClip: {fileID: 0}
+      text: C'est bien !
+      audioClip: {fileID: 8300000, guid: ee540bb9c63ca4840a1da987c74e7e44, type: 3}
     - difficulty: 3
-      text: "C\x27est g\xE9nial, je trouve \xE7a formidable !"
-      audioClip: {fileID: 0}
+      text: "C'est g\xE9nial, je trouve \xE7a formidable !"
+      audioClip: {fileID: 8300000, guid: 2234f9881b228b24c85b8639deaf9872, type: 3}
   - speaker: 1
-    text: "Oui, c\x27est amusant et c\x27est un bon exercice."
+    text: Oui, c'est amusant et c'est un bon exercice.
     audioClip: {fileID: 0}
     hintVideoPath: CafeTypingHints/conversation7_version2_hint5.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui, c\x27est amusant et bon exercice."
-      audioClip: {fileID: 0}
+      text: Oui, c'est amusant et bon exercice.
+      audioClip: {fileID: 8300000, guid: cb208bfe1c36a114f852e3c64648aad6, type: 3}
     - difficulty: 1
-      text: "Oui, c\x27est amusant et c\x27est un bon exercice."
-      audioClip: {fileID: 0}
+      text: Oui, c'est amusant et c'est un bon exercice.
+      audioClip: {fileID: 8300000, guid: b6d2f135dfe5f404a94c007363f04647, type: 3}
     - difficulty: 2
-      text: "Oui, c\x27est assez amusant et en plus c\x27est un bon exercice."
-      audioClip: {fileID: 0}
+      text: Oui, c'est assez amusant et en plus c'est un bon exercice.
+      audioClip: {fileID: 8300000, guid: 80ac5ddd271cfa44d90d2ce211ebb286, type: 3}
     - difficulty: 3
-      text: "Oui, en fait c\x27est vraiment tr\xE8s amusant et en plus \xE7a permet de rester en forme."
-      audioClip: {fileID: 0}
+      text: "Oui, en fait c'est vraiment tr\xE8s amusant et en plus \xE7a permet
+        de rester en forme."
+      audioClip: {fileID: 8300000, guid: 065b5af6ae3c02f47a0eea3e0c064ff4, type: 3}

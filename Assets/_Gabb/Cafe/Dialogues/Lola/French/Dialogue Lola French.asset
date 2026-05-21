@@ -11,192 +11,227 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
   m_Name: Dialogue Lola French
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   linesOfDialogue:
   - speaker: 0
-    text: "Bonjour ! Comment allez-vous aujourd\x27hui ?"
+    text: Bonjour ! Comment allez-vous aujourd'hui ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Bonjour ! Comment allez-vous ?"
-      audioClip: {fileID: 0}
+      text: Bonjour ! Comment allez-vous ?
+      audioClip: {fileID: 8300000, guid: e6179f8cd3e54f44fb029b0305f66775, type: 3}
     - difficulty: 1
-      text: "Bonjour ! Comment allez-vous aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: Bonjour ! Comment allez-vous aujourd'hui ?
+      audioClip: {fileID: 8300000, guid: 5ab01f734d7faa5488ae5ef76620ca0f, type: 3}
     - difficulty: 2
-      text: "Bonjour, bon apr\xE8s-midi ! Comment vous portez-vous aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: "Bonjour, bon apr\xE8s-midi ! Comment vous portez-vous aujourd'hui ?"
+      audioClip: {fileID: 8300000, guid: 702ab1eecc13e58499b52f213dd9fed8, type: 3}
     - difficulty: 3
-      text: "Bonjour, quel plaisir de vous voir ! Comment vous portez-vous en cette belle journ\xE9e ?"
-      audioClip: {fileID: 0}
+      text: "Bonjour, quel plaisir de vous voir ! Comment vous portez-vous en cette
+        belle journ\xE9e ?"
+      audioClip: {fileID: 8300000, guid: 94c6038adf20aa747baa0aa7dfe85002, type: 3}
   - speaker: 1
-    text: "Bien merci, et vous ?"
+    text: Bien merci, et vous ?
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint1.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Bien, et vous ?"
-      audioClip: {fileID: 0}
+      text: Bien, et vous ?
+      audioClip: {fileID: 8300000, guid: 1cc49abf46bf9b84786af6d6ca428626, type: 3}
     - difficulty: 1
-      text: "Bien merci, et vous ?"
-      audioClip: {fileID: 0}
+      text: Bien merci, et vous ?
+      audioClip: {fileID: 8300000, guid: 2e34f50cd370a1b4b8a35f211d2eb5f3, type: 3}
     - difficulty: 2
       text: "Tr\xE8s bien, merci de demander, et vous ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 34f792d0a503e96478d10cdb1f34dd8f, type: 3}
     - difficulty: 3
       text: "\xC0 merveille, merci. Et vous, comment allez-vous ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: ad1f7c9657a780d418c206b4632ecbf4, type: 3}
   - speaker: 0
-    text: "Je vais tr\xE8s bien ! Demain je voyage chez ma sœur."
+    text: "Je vais tr\xE8s bien ! Demain je voyage chez ma s\u0153ur."
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Tr\xE8s bien ! Demain je vais voir ma sœur."
-      audioClip: {fileID: 0}
+      text: "Tr\xE8s bien ! Demain je vais voir ma s\u0153ur."
+      audioClip: {fileID: 8300000, guid: 81dfb2ed177973a4e9496f1ee48ac171, type: 3}
     - difficulty: 1
-      text: "Je vais tr\xE8s bien ! Demain je voyage chez ma sœur."
-      audioClip: {fileID: 0}
+      text: "Je vais tr\xE8s bien ! Demain je voyage chez ma s\u0153ur."
+      audioClip: {fileID: 8300000, guid: 6fe33c96e9682df4e8e7ed27241a9505, type: 3}
     - difficulty: 2
-      text: "Je suis en pleine forme ! Demain je pars en voyage rendre visite \xE0 ma sœur."
-      audioClip: {fileID: 0}
+      text: "Je suis en pleine forme ! Demain je pars en voyage rendre visite \xE0
+        ma s\u0153ur."
+      audioClip: {fileID: 8300000, guid: 5bbfa74c983e2bd438fe4e849704bf07, type: 3}
     - difficulty: 3
-      text: "Formidable ! Demain je pars en voyage rendre visite \xE0 ma sœur, j\x27avais vraiment h\xE2te."
-      audioClip: {fileID: 0}
+      text: "Formidable ! Demain je pars en voyage rendre visite \xE0 ma s\u0153ur,
+        j'avais vraiment h\xE2te."
+      audioClip: {fileID: 8300000, guid: 9d1f209c93981be45a45659d790ba77f, type: 3}
   - speaker: 1
-    text: "C\x27est g\xE9nial ! O\xF9 habite-t-elle ?"
+    text: "C'est g\xE9nial ! O\xF9 habite-t-elle ?"
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint2.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Super ! O\xF9 habite-t-elle ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 12fc27f96801a8447b8e7073b1c98e9c, type: 3}
     - difficulty: 1
-      text: "C\x27est g\xE9nial ! O\xF9 habite-t-elle ?"
-      audioClip: {fileID: 0}
+      text: "C'est g\xE9nial ! O\xF9 habite-t-elle ?"
+      audioClip: {fileID: 8300000, guid: c402d268bf68f814fa56e0cd3bbb8a0b, type: 3}
     - difficulty: 2
-      text: "Comme c\x27est excitant ! O\xF9 habite votre sœur ?"
-      audioClip: {fileID: 0}
+      text: "Comme c'est excitant ! O\xF9 habite votre s\u0153ur ?"
+      audioClip: {fileID: 8300000, guid: a02cae42936142840af0ecbf0919a055, type: 3}
     - difficulty: 3
-      text: "Quelle merveille ! Et dans quelle ville habite votre sœur, si ce n\x27est pas indiscret ?"
-      audioClip: {fileID: 0}
+      text: "Quelle merveille ! Et dans quelle ville habite votre s\u0153ur, si ce
+        n'est pas indiscret ?"
+      audioClip: {fileID: 8300000, guid: 3330e5ce858b52841914af80d0b7d47f, type: 3}
   - speaker: 0
     text: "Elle habite \xE0 Boston."
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Elle habite \xE0 Boston."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 7f3cc1ae6f50e6c4a9bf8ca20c6db1c5, type: 3}
     - difficulty: 1
       text: "Elle habite \xE0 Boston."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 1ddf535d0da83e3499f372071a54438e, type: 3}
     - difficulty: 2
-      text: "Ma sœur habite \xE0 Boston."
-      audioClip: {fileID: 0}
+      text: "Ma s\u0153ur habite \xE0 Boston."
+      audioClip: {fileID: 8300000, guid: 727ebbbe74687eb44828d6baf4df6fde, type: 3}
     - difficulty: 3
       text: "Elle habite l\xE0-bas \xE0 Boston, \xE7a fait d\xE9j\xE0 plusieurs ann\xE9es."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: f3b1ca28ac785bb45b818260abaf0262, type: 3}
   - speaker: 1
-    text: "Comment aimez-vous voyager ?"
+    text: Comment aimez-vous voyager ?
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint3.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Comment voyagez-vous ?"
-      audioClip: {fileID: 0}
+      text: Comment voyagez-vous ?
+      audioClip: {fileID: 8300000, guid: 4ef4b8bfe4b9ab847a77e7e0b60e105e, type: 3}
     - difficulty: 1
-      text: "Comment aimez-vous voyager ?"
-      audioClip: {fileID: 0}
+      text: Comment aimez-vous voyager ?
+      audioClip: {fileID: 8300000, guid: 9f4b6b039024fd344a940614aee0b399, type: 3}
     - difficulty: 2
       text: "Et comment pr\xE9f\xE9rez-vous voyager ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: d95b20fb224c10848a2148b5f338555c, type: 3}
     - difficulty: 3
-      text: "Et quel moyen de transport pr\xE9f\xE9rez-vous pour faire ce voyage ?"
-      audioClip: {fileID: 0}
+      text: "Et quel moyen de transport pr\xE9f\xE9rez-vous pour faire ce voyage
+        ?"
+      audioClip: {fileID: 8300000, guid: f4df503879615524aa7116e32d475d6d, type: 3}
   - speaker: 0
-    text: "J\x27aime voyager en avion. C\x27est rapide et facile."
+    text: J'aime voyager en avion. C'est rapide et facile.
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "J\x27aime l\x27avion. C\x27est rapide."
-      audioClip: {fileID: 0}
+      text: J'aime l'avion. C'est rapide.
+      audioClip: {fileID: 8300000, guid: 91883cc107af6c34ca786e3efa4808b1, type: 3}
     - difficulty: 1
-      text: "J\x27aime voyager en avion. C\x27est rapide et facile."
-      audioClip: {fileID: 0}
+      text: J'aime voyager en avion. C'est rapide et facile.
+      audioClip: {fileID: 8300000, guid: 92b8e523b589ce24ba2a3a320f78a37b, type: 3}
     - difficulty: 2
-      text: "Je pr\xE9f\xE8re voyager en avion parce que c\x27est assez rapide et confortable."
-      audioClip: {fileID: 0}
+      text: "Je pr\xE9f\xE8re voyager en avion parce que c'est assez rapide et confortable."
+      audioClip: {fileID: 8300000, guid: d0b45718651f0904bb85f463caee1d5f, type: 3}
     - difficulty: 3
-      text: "En fait, je pr\xE9f\xE8re l\x27avion, surtout parce que c\x27est rapide et que \xE7a ne me complique pas la vie."
-      audioClip: {fileID: 0}
+      text: "En fait, je pr\xE9f\xE8re l'avion, surtout parce que c'est rapide et
+        que \xE7a ne me complique pas la vie."
+      audioClip: {fileID: 8300000, guid: 64de8083f921c27498330cebe44ca85b, type: 3}
   - speaker: 1
-    text: "Oui, mais c\x27est cher."
+    text: Oui, mais c'est cher.
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint4.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui, mais c\x27est cher."
-      audioClip: {fileID: 0}
+      text: Oui, mais c'est cher.
+      audioClip: {fileID: 8300000, guid: 361cee7c430ba07468ec1582287e622d, type: 3}
     - difficulty: 1
-      text: "Oui, mais c\x27est cher."
-      audioClip: {fileID: 0}
+      text: Oui, mais c'est cher.
+      audioClip: {fileID: 8300000, guid: fa109c818b6689443aa125cf9dddf3c9, type: 3}
     - difficulty: 2
-      text: "Oui, c\x27est vrai, mais \xE7a peut \xEAtre assez cher."
-      audioClip: {fileID: 0}
+      text: "Oui, c'est vrai, mais \xE7a peut \xEAtre assez cher."
+      audioClip: {fileID: 8300000, guid: b8fd37ca0ae76774bb3b0621b33c95a5, type: 3}
     - difficulty: 3
-      text: "Oui, sans aucun doute, mais il faut reconna\xEEtre que \xE7a co\xFBte assez cher."
-      audioClip: {fileID: 0}
+      text: "Oui, sans aucun doute, mais il faut reconna\xEEtre que \xE7a co\xFBte
+        assez cher."
+      audioClip: {fileID: 8300000, guid: 74d4fa9895b2cfb4890ef9a1f5450681, type: 3}
   - speaker: 0
-    text: "C\x27est vrai. Comment aimez-vous voyager ?"
+    text: C'est vrai. Comment aimez-vous voyager ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui. Et vous ?"
-      audioClip: {fileID: 0}
+      text: Oui. Et vous ?
+      audioClip: {fileID: 8300000, guid: 189e4e8f039a5b847b25fba43303f487, type: 3}
     - difficulty: 1
-      text: "C\x27est vrai. Comment aimez-vous voyager ?"
-      audioClip: {fileID: 0}
+      text: C'est vrai. Comment aimez-vous voyager ?
+      audioClip: {fileID: 8300000, guid: 8c0b9026d1b459144b81bb8ae038698e, type: 3}
     - difficulty: 2
-      text: "Vous avez raison. Et vous, comment aimez-vous voyager ?"
-      audioClip: {fileID: 0}
+      text: Vous avez raison. Et vous, comment aimez-vous voyager ?
+      audioClip: {fileID: 8300000, guid: 62d7e77ff9ad1804f9c1be6702706fa0, type: 3}
     - difficulty: 3
-      text: "Vous n\x27avez pas tort. Et vous, que pr\xE9f\xE9rez-vous pour voyager ?"
-      audioClip: {fileID: 0}
+      text: "Vous n'avez pas tort. Et vous, que pr\xE9f\xE9rez-vous pour voyager
+        ?"
+      audioClip: {fileID: 8300000, guid: b93defa802a4b3b4e865b1ebdd511eb4, type: 3}
   - speaker: 1
-    text: "J\x27aime prendre le bus. C\x27est \xE9conomique."
+    text: "J'aime prendre le bus. C'est \xE9conomique."
     audioClip: {fileID: 0}
     hintVideoPath: CafeLolaHints/conversation7_version1_hint5.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "J\x27aime le bus. C\x27est pas cher."
-      audioClip: {fileID: 0}
+      text: J'aime le bus. C'est pas cher.
+      audioClip: {fileID: 8300000, guid: 0355100e23a82954d9e520e48da5d6c0, type: 3}
     - difficulty: 1
-      text: "J\x27aime prendre le bus. C\x27est \xE9conomique."
-      audioClip: {fileID: 0}
+      text: "J'aime prendre le bus. C'est \xE9conomique."
+      audioClip: {fileID: 8300000, guid: 83bfaa3f56c9a664f9993b1c51b1280a, type: 3}
     - difficulty: 2
-      text: "Je pr\xE9f\xE8re prendre le bus parce que c\x27est plus \xE9conomique."
-      audioClip: {fileID: 0}
+      text: "Je pr\xE9f\xE8re prendre le bus parce que c'est plus \xE9conomique."
+      audioClip: {fileID: 8300000, guid: 21396ab99518c0241873095db5295174, type: 3}
     - difficulty: 3
-      text: "Moi, j\x27ai l\x27habitude de prendre le bus, en fait, parce que \xE7a revient beaucoup moins cher."
-      audioClip: {fileID: 0}
+      text: "Moi, j'ai l'habitude de prendre le bus, en fait, parce que \xE7a revient
+        beaucoup moins cher."
+      audioClip: {fileID: 8300000, guid: 6cc07b8c4ede46f45ba8fae794ad2f44, type: 3}
   - speaker: 0
-    text: "Oh, tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re !"
+    text: "Oh, tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re
+      !"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Va dire \xE0 Lola o\xF9 est la gare routi\xE8re !"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: fb826ed15e1fe0049b9867ed76881730, type: 3}
     - difficulty: 1
-      text: "Oh, tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re !"
-      audioClip: {fileID: 0}
+      text: "Oh, tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re
+        !"
+      audioClip: {fileID: 8300000, guid: 72f37f324e279b5439932cd1f4756565, type: 3}
     - difficulty: 2
-      text: "Alors tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re !"
-      audioClip: {fileID: 0}
+      text: "Alors tu devrais aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re
+        !"
+      audioClip: {fileID: 8300000, guid: f463814314fd93c4cbc3e81aa06613ed, type: 3}
     - difficulty: 3
-      text: "N\x27oublie surtout pas d\x27aller dire \xE0 Lola o\xF9 se trouve la gare routi\xE8re, \xE7a va lui \xEAtre bien utile !"
-      audioClip: {fileID: 0}
+      text: "N'oublie surtout pas d'aller dire \xE0 Lola o\xF9 se trouve la gare
+        routi\xE8re, \xE7a va lui \xEAtre bien utile !"
+      audioClip: {fileID: 8300000, guid: d8902bf2200695b41b5aef2464fb3c90, type: 3}

@@ -11,214 +11,214 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
   m_Name: Dialogue Cafe Tapping French
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   linesOfDialogue:
   - speaker: 0
     text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 6cb358725dfaf5d468b1f46eeb98ef14, type: 3}
     - difficulty: 1
       text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 794c6c50aa17a3245b31ecc511d1feb0, type: 3}
     - difficulty: 2
       text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 83d3d67cdb5d60a44b095ffacfeebe85, type: 3}
     - difficulty: 3
       text: "Entra\xEEne-toi aux phon\xE8mes avec moi, tu veux bien ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 69c2568e57941f644a7279a42f939e0d, type: 3}
   - speaker: 1
-    text: "Oui, d\x27accord."
+    text: Oui, d'accord.
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui, d\x27accord."
-      audioClip: {fileID: 0}
+      text: Oui, d'accord.
+      audioClip: {fileID: 8300000, guid: 79af1955982e33a4d923051a89481b99, type: 3}
     - difficulty: 1
-      text: "Oui, d\x27accord."
-      audioClip: {fileID: 0}
+      text: Oui, d'accord.
+      audioClip: {fileID: 8300000, guid: 4d64538334ca1224c9d7d0acc37cc3a9, type: 3}
     - difficulty: 2
-      text: "Oui, d\x27accord."
-      audioClip: {fileID: 0}
+      text: Oui, d'accord.
+      audioClip: {fileID: 8300000, guid: f5a851ed566b12b408ae1ef17f6ee99a, type: 3}
     - difficulty: 3
-      text: "Oui, d\x27accord."
-      audioClip: {fileID: 0}
+      text: Oui, d'accord.
+      audioClip: {fileID: 8300000, guid: 59ccd20b90fa70f4bb6f3a8468aebc3d, type: 3}
   - speaker: 0
     text: "R\xE9p\xE8te apr\xE8s moi : Maison"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "R\xE9p\xE8te apr\xE8s moi : Soleil"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: ea13cb05257e88f4f932b0905a61248b, type: 3}
     - difficulty: 1
       text: "R\xE9p\xE8te apr\xE8s moi : Maison"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 673394761691d674ca60f0b6be7f898d, type: 3}
     - difficulty: 2
       text: "R\xE9p\xE8te apr\xE8s moi : Biblioth\xE8que"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: daeafb27e3c9b774c9db9309e56859fc, type: 3}
     - difficulty: 3
       text: "R\xE9p\xE8te apr\xE8s moi : Virelangue"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 617fddd78d106e448af9720acbe84b7e, type: 3}
   - speaker: 1
     text: Maison
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: Soleil
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 48d125ff1fdc3ba41890a126ec065409, type: 3}
     - difficulty: 1
       text: Maison
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 225113c3d6690b6469e084bc11c4a271, type: 3}
     - difficulty: 2
       text: "Biblioth\xE8que"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 2897e47e9b977144c8d6afcb8ffd3c16, type: 3}
     - difficulty: 3
       text: Virelangue
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 65271272096b9d14c8614b1eece0feba, type: 3}
   - speaker: 0
     text: "Tr\xE8s bien, maintenant : int\xE9rieur"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Tr\xE8s bien, maintenant : Pain"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: c634b664ddc882b469ba4338f9768ee6, type: 3}
     - difficulty: 1
       text: "Tr\xE8s bien, maintenant : int\xE9rieur"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 495c82b42b3429046a2dfb9bad74c2e6, type: 3}
     - difficulty: 2
       text: "Tr\xE8s bien, maintenant : R\xE9frig\xE9rateur"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 21087091535a35d40af1aebffe8d64b7, type: 3}
     - difficulty: 3
       text: "Tr\xE8s bien, maintenant : \xC9lectrom\xE9nager"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: f171caed4007d8b4eb9163f9c921b556, type: 3}
   - speaker: 1
     text: "int\xE9rieur"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: Pain
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 54d16c920b0f0d24088eb4df58860a20, type: 3}
     - difficulty: 1
       text: "int\xE9rieur"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: d52b509857acd074f8548ba63e854f73, type: 3}
     - difficulty: 2
       text: "R\xE9frig\xE9rateur"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 2b8b0cb6e0d2872459f7cd674c9d6ac2, type: 3}
     - difficulty: 3
       text: "\xC9lectrom\xE9nager"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 9c991b34449e32b42a40e67a62832b72, type: 3}
   - speaker: 0
     text: "Pas mal. Maintenant : \xC9tudiant"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Pas mal. Maintenant : Lumi\xE8re"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 3b6e5294230a28e45b0e703368f9120a, type: 3}
     - difficulty: 1
       text: "Pas mal. Maintenant : \xC9tudiant"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: ef90d279507a0424c9e506d24943f674, type: 3}
     - difficulty: 2
       text: "Pas mal. Maintenant : D\xE9veloppement"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 35e18c7b696e0ca409a8cba8e79f8723, type: 3}
     - difficulty: 3
-      text: "Pas mal. Maintenant : Extraordinaire"
-      audioClip: {fileID: 0}
+      text: 'Pas mal. Maintenant : Extraordinaire'
+      audioClip: {fileID: 8300000, guid: deca7824f0662ba47a40ce20bfe3113a, type: 3}
   - speaker: 1
     text: "\xC9tudiant"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Lumi\xE8re"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: b152fcd10430b994b95bc770c93cfb1e, type: 3}
     - difficulty: 1
       text: "\xC9tudiant"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 9daf7c52a76b1be41bdab9c3fca5c43b, type: 3}
     - difficulty: 2
       text: "D\xE9veloppement"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: d1d6765eda0d6494fb482d10fc7b2611, type: 3}
     - difficulty: 3
       text: Extraordinaire
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 95d1b8467de6db84f822dc4e03204196, type: 3}
   - speaker: 0
-    text: "Pas mal. Maintenant : Nez"
+    text: 'Pas mal. Maintenant : Nez'
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Pas mal. Maintenant : Chat"
-      audioClip: {fileID: 0}
+      text: 'Pas mal. Maintenant : Chat'
+      audioClip: {fileID: 8300000, guid: 3e4fa6b69bb0ed44ba6b7744a3eb3fcf, type: 3}
     - difficulty: 1
-      text: "Pas mal. Maintenant : Nez"
-      audioClip: {fileID: 0}
+      text: 'Pas mal. Maintenant : Nez'
+      audioClip: {fileID: 8300000, guid: 162517036df028d4385058de3c834a5b, type: 3}
     - difficulty: 2
-      text: "Pas mal. Maintenant : Chemin de fer"
-      audioClip: {fileID: 0}
+      text: 'Pas mal. Maintenant : Chemin de fer'
+      audioClip: {fileID: 8300000, guid: d3f9979bbeb835d4894a6972500fa559, type: 3}
     - difficulty: 3
-      text: "Pas mal. Maintenant : Chauve-souris"
-      audioClip: {fileID: 0}
+      text: 'Pas mal. Maintenant : Chauve-souris'
+      audioClip: {fileID: 8300000, guid: c8da06851617bbf489f02c0f3aa8a713, type: 3}
   - speaker: 1
     text: Nez
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 1
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: Chat
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 5afd5e65379535541812212bcb6e6a5c, type: 3}
     - difficulty: 1
       text: Nez
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 9933760a36039904bb7bf1a93326cbec, type: 3}
     - difficulty: 2
       text: Chemin de fer
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 96ad06ba9422e9e4c9b4ff6e574ba19f, type: 3}
     - difficulty: 3
       text: Chauve-souris
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 81ec4e432b4a5a546ad600b7efb2de1e, type: 3}
   - speaker: 0
     text: "Tr\xE8s bon travail"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
     _isChallenge: 0
     objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Tr\xE8s bon travail"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: e88474b003d3a4c4286c6e62ab5e7be8, type: 3}
     - difficulty: 1
       text: "Tr\xE8s bon travail"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 14c17440c3e24694981854f918834f84, type: 3}
     - difficulty: 2
       text: "Tr\xE8s bon travail"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: cb6c7b5a14185584f8c5743081314d0a, type: 3}
     - difficulty: 3
       text: "Tr\xE8s bon travail"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a223d826f90dc9f428bafd91e63bae7a, type: 3}

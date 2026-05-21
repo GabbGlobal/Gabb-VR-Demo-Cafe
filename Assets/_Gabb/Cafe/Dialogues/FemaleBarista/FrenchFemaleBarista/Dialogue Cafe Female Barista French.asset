@@ -11,277 +11,316 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
   m_Name: Dialogue Cafe Female Barista French
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   linesOfDialogue:
   - speaker: 0
-    text: "Bonjour. Est-ce que je peux vous aider ?"
+    text: Bonjour. Est-ce que je peux vous aider ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Bonjour. Je vous aide ?"
-      audioClip: {fileID: 0}
+      text: Bonjour. Je vous aide ?
+      audioClip: {fileID: 8300000, guid: 8dae9715f42f13b489a984ec1174ef38, type: 3}
     - difficulty: 1
-      text: "Bonjour. Est-ce que je peux vous aider ?"
-      audioClip: {fileID: 0}
+      text: Bonjour. Est-ce que je peux vous aider ?
+      audioClip: {fileID: 8300000, guid: 2a573295d2e81ac4ca85a5f2edf494c7, type: 3}
     - difficulty: 2
       text: "Bonjour. En quoi puis-je vous \xEAtre utile ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 232a6276498eb0046ae1bb5065e28f76, type: 3}
     - difficulty: 3
-      text: "Tr\xE8s bonne journ\xE9e. Qu\x27est-ce que je peux faire pour vous aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: "Tr\xE8s bonne journ\xE9e. Qu'est-ce que je peux faire pour vous aujourd'hui
+        ?"
+      audioClip: {fileID: 8300000, guid: b6cec24716cf8c048b17672ffbd670d9, type: 3}
   - speaker: 1
-    text: "Bonjour, est-ce que je peux voir le menu s\x27il vous pla\xEEt ?"
+    text: "Bonjour, est-ce que je peux voir le menu s'il vous pla\xEEt ?"
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint1.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Bonjour. Le menu, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "Bonjour. Le menu, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: d9df33c7402e78f45aee391c6392e73c, type: 3}
     - difficulty: 1
-      text: "Bonjour, est-ce que je peux voir le menu s\x27il vous pla\xEEt ?"
-      audioClip: {fileID: 0}
+      text: "Bonjour, est-ce que je peux voir le menu s'il vous pla\xEEt ?"
+      audioClip: {fileID: 8300000, guid: 122c2df35842f8744be569f8b74c82f5, type: 3}
     - difficulty: 2
-      text: "Bonjour, serait-il possible de voir le menu ?"
-      audioClip: {fileID: 0}
+      text: Bonjour, serait-il possible de voir le menu ?
+      audioClip: {fileID: 8300000, guid: 1eed08fa194888b47bf887571c4f1ead, type: 3}
     - difficulty: 3
-      text: "Bonjour. Pourriez-vous me montrer le menu, s\x27il vous pla\xEEt ?"
-      audioClip: {fileID: 0}
+      text: "Bonjour. Pourriez-vous me montrer le menu, s'il vous pla\xEEt ?"
+      audioClip: {fileID: 8300000, guid: 4a7246d4d091c3c4bb6db16f2ac9ce03, type: 3}
   - speaker: 0
-    text: "Oui, voici."
+    text: Oui, voici.
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Oui, le voil\xE0."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 0b0937cb63657174bbebcb97ed118545, type: 3}
     - difficulty: 1
-      text: "Oui, voici."
-      audioClip: {fileID: 0}
+      text: Oui, voici.
+      audioClip: {fileID: 8300000, guid: b240d6c39280b2443bbc434f29539b9e, type: 3}
     - difficulty: 2
       text: "Bien s\xFBr, le voici."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: be5155276809fda42a9f96b691726b27, type: 3}
     - difficulty: 3
-      text: "Bien s\xFBr, je vous le laisse pour que vous puissiez y jeter un coup d\x27œil."
-      audioClip: {fileID: 0}
+      text: "Bien s\xFBr, je vous le laisse pour que vous puissiez y jeter un coup
+        d'\u0153il."
+      audioClip: {fileID: 8300000, guid: dd89b78b37eb24d4486940ed58f786ec, type: 3}
   - speaker: 1
-    text: "Je voudrais un caf\xE9 au lait, s\x27il vous pla\xEEt."
+    text: "Je voudrais un caf\xE9 au lait, s'il vous pla\xEEt."
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint2.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Un caf\xE9 au lait, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "Un caf\xE9 au lait, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: dbb15eb94162da14ba83a1ff7f6ffff4, type: 3}
     - difficulty: 1
-      text: "Je voudrais un caf\xE9 au lait, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "Je voudrais un caf\xE9 au lait, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: 06da2177536da0e478f79e2b65000a1a, type: 3}
     - difficulty: 2
-      text: "J\x27aimerais commander un caf\xE9 au lait, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "J'aimerais commander un caf\xE9 au lait, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: a97022b3e5a4f59488d729e441100537, type: 3}
     - difficulty: 3
       text: "Je souhaiterais commander un caf\xE9 au lait, si vous \xEAtes si aimable."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 845f5374a62e6414189e9c402f3f7188, type: 3}
   - speaker: 0
     text: "Quelque chose \xE0 manger avec \xE7a ?"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Vous voulez manger quelque chose ?"
-      audioClip: {fileID: 0}
+      text: Vous voulez manger quelque chose ?
+      audioClip: {fileID: 8300000, guid: 4dd274f47e368fd40a5c6f0529e4557c, type: 3}
     - difficulty: 1
       text: "Quelque chose \xE0 manger avec \xE7a ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 108142592cc5cca4f93069b55eb44a2b, type: 3}
     - difficulty: 2
       text: "Souhaiteriez-vous ajouter quelque chose \xE0 manger ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 79b5214d98d70434e80fae6e71d50fbb, type: 3}
     - difficulty: 3
-      text: "D\xE9sireriez-vous accompagner votre caf\xE9 avec quelque chose \xE0 grignoter ?"
-      audioClip: {fileID: 0}
+      text: "D\xE9sireriez-vous accompagner votre caf\xE9 avec quelque chose \xE0
+        grignoter ?"
+      audioClip: {fileID: 8300000, guid: 48aa19c78aefbe34489a5b21ae9fd424, type: 3}
   - speaker: 1
-    text: "Oui, je voudrais un sandwich aux œufs."
+    text: "Oui, je voudrais un sandwich aux \u0153ufs."
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint3.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui, un sandwich aux œufs."
-      audioClip: {fileID: 0}
+      text: "Oui, un sandwich aux \u0153ufs."
+      audioClip: {fileID: 8300000, guid: 049471879d4991e4fb66e973b0c076fe, type: 3}
     - difficulty: 1
-      text: "Oui, je voudrais un sandwich aux œufs."
-      audioClip: {fileID: 0}
+      text: "Oui, je voudrais un sandwich aux \u0153ufs."
+      audioClip: {fileID: 8300000, guid: 7d239ff971497ed4dae3d3ab554d031d, type: 3}
     - difficulty: 2
-      text: "Oui, s\x27il vous pla\xEEt, mettez-moi un sandwich aux œufs."
-      audioClip: {fileID: 0}
+      text: "Oui, s'il vous pla\xEEt, mettez-moi un sandwich aux \u0153ufs."
+      audioClip: {fileID: 8300000, guid: 209d7cd8a5fd4a74f800416d7f513477, type: 3}
     - difficulty: 3
-      text: "Oui, j\x27adorerais que vous me pr\xE9pariez un sandwich aux œufs, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "Oui, j'adorerais que vous me pr\xE9pariez un sandwich aux \u0153ufs,
+        s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: 482efb910fadb65479803e17680a85bf, type: 3}
   - speaker: 0
-    text: "Autre chose ?"
+    text: Autre chose ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Autre chose ?"
-      audioClip: {fileID: 0}
+      text: Autre chose ?
+      audioClip: {fileID: 8300000, guid: a6231f870250ca44e8d856f65dbdf258, type: 3}
     - difficulty: 1
-      text: "Autre chose ?"
-      audioClip: {fileID: 0}
+      text: Autre chose ?
+      audioClip: {fileID: 8300000, guid: 1aa3579563746984c9244bf154f84638, type: 3}
     - difficulty: 2
       text: "D\xE9sirez-vous autre chose ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 168ba3867262a864ab91c8bff9b61f12, type: 3}
     - difficulty: 3
-      text: "Y a-t-il autre chose que je puisse vous proposer ?"
-      audioClip: {fileID: 0}
+      text: Y a-t-il autre chose que je puisse vous proposer ?
+      audioClip: {fileID: 8300000, guid: 3881e51f0885f4741a8d91a2c2708ce7, type: 3}
   - speaker: 1
-    text: "C\x27est quoi comme petit pain, celui-l\xE0 ?"
+    text: "C'est quoi comme petit pain, celui-l\xE0 ?"
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint4.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "C\x27est quoi \xE7a ?"
-      audioClip: {fileID: 0}
+      text: "C'est quoi \xE7a ?"
+      audioClip: {fileID: 8300000, guid: bd3d881a573f6a84da89eb7d825f3992, type: 3}
     - difficulty: 1
-      text: "C\x27est quoi comme petit pain, celui-l\xE0 ?"
-      audioClip: {fileID: 0}
+      text: "C'est quoi comme petit pain, celui-l\xE0 ?"
+      audioClip: {fileID: 8300000, guid: 6bffd0230462c9446acbf9dc8a85692d, type: 3}
     - difficulty: 2
-      text: "Pourriez-vous me dire quel type de petit pain c\x27est ?"
-      audioClip: {fileID: 0}
+      text: Pourriez-vous me dire quel type de petit pain c'est ?
+      audioClip: {fileID: 8300000, guid: 4dbdf2c3f1b3ae047900d84a9780f462, type: 3}
     - difficulty: 3
-      text: "Excusez-moi, est-ce que cela vous d\xE9rangerait de me dire quel genre de petit pain vous avez l\xE0-bas ?"
-      audioClip: {fileID: 0}
+      text: "Excusez-moi, est-ce que cela vous d\xE9rangerait de me dire quel genre
+        de petit pain vous avez l\xE0-bas ?"
+      audioClip: {fileID: 8300000, guid: dec6b5a012cbb79429a4a0bdca1465b7, type: 3}
   - speaker: 0
-    text: "C\x27est un muffin aux myrtilles. Vous en voulez un ?"
+    text: C'est un muffin aux myrtilles. Vous en voulez un ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "C\x27est un muffin. Vous en voulez un ?"
-      audioClip: {fileID: 0}
+      text: C'est un muffin. Vous en voulez un ?
+      audioClip: {fileID: 8300000, guid: 17cda459e48f9d447a0f0b167a83b92c, type: 3}
     - difficulty: 1
-      text: "C\x27est un muffin aux myrtilles. Vous en voulez un ?"
-      audioClip: {fileID: 0}
+      text: C'est un muffin aux myrtilles. Vous en voulez un ?
+      audioClip: {fileID: 8300000, guid: 4ac9888594dd9bd418906e6dff13543e, type: 3}
     - difficulty: 2
-      text: "C\x27est un muffin aux myrtilles. Aimeriez-vous en go\xFBter un ?"
-      audioClip: {fileID: 0}
+      text: "C'est un muffin aux myrtilles. Aimeriez-vous en go\xFBter un ?"
+      audioClip: {fileID: 8300000, guid: 61cb11d1a8659434ca99dc23e87a855b, type: 3}
     - difficulty: 3
-      text: "C\x27est un muffin aux myrtilles tout frais. Est-ce qu\x27il vous tente ?"
-      audioClip: {fileID: 0}
+      text: C'est un muffin aux myrtilles tout frais. Est-ce qu'il vous tente ?
+      audioClip: {fileID: 8300000, guid: 7b6f82980e7d00340a34baf6166a66ea, type: 3}
   - speaker: 1
-    text: "Non merci, pas aujourd\x27hui."
+    text: Non merci, pas aujourd'hui.
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint5.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Non merci."
-      audioClip: {fileID: 0}
+      text: Non merci.
+      audioClip: {fileID: 8300000, guid: 0e1d9a235aee7d544b32da3b9df19f04, type: 3}
     - difficulty: 1
-      text: "Non merci, pas aujourd\x27hui."
-      audioClip: {fileID: 0}
+      text: Non merci, pas aujourd'hui.
+      audioClip: {fileID: 8300000, guid: 6df4a467c1bc23e4c9e73bf5a9832cc2, type: 3}
     - difficulty: 2
-      text: "Non, merci beaucoup, pas aujourd\x27hui."
-      audioClip: {fileID: 0}
+      text: Non, merci beaucoup, pas aujourd'hui.
+      audioClip: {fileID: 8300000, guid: 04dad255abbb60848b3ca22c74ea998d, type: 3}
     - difficulty: 3
-      text: "C\x27est tr\xE8s gentil, mais aujourd\x27hui \xE7a ne me dit rien."
-      audioClip: {fileID: 0}
+      text: "C'est tr\xE8s gentil, mais aujourd'hui \xE7a ne me dit rien."
+      audioClip: {fileID: 8300000, guid: d1e86138b6899c744b11254d43238b15, type: 3}
   - speaker: 0
-    text: "D\x27accord, \xE7a fera cinq dollars et quarante-sept centimes."
+    text: "D'accord, \xE7a fera cinq dollars et quarante-sept centimes."
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "\xC7a fait cinq dollars et quarante-sept centimes."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 424f659df4c6ca741bfbcfebf231ae7e, type: 3}
     - difficulty: 1
-      text: "D\x27accord, \xE7a fera cinq dollars et quarante-sept centimes."
-      audioClip: {fileID: 0}
+      text: "D'accord, \xE7a fera cinq dollars et quarante-sept centimes."
+      audioClip: {fileID: 8300000, guid: ffe6c999a19d39248b09f2645e41aeec, type: 3}
     - difficulty: 2
       text: "Tr\xE8s bien, le total sera de cinq dollars et quarante-sept centimes."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 8cf44e933e1d2b24db20ddc7a4cbf688, type: 3}
     - difficulty: 3
-      text: "Parfait, alors le total vous reviendra \xE0 cinq dollars et quarante-sept centimes."
-      audioClip: {fileID: 0}
+      text: "Parfait, alors le total vous reviendra \xE0 cinq dollars et quarante-sept
+        centimes."
+      audioClip: {fileID: 8300000, guid: 2dca6e2472ac83f4bacd7d9a42ce5b2d, type: 3}
   - speaker: 1
-    text: "Est-ce que je peux payer par carte ?"
+    text: Est-ce que je peux payer par carte ?
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint6.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Par carte ?"
-      audioClip: {fileID: 0}
+      text: Par carte ?
+      audioClip: {fileID: 8300000, guid: ab52cd005a5a6be4791c397d034a0dd4, type: 3}
     - difficulty: 1
-      text: "Est-ce que je peux payer par carte ?"
-      audioClip: {fileID: 0}
+      text: Est-ce que je peux payer par carte ?
+      audioClip: {fileID: 8300000, guid: c893ffa667068ee44b71e9a0ae18c32b, type: 3}
     - difficulty: 2
       text: "Est-il possible de payer par carte de cr\xE9dit ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 8c1f5b53a9ceaa549895fd9e46555665, type: 3}
     - difficulty: 3
       text: "Auriez-vous la possibilit\xE9 de me faire payer par carte ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 66f52951378594c428b5b44c7449dee8, type: 3}
   - speaker: 0
     text: "Non, nous acceptons uniquement les esp\xE8ces."
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Non, seulement en esp\xE8ces."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: cf0a80e1f85f12b40a9727e1c4c73465, type: 3}
     - difficulty: 1
       text: "Non, nous acceptons uniquement les esp\xE8ces."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: bdf7a7e94a64edf4ba8a3887dad10b0a, type: 3}
     - difficulty: 2
       text: "Je suis d\xE9sol\xE9e, nous acceptons uniquement les paiements en esp\xE8ces."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: c4fdccd1f81e4e844b29088f9e544d33, type: 3}
     - difficulty: 3
-      text: "Excusez-moi, malheureusement pour le moment nous ne prenons que les paiements en esp\xE8ces."
-      audioClip: {fileID: 0}
+      text: "Excusez-moi, malheureusement pour le moment nous ne prenons que les
+        paiements en esp\xE8ces."
+      audioClip: {fileID: 8300000, guid: 368c86ef4301fd24f9deec68558f8995, type: 3}
   - speaker: 1
-    text: "Bien, voici. Voici six dollars."
+    text: Bien, voici. Voici six dollars.
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint7.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "D\x27accord. Voici six dollars."
-      audioClip: {fileID: 0}
+      text: D'accord. Voici six dollars.
+      audioClip: {fileID: 8300000, guid: 6dc8a4435cc5c42478414038c0e662e8, type: 3}
     - difficulty: 1
-      text: "Bien, voici. Voici six dollars."
-      audioClip: {fileID: 0}
+      text: Bien, voici. Voici six dollars.
+      audioClip: {fileID: 8300000, guid: 676b3b0ac127e464fa7a62e7d39cbd95, type: 3}
     - difficulty: 2
-      text: "D\x27accord, voici. Je vous donne six dollars."
-      audioClip: {fileID: 0}
+      text: D'accord, voici. Je vous donne six dollars.
+      audioClip: {fileID: 8300000, guid: 67cfabe0c72b6764da8dbdf97be9697a, type: 3}
     - difficulty: 3
       text: "Pas de probl\xE8me, voici. Je vous donne six dollars tout rond."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 5ba3e60f5de57b54c9298bba00a0064b, type: 3}
   - speaker: 0
-    text: "Voici votre monnaie, cinquante-trois centimes."
+    text: Voici votre monnaie, cinquante-trois centimes.
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Votre monnaie : cinquante-trois centimes."
-      audioClip: {fileID: 0}
+      text: 'Votre monnaie : cinquante-trois centimes.'
+      audioClip: {fileID: 8300000, guid: 79bbcf74b5eed0e449d034ad3552a9c4, type: 3}
     - difficulty: 1
-      text: "Voici votre monnaie, cinquante-trois centimes."
-      audioClip: {fileID: 0}
+      text: Voici votre monnaie, cinquante-trois centimes.
+      audioClip: {fileID: 8300000, guid: 9df2e52dab605d946bed2dcaaa574bc0, type: 3}
     - difficulty: 2
-      text: "Voici votre monnaie, ce sont cinquante-trois centimes."
-      audioClip: {fileID: 0}
+      text: Voici votre monnaie, ce sont cinquante-trois centimes.
+      audioClip: {fileID: 8300000, guid: af442a00f12c6e84b8019306884e6981, type: 3}
     - difficulty: 3
       text: "Je vous rends la monnaie, \xE7a fait cinquante-trois centimes."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a309517e6d2f955428cd1c30c7770c89, type: 3}
   - speaker: 1
-    text: "Merci !"
+    text: Merci !
     audioClip: {fileID: 0}
     hintVideoPath: FemaleBaristaHints/conversation8_version1_hint8.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Merci !"
-      audioClip: {fileID: 0}
+      text: Merci !
+      audioClip: {fileID: 8300000, guid: c55fa3bc480a69f48a170ef8d23568cd, type: 3}
     - difficulty: 1
-      text: "Merci !"
-      audioClip: {fileID: 0}
+      text: Merci !
+      audioClip: {fileID: 8300000, guid: c0ee0c8e0862a854d862920616e4f4ed, type: 3}
     - difficulty: 2
-      text: "Merci !"
-      audioClip: {fileID: 0}
+      text: Merci !
+      audioClip: {fileID: 8300000, guid: 2c62fecc9c5356342a4871923a2de50c, type: 3}
     - difficulty: 3
-      text: "Merci !"
-      audioClip: {fileID: 0}
+      text: Merci !
+      audioClip: {fileID: 8300000, guid: d4a6c69393e3db94f8691ef8c9e52479, type: 3}

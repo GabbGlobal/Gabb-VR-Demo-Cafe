@@ -11,243 +11,281 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5cd1abf5930684b46a5a64c1bedd3b33, type: 3}
   m_Name: Dialogue Cafe MaleBarista French
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   linesOfDialogue:
   - speaker: 0
-    text: "Bonjour, qu\x27est-ce que tu voudrais boire aujourd\x27hui ?"
+    text: Bonjour, qu'est-ce que tu voudrais boire aujourd'hui ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Bonjour, tu veux boire quoi ?"
-      audioClip: {fileID: 0}
+      text: Bonjour, tu veux boire quoi ?
+      audioClip: {fileID: 8300000, guid: 192355f17d2bec1498d05e73e4eb2df9, type: 3}
     - difficulty: 1
-      text: "Bonjour, qu\x27est-ce que tu voudrais boire aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: Bonjour, qu'est-ce que tu voudrais boire aujourd'hui ?
+      audioClip: {fileID: 8300000, guid: 03e3159745abff044b775f0001337b00, type: 3}
     - difficulty: 2
-      text: "Bonjour, qu\x27est-ce qui te ferait plaisir \xE0 boire aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: "Bonjour, qu'est-ce qui te ferait plaisir \xE0 boire aujourd'hui ?"
+      audioClip: {fileID: 8300000, guid: b1c44de9e76b9f64a95879cc67d53261, type: 3}
     - difficulty: 3
-      text: "Bonjour, qu\x27est-ce que je peux te proposer \xE0 boire en cette belle matin\xE9e ?"
-      audioClip: {fileID: 0}
+      text: "Bonjour, qu'est-ce que je peux te proposer \xE0 boire en cette belle
+        matin\xE9e ?"
+      audioClip: {fileID: 8300000, guid: 8b02e01f22761f4438bd0dee901bd7b1, type: 3}
   - speaker: 1
     text: "Quels types de th\xE9 avez-vous ?"
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint1.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Quel th\xE9 avez-vous ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 8ac898d3b7dec98459175a42b16950b4, type: 3}
     - difficulty: 1
       text: "Quels types de th\xE9 avez-vous ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: d020abdf86caae749b8dfc234774240f, type: 3}
     - difficulty: 2
       text: "Quelles vari\xE9t\xE9s de th\xE9 proposez-vous ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: d34cf5c42e7d71f4e8c837ecda79143d, type: 3}
     - difficulty: 3
       text: "Pourriez-vous me dire quels th\xE9s vous avez de disponibles ?"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 2b0d4d9f5879d554c982c94d74257db6, type: 3}
   - speaker: 0
     text: "Nous avons du th\xE9 noir et du th\xE9 vert."
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "On a du th\xE9 noir et du th\xE9 vert."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 6705fee797368704c991ced27c5c8515, type: 3}
     - difficulty: 1
       text: "Nous avons du th\xE9 noir et du th\xE9 vert."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 24f5820133b398f4ba06dcefea04758e, type: 3}
     - difficulty: 2
       text: "Nous disposons de th\xE9 noir et de th\xE9 vert."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 024b86605ede677419320c5bd35f314a, type: 3}
     - difficulty: 3
-      text: "Alors, ce que nous avons en ce moment, c\x27est du th\xE9 noir et du th\xE9 vert."
-      audioClip: {fileID: 0}
+      text: "Alors, ce que nous avons en ce moment, c'est du th\xE9 noir et du th\xE9
+        vert."
+      audioClip: {fileID: 8300000, guid: ac46ac175daee4e46ba45abe560573c7, type: 3}
   - speaker: 1
-    text: "Pourriez-vous me donner un th\xE9 noir, s\x27il vous pla\xEEt ?"
+    text: "Pourriez-vous me donner un th\xE9 noir, s'il vous pla\xEEt ?"
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint2.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Un th\xE9 noir, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "Un th\xE9 noir, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: 7d7ac942afcb12a4795593b9c392d149, type: 3}
     - difficulty: 1
-      text: "Pourriez-vous me donner un th\xE9 noir, s\x27il vous pla\xEEt ?"
-      audioClip: {fileID: 0}
+      text: "Pourriez-vous me donner un th\xE9 noir, s'il vous pla\xEEt ?"
+      audioClip: {fileID: 8300000, guid: 03bd896aada781d4498d934ca1a0f12a, type: 3}
     - difficulty: 2
-      text: "Serait-il possible de me servir un th\xE9 noir, s\x27il vous pla\xEEt ?"
-      audioClip: {fileID: 0}
+      text: "Serait-il possible de me servir un th\xE9 noir, s'il vous pla\xEEt ?"
+      audioClip: {fileID: 8300000, guid: 458e67e7ecb65ca4fb4337f10fbcbd64, type: 3}
     - difficulty: 3
-      text: "Est-ce que tu pourrais me pr\xE9parer un th\xE9 noir, s\x27il te pla\xEEt ?"
-      audioClip: {fileID: 0}
+      text: "Est-ce que tu pourrais me pr\xE9parer un th\xE9 noir, s'il te pla\xEEt
+        ?"
+      audioClip: {fileID: 8300000, guid: 9a929258019a9fc40a44590c5ff46fc9, type: 3}
   - speaker: 0
-    text: "Bien s\xFBr, quelque chose \xE0 manger avec \xE7a ? Tu veux un biscuit ou un muffin ?"
+    text: "Bien s\xFBr, quelque chose \xE0 manger avec \xE7a ? Tu veux un biscuit
+      ou un muffin ?"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui ! Tu veux manger quelque chose ? On a des biscuits et des muffins."
-      audioClip: {fileID: 0}
+      text: Oui ! Tu veux manger quelque chose ? On a des biscuits et des muffins.
+      audioClip: {fileID: 8300000, guid: 081e1980cf62ee34db974b2124f432da, type: 3}
     - difficulty: 1
-      text: "Bien s\xFBr, quelque chose \xE0 manger avec \xE7a ? Tu veux un biscuit ou un muffin ?"
-      audioClip: {fileID: 0}
+      text: "Bien s\xFBr, quelque chose \xE0 manger avec \xE7a ? Tu veux un biscuit
+        ou un muffin ?"
+      audioClip: {fileID: 8300000, guid: c801fac1c4296354cb0c317ce09976d1, type: 3}
     - difficulty: 2
-      text: "Bien s\xFBr, tu voudrais l\x27accompagner de quelque chose \xE0 manger ? Nous avons des biscuits et des muffins."
-      audioClip: {fileID: 0}
+      text: "Bien s\xFBr, tu voudrais l'accompagner de quelque chose \xE0 manger
+        ? Nous avons des biscuits et des muffins."
+      audioClip: {fileID: 8300000, guid: ceb3f5353fbec254c9eeaf6f9350d74c, type: 3}
     - difficulty: 3
-      text: "Bien s\xFBr ! Tu n\x27as pas envie de quelque chose pour accompagner le th\xE9 ? Je peux te proposer un biscuit ou un muffin."
-      audioClip: {fileID: 0}
+      text: "Bien s\xFBr ! Tu n'as pas envie de quelque chose pour accompagner le
+        th\xE9 ? Je peux te proposer un biscuit ou un muffin."
+      audioClip: {fileID: 8300000, guid: 3975c067d948e7f4085de7b42ab0ea09, type: 3}
   - speaker: 1
-    text: "Quels types de biscuits avez-vous ?"
+    text: Quels types de biscuits avez-vous ?
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint3.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Quels biscuits avez-vous ?"
-      audioClip: {fileID: 0}
+      text: Quels biscuits avez-vous ?
+      audioClip: {fileID: 8300000, guid: 43dd571a89be98a49bbe87a9678008a5, type: 3}
     - difficulty: 1
-      text: "Quels types de biscuits avez-vous ?"
-      audioClip: {fileID: 0}
+      text: Quels types de biscuits avez-vous ?
+      audioClip: {fileID: 8300000, guid: 88bb714db22ad5845a1a980857428f47, type: 3}
     - difficulty: 2
-      text: "Quels types de biscuits proposez-vous ?"
-      audioClip: {fileID: 0}
+      text: Quels types de biscuits proposez-vous ?
+      audioClip: {fileID: 8300000, guid: 4464030aba6ac99478d3c18a1dac5618, type: 3}
     - difficulty: 3
-      text: "Pourriez-vous me dire quels biscuits vous avez de disponibles ?"
-      audioClip: {fileID: 0}
+      text: Pourriez-vous me dire quels biscuits vous avez de disponibles ?
+      audioClip: {fileID: 8300000, guid: f25179d9b863de94d81a6fe8312faee2, type: 3}
   - speaker: 0
     text: "Nous avons des biscuits au beurre de cacahu\xE8te."
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "On a des biscuits au beurre de cacahu\xE8te."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: ff3b3a6fc78fdb44b921ae74e6a57cbe, type: 3}
     - difficulty: 1
       text: "Nous avons des biscuits au beurre de cacahu\xE8te."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 11b6f3fd525b49643ae56c40ee419654, type: 3}
     - difficulty: 2
       text: "Nous disposons de biscuits au beurre de cacahu\xE8te."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 305add7b8ed01304196790bac81fd36d, type: 3}
     - difficulty: 3
       text: "Ce que nous avons en ce moment, ce sont des biscuits au beurre de cacahu\xE8te."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 38ccdb4dcdafb214bb83886e1034ac9d, type: 3}
   - speaker: 1
-    text: "Je voudrais un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
+    text: "Je voudrais un biscuit au beurre de cacahu\xE8te, s'il vous pla\xEEt."
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint4.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "Un biscuit au beurre de cacahu\xE8te, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: 6203af050dcd05c4c915000696cb7d36, type: 3}
     - difficulty: 1
-      text: "Je voudrais un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "Je voudrais un biscuit au beurre de cacahu\xE8te, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: 2a8b98ff92e010d4e860be44ed0e8c33, type: 3}
     - difficulty: 2
-      text: "J\x27aimerais un biscuit au beurre de cacahu\xE8te, s\x27il vous pla\xEEt."
-      audioClip: {fileID: 0}
+      text: "J'aimerais un biscuit au beurre de cacahu\xE8te, s'il vous pla\xEEt."
+      audioClip: {fileID: 8300000, guid: 58978f0eb761244448397a941506f030, type: 3}
     - difficulty: 3
-      text: "Alors je vais prendre un biscuit au beurre de cacahu\xE8te, si \xE7a ne vous d\xE9range pas."
-      audioClip: {fileID: 0}
+      text: "Alors je vais prendre un biscuit au beurre de cacahu\xE8te, si \xE7a
+        ne vous d\xE9range pas."
+      audioClip: {fileID: 8300000, guid: 0e772aba482bf9944bc1e5e66f0b3bf9, type: 3}
   - speaker: 0
-    text: "Ce sera tout ?"
+    text: Ce sera tout ?
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Autre chose ?"
-      audioClip: {fileID: 0}
+      text: Autre chose ?
+      audioClip: {fileID: 8300000, guid: 9e2d5b017e243a740a3c68bb26f6c723, type: 3}
     - difficulty: 1
-      text: "Ce sera tout ?"
-      audioClip: {fileID: 0}
+      text: Ce sera tout ?
+      audioClip: {fileID: 8300000, guid: 76263def4958dc84aa5b9ca45e5bde3d, type: 3}
     - difficulty: 2
-      text: "Ce sera tout pour aujourd\x27hui ?"
-      audioClip: {fileID: 0}
+      text: Ce sera tout pour aujourd'hui ?
+      audioClip: {fileID: 8300000, guid: 2839be614d19d9c498796a26b82a3fb5, type: 3}
     - difficulty: 3
-      text: "Je peux te proposer autre chose ou ce sera tout ?"
-      audioClip: {fileID: 0}
+      text: Je peux te proposer autre chose ou ce sera tout ?
+      audioClip: {fileID: 8300000, guid: 837db6b840a69a74baa5cfaf26ae344c, type: 3}
   - speaker: 1
-    text: "Oui, c\x27est tout. Combien \xE7a co\xFBte ?"
+    text: "Oui, c'est tout. Combien \xE7a co\xFBte ?"
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint5.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Oui. C\x27est combien ?"
-      audioClip: {fileID: 0}
+      text: Oui. C'est combien ?
+      audioClip: {fileID: 8300000, guid: 45527fa2402e0f1419af637f0c83ef72, type: 3}
     - difficulty: 1
-      text: "Oui, c\x27est tout. Combien \xE7a co\xFBte ?"
-      audioClip: {fileID: 0}
+      text: "Oui, c'est tout. Combien \xE7a co\xFBte ?"
+      audioClip: {fileID: 8300000, guid: c77b93ce7eba17347b95e783584b29a5, type: 3}
     - difficulty: 2
-      text: "Oui, c\x27est tout. Combien je vous dois ?"
-      audioClip: {fileID: 0}
+      text: Oui, c'est tout. Combien je vous dois ?
+      audioClip: {fileID: 8300000, guid: b2cc5b98356a3c549ae190d5eddfa5dc, type: 3}
     - difficulty: 3
-      text: "Non, ce sera tout. Combien je te dois au total ?"
-      audioClip: {fileID: 0}
+      text: Non, ce sera tout. Combien je te dois au total ?
+      audioClip: {fileID: 8300000, guid: 646e08cba8eec704c904865bb25564ca, type: 3}
   - speaker: 0
     text: "\xC7a fera quatre dollars et soixante centimes."
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "\xC7a fait quatre dollars soixante."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: a4fa49cc250d7204abcbb07987dd78d6, type: 3}
     - difficulty: 1
       text: "\xC7a fera quatre dollars et soixante centimes."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: c686fee80dbab8f429f6d9c7c0cea64e, type: 3}
     - difficulty: 2
-      text: "Le total serait de quatre dollars et soixante centimes."
-      audioClip: {fileID: 0}
+      text: Le total serait de quatre dollars et soixante centimes.
+      audioClip: {fileID: 8300000, guid: 6e4e32ce8b9ecef4f8bb6f2792d96174, type: 3}
     - difficulty: 3
       text: "\xC7a te revient \xE0 quatre dollars et soixante centimes au total."
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 87afbf4d294ef564a935709d619a785d, type: 3}
   - speaker: 1
-    text: "Voici."
+    text: Voici.
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint6.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Voici."
-      audioClip: {fileID: 0}
+      text: Voici.
+      audioClip: {fileID: 8300000, guid: 1b7d2c42b0a38f64e92da7d3a0995ed4, type: 3}
     - difficulty: 1
-      text: "Voici."
-      audioClip: {fileID: 0}
+      text: Voici.
+      audioClip: {fileID: 8300000, guid: 78804dd5ca47ded41a47cfd6624daf74, type: 3}
     - difficulty: 2
-      text: "Voici."
-      audioClip: {fileID: 0}
+      text: Voici.
+      audioClip: {fileID: 8300000, guid: 4006a389c01ad554594e4175692d94bf, type: 3}
     - difficulty: 3
-      text: "Voici, gardez la monnaie."
-      audioClip: {fileID: 0}
+      text: Voici, gardez la monnaie.
+      audioClip: {fileID: 8300000, guid: 317616442b842174aaa48e1a5ce92f8d, type: 3}
   - speaker: 0
     text: "Merci. Voici ton th\xE9 et ton biscuit. Bonne journ\xE9e !"
     audioClip: {fileID: 0}
-    hintVideoPath:
+    hintVideoPath: 
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
       text: "Merci. Ton th\xE9 et ton biscuit. Bonne journ\xE9e !"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 36a49a4bd57cbcd44b20a0b19e760c81, type: 3}
     - difficulty: 1
       text: "Merci. Voici ton th\xE9 et ton biscuit. Bonne journ\xE9e !"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: d33a4f54446a7384786a1574fc4053b1, type: 3}
     - difficulty: 2
-      text: "Merci beaucoup. Voici ton th\xE9 et ton biscuit. Excellente journ\xE9e !"
-      audioClip: {fileID: 0}
+      text: "Merci beaucoup. Voici ton th\xE9 et ton biscuit. Excellente journ\xE9e
+        !"
+      audioClip: {fileID: 8300000, guid: a6821453cab40ff4497b3b427a5dd0cf, type: 3}
     - difficulty: 3
-      text: "Merci beaucoup ! Voil\xE0 ton petit th\xE9 et ton biscuit. Passe une tr\xE8s bonne journ\xE9e !"
-      audioClip: {fileID: 0}
+      text: "Merci beaucoup ! Voil\xE0 ton petit th\xE9 et ton biscuit. Passe une
+        tr\xE8s bonne journ\xE9e !"
+      audioClip: {fileID: 8300000, guid: 043d6e9ebde4d034382ee5fa99a2b6e4, type: 3}
   - speaker: 1
-    text: "Toi aussi. Au revoir."
+    text: Toi aussi. Au revoir.
     audioClip: {fileID: 0}
     hintVideoPath: MaleBaristaHints/conversation8_version2_hint7.mp4
+    _isChallenge: 0
+    objectsToActivateOnSuccess: []
     textVariants:
     - difficulty: 0
-      text: "Au revoir."
-      audioClip: {fileID: 0}
+      text: Au revoir.
+      audioClip: {fileID: 8300000, guid: a64e7e35de4191e4bb9b56bd96b47f92, type: 3}
     - difficulty: 1
-      text: "Toi aussi. Au revoir."
-      audioClip: {fileID: 0}
+      text: Toi aussi. Au revoir.
+      audioClip: {fileID: 8300000, guid: 3503f8998a834f94197fc6bb0dd2ce58, type: 3}
     - difficulty: 2
       text: "De m\xEAme. \xC0 bient\xF4t !"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 7552da10a2c48b44aa6938ecaed6a7ee, type: 3}
     - difficulty: 3
       text: "Pareillement, bonne journ\xE9e \xE0 toi aussi. \xC0 la prochaine !"
-      audioClip: {fileID: 0}
+      audioClip: {fileID: 8300000, guid: 44c31f2e56a6a794e845c6905938b527, type: 3}
