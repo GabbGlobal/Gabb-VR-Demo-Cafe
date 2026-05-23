@@ -1,580 +1,1814 @@
 {
     "dictionary": [
-      {
-        "word": "Hola",
-        "POS": "Interjection",
-        "Meaning": "Hello."
-      },
-      {
-        "word": "Buenos",
-        "POS": "Adjective",
-        "Meaning": "Good."
-      },
-      {
-        "word": "días",
-        "POS": "Noun",
-        "Meaning": "Days."
-      },
-      {
-        "word": "Bien",
-        "POS": "Adjective",
-        "Meaning": "Well."
-      },
-      {
-        "word": "Gracias",
-        "POS": "Noun",
-        "Meaning": "Thank you."
-      },
-      {
-        "word": "Cómo",
-        "POS": "Adverb",
-        "Meaning": "How."
-      },
-      {
-        "word": "está",
-        "POS": "Verb",
-        "Meaning": "Are (you formal)."
-      },
-      {
-        "word": "usted",
-        "POS": "Pronoun",
-        "Meaning": "You (formal)."
-      },
-      {
-        "word": "hoy",
-        "POS": "Adverb",
-        "Meaning": "Today."
-      },
-      {
-        "word": "genial",
-        "POS": "Adjective",
-        "Meaning": "Great."
-      },
-      {
-        "word": "mañana",
-        "POS": "Noun",
-        "Meaning": "Tomorrow."
-      },
-      {
-        "word": "viajo",
-        "POS": "Verb",
-        "Meaning": "I travel."
-      },
-      {
-        "word": "casa",
-        "POS": "Noun",
-        "Meaning": "House."
-      },
-      {
-        "word": "hermana",
-        "POS": "Noun",
-        "Meaning": "Sister."
-      },
-      {
-        "word": "eso",
-        "POS": "Pronoun",
-        "Meaning": "That."
-      },
-      {
-        "word": "es",
-        "POS": "Verb",
-        "Meaning": "Is."
-      },
-      {
-        "word": "dónde",
-        "POS": "Adverb",
-        "Meaning": "Where."
-      },
-      {
-        "word": "vive",
-        "POS": "Verb",
-        "Meaning": "Lives."
-      },
-      {
-        "word": "Boston",
-        "POS": "Proper Noun",
-        "Meaning": "Boston."
-      },
-      {
-        "word": "te",
-        "POS": "Pronoun",
-        "Meaning": "You (informal)."
-      },
-      {
-        "word": "gusta",
-        "POS": "Verb",
-        "Meaning": "Like."
-      },
-      {
-        "word": "viajar",
-        "POS": "Verb",
-        "Meaning": "To travel."
-      },
-      {
-        "word": "me",
-        "POS": "Pronoun",
-        "Meaning": "Me."
-      },
-      {
-        "word": "gusta",
-        "POS": "Verb",
-        "Meaning": "Like."
-      },
-      {
-        "word": "avión",
-        "POS": "Noun",
-        "Meaning": "Airplane."
-      },
-      {
-        "word": "rápido",
-        "POS": "Adjective",
-        "Meaning": "Fast."
-      },
-      {
-        "word": "fácil",
-        "POS": "Adjective",
-        "Meaning": "Easy."
-      },
-      {
-        "word": "cierto",
-        "POS": "Adjective",
-        "Meaning": "True."
-      },
-      {
-        "word": "tomar",
-        "POS": "Verb",
-        "Meaning": "To take."
-      },
-      {
-        "word": "autobús",
-        "POS": "Noun",
-        "Meaning": "Bus."
-      },
-      {
-        "word": "económico",
-        "POS": "Adjective",
-        "Meaning": "Economical."
-      },
-      {
-        "word": "deberías",
-        "POS": "Verb",
-        "Meaning": "You should."
-      },
-      {
-        "word": "ir",
-        "POS": "Verb",
-        "Meaning": "To go."
-      },
-      {
-        "word": "decirle",
-        "POS": "Verb",
-        "Meaning": "To tell her."
-      },
-      {
-        "word": "Lola",
-        "POS": "Proper Noun",
-        "Meaning": "Lola."
-      },
-      {
-        "word": "estación",
-        "POS": "Noun",
-        "Meaning": "Station."
-      },
-      {
-        "word": "de",
-        "POS": "Preposition",
-        "Meaning": "Of."
-      },
-      {
-        "word": "autobuses",
-        "POS": "Noun",
-        "Meaning": "Buses."
-      },
-      {
-        "word": "sabés",
-        "POS": "Verb",
-        "Meaning": "Do you know?"
-      },
-      {
-        "word": "cerca",
-        "POS": "Adverb",
-        "Meaning": "Near."
-      },
-      {
-        "word": "otro",
-        "POS": "Adjective",
-        "Meaning": "Other."
-      },
-      {
-        "word": "lado",
-        "POS": "Noun",
-        "Meaning": "Side."
-      },
-      {
-        "word": "calle",
-        "POS": "Noun",
-        "Meaning": "Street."
-      },
-      {
-        "word": "caros",
-        "POS": "Adjective",
-        "Meaning": "Expensive."
-      },
-      {
-        "word": "billetes",
-        "POS": "Noun",
-        "Meaning": "Tickets."
-      },
-      {
-        "word": "cuesta",
-        "POS": "Verb",
-        "Meaning": "Costs."
-      },
-      {
-        "word": "dos",
-        "POS": "Number",
-        "Meaning": "Two."
-      },
-      {
-        "word": "dólares",
-        "POS": "Noun",
-        "Meaning": "Dollars."
-      },
-      {
-        "word": "veinticinco",
-        "POS": "Number",
-        "Meaning": "Twenty-five."
-      },
-      {
-        "word": "centavos",
-        "POS": "Noun",
-        "Meaning": "Cents."
-      },
-      {
-        "word": "conduzco",
-        "POS": "Verb",
-        "Meaning": "I drive."
-      },
-      {
-        "word": "bici",
-        "POS": "Noun",
-        "Meaning": "Bike."
-      },
-      {
-        "word": "fresco",
-        "POS": "Adjective",
-        "Meaning": "Cool."
-      },
-      {
-        "word": "divertido",
-        "POS": "Adjective",
-        "Meaning": "Fun."
-      },
-      {
-        "word": "ejercicio",
-        "POS": "Noun",
-        "Meaning": "Exercise."
-      },
-      {
-        "word": "buen",
-        "POS": "Adjective",
-        "Meaning": "Good."
-      },
-      {
-        "word": "día",
-        "POS": "Noun",
-        "Meaning": "Day."
-      },
-      {
-        "word": "ayudar",
-        "POS": "Verb",
-        "Meaning": "To help."
-      },
-      {
-        "word": "puedo",
-        "POS": "Verb",
-        "Meaning": "I can."
-      },
-      {
-        "word": "algo",
-        "POS": "Pronoun",
-        "Meaning": "Something."
-      },
-      {
-        "word": "menú",
-        "POS": "Noun",
-        "Meaning": "Menu."
-      },
-      {
-        "word": "ver",
-        "POS": "Verb",
-        "Meaning": "To see."
-      },
-      {
-        "word": "por",
-        "POS": "Preposition",
-        "Meaning": "For."
-      },
-      {
-        "word": "favor",
-        "POS": "Noun",
-        "Meaning": "Please."
-      },
-      {
-        "word": "café",
-        "POS": "Noun",
-        "Meaning": "Coffee."
-      },
-      {
-        "word": "leche",
-        "POS": "Noun",
-        "Meaning": "Milk."
-      },
-      {
-        "word": "algo",
-        "POS": "Pronoun",
-        "Meaning": "Something."
-      },
-      {
-        "word": "para",
-        "POS": "Preposition",
-        "Meaning": "For."
-      },
-      {
-        "word": "comer",
-        "POS": "Verb",
-        "Meaning": "To eat."
-      },
-      {
-        "word": "eso",
-        "POS": "Pronoun",
-        "Meaning": "That."
-      },
-      {
-        "word": "gustaría",
-        "POS": "Verb",
-        "Meaning": "Would like."
-      },
-      {
-        "word": "sándwich",
-        "POS": "Noun",
-        "Meaning": "Sandwich."
-      },
-      {
-        "word": "huevo",
-        "POS": "Noun",
-        "Meaning": "Egg."
-      },
-      {
-        "word": "qué",
-        "POS": "Interrogative",
-        "Meaning": "What."
-      },
-      {
-        "word": "clase",
-        "POS": "Noun",
-        "Meaning": "Kind."
-      },
-      {
-        "word": "panecillo",
-        "POS": "Noun",
-        "Meaning": "Roll."
-      },
-      {
-        "word": "ese",
-        "POS": "Adjective",
-        "Meaning": "That."
-      },
-      {
-        "word": "muffin",
-        "POS": "Noun",
-        "Meaning": "Muffin."
-      },
-      {
-        "word": "arándanos",
-        "POS": "Noun",
-        "Meaning": "Blueberries."
-      },
-      {
-        "word": "quieres",
-        "POS": "Verb",
-        "Meaning": "Do you want?"
-      },
-      {
-        "word": "uno",
-        "POS": "Number",
-        "Meaning": "One."
-      },
-      {
-        "word": "gracias",
-        "POS": "Noun",
-        "Meaning": "Thank you."
-      },
-      {
-        "word": "cinco",
-        "POS": "Number",
-        "Meaning": "Five."
-      },
-      {
-        "word": "cuarenta",
-        "POS": "Number",
-        "Meaning": "Forty."
-      },
-      {
-        "word": "siete",
-        "POS": "Number",
-        "Meaning": "Seven."
-      },
-      {
-        "word": "pagar",
-        "POS": "Verb",
-        "Meaning": "To pay."
-      },
-      {
-        "word": "tarjeta",
-        "POS": "Noun",
-        "Meaning": "Card."
-      },
-      {
-        "word": "sólo",
-        "POS": "Adverb",
-        "Meaning": "Only."
-      },
-      {
-        "word": "aceptamos",
-        "POS": "Verb",
-        "Meaning": "We accept."
-      },
-      {
-        "word": "efectivo",
-        "POS": "Noun",
-        "Meaning": "Cash."
-      },
-      {
-        "word": "seis",
-        "POS": "Number",
-        "Meaning": "Six."
-      },
-      {
-        "word": "aquí",
-        "POS": "Adverb",
-        "Meaning": "Here."
-      },
-      {
-        "word": "cambio",
-        "POS": "Noun",
-        "Meaning": "Change."
-      },
-      {
-        "word": "cincuenta",
-        "POS": "Number",
-        "Meaning": "Fifty."
-      },
-      {
-        "word": "tres",
-        "POS": "Number",
-        "Meaning": "Three."
-      },
-      {
-        "word": "tener",
-        "POS": "Verb",
-        "Meaning": "To have."
-      },
-      {
-        "word": "buen",
-        "POS": "Adjective",
-        "Meaning": "Good."
-      },
-      {
-        "word": "tú",
-        "POS": "Pronoun",
-        "Meaning": "You."
-      },
-      {
-        "word": "adiós",
-        "POS": "Interjection",
-        "Meaning": "Goodbye."
-      },
-      {
-        "word": "qué",
-        "POS": "Interrogative",
-        "Meaning": "What."
-      },
-      {
-        "word": "tipos",
-        "POS": "Noun",
-        "Meaning": "Types."
-      },
-      {
-        "word": "té",
-        "POS": "Noun",
-        "Meaning": "Tea."
-      },
-      {
-        "word": "nosotros",
-        "POS": "Pronoun",
-        "Meaning": "We."
-      },
-      {
-        "word": "tenemos",
-        "POS": "Verb",
-        "Meaning": "We have."
-      },
-      {
-        "word": "negro",
-        "POS": "Adjective",
-        "Meaning": "Black."
-      },
-      {
-        "word": "verde",
-        "POS": "Adjective",
-        "Meaning": "Green."
-      },
-      {
-        "word": "darme",
-        "POS": "Verb",
-        "Meaning": "To give me."
-      },
-      {
-        "word": "galleta",
-        "POS": "Noun",
-        "Meaning": "Cookie."
-      },
-      {
-        "word": "maní",
-        "POS": "Noun",
-        "Meaning": "Peanut."
-      },
-      {
-        "word": "costar",
-        "POS": "Verb",
-        "Meaning": "To cost."
-      },
-      {
-        "word": "serán",
-        "POS": "Verb",
-        "Meaning": "They will be."
-      },
-      {
-        "word": "cuatro",
-        "POS": "Number",
-        "Meaning": "Four."
-      },
-      {
-        "word": "sesenta",
-        "POS": "Number",
-        "Meaning": "Sixty."
-      },
-      {
-        "word": "centavos",
-        "POS": "Noun",
-        "Meaning": "Cents."
-      },
-      {
-        "word": "adiós",
-        "POS": "Interjection",
-        "Meaning": "Goodbye."
-      }
+        {
+            "word": "Hola",
+            "POS": "Interjection",
+            "Meaning": "Hello."
+        },
+        {
+            "word": "Buenos",
+            "POS": "Adjective",
+            "Meaning": "Good."
+        },
+        {
+            "word": "días",
+            "POS": "Noun",
+            "Meaning": "Days."
+        },
+        {
+            "word": "Bien",
+            "POS": "Adjective",
+            "Meaning": "Well."
+        },
+        {
+            "word": "Gracias",
+            "POS": "Noun",
+            "Meaning": "Thank you."
+        },
+        {
+            "word": "Cómo",
+            "POS": "Adverb",
+            "Meaning": "How."
+        },
+        {
+            "word": "está",
+            "POS": "Verb",
+            "Meaning": "Are (you formal)."
+        },
+        {
+            "word": "usted",
+            "POS": "Pronoun",
+            "Meaning": "You (formal)."
+        },
+        {
+            "word": "hoy",
+            "POS": "Adverb",
+            "Meaning": "Today."
+        },
+        {
+            "word": "genial",
+            "POS": "Adjective",
+            "Meaning": "Great."
+        },
+        {
+            "word": "mañana",
+            "POS": "Noun",
+            "Meaning": "Tomorrow."
+        },
+        {
+            "word": "viajo",
+            "POS": "Verb",
+            "Meaning": "I travel."
+        },
+        {
+            "word": "casa",
+            "POS": "Noun",
+            "Meaning": "House."
+        },
+        {
+            "word": "hermana",
+            "POS": "Noun",
+            "Meaning": "Sister."
+        },
+        {
+            "word": "eso",
+            "POS": "Pronoun",
+            "Meaning": "That."
+        },
+        {
+            "word": "es",
+            "POS": "Verb",
+            "Meaning": "Is."
+        },
+        {
+            "word": "dónde",
+            "POS": "Adverb",
+            "Meaning": "Where."
+        },
+        {
+            "word": "vive",
+            "POS": "Verb",
+            "Meaning": "Lives."
+        },
+        {
+            "word": "Boston",
+            "POS": "Proper Noun",
+            "Meaning": "Boston."
+        },
+        {
+            "word": "te",
+            "POS": "Pronoun",
+            "Meaning": "You (informal)."
+        },
+        {
+            "word": "gusta",
+            "POS": "Verb",
+            "Meaning": "Like."
+        },
+        {
+            "word": "viajar",
+            "POS": "Verb",
+            "Meaning": "To travel."
+        },
+        {
+            "word": "me",
+            "POS": "Pronoun",
+            "Meaning": "Me."
+        },
+        {
+            "word": "gusta",
+            "POS": "Verb",
+            "Meaning": "Like."
+        },
+        {
+            "word": "avión",
+            "POS": "Noun",
+            "Meaning": "Airplane."
+        },
+        {
+            "word": "rápido",
+            "POS": "Adjective",
+            "Meaning": "Fast."
+        },
+        {
+            "word": "fácil",
+            "POS": "Adjective",
+            "Meaning": "Easy."
+        },
+        {
+            "word": "cierto",
+            "POS": "Adjective",
+            "Meaning": "True."
+        },
+        {
+            "word": "tomar",
+            "POS": "Verb",
+            "Meaning": "To take."
+        },
+        {
+            "word": "autobús",
+            "POS": "Noun",
+            "Meaning": "Bus."
+        },
+        {
+            "word": "económico",
+            "POS": "Adjective",
+            "Meaning": "Economical."
+        },
+        {
+            "word": "deberías",
+            "POS": "Verb",
+            "Meaning": "You should."
+        },
+        {
+            "word": "ir",
+            "POS": "Verb",
+            "Meaning": "To go."
+        },
+        {
+            "word": "decirle",
+            "POS": "Verb",
+            "Meaning": "To tell her."
+        },
+        {
+            "word": "Lola",
+            "POS": "Proper Noun",
+            "Meaning": "Lola."
+        },
+        {
+            "word": "estación",
+            "POS": "Noun",
+            "Meaning": "Station."
+        },
+        {
+            "word": "de",
+            "POS": "Preposition",
+            "Meaning": "Of."
+        },
+        {
+            "word": "autobuses",
+            "POS": "Noun",
+            "Meaning": "Buses."
+        },
+        {
+            "word": "sabés",
+            "POS": "Verb",
+            "Meaning": "Do you know?"
+        },
+        {
+            "word": "cerca",
+            "POS": "Adverb",
+            "Meaning": "Near."
+        },
+        {
+            "word": "otro",
+            "POS": "Adjective",
+            "Meaning": "Other."
+        },
+        {
+            "word": "lado",
+            "POS": "Noun",
+            "Meaning": "Side."
+        },
+        {
+            "word": "calle",
+            "POS": "Noun",
+            "Meaning": "Street."
+        },
+        {
+            "word": "caros",
+            "POS": "Adjective",
+            "Meaning": "Expensive."
+        },
+        {
+            "word": "billetes",
+            "POS": "Noun",
+            "Meaning": "Tickets."
+        },
+        {
+            "word": "cuesta",
+            "POS": "Verb",
+            "Meaning": "Costs."
+        },
+        {
+            "word": "dos",
+            "POS": "Number",
+            "Meaning": "Two."
+        },
+        {
+            "word": "dólares",
+            "POS": "Noun",
+            "Meaning": "Dollars."
+        },
+        {
+            "word": "veinticinco",
+            "POS": "Number",
+            "Meaning": "Twenty-five."
+        },
+        {
+            "word": "centavos",
+            "POS": "Noun",
+            "Meaning": "Cents."
+        },
+        {
+            "word": "conduzco",
+            "POS": "Verb",
+            "Meaning": "I drive."
+        },
+        {
+            "word": "bici",
+            "POS": "Noun",
+            "Meaning": "Bike."
+        },
+        {
+            "word": "fresco",
+            "POS": "Adjective",
+            "Meaning": "Cool."
+        },
+        {
+            "word": "divertido",
+            "POS": "Adjective",
+            "Meaning": "Fun."
+        },
+        {
+            "word": "ejercicio",
+            "POS": "Noun",
+            "Meaning": "Exercise."
+        },
+        {
+            "word": "buen",
+            "POS": "Adjective",
+            "Meaning": "Good."
+        },
+        {
+            "word": "día",
+            "POS": "Noun",
+            "Meaning": "Day."
+        },
+        {
+            "word": "ayudar",
+            "POS": "Verb",
+            "Meaning": "To help."
+        },
+        {
+            "word": "puedo",
+            "POS": "Verb",
+            "Meaning": "I can."
+        },
+        {
+            "word": "algo",
+            "POS": "Pronoun",
+            "Meaning": "Something."
+        },
+        {
+            "word": "menú",
+            "POS": "Noun",
+            "Meaning": "Menu."
+        },
+        {
+            "word": "ver",
+            "POS": "Verb",
+            "Meaning": "To see."
+        },
+        {
+            "word": "por",
+            "POS": "Preposition",
+            "Meaning": "For."
+        },
+        {
+            "word": "favor",
+            "POS": "Noun",
+            "Meaning": "Please."
+        },
+        {
+            "word": "café",
+            "POS": "Noun",
+            "Meaning": "Coffee."
+        },
+        {
+            "word": "leche",
+            "POS": "Noun",
+            "Meaning": "Milk."
+        },
+        {
+            "word": "algo",
+            "POS": "Pronoun",
+            "Meaning": "Something."
+        },
+        {
+            "word": "para",
+            "POS": "Preposition",
+            "Meaning": "For."
+        },
+        {
+            "word": "comer",
+            "POS": "Verb",
+            "Meaning": "To eat."
+        },
+        {
+            "word": "eso",
+            "POS": "Pronoun",
+            "Meaning": "That."
+        },
+        {
+            "word": "gustaría",
+            "POS": "Verb",
+            "Meaning": "Would like."
+        },
+        {
+            "word": "sándwich",
+            "POS": "Noun",
+            "Meaning": "Sandwich."
+        },
+        {
+            "word": "huevo",
+            "POS": "Noun",
+            "Meaning": "Egg."
+        },
+        {
+            "word": "qué",
+            "POS": "Interrogative",
+            "Meaning": "What."
+        },
+        {
+            "word": "clase",
+            "POS": "Noun",
+            "Meaning": "Kind."
+        },
+        {
+            "word": "panecillo",
+            "POS": "Noun",
+            "Meaning": "Roll."
+        },
+        {
+            "word": "ese",
+            "POS": "Adjective",
+            "Meaning": "That."
+        },
+        {
+            "word": "muffin",
+            "POS": "Noun",
+            "Meaning": "Muffin."
+        },
+        {
+            "word": "arándanos",
+            "POS": "Noun",
+            "Meaning": "Blueberries."
+        },
+        {
+            "word": "quieres",
+            "POS": "Verb",
+            "Meaning": "Do you want?"
+        },
+        {
+            "word": "uno",
+            "POS": "Number",
+            "Meaning": "One."
+        },
+        {
+            "word": "gracias",
+            "POS": "Noun",
+            "Meaning": "Thank you."
+        },
+        {
+            "word": "cinco",
+            "POS": "Number",
+            "Meaning": "Five."
+        },
+        {
+            "word": "cuarenta",
+            "POS": "Number",
+            "Meaning": "Forty."
+        },
+        {
+            "word": "siete",
+            "POS": "Number",
+            "Meaning": "Seven."
+        },
+        {
+            "word": "pagar",
+            "POS": "Verb",
+            "Meaning": "To pay."
+        },
+        {
+            "word": "tarjeta",
+            "POS": "Noun",
+            "Meaning": "Card."
+        },
+        {
+            "word": "sólo",
+            "POS": "Adverb",
+            "Meaning": "Only."
+        },
+        {
+            "word": "aceptamos",
+            "POS": "Verb",
+            "Meaning": "We accept."
+        },
+        {
+            "word": "efectivo",
+            "POS": "Noun",
+            "Meaning": "Cash."
+        },
+        {
+            "word": "seis",
+            "POS": "Number",
+            "Meaning": "Six."
+        },
+        {
+            "word": "aquí",
+            "POS": "Adverb",
+            "Meaning": "Here."
+        },
+        {
+            "word": "cambio",
+            "POS": "Noun",
+            "Meaning": "Change."
+        },
+        {
+            "word": "cincuenta",
+            "POS": "Number",
+            "Meaning": "Fifty."
+        },
+        {
+            "word": "tres",
+            "POS": "Number",
+            "Meaning": "Three."
+        },
+        {
+            "word": "tener",
+            "POS": "Verb",
+            "Meaning": "To have."
+        },
+        {
+            "word": "buen",
+            "POS": "Adjective",
+            "Meaning": "Good."
+        },
+        {
+            "word": "tú",
+            "POS": "Pronoun",
+            "Meaning": "You."
+        },
+        {
+            "word": "adiós",
+            "POS": "Interjection",
+            "Meaning": "Goodbye."
+        },
+        {
+            "word": "qué",
+            "POS": "Interrogative",
+            "Meaning": "What."
+        },
+        {
+            "word": "tipos",
+            "POS": "Noun",
+            "Meaning": "Types."
+        },
+        {
+            "word": "té",
+            "POS": "Noun",
+            "Meaning": "Tea."
+        },
+        {
+            "word": "nosotros",
+            "POS": "Pronoun",
+            "Meaning": "We."
+        },
+        {
+            "word": "tenemos",
+            "POS": "Verb",
+            "Meaning": "We have."
+        },
+        {
+            "word": "negro",
+            "POS": "Adjective",
+            "Meaning": "Black."
+        },
+        {
+            "word": "verde",
+            "POS": "Adjective",
+            "Meaning": "Green."
+        },
+        {
+            "word": "darme",
+            "POS": "Verb",
+            "Meaning": "To give me."
+        },
+        {
+            "word": "galleta",
+            "POS": "Noun",
+            "Meaning": "Cookie."
+        },
+        {
+            "word": "maní",
+            "POS": "Noun",
+            "Meaning": "Peanut."
+        },
+        {
+            "word": "costar",
+            "POS": "Verb",
+            "Meaning": "To cost."
+        },
+        {
+            "word": "serán",
+            "POS": "Verb",
+            "Meaning": "They will be."
+        },
+        {
+            "word": "cuatro",
+            "POS": "Number",
+            "Meaning": "Four."
+        },
+        {
+            "word": "sesenta",
+            "POS": "Number",
+            "Meaning": "Sixty."
+        },
+        {
+            "word": "centavos",
+            "POS": "Noun",
+            "Meaning": "Cents."
+        },
+        {
+            "word": "adiós",
+            "POS": "Interjection",
+            "Meaning": "Goodbye."
+        },
+        {
+            "word": "el",
+            "POS": "Article",
+            "Meaning": "The (masculine)."
+        },
+        {
+            "word": "la",
+            "POS": "Article",
+            "Meaning": "The (feminine)."
+        },
+        {
+            "word": "las",
+            "POS": "Article",
+            "Meaning": "The (feminine plural)."
+        },
+        {
+            "word": "los",
+            "POS": "Article",
+            "Meaning": "The (masculine plural)."
+        },
+        {
+            "word": "una",
+            "POS": "Article",
+            "Meaning": "A/an (feminine)."
+        },
+        {
+            "word": "un",
+            "POS": "Article",
+            "Meaning": "A/an (masculine)."
+        },
+        {
+            "word": "al",
+            "POS": "Preposition",
+            "Meaning": "To the."
+        },
+        {
+            "word": "con",
+            "POS": "Preposition",
+            "Meaning": "With."
+        },
+        {
+            "word": "en",
+            "POS": "Preposition",
+            "Meaning": "In/on."
+        },
+        {
+            "word": "sin",
+            "POS": "Preposition",
+            "Meaning": "Without."
+        },
+        {
+            "word": "sobre",
+            "POS": "Preposition",
+            "Meaning": "About/on."
+        },
+        {
+            "word": "hasta",
+            "POS": "Preposition",
+            "Meaning": "Until/to."
+        },
+        {
+            "word": "ella",
+            "POS": "Pronoun",
+            "Meaning": "She."
+        },
+        {
+            "word": "le",
+            "POS": "Pronoun",
+            "Meaning": "To him/her."
+        },
+        {
+            "word": "lo",
+            "POS": "Pronoun",
+            "Meaning": "It/him."
+        },
+        {
+            "word": "mi",
+            "POS": "Adjective",
+            "Meaning": "My."
+        },
+        {
+            "word": "se",
+            "POS": "Pronoun",
+            "Meaning": "Oneself."
+        },
+        {
+            "word": "su",
+            "POS": "Adjective",
+            "Meaning": "His/her/your (formal)."
+        },
+        {
+            "word": "yo",
+            "POS": "Pronoun",
+            "Meaning": "I."
+        },
+        {
+            "word": "nos",
+            "POS": "Pronoun",
+            "Meaning": "Us."
+        },
+        {
+            "word": "este",
+            "POS": "Adjective",
+            "Meaning": "This (masculine)."
+        },
+        {
+            "word": "esta",
+            "POS": "Adjective",
+            "Meaning": "This (feminine)."
+        },
+        {
+            "word": "que",
+            "POS": "Conjunction",
+            "Meaning": "That/which."
+        },
+        {
+            "word": "pero",
+            "POS": "Conjunction",
+            "Meaning": "But."
+        },
+        {
+            "word": "porque",
+            "POS": "Conjunction",
+            "Meaning": "Because."
+        },
+        {
+            "word": "aunque",
+            "POS": "Conjunction",
+            "Meaning": "Although."
+        },
+        {
+            "word": "si",
+            "POS": "Conjunction",
+            "Meaning": "If."
+        },
+        {
+            "word": "pues",
+            "POS": "Conjunction",
+            "Meaning": "Well/then."
+        },
+        {
+            "word": "entonces",
+            "POS": "Conjunction",
+            "Meaning": "Then/so."
+        },
+        {
+            "word": "muy",
+            "POS": "Adverb",
+            "Meaning": "Very."
+        },
+        {
+            "word": "más",
+            "POS": "Adverb",
+            "Meaning": "More."
+        },
+        {
+            "word": "no",
+            "POS": "Adverb",
+            "Meaning": "No/not."
+        },
+        {
+            "word": "sí",
+            "POS": "Adverb",
+            "Meaning": "Yes."
+        },
+        {
+            "word": "también",
+            "POS": "Adverb",
+            "Meaning": "Also."
+        },
+        {
+            "word": "ahora",
+            "POS": "Adverb",
+            "Meaning": "Now."
+        },
+        {
+            "word": "ahí",
+            "POS": "Adverb",
+            "Meaning": "There."
+        },
+        {
+            "word": "allá",
+            "POS": "Adverb",
+            "Meaning": "Over there."
+        },
+        {
+            "word": "bastante",
+            "POS": "Adverb",
+            "Meaning": "Quite/enough."
+        },
+        {
+            "word": "apenas",
+            "POS": "Adverb",
+            "Meaning": "Barely/hardly."
+        },
+        {
+            "word": "ahorita",
+            "POS": "Adverb",
+            "Meaning": "Right now."
+        },
+        {
+            "word": "cerquita",
+            "POS": "Adverb",
+            "Meaning": "Very close."
+        },
+        {
+            "word": "encima",
+            "POS": "Adverb",
+            "Meaning": "On top/moreover."
+        },
+        {
+            "word": "ya",
+            "POS": "Adverb",
+            "Meaning": "Already."
+        },
+        {
+            "word": "solo",
+            "POS": "Adverb",
+            "Meaning": "Only/alone."
+        },
+        {
+            "word": "solamente",
+            "POS": "Adverb",
+            "Meaning": "Only."
+        },
+        {
+            "word": "igualmente",
+            "POS": "Adverb",
+            "Meaning": "Likewise."
+        },
+        {
+            "word": "lamentablemente",
+            "POS": "Adverb",
+            "Meaning": "Unfortunately."
+        },
+        {
+            "word": "nomás",
+            "POS": "Adverb",
+            "Meaning": "Just/only."
+        },
+        {
+            "word": "luego",
+            "POS": "Adverb",
+            "Meaning": "Later/then."
+        },
+        {
+            "word": "cuánto",
+            "POS": "Adverb",
+            "Meaning": "How much."
+        },
+        {
+            "word": "recién",
+            "POS": "Adverb",
+            "Meaning": "Recently/freshly."
+        },
+        {
+            "word": "tal",
+            "POS": "Adverb",
+            "Meaning": "Such/so."
+        },
+        {
+            "word": "tan",
+            "POS": "Adverb",
+            "Meaning": "So/such."
+        },
+        {
+            "word": "justo",
+            "POS": "Adverb",
+            "Meaning": "Just/exactly."
+        },
+        {
+            "word": "mal",
+            "POS": "Adverb",
+            "Meaning": "Badly/wrong."
+        },
+        {
+            "word": "mucho",
+            "POS": "Adverb",
+            "Meaning": "A lot/much."
+        },
+        {
+            "word": "barato",
+            "POS": "Adjective",
+            "Meaning": "Cheap."
+        },
+        {
+            "word": "baratos",
+            "POS": "Adjective",
+            "Meaning": "Cheap (plural)."
+        },
+        {
+            "word": "bonita",
+            "POS": "Adjective",
+            "Meaning": "Pretty/nice (feminine)."
+        },
+        {
+            "word": "bonito",
+            "POS": "Adjective",
+            "Meaning": "Pretty/nice."
+        },
+        {
+            "word": "buenas",
+            "POS": "Adjective",
+            "Meaning": "Good (feminine plural)/hello."
+        },
+        {
+            "word": "caro",
+            "POS": "Adjective",
+            "Meaning": "Expensive."
+        },
+        {
+            "word": "accesibles",
+            "POS": "Adjective",
+            "Meaning": "Affordable/accessible."
+        },
+        {
+            "word": "amable",
+            "POS": "Adjective",
+            "Meaning": "Kind."
+        },
+        {
+            "word": "cómodo",
+            "POS": "Adjective",
+            "Meaning": "Comfortable."
+        },
+        {
+            "word": "conveniente",
+            "POS": "Adjective",
+            "Meaning": "Convenient."
+        },
+        {
+            "word": "disponibles",
+            "POS": "Adjective",
+            "Meaning": "Available."
+        },
+        {
+            "word": "económicos",
+            "POS": "Adjective",
+            "Meaning": "Economical (plural)."
+        },
+        {
+            "word": "emocionante",
+            "POS": "Adjective",
+            "Meaning": "Exciting."
+        },
+        {
+            "word": "estupendo",
+            "POS": "Adjective",
+            "Meaning": "Wonderful."
+        },
+        {
+            "word": "excelente",
+            "POS": "Adjective",
+            "Meaning": "Excellent."
+        },
+        {
+            "word": "extraordinario",
+            "POS": "Adjective",
+            "Meaning": "Extraordinary."
+        },
+        {
+            "word": "fenomenal",
+            "POS": "Adjective",
+            "Meaning": "Phenomenal/great."
+        },
+        {
+            "word": "perfecto",
+            "POS": "Adjective",
+            "Meaning": "Perfect."
+        },
+        {
+            "word": "posible",
+            "POS": "Adjective",
+            "Meaning": "Possible."
+        },
+        {
+            "word": "justos",
+            "POS": "Adjective",
+            "Meaning": "Exact/even (plural)."
+        },
+        {
+            "word": "varios",
+            "POS": "Adjective",
+            "Meaning": "Several."
+        },
+        {
+            "word": "mucha",
+            "POS": "Adjective",
+            "Meaning": "Much (feminine)."
+        },
+        {
+            "word": "muchas",
+            "POS": "Adjective",
+            "Meaning": "Many (feminine)."
+        },
+        {
+            "word": "todo",
+            "POS": "Adjective",
+            "Meaning": "All/everything."
+        },
+        {
+            "word": "hecho",
+            "POS": "Adjective",
+            "Meaning": "Made/done."
+        },
+        {
+            "word": "supuesto",
+            "POS": "Adjective",
+            "Meaning": "Supposed (por supuesto = of course)."
+        },
+        {
+            "word": "biblioteca",
+            "POS": "Noun",
+            "Meaning": "Library."
+        },
+        {
+            "word": "bicicleta",
+            "POS": "Noun",
+            "Meaning": "Bicycle."
+        },
+        {
+            "word": "billete",
+            "POS": "Noun",
+            "Meaning": "Ticket."
+        },
+        {
+            "word": "ciudad",
+            "POS": "Noun",
+            "Meaning": "City."
+        },
+        {
+            "word": "crédito",
+            "POS": "Noun",
+            "Meaning": "Credit."
+        },
+        {
+            "word": "desarrollo",
+            "POS": "Noun",
+            "Meaning": "Development."
+        },
+        {
+            "word": "duda",
+            "POS": "Noun",
+            "Meaning": "Doubt."
+        },
+        {
+            "word": "electrodoméstico",
+            "POS": "Noun",
+            "Meaning": "Appliance."
+        },
+        {
+            "word": "estudiante",
+            "POS": "Noun",
+            "Meaning": "Student."
+        },
+        {
+            "word": "falta",
+            "POS": "Noun",
+            "Meaning": "Need/lack."
+        },
+        {
+            "word": "ferrocarril",
+            "POS": "Noun",
+            "Meaning": "Railroad."
+        },
+        {
+            "word": "fonemas",
+            "POS": "Noun",
+            "Meaning": "Phonemes."
+        },
+        {
+            "word": "galletas",
+            "POS": "Noun",
+            "Meaning": "Cookies."
+        },
+        {
+            "word": "gato",
+            "POS": "Noun",
+            "Meaning": "Cat."
+        },
+        {
+            "word": "gusto",
+            "POS": "Noun",
+            "Meaning": "Pleasure."
+        },
+        {
+            "word": "hora",
+            "POS": "Noun",
+            "Meaning": "Hour/time."
+        },
+        {
+            "word": "indiscreción",
+            "POS": "Noun",
+            "Meaning": "Indiscretion."
+        },
+        {
+            "word": "interior",
+            "POS": "Noun",
+            "Meaning": "Interior/inside."
+        },
+        {
+            "word": "luz",
+            "POS": "Noun",
+            "Meaning": "Light."
+        },
+        {
+            "word": "mantequilla",
+            "POS": "Noun",
+            "Meaning": "Butter."
+        },
+        {
+            "word": "maravilla",
+            "POS": "Noun",
+            "Meaning": "Wonder/marvel."
+        },
+        {
+            "word": "medio",
+            "POS": "Noun",
+            "Meaning": "Means/medium."
+        },
+        {
+            "word": "molestia",
+            "POS": "Noun",
+            "Meaning": "Bother/trouble."
+        },
+        {
+            "word": "momento",
+            "POS": "Noun",
+            "Meaning": "Moment."
+        },
+        {
+            "word": "muffins",
+            "POS": "Noun",
+            "Meaning": "Muffins."
+        },
+        {
+            "word": "murciélago",
+            "POS": "Noun",
+            "Meaning": "Bat (animal)."
+        },
+        {
+            "word": "nariz",
+            "POS": "Noun",
+            "Meaning": "Nose."
+        },
+        {
+            "word": "opciones",
+            "POS": "Noun",
+            "Meaning": "Options."
+        },
+        {
+            "word": "pagos",
+            "POS": "Noun",
+            "Meaning": "Payments."
+        },
+        {
+            "word": "pan",
+            "POS": "Noun",
+            "Meaning": "Bread."
+        },
+        {
+            "word": "posibilidad",
+            "POS": "Noun",
+            "Meaning": "Possibility."
+        },
+        {
+            "word": "problema",
+            "POS": "Noun",
+            "Meaning": "Problem."
+        },
+        {
+            "word": "razón",
+            "POS": "Noun",
+            "Meaning": "Reason."
+        },
+        {
+            "word": "refrigerador",
+            "POS": "Noun",
+            "Meaning": "Refrigerator."
+        },
+        {
+            "word": "sol",
+            "POS": "Noun",
+            "Meaning": "Sun."
+        },
+        {
+            "word": "tecito",
+            "POS": "Noun",
+            "Meaning": "Little tea (affectionate)."
+        },
+        {
+            "word": "total",
+            "POS": "Noun",
+            "Meaning": "Total."
+        },
+        {
+            "word": "trabalenguas",
+            "POS": "Noun",
+            "Meaning": "Tongue twister."
+        },
+        {
+            "word": "trabajo",
+            "POS": "Noun",
+            "Meaning": "Work/job."
+        },
+        {
+            "word": "transporte",
+            "POS": "Noun",
+            "Meaning": "Transportation."
+        },
+        {
+            "word": "variedades",
+            "POS": "Noun",
+            "Meaning": "Varieties."
+        },
+        {
+            "word": "verdad",
+            "POS": "Noun",
+            "Meaning": "Truth."
+        },
+        {
+            "word": "viaje",
+            "POS": "Noun",
+            "Meaning": "Trip."
+        },
+        {
+            "word": "vistazo",
+            "POS": "Noun",
+            "Meaning": "Glance/look."
+        },
+        {
+            "word": "años",
+            "POS": "Noun",
+            "Meaning": "Years."
+        },
+        {
+            "word": "casualidad",
+            "POS": "Noun",
+            "Meaning": "Coincidence/chance."
+        },
+        {
+            "word": "tardes",
+            "POS": "Noun",
+            "Meaning": "Afternoons."
+        },
+        {
+            "word": "tipo",
+            "POS": "Noun",
+            "Meaning": "Type/kind."
+        },
+        {
+            "word": "nada",
+            "POS": "Pronoun",
+            "Meaning": "Nothing."
+        },
+        {
+            "word": "anda",
+            "POS": "Verb",
+            "Meaning": "Goes/walks."
+        },
+        {
+            "word": "andamos",
+            "POS": "Verb",
+            "Meaning": "We go/walk."
+        },
+        {
+            "word": "andas",
+            "POS": "Verb",
+            "Meaning": "You go/walk."
+        },
+        {
+            "word": "antoja",
+            "POS": "Verb",
+            "Meaning": "Craves/feels like."
+        },
+        {
+            "word": "apetece",
+            "POS": "Verb",
+            "Meaning": "Feels like/appeals."
+        },
+        {
+            "word": "apetecería",
+            "POS": "Verb",
+            "Meaning": "Would feel like."
+        },
+        {
+            "word": "arreglas",
+            "POS": "Verb",
+            "Meaning": "You manage/fix."
+        },
+        {
+            "word": "ayudo",
+            "POS": "Verb",
+            "Meaning": "I help."
+        },
+        {
+            "word": "añadir",
+            "POS": "Verb",
+            "Meaning": "To add."
+        },
+        {
+            "word": "agradezco",
+            "POS": "Verb",
+            "Meaning": "I appreciate/thank."
+        },
+        {
+            "word": "cobrarme",
+            "POS": "Verb",
+            "Meaning": "To charge me."
+        },
+        {
+            "word": "contamos",
+            "POS": "Verb",
+            "Meaning": "We have/count on."
+        },
+        {
+            "word": "cruza",
+            "POS": "Verb",
+            "Meaning": "Cross (command)."
+        },
+        {
+            "word": "cruzas",
+            "POS": "Verb",
+            "Meaning": "You cross."
+        },
+        {
+            "word": "cuestan",
+            "POS": "Verb",
+            "Meaning": "They cost."
+        },
+        {
+            "word": "debo",
+            "POS": "Verb",
+            "Meaning": "I owe."
+        },
+        {
+            "word": "decir",
+            "POS": "Verb",
+            "Meaning": "To say/tell."
+        },
+        {
+            "word": "decirme",
+            "POS": "Verb",
+            "Meaning": "To tell me."
+        },
+        {
+            "word": "dejes",
+            "POS": "Verb",
+            "Meaning": "You stop/leave (subjunctive)."
+        },
+        {
+            "word": "dejo",
+            "POS": "Verb",
+            "Meaning": "I leave/set down."
+        },
+        {
+            "word": "desea",
+            "POS": "Verb",
+            "Meaning": "Desires/wishes."
+        },
+        {
+            "word": "desearía",
+            "POS": "Verb",
+            "Meaning": "Would desire."
+        },
+        {
+            "word": "desplazarme",
+            "POS": "Verb",
+            "Meaning": "To get around."
+        },
+        {
+            "word": "devuelvo",
+            "POS": "Verb",
+            "Meaning": "I return/give back."
+        },
+        {
+            "word": "diera",
+            "POS": "Verb",
+            "Meaning": "Were to give (subjunctive)."
+        },
+        {
+            "word": "doy",
+            "POS": "Verb",
+            "Meaning": "I give."
+        },
+        {
+            "word": "eches",
+            "POS": "Verb",
+            "Meaning": "You take/throw (subjunctive)."
+        },
+        {
+            "word": "encantaría",
+            "POS": "Verb",
+            "Meaning": "Would love."
+        },
+        {
+            "word": "encuentra",
+            "POS": "Verb",
+            "Meaning": "Finds/is located."
+        },
+        {
+            "word": "estoy",
+            "POS": "Verb",
+            "Meaning": "I am."
+        },
+        {
+            "word": "hacer",
+            "POS": "Verb",
+            "Meaning": "To do/make."
+        },
+        {
+            "word": "haciendo",
+            "POS": "Verb",
+            "Meaning": "Doing/making."
+        },
+        {
+            "word": "harías",
+            "POS": "Verb",
+            "Meaning": "You would do."
+        },
+        {
+            "word": "hay",
+            "POS": "Verb",
+            "Meaning": "There is/there are."
+        },
+        {
+            "word": "importaría",
+            "POS": "Verb",
+            "Meaning": "Would mind."
+        },
+        {
+            "word": "lleva",
+            "POS": "Verb",
+            "Meaning": "Carries/has been."
+        },
+        {
+            "word": "llevar",
+            "POS": "Verb",
+            "Meaning": "To carry/take."
+        },
+        {
+            "word": "manejamos",
+            "POS": "Verb",
+            "Meaning": "We carry/handle."
+        },
+        {
+            "word": "manejan",
+            "POS": "Verb",
+            "Meaning": "They carry/handle."
+        },
+        {
+            "word": "mantienes",
+            "POS": "Verb",
+            "Meaning": "You maintain/keep."
+        },
+        {
+            "word": "mira",
+            "POS": "Verb",
+            "Meaning": "Look (command)."
+        },
+        {
+            "word": "mostrar",
+            "POS": "Verb",
+            "Meaning": "To show."
+        },
+        {
+            "word": "moverte",
+            "POS": "Verb",
+            "Meaning": "To move yourself."
+        },
+        {
+            "word": "mueves",
+            "POS": "Verb",
+            "Meaning": "You move."
+        },
+        {
+            "word": "muevo",
+            "POS": "Verb",
+            "Meaning": "I move."
+        },
+        {
+            "word": "ofrecer",
+            "POS": "Verb",
+            "Meaning": "To offer."
+        },
+        {
+            "word": "ordenar",
+            "POS": "Verb",
+            "Meaning": "To order."
+        },
+        {
+            "word": "paso",
+            "POS": "Verb",
+            "Meaning": "I pass/hand over."
+        },
+        {
+            "word": "pedir",
+            "POS": "Verb",
+            "Meaning": "To ask for/order."
+        },
+        {
+            "word": "podría",
+            "POS": "Verb",
+            "Meaning": "Could."
+        },
+        {
+            "word": "podrías",
+            "POS": "Verb",
+            "Meaning": "You could."
+        },
+        {
+            "word": "practica",
+            "POS": "Verb",
+            "Meaning": "Practice (command)."
+        },
+        {
+            "word": "prefiere",
+            "POS": "Verb",
+            "Meaning": "Prefers."
+        },
+        {
+            "word": "prefiero",
+            "POS": "Verb",
+            "Meaning": "I prefer."
+        },
+        {
+            "word": "preguntar",
+            "POS": "Verb",
+            "Meaning": "To ask."
+        },
+        {
+            "word": "prepararme",
+            "POS": "Verb",
+            "Meaning": "To prepare for me."
+        },
+        {
+            "word": "probar",
+            "POS": "Verb",
+            "Meaning": "To try/taste."
+        },
+        {
+            "word": "pueda",
+            "POS": "Verb",
+            "Meaning": "Can (subjunctive)."
+        },
+        {
+            "word": "puede",
+            "POS": "Verb",
+            "Meaning": "Can."
+        },
+        {
+            "word": "pusiera",
+            "POS": "Verb",
+            "Meaning": "Were to put (subjunctive)."
+        },
+        {
+            "word": "póngame",
+            "POS": "Verb",
+            "Meaning": "Give me/put me (command)."
+        },
+        {
+            "word": "queda",
+            "POS": "Verb",
+            "Meaning": "Is located/remains."
+        },
+        {
+            "word": "quedaría",
+            "POS": "Verb",
+            "Meaning": "Would come to."
+        },
+        {
+            "word": "quede",
+            "POS": "Verb",
+            "Meaning": "Is located (subjunctive)."
+        },
+        {
+            "word": "quejo",
+            "POS": "Verb",
+            "Meaning": "I complain."
+        },
+        {
+            "word": "quiero",
+            "POS": "Verb",
+            "Meaning": "I want."
+        },
+        {
+            "word": "quisiera",
+            "POS": "Verb",
+            "Meaning": "Would like."
+        },
+        {
+            "word": "quédate",
+            "POS": "Verb",
+            "Meaning": "Keep (command)."
+        },
+        {
+            "word": "reconocer",
+            "POS": "Verb",
+            "Meaning": "To recognize/admit."
+        },
+        {
+            "word": "repite",
+            "POS": "Verb",
+            "Meaning": "Repeat (command)."
+        },
+        {
+            "word": "resulta",
+            "POS": "Verb",
+            "Meaning": "Turns out/results."
+        },
+        {
+            "word": "sabes",
+            "POS": "Verb",
+            "Meaning": "You know."
+        },
+        {
+            "word": "sabrás",
+            "POS": "Verb",
+            "Meaning": "You will know."
+        },
+        {
+            "word": "sale",
+            "POS": "Verb",
+            "Meaning": "Comes out/costs."
+        },
+        {
+            "word": "salgo",
+            "POS": "Verb",
+            "Meaning": "I leave/go out."
+        },
+        {
+            "word": "ser",
+            "POS": "Verb",
+            "Meaning": "To be."
+        },
+        {
+            "word": "servir",
+            "POS": "Verb",
+            "Meaning": "To serve."
+        },
+        {
+            "word": "servirle",
+            "POS": "Verb",
+            "Meaning": "To serve you."
+        },
+        {
+            "word": "será",
+            "POS": "Verb",
+            "Meaning": "Will be."
+        },
+        {
+            "word": "sería",
+            "POS": "Verb",
+            "Meaning": "Would be."
+        },
+        {
+            "word": "serían",
+            "POS": "Verb",
+            "Meaning": "Would be (plural)."
+        },
+        {
+            "word": "siento",
+            "POS": "Verb",
+            "Meaning": "I feel/I am sorry."
+        },
+        {
+            "word": "son",
+            "POS": "Verb",
+            "Meaning": "They are."
+        },
+        {
+            "word": "sueles",
+            "POS": "Verb",
+            "Meaning": "You usually do."
+        },
+        {
+            "word": "suelo",
+            "POS": "Verb",
+            "Meaning": "I usually do."
+        },
+        {
+            "word": "tenga",
+            "POS": "Verb",
+            "Meaning": "Have (subjunctive)."
+        },
+        {
+            "word": "tendrían",
+            "POS": "Verb",
+            "Meaning": "Would have."
+        },
+        {
+            "word": "tenía",
+            "POS": "Verb",
+            "Meaning": "Had."
+        },
+        {
+            "word": "tiene",
+            "POS": "Verb",
+            "Meaning": "Has."
+        },
+        {
+            "word": "tienen",
+            "POS": "Verb",
+            "Meaning": "They have."
+        },
+        {
+            "word": "tienes",
+            "POS": "Verb",
+            "Meaning": "You have."
+        },
+        {
+            "word": "va",
+            "POS": "Verb",
+            "Meaning": "Goes."
+        },
+        {
+            "word": "vas",
+            "POS": "Verb",
+            "Meaning": "You go."
+        },
+        {
+            "word": "ve",
+            "POS": "Verb",
+            "Meaning": "Go (command)/sees."
+        },
+        {
+            "word": "vemos",
+            "POS": "Verb",
+            "Meaning": "We see."
+        },
+        {
+            "word": "viaja",
+            "POS": "Verb",
+            "Meaning": "Travels."
+        },
+        {
+            "word": "visitar",
+            "POS": "Verb",
+            "Meaning": "To visit."
+        },
+        {
+            "word": "voy",
+            "POS": "Verb",
+            "Meaning": "I go."
+        },
+        {
+            "word": "yendo",
+            "POS": "Verb",
+            "Meaning": "Going."
+        },
+        {
+            "word": "parece",
+            "POS": "Verb",
+            "Meaning": "Seems/appears."
+        },
+        {
+            "word": "uso",
+            "POS": "Verb",
+            "Meaning": "I use."
+        },
+        {
+            "word": "ah",
+            "POS": "Interjection",
+            "Meaning": "Ah."
+        },
+        {
+            "word": "claro",
+            "POS": "Interjection",
+            "Meaning": "Of course."
+        },
+        {
+            "word": "disculpe",
+            "POS": "Interjection",
+            "Meaning": "Excuse me."
+        },
+        {
+            "word": "oh",
+            "POS": "Interjection",
+            "Meaning": "Oh."
+        },
+        {
+            "word": "ok",
+            "POS": "Interjection",
+            "Meaning": "OK."
+        },
+        {
+            "word": "oye",
+            "POS": "Interjection",
+            "Meaning": "Hey."
+        },
+        {
+            "word": "vaya",
+            "POS": "Interjection",
+            "Meaning": "Wow/well."
+        },
+        {
+            "word": "tu",
+            "POS": "Adjective",
+            "Meaning": "Your (informal)."
+        },
+        {
+            "word": "acompañar",
+            "POS": "Verb",
+            "Meaning": "To accompany."
+        },
+        {
+            "word": "acompañarlo",
+            "POS": "Verb",
+            "Meaning": "To accompany it."
+        },
+        {
+            "word": "además",
+            "POS": "Adverb",
+            "Meaning": "Besides/also."
+        },
+        {
+            "word": "conmigo",
+            "POS": "Pronoun",
+            "Meaning": "With me."
+        },
+        {
+            "word": "lejos",
+            "POS": "Adverb",
+            "Meaning": "Far."
+        },
+        {
+            "word": "picar",
+            "POS": "Verb",
+            "Meaning": "To snack/nibble."
+        },
+        {
+            "word": "verle",
+            "POS": "Verb",
+            "Meaning": "To see you/him."
+        }
     ]
-  }
-  
+}

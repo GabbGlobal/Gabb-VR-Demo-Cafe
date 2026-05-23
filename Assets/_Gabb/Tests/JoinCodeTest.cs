@@ -17,10 +17,10 @@ public class JoinCodeTest : MonoBehaviour
     }
 
 
-    [ContextMenu("Test Join GMW7-CB9S")]
+    [ContextMenu("Test Join 3KJN-CK6K")]
     public async void TestJoin()
     {
-        string code = "GMW7-CB9S";
+        string code = "3KJN-CK6K";
         Debug.Log($"[JoinTest] Testing join with code: {code}");
 
         config.joinCode = code;
