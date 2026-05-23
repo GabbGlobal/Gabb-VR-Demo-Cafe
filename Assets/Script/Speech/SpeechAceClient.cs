@@ -26,6 +26,7 @@ public class SpeechAceClient : MonoBehaviour
     }
 
     public void SetApiKey(string key) => apiKey = key;
+    public void SetDialect(string d) { dialect = d; Debug.Log($"[SpeechAce] Dialect set to {d}"); }
 
     public async Task<SpeechAceResult> ScoreAsync(byte[] wavData, string referenceText)
     {

@@ -32,6 +32,7 @@ public class CloudSpeechRecognizer : MonoBehaviour
     }
 
     public void SetApiKey(string key) => apiKey = key;
+    public void SetLanguage(string lang) { language = lang; Debug.Log($"[CloudSTT] Language set to {lang}"); }
 
     public async Task<string> Transcribe(byte[] wavData)
     {

@@ -70,6 +70,19 @@ public class AzureSpeechRecognizer : MonoBehaviour
         if (autoStart) _ = StartListening();  // keep current behavior unless you turn it off
     }
 
+    public async void SetLanguageCode(string code)
+    {
+        languageCode = code;
+        Debug.Log($"[Azure] Language set to {code}, reinitializing recognizer...");
+        bool wasListening = IsListening;
+        if (IsListening) await StopListening();
+        recognizer?.Dispose();
+        recognizer = null;
+        speechConfig = null;
+        await InitializeRecognizer();
+        if (wasListening) await StartListening();
+    }
+
     private void Update()
     {
         while (mainThreadQueue.TryDequeue(out var action))

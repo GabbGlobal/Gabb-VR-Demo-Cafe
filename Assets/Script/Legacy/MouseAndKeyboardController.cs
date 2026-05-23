@@ -115,8 +115,23 @@ public class MouseAndKeyboardController : MonoBehaviour
             handLeft.transform.parent.localPosition = new Vector3(0f, -2f, 0f);
 
     }
+
+    public bool swapToFrench, swapToSpanish;
     void Update()
     {
+        if (swapToFrench)
+        {
+            swapToFrench = false;
+            LanguageToggle.Instance.ToggleFrench();
+        }
+        
+        if (swapToSpanish)
+        {
+            swapToSpanish = false;
+            LanguageToggle.Instance.ToggleSpanish();
+
+        }
+
         if (cam == null) return;
 
         if (escapeAction.WasPressedThisFrame())

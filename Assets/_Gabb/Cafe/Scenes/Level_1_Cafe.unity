@@ -8628,6 +8628,51 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5277738154584103878, guid: 23e9bb5946733c94f8dd51e3cbf741ed, type: 3}
   m_PrefabInstance: {fileID: 667092342}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &668166079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 668166081}
+  - component: {fileID: 668166080}
+  m_Layer: 0
+  m_Name: LanguageToggle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &668166080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668166079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aebfb230bae11164c898a23313be7aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backendConfig: {fileID: 11400000, guid: 32cce36b01f4f884d9b638b0fb9c496e, type: 2}
+--- !u!4 &668166081
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668166079}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6751704, y: -0.004999876, z: 3.4353278}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668706864 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8501332597705487872, guid: de6878dd37710934b89bde7915da4f1b, type: 3}
@@ -26618,7 +26663,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1971873406
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26638,6 +26683,8 @@ MonoBehaviour:
   handRight: {fileID: 1563271886}
   logMicVolume: 0
   mic: {fileID: 104384743}
+  swapToFrench: 0
+  swapToSpanish: 0
 --- !u!4 &1971873407
 Transform:
   m_ObjectHideFlags: 0
@@ -31212,6 +31259,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC Female_Barista
       objectReference: {fileID: 0}
+    - target: {fileID: 5491015275743495985, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
+      propertyPath: dialogueFrench
+      value: 
+      objectReference: {fileID: 11400000, guid: f1bc106c16581fd4591d1e0742e9c454, type: 2}
     - target: {fileID: 6543545862623860363, guid: 321a6eb82e357954f8134e02f6b44d9d, type: 3}
       propertyPath: onPlayerEnter.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -42954,6 +43005,10 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 7de17f4ada6674d4b94f7e6bda9ad994, type: 2}
+    - target: {fileID: 560738180698866149, guid: 34b19d0677f59fe4fb7b2985116f469d, type: 3}
+      propertyPath: dialogueFrench
+      value: 
+      objectReference: {fileID: 11400000, guid: 505c88d9d69210a4ab6145b47c080d08, type: 2}
     - target: {fileID: 2322719481650739164, guid: 34b19d0677f59fe4fb7b2985116f469d, type: 3}
       propertyPath: m_RootOrder
       value: 22
@@ -44525,6 +44580,10 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 11400000, guid: 69042127d01b95a4f9924dc7ceefa098, type: 2}
+    - target: {fileID: 4217995843144485533, guid: 4edddc93852da374d83c380f2e0f754f, type: 3}
+      propertyPath: dialogueFrench
+      value: 
+      objectReference: {fileID: 11400000, guid: a369c6b3c08dd264c9c2a1cf5c6e7998, type: 2}
     - target: {fileID: 6322202567468482307, guid: 4edddc93852da374d83c380f2e0f754f, type: 3}
       propertyPath: m_Name
       value: NPC Lola
@@ -52585,6 +52644,10 @@ PrefabInstance:
       propertyPath: dialogue
       value: 
       objectReference: {fileID: 11400000, guid: a3248d713a9810242b0a73482708a84f, type: 2}
+    - target: {fileID: 9004351629736369340, guid: 7b9b2128b5561ae45968bf61faa471fb, type: 3}
+      propertyPath: dialogueFrench
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f3b4534ea20c9742b092186952c4d27, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -52920,3 +52983,4 @@ SceneRoots:
   - {fileID: 104384744}
   - {fileID: 1203444420}
   - {fileID: 1971873407}
+  - {fileID: 668166081}

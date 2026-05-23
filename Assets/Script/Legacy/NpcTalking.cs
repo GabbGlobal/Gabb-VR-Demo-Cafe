@@ -21,6 +21,9 @@ public class NpcTalking : MonoBehaviour
     private PlayerTriggerZone playerTriggerZone;
     private NpcFacing npcFacing;
     public Dialogue dialogue;
+    [Tooltip("French version of this NPC's dialogue (assign in Inspector)")]
+    public Dialogue dialogueFrench;
+    private Dialogue _dialogueSpanish;
     public AudioSource speechAudioSource;
     public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
     public static NpcTalking previousNpcTalking = null;
@@ -48,6 +51,16 @@ public class NpcTalking : MonoBehaviour
         }
         originalRotation = transform.rotation;
         playerTriggerZone.onPlayerExit.AddListener(() => { hasFinishedDialogueAndNotLeftAreaYet = false; }); // reset convo block once the player leaves the trigger area.
+        _dialogueSpanish = dialogue;
+        ApplyLanguage(LanguageToggle.CurrentLanguage);
+    }
+
+    public void ApplyLanguage(GabbLanguage language)
+    {
+        if (_dialogueSpanish == null) _dialogueSpanish = dialogue;
+        dialogue = language == GabbLanguage.French && dialogueFrench != null
+            ? dialogueFrench
+            : _dialogueSpanish;
     }
 
     void OnEnable()

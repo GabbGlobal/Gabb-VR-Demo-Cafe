@@ -7,7 +7,7 @@ public class SessionData
     public string StudentName { get; }
     public string ClassId { get; }
     public string JoinCode { get; }
-    public string Language { get; }
+    public string Language { get; set; }
     public DateTime StartedAt { get; }
     public bool HasSentFirstEvent;
 
