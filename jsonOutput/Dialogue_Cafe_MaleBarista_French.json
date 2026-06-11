@@ -1,0 +1,386 @@
+{
+  "name": "Dialogue Cafe MaleBarista French",
+  "totalLines": 14,
+  "lines": [
+    {
+      "speaker": "NPC",
+      "text": "Bonjour, qu'est-ce que tu voudrais boire aujourd'hui ?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Bonjour, tu veux boire quoi ?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Bonjour, qu'est-ce que tu voudrais boire aujourd'hui ?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Bonjour, qu'est-ce qui te ferait plaisir à boire aujourd'hui ?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Bonjour, qu'est-ce que je peux te proposer à boire en cette belle matinée ?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Quels types de thé avez-vous ?",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint1.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Quel thé avez-vous ?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Quels types de thé avez-vous ?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Quelles variétés de thé proposez-vous ?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Pourriez-vous me dire quels thés vous avez de disponibles ?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Nous avons du thé noir et du thé vert.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "On a du thé noir et du thé vert."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Nous avons du thé noir et du thé vert."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Nous disposons de thé noir et de thé vert."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Alors, ce que nous avons en ce moment, c'est du thé noir et du thé vert."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Pourriez-vous me donner un thé noir, s'il vous plaît ?",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint2.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Un thé noir, s'il vous plaît."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Pourriez-vous me donner un thé noir, s'il vous plaît ?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Serait-il possible de me servir un thé noir, s'il vous plaît ?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Est-ce que tu pourrais me préparer un thé noir, s'il te plaît ?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Bien sûr, quelque chose à manger avec ça ? Tu veux un biscuit ou un muffin ?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Oui ! Tu veux manger quelque chose ? On a des biscuits et des muffins."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Bien sûr, quelque chose à manger avec ça ? Tu veux un biscuit ou un muffin ?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Bien sûr, tu voudrais l'accompagner de quelque chose à manger ? Nous avons des biscuits et des muffins."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Bien sûr ! Tu n'as pas envie de quelque chose pour accompagner le thé ? Je peux te proposer un biscuit ou un muffin."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Quels types de biscuits avez-vous ?",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint3.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Quels biscuits avez-vous ?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Quels types de biscuits avez-vous ?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Quels types de biscuits proposez-vous ?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Pourriez-vous me dire quels biscuits vous avez de disponibles ?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Nous avons des biscuits au beurre de cacahuète.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "On a des biscuits au beurre de cacahuète."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Nous avons des biscuits au beurre de cacahuète."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Nous disposons de biscuits au beurre de cacahuète."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Ce que nous avons en ce moment, ce sont des biscuits au beurre de cacahuète."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Je voudrais un biscuit au beurre de cacahuète, s'il vous plaît.",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint4.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Un biscuit au beurre de cacahuète, s'il vous plaît."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Je voudrais un biscuit au beurre de cacahuète, s'il vous plaît."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "J'aimerais un biscuit au beurre de cacahuète, s'il vous plaît."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Alors je vais prendre un biscuit au beurre de cacahuète, si ça ne vous dérange pas."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Ce sera tout ?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Autre chose ?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Ce sera tout ?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Ce sera tout pour aujourd'hui ?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Je peux te proposer autre chose ou ce sera tout ?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Oui, c'est tout. Combien ça coûte ?",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint5.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Oui. C'est combien ?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Oui, c'est tout. Combien ça coûte ?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Oui, c'est tout. Combien je vous dois ?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Non, ce sera tout. Combien je te dois au total ?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Ça fera quatre dollars et soixante centimes.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Ça fait quatre dollars soixante."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Ça fera quatre dollars et soixante centimes."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Le total serait de quatre dollars et soixante centimes."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Ça te revient à quatre dollars et soixante centimes au total."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Voici.",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint6.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Voici."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Voici."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Voici."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Voici, gardez la monnaie."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Merci. Voici ton thé et ton biscuit. Bonne journée !",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Merci. Ton thé et ton biscuit. Bonne journée !"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Merci. Voici ton thé et ton biscuit. Bonne journée !"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Merci beaucoup. Voici ton thé et ton biscuit. Excellente journée !"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Merci beaucoup ! Voilà ton petit thé et ton biscuit. Passe une très bonne journée !"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Toi aussi. Au revoir.",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint7.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Au revoir."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Toi aussi. Au revoir."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "De même. À bientôt !"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Pareillement, bonne journée à toi aussi. À la prochaine !"
+        }
+      ]
+    }
+  ],
+  "language": "French",
+  "sourceFile": "Assets/_Gabb/Cafe/Dialogues/MaleBarista/French/Dialogue Cafe MaleBarista French.asset"
+}

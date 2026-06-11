@@ -28,6 +28,7 @@ public class NpcTalking : MonoBehaviour
     public static NpcTalking currentNpcTalking = null; // static var to help enforce 1 NPC talking at a time
     public static NpcTalking previousNpcTalking = null;
     public static event System.Action<float, string> OnSpeechAttemptScored;
+    public static event System.Action<DialogueDifficulty, DialogueDifficulty> OnDifficultyChanged;
     public static DialogueDifficulty CurrentDifficulty = DialogueDifficulty.Medium;
     bool hasFinishedDialogueAndNotLeftAreaYet = false;
     public static LineOfDialogue GetCurrentLineOfDialogueGlobal()
@@ -85,7 +86,10 @@ public class NpcTalking : MonoBehaviour
             CurrentDifficulty--;
 
         if (CurrentDifficulty != prev)
+        {
             Debug.Log($"[NpcTalking] Difficulty {prev} -> {CurrentDifficulty}");
+            OnDifficultyChanged?.Invoke(prev, CurrentDifficulty);
+        }
     }
 
     CancellationTokenSource convoCancellation;
@@ -272,7 +276,16 @@ public class NpcTalking : MonoBehaviour
         }
 
         string[] refWords = lineText.Split(' ');
-        float estimatedPhraseDuration = refWords.Length * 0.25f;
+        float rawDuration = (lineAudio != null) ? lineAudio.length : refWords.Length * 0.45f;
+        float cadenceSpeed = CurrentDifficulty switch
+        {
+            DialogueDifficulty.Easy   => 0.50f,
+            DialogueDifficulty.Medium => 0.60f,
+            DialogueDifficulty.Hard   => 0.70f,
+            DialogueDifficulty.Expert => 0.80f,
+            _ => 0.60f
+        };
+        float estimatedPhraseDuration = rawDuration / cadenceSpeed;
         const float speakingThreshold = 0.015f;
         const float settleDelay = 0.5f;
 
@@ -285,6 +298,7 @@ public class NpcTalking : MonoBehaviour
         bool hintPlaying = false;
         string debugResult = null;
         float speechTime = 0f;
+        float speechStartTime = -1f;
         int lastWordIdx = -1;
         byte[] capturedWav = null;
 
@@ -329,8 +343,14 @@ public class NpcTalking : MonoBehaviour
 
             if (!hintPlaying && mic.IsRecording && mic.CurrentVolume >= speakingThreshold)
             {
+                if (speechStartTime < 0f) speechStartTime = Time.time;
                 speechTime += Time.deltaTime;
-                float progress = Mathf.Clamp01(speechTime / estimatedPhraseDuration);
+            }
+
+            if (!hintPlaying && mic.IsRecording && speechStartTime >= 0f)
+            {
+                float wallElapsed = Time.time - speechStartTime;
+                float progress = Mathf.Clamp01(wallElapsed / estimatedPhraseDuration);
                 int wordIdx = Mathf.Min((int)(progress * refWords.Length), refWords.Length - 1);
                 if (wordIdx != lastWordIdx)
                 {
@@ -382,7 +402,7 @@ public class NpcTalking : MonoBehaviour
                     wordLog.Append($"{w.word}={w.qualityScore:F0} ");
                 Log(wordLog.ToString());
                 Log($"[Phase2] SpeechAce: {accuracy:F0}% ({gradeResult.matchedCount}/{gradeResult.totalWords} words) [raw={scoreResult.overallScore:F0}]");
-                await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
+                await Awaitable.WaitForSecondsAsync(0.5f, cancellationToken);
                 if (cancellationToken.IsCancellationRequested) return;
             }
             else
@@ -401,7 +421,7 @@ public class NpcTalking : MonoBehaviour
 
         failedAttempts = 0;
         ConversationUI.Instance.ShowSuccess();
-        await Awaitable.WaitForSecondsAsync(2f, cancellationToken);
+        await Awaitable.WaitForSecondsAsync(1f, cancellationToken);
         if (cancellationToken.IsCancellationRequested) return;
         MoveToNextLineOfDialogue();
     }
@@ -431,7 +451,9 @@ public class NpcTalking : MonoBehaviour
             words[i] = new PhraseGrader.WordResult
             {
                 referenceWord = result.words[i].word,
-                matched = passed
+                matched = passed,
+                qualityScore = result.words[i].qualityScore,
+                hasQualityScore = true
             };
         }
         float acc = result.words.Length > 0 ? (float)matched / result.words.Length : 0f;

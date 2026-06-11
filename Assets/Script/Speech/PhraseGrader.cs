@@ -9,6 +9,8 @@ public static class PhraseGrader
     {
         public string referenceWord;
         public bool matched;
+        public float qualityScore;
+        public bool hasQualityScore;
     }
 
     public struct GradeResult
@@ -63,9 +65,18 @@ public static class PhraseGrader
         for (int i = 0; i < result.words.Length; i++)
         {
             var w = result.words[i];
-            sb.Append(w.matched
-                ? $"<color=green>{w.referenceWord}</color>"
-                : w.referenceWord);
+            if (w.hasQualityScore)
+            {
+                int pct = (int)w.qualityScore;
+                string color = w.matched ? "#4CAF50" : "#FF9800";
+                sb.Append($"<color={color}>{w.referenceWord} ({pct}%)</color>");
+            }
+            else
+            {
+                sb.Append(w.matched
+                    ? $"<color=green>{w.referenceWord}</color>"
+                    : w.referenceWord);
+            }
             if (i < result.words.Length - 1) sb.Append(' ');
         }
         return sb.ToString();

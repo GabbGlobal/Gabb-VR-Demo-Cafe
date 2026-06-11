@@ -19,6 +19,9 @@ public class VRKeyboard : MonoBehaviour
     public event Action<string> OnTextChanged;
     public event Action<string> OnSubmit;
 
+    [SerializeField] VRToggle frenchToggle;
+    [SerializeField] VRToggle spanishToggle;
+
     public string Text { get; private set; } = "";
     public int MaxLength { get; set; } = 8;
 
@@ -113,5 +116,21 @@ public class VRKeyboard : MonoBehaviour
     {
         Text = "";
         OnTextChanged?.Invoke(Text);
+    }
+
+    public void ToggleClicked(VRToggle whichToggle)
+    {
+        spanishToggle.SetDisabledHighlight();
+        frenchToggle.SetDisabledHighlight();
+        if (whichToggle == spanishToggle)
+        {
+            LanguageToggle.Instance.ToggleSpanish();
+            spanishToggle.SetEnabledHighlight();
+        } else
+        {
+            LanguageToggle.Instance.ToggleFrench();
+            frenchToggle.SetEnabledHighlight();
+
+        }
     }
 }

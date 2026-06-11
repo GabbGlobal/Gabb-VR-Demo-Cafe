@@ -1,0 +1,386 @@
+{
+  "name": "Dialogue Cafe MaleBarista",
+  "totalLines": 14,
+  "lines": [
+    {
+      "speaker": "NPC",
+      "text": "Hola, ¿qué te gustaría tomar hoy?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Hola, ¿qué quieres tomar?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Hola, ¿qué te gustaría tomar hoy?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Buen día, ¿qué te apetecería tomar el día de hoy?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Buenas, ¿qué te puedo ofrecer para tomar en esta mañana tan bonita?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¿Qué tipos de té tienes?",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint1.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Qué té tienes?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Qué tipos de té tienes?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Qué variedades de té manejan?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Me podrías decir qué opciones de té tienen disponibles?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Nosotros tenemos té negro y té verde.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Tenemos té negro y té verde."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Nosotros tenemos té negro y té verde."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Contamos con té negro y té verde."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Mira, lo que manejamos ahorita es té negro y té verde."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¿Podría darme un té negro, por favor",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint2.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Un té negro, por favor."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Podría darme un té negro, por favor"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Sería posible que me diera un té negro, por favor?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Me harías el favor de prepararme un té negro?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Claro, ¿algo para comer con eso? ¿Quieres una galleta o un muffin?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Sí! ¿Quieres comer algo? Tenemos galletas y muffins."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Claro, ¿algo para comer con eso? ¿Quieres una galleta o un muffin?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Por supuesto, ¿te gustaría acompañarlo con algo de comer? Tenemos galletas y muffins."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¡Claro que sí! ¿No se te antoja algo para acompañar el té? Te puedo ofrecer una galleta o un muffin."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¿Qué tipo de galletas tienes?",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint3.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Qué galletas tienes?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Qué tipo de galletas tienes?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Qué tipos de galletas manejan?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Me podrías decir qué galletas tienen disponibles?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Nosotros tenemos galletas de mantequilla de maní.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Tenemos galletas de mantequilla de maní."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Nosotros tenemos galletas de mantequilla de maní."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Contamos con galletas de mantequilla de maní."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Lo que manejamos ahorita son galletas de mantequilla de maní."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Quiero una galleta de mantequilla de maní, por favor.",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint4.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Una galleta de maní, por favor."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Quiero una galleta de mantequilla de maní, por favor."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Me gustaría una galleta de mantequilla de maní, por favor."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Entonces me voy a llevar una galleta de mantequilla de maní, si no es mucha molestia."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "¿Eso sería todo?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Algo más?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Eso sería todo?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Eso sería todo por hoy?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Te puedo ofrecer algo más o sería todo?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Si, eso es. Cuánto cuesta.",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint5.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Sí. ¿Cuánto es?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Si, eso es. Cuánto cuesta."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Sí, eso es todo. ¿Cuánto le debo?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "No, eso sería todo. ¿Cuánto te debo en total?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Serán cuatro dólares y sesenta centavos.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Son cuatro dólares con sesenta."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Serán cuatro dólares y sesenta centavos."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "El total sería cuatro dólares con sesenta centavos."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Te sale en cuatro dólares con sesenta centavos el total."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Aquí tienes.",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint6.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Aquí tienes."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Aquí tienes."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Aquí tienes."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Aquí tienes, quédate con el cambio."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Gracias. Aquí tienes: tu té y tu galleta. ¡Que tenga un buen día!",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Gracias. Tu té y tu galleta. ¡Buen día!"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Gracias. Aquí tienes: tu té y tu galleta. ¡Que tenga un buen"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Muchas gracias. Aquí tienes tu té y tu galleta. ¡Que tenga un excelente día!"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¡Muchas gracias! Aquí te dejo tu tecito y tu galleta. ¡Que te vaya muy bien el día de hoy!"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Tú también. adiós",
+      "hintVideoPath": "MaleBaristaHints/conversation8_version2_hint7.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Adiós."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Tú también. adiós"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Igualmente. ¡Hasta luego!"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Igualmente, que te vaya bonito. ¡Nos vemos!"
+        }
+      ]
+    }
+  ],
+  "language": "Spanish",
+  "sourceFile": "Assets/_Gabb/Cafe/Dialogues/MaleBarista/Dialogue Cafe MaleBarista.asset"
+}

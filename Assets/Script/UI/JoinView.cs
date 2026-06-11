@@ -25,7 +25,7 @@ public class JoinView : MonoBehaviour
         {
             testSubmit = false;
             Debug.LogError("Submitting");
-            OnSubmit("GMW7CB9S");
+            OnSubmit("3KJNCK6K");
         }
     }
 
@@ -44,6 +44,7 @@ public class JoinView : MonoBehaviour
 
 #if !VR_BUILD
         vrKeyboard.gameObject.SetActive(false);
+        OnSubmit("3KJNCK6K");
 #endif
     }
 

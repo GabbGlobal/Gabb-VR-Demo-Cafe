@@ -17,6 +17,7 @@ public class ConversationUI : MonoBehaviour
     public TMP_Text advisorText;
     public Transform showHideChild;
     private Color playerTextStartColor;
+    private float playerTextStartSize;
     public Color successColor = Color.green;
     public Color failColor = Color.red;
     public AudioSource audioSource;
@@ -41,11 +42,44 @@ public class ConversationUI : MonoBehaviour
     void Start()
     {
         playerTextStartColor = playerDialogueText.color;
+        playerTextStartSize = playerDialogueText.fontSize;
         ResetText();
         ResetVideo();
         hintButton.gameObject.SetActive(false); // hide hint button
         showHideChild.gameObject.SetActive(false); // hide ui
         hintButton.onClick.AddListener(OnHintButtonClick);
+        NpcTalking.OnDifficultyChanged += HandleDifficultyChanged;
+    }
+
+    void OnDestroy()
+    {
+        NpcTalking.OnDifficultyChanged -= HandleDifficultyChanged;
+    }
+
+    private Coroutine difficultyMessageCoroutine;
+
+    void HandleDifficultyChanged(DialogueDifficulty prev, DialogueDifficulty next)
+    {
+        if (!showHideChild.gameObject.activeSelf) return;
+
+        bool leveledUp = next > prev;
+        string message = leveledUp
+            ? "<color=#4CAF50>Level Up!</color>"
+            : "<color=#FFC107>Slowing Down..</color>";
+
+        if (difficultyMessageCoroutine != null)
+            StopCoroutine(difficultyMessageCoroutine);
+        difficultyMessageCoroutine = StartCoroutine(ShowDifficultyMessage(message));
+    }
+
+    IEnumerator ShowDifficultyMessage(string message)
+    {
+        string previous = advisorText.text;
+        advisorText.text = message;
+        yield return new WaitForSeconds(3f);
+        if (advisorText.text == message)
+            advisorText.text = previous;
+        difficultyMessageCoroutine = null;
     }
 
     public void OnStartConvo(NpcTalking npcTalking)
@@ -213,6 +247,7 @@ public class ConversationUI : MonoBehaviour
 
     public void ShowGradeResult(PhraseGrader.GradeResult result)
     {
+        playerDialogueText.fontSize = playerTextStartSize * 0.8f;
         playerDialogueText.text = PhraseGrader.ToColoredRichText(result);
         playerDialogueText.color = Color.white;
         int pct = Mathf.RoundToInt(result.accuracy * 100f);
@@ -224,6 +259,7 @@ public class ConversationUI : MonoBehaviour
         npcDialogueText.text = "";
         playerDialogueText.text = "";
         playerDialogueText.color = playerTextStartColor;
+        playerDialogueText.fontSize = playerTextStartSize;
         advisorText.text = "";
     }
 

@@ -327,14 +327,14 @@ public class InteractionManager : MonoBehaviour
         {
             string word = dialogueText.textInfo.wordInfo[wordIndex].GetWord();
 
-            // Convert to lowercase to match dictionary keys
             word = word.ToLower();
+            string lang = LanguageToggle.CurrentLanguage.ToString().ToLower();
+            string key = lang + ":" + word;
 
-            // Check if the word exists in the dictionary
-            if (dictionary.ContainsKey(word))
+            if (dictionary.ContainsKey(key))
             {
-                string meaning = dictionary[word].Meaning;
-                string pos = dictionary[word].POS;
+                string meaning = dictionary[key].Meaning;
+                string pos = dictionary[key].POS;
                 Debug.Log($"Word: {word}, Meaning: {meaning}, POS: {pos}");
 
                 // Set the currently hovered text
@@ -392,10 +392,10 @@ public class InteractionManager : MonoBehaviour
         // Initialize the dictionary
         dictionary = new Dictionary<string, DictionaryEntry>();
 
-        // Fill the dictionary with word-meaning and POS pairs
         foreach (var entry in data.dictionary)
         {
-            dictionary[entry.word.ToLower()] = entry; // Store the entire DictionaryEntry object
+            string key = (entry.language ?? "spanish").ToLower() + ":" + entry.word.ToLower();
+            dictionary[key] = entry;
         }
     }
 
@@ -1194,4 +1194,5 @@ public class DictionaryEntry
     public string word;
     public string POS;
     public string Meaning;
+    public string language;
 }

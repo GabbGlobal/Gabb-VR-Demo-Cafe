@@ -1,0 +1,440 @@
+{
+  "name": "Dialogue Cafe Female Barista",
+  "totalLines": 16,
+  "lines": [
+    {
+      "speaker": "NPC",
+      "text": "Buen día. ¿Le puedo ayudar en algo?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Hola. ¿Le ayudo?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Buen día. ¿Le puedo ayudar en algo?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Buen día. ¿En qué le puedo servir?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Muy buen día. ¿En qué puedo servirle el día de hoy?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Hola, ¿puedo ver el menú por favor?",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint1.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Hola. El menú, por favor."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Hola, ¿puedo ver el menú por favor?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Hola, ¿sería posible ver el menú?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Hola, buenas. ¿Me podría mostrar el menú, por favor?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Si, aquí tienes.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Sí, aquí está."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Si, aquí tienes."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Por supuesto, aquí lo tienes."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Claro que sí, aquí te lo dejo para que le eches un vistazo."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Quiero un café con leche por favor.",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint2.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Un café con leche, por favor."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Quiero un café con leche por favor."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Me gustaría pedir un café con leche, por favor."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Quisiera ordenar un café con leche, si es tan amable."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "¿Algo para comer con eso?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Quieres comer algo?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Algo para comer con eso?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Le gustaría añadir algo de comer?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Desearía acompañar su café con algo para picar?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Sí, me gustaría un sándwich de huevo.",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint3.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Sí, un sándwich de huevo."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Sí, me gustaría un sándwich de huevo."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Sí, por favor, póngame un sándwich de huevo."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Sí, me encantaría que me pusiera un sándwich de huevo, por favor."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "¿Algo más?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Algo más?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Algo más?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Desea algo más?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Hay algo más que le pueda ofrecer?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¿Qué clase de panecillo es ese?",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint4.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Qué es eso?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Qué clase de panecillo es ese?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Me podría decir qué tipo de panecillo es ese?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Disculpe, ¿le importaría decirme qué clase de panecillo es el que tienen ahí?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Es un muffin de arándanos. ¿Quieres uno?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Es un muffin. ¿Quieres uno?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Es un muffin de arándanos. ¿Quieres uno?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Es un muffin de arándanos. ¿Le gustaría probar uno?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Ese es un muffin de arándanos recién hecho. ¿Le apetece uno?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "No gracias, hoy no.",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint5.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "No gracias."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "No gracias, hoy no."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "No, muchas gracias, hoy no."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Se lo agradezco, pero hoy no me apetece."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Ok, serán cinco dólares con cuarenta y siete centavos.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Son cinco dólares y cuarenta y siete centavos."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Ok, serán cinco dólares con cuarenta y siete centavos."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Muy bien, el total será cinco dólares con cuarenta y siete centavos."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Perfecto, entonces el total le quedaría en cinco dólares con cuarenta y siete centavos."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¿Puedo pagar con tarjeta?",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint6.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Con tarjeta?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Puedo pagar con tarjeta?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Es posible pagar con tarjeta de crédito?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Tendrían la posibilidad de cobrarme con tarjeta?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "No, sólo aceptamos efectivo.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "No, solo efectivo."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "No, sólo aceptamos efectivo."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Lo siento, solamente aceptamos pagos en efectivo."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Disculpe, lamentablemente por el momento solo manejamos pagos en efectivo."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Bien, aquí tienes. Aquí tienes seis dólares.",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint7.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Ok. Aquí tienes seis dólares."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Bien, aquí tienes. Aquí tienes seis dólares."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Está bien, aquí tienes. Te doy seis dólares."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "No hay problema, aquí tienes. Te paso seis dólares justos."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Aquí tienes el cambio, cincuenta y tres centavos.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Tu cambio: cincuenta y tres centavos."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Aquí tienes el cambio, cincuenta y tres centavos."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Aquí tienes tu cambio, son cincuenta y tres centavos."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Aquí le devuelvo el cambio, que serían cincuenta y tres centavos."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¡Gracias!",
+      "hintVideoPath": "FemaleBaristaHints/conversation8_version1_hint8.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¡Gracias!"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¡Gracias!"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¡Gracias!"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¡Gracias!"
+        }
+      ]
+    }
+  ],
+  "language": "Spanish",
+  "sourceFile": "Assets/_Gabb/Cafe/Dialogues/FemaleBarista/Dialogue Cafe Female Barista.asset"
+}

@@ -1,0 +1,305 @@
+{
+  "name": "Dialogue Lola",
+  "totalLines": 11,
+  "lines": [
+    {
+      "speaker": "NPC",
+      "text": "¡Hola! ¿Cómo está usted hoy?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¡Hola! ¿Cómo está?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¡Hola! ¿Cómo está usted hoy?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¡Hola, buenas tardes! ¿Cómo se encuentra usted hoy?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¡Hola, qué gusto verle! ¿Cómo se encuentra usted en este día tan bonito?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Bien gracias, ¿y usted?",
+      "hintVideoPath": "CafeLolaHints/conversation7_version1_hint1.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Bien, ¿y usted?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Bien gracias, ¿y usted?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Muy bien, gracias por preguntar, ¿y usted?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "De maravilla, gracias. ¿Y usted cómo anda?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "¡Estoy genial! Mañana viajo a casa de mi hermana.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¡Muy bien! Mañana voy a ver a mi hermana."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¡Estoy genial! Mañana viajo a casa de mi hermana."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¡Estoy de maravilla! Mañana salgo de viaje para visitar a mi hermana."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¡Fenomenal! Mañana me voy de viaje a visitar a mi hermana, que ya tenía ganas."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¡Eso es genial! ¿Dónde vive?",
+      "hintVideoPath": "CafeLolaHints/conversation7_version1_hint2.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¡Qué bien! ¿Dónde vive?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¡Eso es genial! ¿Dónde vive?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¡Qué emocionante! ¿En dónde vive su hermana?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¡Qué maravilla! ¿Y en qué ciudad vive su hermana, si no es indiscreción?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Ella vive en Boston.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Ella vive en Boston."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Ella vive en Boston."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Mi hermana vive en Boston."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Vive allá en Boston, lleva ya varios años."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "¿Cómo te gusta viajar?",
+      "hintVideoPath": "CafeLolaHints/conversation7_version1_hint3.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¿Cómo viaja usted?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¿Cómo te gusta viajar?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¿Y cómo prefiere usted viajar?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¿Y qué medio de transporte prefiere para hacer ese viaje?"
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Me gusta viajar en avión. Es rápido y fácil.",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Me gusta el avión. Es rápido."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Me gusta viajar en avión. Es rápido y fácil."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Prefiero viajar en avión porque es bastante rápido y cómodo."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "La verdad es que prefiero el avión, sobre todo porque es rápido y no me complica la vida."
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Sí, pero es caro.",
+      "hintVideoPath": "CafeLolaHints/conversation7_version1_hint4.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Sí, pero es caro."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Sí, pero es caro."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Sí, eso sí, aunque puede ser bastante caro."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Sí, sin duda, aunque hay que reconocer que sale bastante caro."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "Eso es cierto. ¿Cómo te gusta viajar?",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Sí. ¿Y usted?"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Eso es cierto. ¿Cómo te gusta viajar?"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Tiene usted razón. ¿Y a usted cómo le gusta viajar?"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "No le falta razón. ¿Y usted, qué prefiere a la hora de viajar?"
+        }
+      ]
+    },
+    {
+      "speaker": "Player",
+      "text": "Me gusta tomar el autobús. Es económico.",
+      "hintVideoPath": "CafeLolaHints/conversation7_version1_hint5.mp4",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "Me gusta el autobús. Es barato."
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "Me gusta tomar el autobús. Es económico."
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "Prefiero tomar el autobús porque es más económico."
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "Yo suelo ir en autobús, la verdad, porque sale mucho más económico."
+        }
+      ]
+    },
+    {
+      "speaker": "NPC",
+      "text": "¡Oh, deberías ir a decirle a Lola dónde está la estación de autobuses!",
+      "hintVideoPath": "",
+      "textVariants": [
+        {
+          "difficulty": 0,
+          "difficultyLabel": "Easy",
+          "text": "¡Ve a decirle a Lola dónde está la estación!"
+        },
+        {
+          "difficulty": 1,
+          "difficultyLabel": "Medium",
+          "text": "¡Oh, deberías ir a decirle a Lola dónde está la estación"
+        },
+        {
+          "difficulty": 2,
+          "difficultyLabel": "Hard",
+          "text": "¡Entonces deberías ir a decirle a Lola dónde queda la estación de autobuses!"
+        },
+        {
+          "difficulty": 3,
+          "difficultyLabel": "Expert",
+          "text": "¡Pues no dejes de ir a decirle a Lola dónde queda la estación de autobuses, que le va a hacer falta!"
+        }
+      ]
+    }
+  ],
+  "language": "Spanish",
+  "sourceFile": "Assets/_Gabb/Cafe/Dialogues/Lola/Dialogue Lola.asset"
+}
